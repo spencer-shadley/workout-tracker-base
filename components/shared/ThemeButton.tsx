@@ -6,6 +6,7 @@ export default function ThemeButton() {
 
   return (
     <Button
+      variant="contained"
       onClick={() => (theme == 'dark' ? setTheme('light') : setTheme('dark'))}
     >
       Toggle Mode
