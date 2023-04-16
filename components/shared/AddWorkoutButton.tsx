@@ -8,11 +8,11 @@ import {
 import AddHIITWorkoutDialog from '../main/hiit/AddHIITWorkoutDialog';
 import React from 'react';
 
-const addHIITWorkout = 'HIIT Workout';
+const HIITWorkoutKey = 'Start HIIT Workout';
 const actions = [
   {
     icon: <Accessibility />,
-    name: addHIITWorkout,
+    name: HIITWorkoutKey,
   },
   { icon: <FitnessCenter />, name: 'Strength Workout' },
   { icon: <TrendingUp />, name: 'Strength Record' },
@@ -43,11 +43,11 @@ export default function Main() {
         ))}
       </SpeedDial>
       <AddHIITWorkoutDialog
-        isOpen={currentDialog === 'HIIT Workout'}
+        isOpen={currentDialog === HIITWorkoutKey}
         onClose={() => {
           setCurrentDialog(undefined);
         }}
-        title={''}
+        title={`${HIITWorkoutKey}`}
       />
       ;
     </>
