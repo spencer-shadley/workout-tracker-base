@@ -16,6 +16,8 @@ import { FitnessCenter } from '@mui/icons-material';
 const pages = ['TODO: history', 'TODO: new', 'TODO: exercises'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+const AppTitle = 'Workout Tracker';
+
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -59,7 +61,7 @@ export default function Header() {
               textDecoration: 'none',
             }}
           >
-            Workout Tracker
+            {AppTitle}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -115,7 +117,7 @@ export default function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            {AppTitle}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
