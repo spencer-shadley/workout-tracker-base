@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import HIITConfig from './HIITConfig';
+import DialogContent from './DialogContent';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -56,6 +57,7 @@ export default function AddHIITWorkoutDialog({
             </Button>
           </Toolbar>
         </AppBar>
+        <DialogContent />
         <HIITConfig />
       </Dialog>
     </div>

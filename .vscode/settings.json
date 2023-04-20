@@ -4,5 +4,12 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["appbar", "HIIT", "Shadley", "tailwindcss"]
+  "cSpell.words": [
+    "appbar",
+    "deadlift",
+    "HIIT",
+    "pullups",
+    "Shadley",
+    "tailwindcss"
+  ]
 }
