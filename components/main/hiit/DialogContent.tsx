@@ -7,6 +7,8 @@ import {
   ListItemButton,
   ListItem,
   IconButton,
+  Autocomplete,
+  TextField,
 } from '@mui/material';
 
 import { InfoOutlined, FitnessCenter } from '@mui/icons-material';
@@ -18,6 +20,8 @@ import { InfoOutlined, FitnessCenter } from '@mui/icons-material';
 
 // TODO: create github issues
 // TODO: add icons
+
+const numberOfExercisesPerCategory = 5;
 
 // TODO: localstorage or db
 const mostRecentExercises: ExerciseInfo[] = [
@@ -34,12 +38,19 @@ const mostRecentExercises: ExerciseInfo[] = [
   },
 ];
 
+const mostUsedExercises: ExerciseInfo[] = [...mostRecentExercises];
+
+const exercises: ExerciseInfo[] = [
+  ...mostRecentExercises.slice(0, numberOfExercisesPerCategory),
+  ...mostUsedExercises.slice(0, numberOfExercisesPerCategory),
+];
+
 export default function DialogContent() {
   return (
     <List>
-      {mostRecentExercises.map((mostRecentExercise) => (
+      {exercises.map((exercise) => (
         <ListItem
-          key={mostRecentExercise.name}
+          key={exercise.name}
           secondaryAction={
             <IconButton aria-label="comment">
               <InfoOutlined />
@@ -53,12 +64,21 @@ export default function DialogContent() {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={mostRecentExercise.name}
-              secondary={mostRecentExercise.description}
+              primary={exercise.name}
+              secondary={exercise.description}
             />
           </ListItemButton>
         </ListItem>
       ))}
+      <ListItem>
+        <Autocomplete
+          style={{ width: '100dvw' }}
+          options={exercises.map((exercise) => exercise.name)}
+          renderInput={(params) => (
+            <TextField {...params} label="Add exercise" />
+          )}
+        />
+      </ListItem>
     </List>
   );
 }
