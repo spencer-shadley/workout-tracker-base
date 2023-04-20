@@ -2,6 +2,6 @@ export default interface ExerciseInfo {
   name: string;
   description?: string;
   lastCompleted?: Date;
-  numberOfTimesCompleted: number;
+  numberOfTimesCompleted?: number;
   maxWeight?: number;
 }
