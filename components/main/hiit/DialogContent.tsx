@@ -5,7 +5,11 @@ import {
   Avatar,
   ListItemText,
   ListItemButton,
+  ListItem,
+  IconButton,
 } from '@mui/material';
+
+import { InfoOutlined, FitnessCenter } from '@mui/icons-material';
 // list of past exercises
 // top 5 most recent, filtered as you type
 // top 5 most used
@@ -34,15 +38,26 @@ export default function DialogContent() {
   return (
     <List>
       {mostRecentExercises.map((mostRecentExercise) => (
-        <ListItemButton key={mostRecentExercise.name}>
-          <ListItemAvatar>
-            <Avatar>{/* <FolderIcon /> */}</Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary={mostRecentExercise.name}
-            secondary={mostRecentExercise.description}
-          />
-        </ListItemButton>
+        <ListItem
+          key={mostRecentExercise.name}
+          secondaryAction={
+            <IconButton aria-label="comment">
+              <InfoOutlined />
+            </IconButton>
+          }
+        >
+          <ListItemButton>
+            <ListItemAvatar>
+              <Avatar>
+                <FitnessCenter />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={mostRecentExercise.name}
+              secondary={mostRecentExercise.description}
+            />
+          </ListItemButton>
+        </ListItem>
       ))}
     </List>
   );
