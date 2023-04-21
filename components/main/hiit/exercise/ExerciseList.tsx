@@ -29,12 +29,15 @@ for (const exercise of allExercises) {
 export interface ExerciseContext {
   exercises: Map<string, ExerciseInfo>;
   moveExercise: (exercise: ExerciseInfo, toColumn: ExerciseColumnTypes) => void;
+  removeExercise: (name: string) => void;
 }
 
 export const ExercisesContext = createContext<ExerciseContext>({
   exercises: new Map(),
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   moveExercise: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  removeExercise: () => {},
 });
 
 export default function DialogContent() {
@@ -50,6 +53,10 @@ export default function DialogContent() {
             ...exercise,
             currentColumn: toColumn,
           });
+          setExercises(exercises);
+        },
+        removeExercise: (exerciseName) => {
+          exercises.delete(exerciseName);
           setExercises(exercises);
         },
       }}
