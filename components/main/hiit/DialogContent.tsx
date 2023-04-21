@@ -18,13 +18,6 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-interface temp {
-  fromNow(): string;
-}
-
-// import * as relativeTime from 'dayjs/plugin/relativeTime';
-// dayjs.extend(relativeTime.default);
-
 // list of past exercises
 // top 5 most recent, filtered as you type
 // top 5 most used
@@ -59,7 +52,8 @@ const ExerciseStatLabel = ({
   ...otherProps
 }: TypographyIfExistsProps) => {
   return data ? (
-    <Typography sx={{ mb: 1.5 }} color="text.secondary" {...otherProps}>
+    // TODO: bold the data
+    <Typography color="text.secondary" {...otherProps}>
       {`${beforeText} ${data} ${afterText}`.trim()}
     </Typography>
   ) : null;
@@ -94,6 +88,11 @@ const ExerciseCard = ({ exercise }: ExerciseButtonProps) => {
           data={exercise.numberOfTimesCompleted}
           beforeText="Completed"
           afterText="times"
+        />
+        <ExerciseStatLabel
+          data={exercise.maxWeight}
+          beforeText="Max weight"
+          afterText="lbs"
         />
       </CardContent>
     </Card>
