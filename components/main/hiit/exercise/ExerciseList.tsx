@@ -7,12 +7,13 @@ import {
   Grid,
   Typography,
   Divider,
+  Paper,
 } from '@mui/material';
 import { makeRandomFakeExercises } from '@/components/shared/MockExerciseInfo';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React, { useRef, useState } from 'react';
+import React, { PropsWithChildren, useRef, useState } from 'react';
 import ExerciseListItem from '../exercise/ExerciseListItem';
 import { useDrop } from 'react-dnd';
 import DraggableExerciseInfo from '@/components/shared/DraggableExerciseInfo';
@@ -35,6 +36,22 @@ const mostUsedExercises: ExerciseInfo[] = [...mostRecentExercises];
 const allExercises = [...mostRecentExercises, ...mostUsedExercises];
 const uniqueExercises: Set<ExerciseInfo> = new Set([...allExercises]);
 const topExercises = [...uniqueExercises].slice(0, numberOfTopExercises);
+
+interface ExerciseColumnProps extends PropsWithChildren {
+  title: string;
+}
+
+function ExerciseColumn({ title, children }: ExerciseColumnProps) {
+  return (
+    <Grid item xs={5}>
+      <Paper elevation={6} sx={{ height: '100%' }}>
+        <Typography>{title}</Typography>
+        <Divider />
+        {children}
+      </Paper>
+    </Grid>
+  );
+}
 
 export default function DialogContent() {
   const [exercises] = useState<ExerciseInfo[]>(topExercises);
@@ -73,9 +90,7 @@ export default function DialogContent() {
 
   return (
     <Grid container justifyContent="space-evenly">
-      <Grid item xs={5} sx={{ backgroundColor: 'teal' }}>
-        <Typography>Exercises</Typography>
-        <Divider />
+      <ExerciseColumn title="Exercises">
         <List ref={drop}>
           {[...exercises].map((exercise, index) => (
             <ExerciseListItem
@@ -95,11 +110,15 @@ export default function DialogContent() {
             />
           </ListItem>
         </List>
-      </Grid>
-      <Grid item xs={5} sx={{ backgroundColor: 'darkcyan' }}>
-        <Typography>Current Workout</Typography>
-        <Divider />
-      </Grid>
+      </ExerciseColumn>
+      <ExerciseColumn title="Workouts">
+        <ExerciseListItem
+          key={exercises[0].name}
+          exercise={exercises[0]}
+          isOver={isOver}
+          index={0}
+        />
+      </ExerciseColumn>
     </Grid>
   );
 }
