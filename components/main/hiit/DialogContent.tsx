@@ -5,17 +5,14 @@ import {
   IconButton,
   Autocomplete,
   TextField,
-  Card,
-  CardContent,
-  Typography,
-  TypographyProps,
 } from '@mui/material';
-
+import { DragDropContext } from 'react-beautiful-dnd';
 import { InfoOutlined } from '@mui/icons-material';
 import { makeRandomFakeExercises } from '@/components/shared/MockExerciseInfo';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import ExerciseCard from './ExerciseCard';
 dayjs.extend(relativeTime);
 
 // list of past exercises
@@ -39,66 +36,6 @@ const exercises: Set<ExerciseInfo> = new Set([
   ...mostUsedExercises.slice(0, numberOfExercisesPerCategory),
 ]);
 
-interface TypographyIfExistsProps extends TypographyProps {
-  data: unknown | undefined;
-  beforeText: string;
-  afterText: string;
-}
-
-const ExerciseStatLabel = ({
-  data,
-  beforeText,
-  afterText,
-  ...otherProps
-}: TypographyIfExistsProps) => {
-  return data ? (
-    // TODO: bold the data
-    <Typography color="text.secondary" {...otherProps}>
-      {`${beforeText} ${data} ${afterText}`.trim()}
-    </Typography>
-  ) : null;
-};
-
-interface ExerciseButtonProps {
-  exercise: ExerciseInfo;
-}
-
-const ExerciseCard = ({ exercise }: ExerciseButtonProps) => {
-  return (
-    <Card style={{ width: '100dvw' }}>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {exercise.name}
-        </Typography>
-        <ExerciseStatLabel
-          data={exercise.description}
-          beforeText=""
-          afterText=""
-        />
-        <ExerciseStatLabel
-          data={
-            exercise.lastCompleted
-              ? dayjs().to(dayjs(exercise.lastCompleted))
-              : undefined
-          }
-          beforeText="Last completed"
-          afterText=""
-        />
-        <ExerciseStatLabel
-          data={exercise.numberOfTimesCompleted}
-          beforeText="Completed"
-          afterText="times"
-        />
-        <ExerciseStatLabel
-          data={exercise.maxWeight}
-          beforeText="Max weight"
-          afterText="lbs"
-        />
-      </CardContent>
-    </Card>
-  );
-};
-
 export default function DialogContent() {
   return (
     <List>
@@ -111,7 +48,6 @@ export default function DialogContent() {
             </IconButton>
           }
         >
-          {/* <ExerciseButton exercise={exercise} /> */}
           <ExerciseCard exercise={exercise} />
         </ListItem>
       ))}
