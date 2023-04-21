@@ -3,13 +3,24 @@ import { Card, CardContent, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import ExerciseStatLabel from './ExerciseStatLabel';
 
-interface ExerciseButtonProps {
+interface ExerciseCardProps {
   exercise: ExerciseInfo;
+  isDragging: boolean;
+  isOver: boolean;
 }
 
-export default function ExerciseCard({ exercise }: ExerciseButtonProps) {
+export default function ExerciseCard({
+  exercise,
+  isDragging,
+  isOver,
+}: ExerciseCardProps) {
   return (
-    <Card style={{ width: '100dvw' }}>
+    <Card
+      style={{ width: '100dvw' }}
+      sx={{
+        backgroundColor: isDragging && isOver ? 'lightblue' : undefined,
+      }}
+    >
       <CardContent>
         <Typography variant="h5" component="div">
           {exercise.name}
