@@ -13,7 +13,7 @@ interface ExerciseCardProps {
 export default function ExerciseCard({ exercise, isOver }: ExerciseCardProps) {
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.EXERCISE_CARD,
-    item: { exercise },
+    item: exercise,
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

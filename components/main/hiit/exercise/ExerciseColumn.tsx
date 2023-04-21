@@ -7,56 +7,52 @@ import {
   Alert,
   Snackbar,
 } from '@mui/material';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import ExerciseListItem from './ExerciseListItem';
 import { useDrop } from 'react-dnd';
-import DraggableExerciseInfo from '@/components/shared/DraggableExerciseInfo';
 import itemTypes from '@/utils/itemType';
 import { ExercisesContext } from './ExerciseList';
 import { ExerciseColumnTypes } from '@/components/shared/ExerciseColumnTypes';
+import ExerciseInfo from '@/components/shared/ExerciseInfo';
 
 interface ExerciseColumnProps {
   title: ExerciseColumnTypes;
 }
 
 export default function ExerciseColumn({ title }: ExerciseColumnProps) {
-  const { exercises, moveExercise } = useContext(ExercisesContext);
-
-  const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
-    useState<boolean>(false);
-  const ref = useRef(null);
-  const [{ isOver }, drop] = useDrop(
-    () => ({
-      accept: itemTypes.EXERCISE_CARD,
-      drop: (droppedExercise) => {
-        if (exercises.get(droppedExercise.name)?.currentColumn === title) {
-          setShowDuplicateExerciseWarning(true);
-          return;
-        }
-
-        moveExercise(
-          droppedExercise,
-          title === 'Exercises' ? 'Workout' : 'Exercises'
-        );
-      },
-      hover: (item: DraggableExerciseInfo) => {
-        console.log(item);
-        if (!ref.current) {
-          return;
-        }
-      },
-      collect: (monitor) => ({
-        isOver: !!monitor.isOver(),
-      }),
-    }),
-    [exercises]
-  );
+  const { exercises, removeExercise } = useContext(ExercisesContext);
 
   const getExercisesOfColumn = (column: ExerciseColumnTypes) => {
     return [...exercises.values()].filter(
       (exercise) => exercise.currentColumn === column
     );
   };
+
+  const [columnExercises, setColumnExercises] = useState<ExerciseInfo[]>(
+    getExercisesOfColumn(title)
+  );
+
+  const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
+    useState<boolean>(false);
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: itemTypes.EXERCISE_CARD,
+      drop: (droppedExercise: ExerciseInfo) => {
+        if (columnExercises.includes(droppedExercise)) {
+          setShowDuplicateExerciseWarning(true);
+          return;
+        }
+        setColumnExercises([...columnExercises, droppedExercise]);
+      },
+      hover: (draggedExercise: ExerciseInfo) => {
+        removeExercise(draggedExercise.name);
+      },
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    }),
+    [columnExercises]
+  );
 
   return (
     <>
@@ -70,7 +66,7 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
           </Typography>
           <Divider />
           <List ref={drop}>
-            {getExercisesOfColumn(title).map((exercise) => (
+            {columnExercises.map((exercise) => (
               <ExerciseListItem
                 key={exercise.name}
                 exercise={exercise}
