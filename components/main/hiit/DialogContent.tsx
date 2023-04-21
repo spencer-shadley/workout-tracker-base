@@ -1,10 +1,6 @@
 import ExerciseInfo from '@/components/shared/ExerciseInfo';
 import {
   List,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  ListItemButton,
   ListItem,
   IconButton,
   Autocomplete,
@@ -15,8 +11,20 @@ import {
   TypographyProps,
 } from '@mui/material';
 
-import { InfoOutlined, FitnessCenter } from '@mui/icons-material';
+import { InfoOutlined } from '@mui/icons-material';
 import { makeRandomFakeExercises } from '@/components/shared/MockExerciseInfo';
+
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+
+interface temp {
+  fromNow(): string;
+}
+
+// import * as relativeTime from 'dayjs/plugin/relativeTime';
+// dayjs.extend(relativeTime.default);
+
 // list of past exercises
 // top 5 most recent, filtered as you type
 // top 5 most used
@@ -74,7 +82,11 @@ const ExerciseCard = ({ exercise }: ExerciseButtonProps) => {
           afterText=""
         />
         <ExerciseStatLabel
-          data={exercise.lastCompleted ? exercise.lastCompleted.get : undefined}
+          data={
+            exercise.lastCompleted
+              ? dayjs().to(dayjs(exercise.lastCompleted))
+              : undefined
+          }
           beforeText="Last completed"
           afterText=""
         />
