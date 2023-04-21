@@ -45,7 +45,9 @@ function ExerciseColumn({ title, children }: ExerciseColumnProps) {
   return (
     <Grid item xs={5}>
       <Paper elevation={6} sx={{ height: '100%' }}>
-        <Typography>{title}</Typography>
+        <Typography variant="h3" textTransform="uppercase" textAlign="center">
+          {title}
+        </Typography>
         <Divider />
         {children}
       </Paper>
@@ -89,7 +91,7 @@ export default function DialogContent() {
   );
 
   return (
-    <Grid container justifyContent="space-evenly">
+    <Grid container justifyContent="space-evenly" mt={2}>
       <ExerciseColumn title="Exercises">
         <List ref={drop}>
           {[...exercises].map((exercise, index) => (
@@ -105,7 +107,7 @@ export default function DialogContent() {
               style={{ width: '100dvw' }}
               options={[...uniqueExercises].map((exercise) => exercise.name)}
               renderInput={(params) => (
-                <TextField {...params} label="Add exercise" />
+                <TextField {...params} label="Search exercise" />
               )}
             />
           </ListItem>
