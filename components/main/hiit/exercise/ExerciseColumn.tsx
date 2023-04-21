@@ -6,6 +6,8 @@ import {
   List,
   Alert,
   Snackbar,
+  TextField,
+  Autocomplete,
 } from '@mui/material';
 import { useContext, useState } from 'react';
 import ExerciseListItem from './ExerciseListItem';
@@ -20,6 +22,7 @@ interface ExerciseColumnProps {
 }
 
 export default function ExerciseColumn({ title }: ExerciseColumnProps) {
+  const [filter, setFilter] = useState<string>('');
   const { exercises, removeExercise } = useContext(ExercisesContext);
 
   const getExercisesOfColumn = (column: ExerciseColumnTypes) => {
@@ -65,14 +68,29 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
             {title}
           </Typography>
           <Divider />
-          <List ref={drop}>
-            {columnExercises.map((exercise) => (
-              <ExerciseListItem
-                key={exercise.name}
-                exercise={exercise}
-                isOver={isOver}
+          <Autocomplete
+            fullWidth
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                margin="normal"
+                label="Search exercise"
+                value={filter}
+                onChange={(event) => setFilter(event.target.value)}
               />
-            ))}
+            )}
+            options={columnExercises.map((exercise) => exercise.name)}
+          />
+          <List ref={drop}>
+            {columnExercises
+              .filter((exercise) => exercise.name.includes(filter))
+              .map((exercise) => (
+                <ExerciseListItem
+                  key={exercise.name}
+                  exercise={exercise}
+                  isOver={isOver}
+                />
+              ))}
             {/* <ListItem>
             <Autocomplete
               style={{ width: '100dvw' }}
