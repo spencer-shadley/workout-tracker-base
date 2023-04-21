@@ -2,21 +2,27 @@ import ExerciseInfo from '@/components/shared/ExerciseInfo';
 import { Card, CardContent, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import ExerciseStatLabel from './ExerciseStatLabel';
+import { DragSourceMonitor, useDrag } from 'react-dnd';
+import itemTypes from '@/utils/itemType';
 
 interface ExerciseCardProps {
   exercise: ExerciseInfo;
-  isDragging: boolean;
   isOver: boolean;
 }
 
-export default function ExerciseCard({
-  exercise,
-  isDragging,
-  isOver,
-}: ExerciseCardProps) {
+export default function ExerciseCard({ exercise, isOver }: ExerciseCardProps) {
+  const [{ isDragging }, drag] = useDrag({
+    type: itemTypes.EXERCISE_CARD,
+    item: { exercise },
+    collect: (monitor: DragSourceMonitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
   return (
     <Card
-      style={{ width: '100dvw' }}
+      ref={drag}
+      style={{ width: '100dvw', opacity: isDragging ? 0.5 : undefined }}
       sx={{
         backgroundColor: isDragging && isOver ? 'lightblue' : undefined,
       }}
