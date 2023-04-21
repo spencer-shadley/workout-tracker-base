@@ -1,7 +1,7 @@
 import { Chip, Typography, TypographyProps } from '@mui/material';
 
 interface ExerciseStatLabelProps extends TypographyProps {
-  data: string | undefined;
+  data: string | number | undefined;
   beforeText: string;
   afterText: string;
 }

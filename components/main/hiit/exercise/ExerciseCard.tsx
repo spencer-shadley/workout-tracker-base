@@ -1,16 +1,22 @@
 import ExerciseInfo from '@/components/shared/ExerciseInfo';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, IconButton, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import ExerciseStatLabel from './ExerciseStatLabel';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface ExerciseCardProps {
   exercise: ExerciseInfo;
   isOver: boolean;
+  shouldShowCloseButton: boolean;
 }
 
-export default function ExerciseCard({ exercise, isOver }: ExerciseCardProps) {
+export default function ExerciseCard({
+  exercise,
+  isOver,
+  shouldShowCloseButton,
+}: ExerciseCardProps) {
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.EXERCISE_CARD,
     item: exercise,
@@ -28,9 +34,22 @@ export default function ExerciseCard({ exercise, isOver }: ExerciseCardProps) {
       }}
     >
       <CardContent>
-        <Typography variant="h5" component="div">
-          {exercise.name}
-        </Typography>
+        <span style={{ display: 'flex', width: '100%' }}>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            {exercise.name}
+          </Typography>
+          {shouldShowCloseButton && (
+            <IconButton
+              onClick={() => {
+                console.log('clicked close button');
+              }}
+            >
+              <CloseIcon
+                style={{ alignSelf: 'center', justifySelf: 'flex-end' }}
+              />
+            </IconButton>
+          )}
+        </span>
         <ExerciseStatLabel
           data={exercise.description}
           beforeText=""

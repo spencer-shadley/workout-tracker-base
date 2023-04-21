@@ -88,6 +88,7 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
               .filter((exercise) => exercise.name.includes(filter))
               .map((exercise) => (
                 <ExerciseListItem
+                  shouldShowCloseButton={title === 'Workout'}
                   key={exercise.name}
                   exercise={exercise}
                   isOver={isOver}
@@ -107,7 +108,7 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
       </Grid>
       <Snackbar
         open={showDuplicateExerciseWarning}
-        autoHideDuration={6000}
+        autoHideDuration={1000}
         onClose={() => {
           setShowDuplicateExerciseWarning(false);
         }}
@@ -119,7 +120,7 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
           severity="warning"
           sx={{ width: '100%' }}
         >
-          You already added this exercise
+          Exercise already exists
         </Alert>
       </Snackbar>
     </>
