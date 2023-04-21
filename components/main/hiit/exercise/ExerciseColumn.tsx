@@ -70,18 +70,20 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
           <Divider />
           <Autocomplete
             fullWidth
+            freeSolo
             renderInput={(params) => (
               <TextField
                 {...params}
                 margin="normal"
                 label="Search exercise"
+                type="search"
                 value={filter}
                 onChange={(event) => setFilter(event.target.value)}
               />
             )}
             options={columnExercises.map((exercise) => exercise.name)}
           />
-          <List ref={drop}>
+          <List ref={drop} sx={{ overflow: 'auto', maxHeight: '500px' }}>
             {columnExercises
               .filter((exercise) => exercise.name.includes(filter))
               .map((exercise) => (

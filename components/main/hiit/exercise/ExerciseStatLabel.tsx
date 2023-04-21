@@ -1,7 +1,7 @@
-import { Typography, TypographyProps } from '@mui/material';
+import { Chip, Typography, TypographyProps } from '@mui/material';
 
 interface ExerciseStatLabelProps extends TypographyProps {
-  data: unknown | undefined;
+  data: string | undefined;
   beforeText: string;
   afterText: string;
 }
@@ -14,8 +14,32 @@ export default function ExerciseStatLabel({
 }: ExerciseStatLabelProps) {
   return data ? (
     // TODO: bold the data
-    <Typography color="text.secondary" {...otherProps}>
-      {`${beforeText} ${data} ${afterText}`.trim()}
-    </Typography>
+    <span
+      style={{
+        whiteSpace: 'nowrap',
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+      }}
+    >
+      {beforeText && (
+        <Typography color="text.secondary" {...otherProps}>
+          {beforeText}
+        </Typography>
+      )}
+
+      <Chip
+        label={data}
+        style={{ margin: '.5em' }}
+        size="small"
+        sx={{ padding: 0 }}
+      />
+
+      {afterText && (
+        <Typography color="text.secondary" {...otherProps}>
+          {afterText}
+        </Typography>
+      )}
+    </span>
   ) : null;
 }
