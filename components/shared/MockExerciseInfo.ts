@@ -28,6 +28,7 @@ const generateExercise = (name: string): ExerciseInfo => {
     numberOfTimesCompleted: generateRandomInt(100, 0.2),
     maxWeight: generateRandomInt(1000, 0.5),
     lastCompleted: generateRandomDateWithinDays(100),
+    currentColumn: 'Exercises',
   };
 };
 

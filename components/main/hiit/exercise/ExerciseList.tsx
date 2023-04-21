@@ -4,13 +4,10 @@ import { makeRandomFakeExercises } from '@/components/shared/MockExerciseInfo';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import ExerciseColumn from './ExerciseColumn';
+import { ExerciseColumnTypes } from '@/components/shared/ExerciseColumnTypes';
 dayjs.extend(relativeTime);
-
-// list of past exercises
-// top 5 most recent, filtered as you type
-// top 5 most used
 
 // option to add
 
@@ -20,25 +17,47 @@ dayjs.extend(relativeTime);
 // TODO: add filter
 // TODO: add advanced search
 
-const numberOfTopExercises = 5;
-
 // TODO: localstorage or db
 const mostRecentExercises: ExerciseInfo[] = makeRandomFakeExercises();
 const mostUsedExercises: ExerciseInfo[] = [...mostRecentExercises];
 const allExercises = [...mostRecentExercises, ...mostUsedExercises];
-const uniqueExercises: Set<ExerciseInfo> = new Set([...allExercises]);
+const uniqueExercises: Map<string, ExerciseInfo> = new Map();
+for (const exercise of allExercises) {
+  uniqueExercises.set(exercise.name, exercise);
+}
+
+export interface ExerciseContext {
+  exercises: Map<string, ExerciseInfo>;
+  moveExercise: (exercise: ExerciseInfo, toColumn: ExerciseColumnTypes) => void;
+}
+
+export const ExercisesContext = createContext<ExerciseContext>({
+  exercises: new Map(),
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  moveExercise: () => {},
+});
 
 export default function DialogContent() {
+  const [exercises, setExercises] =
+    useState<Map<string, ExerciseInfo>>(uniqueExercises);
+
   return (
-    <Grid container justifyContent="space-evenly" mt={2}>
-      <ExerciseColumn
-        title="Exercises"
-        initialExercises={[...uniqueExercises].slice(0, 5)}
-      />
-      <ExerciseColumn
-        title="Workouts"
-        initialExercises={[...uniqueExercises].slice(0, 3)}
-      />
-    </Grid>
+    <ExercisesContext.Provider
+      value={{
+        exercises,
+        moveExercise: (exercise, toColumn) => {
+          exercises.set(exercise.name, {
+            ...exercise,
+            currentColumn: toColumn,
+          });
+          setExercises(exercises);
+        },
+      }}
+    >
+      <Grid container justifyContent="space-evenly" mt={2}>
+        <ExerciseColumn title="Exercises" />
+        <ExerciseColumn title="Workout" />
+      </Grid>
+    </ExercisesContext.Provider>
   );
 }
