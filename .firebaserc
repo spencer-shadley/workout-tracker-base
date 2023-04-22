@@ -1,5 +1,11 @@
 {
   "projects": {
     "default": "workout-tracker-5e40b"
+  },
+  "targets": {},
+  "etags": {
+    "workout-tracker-5e40b": {
+      "extensionInstances": {}
+    }
   }
 }
