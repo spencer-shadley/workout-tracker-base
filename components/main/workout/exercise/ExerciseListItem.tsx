@@ -1,6 +1,6 @@
 import { ListItem } from '@mui/material';
 import ExerciseCard from './ExerciseCard';
-import ExerciseInfo from '@/components/shared/ExerciseInfo';
+import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 interface ExerciseListItemProps {
   exercise: ExerciseInfo;

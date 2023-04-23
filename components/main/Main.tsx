@@ -1,6 +1,6 @@
 import 'animate.css';
 import TransparentText from '../shared/TransparentText';
-import MainButton from '../shared/GiantButton';
+import GiantButton from '../shared/GiantButton';
 
 export default function Main() {
   return (
@@ -20,9 +20,15 @@ export default function Main() {
           <TransparentText shouldAnimate>Spencer</TransparentText>
         </span>
 
-        <MainButton>Start a workout</MainButton>
-        <MainButton>Generate a workout with AI</MainButton>
-        <MainButton>See stats</MainButton>
+        <GiantButton
+          onClick={() => {
+            window.location.href = '/StartWorkoutPage';
+          }}
+        >
+          Start a workout
+        </GiantButton>
+        <GiantButton>Generate a workout with AI</GiantButton>
+        <GiantButton>See stats</GiantButton>
       </div>
     </main>
   );

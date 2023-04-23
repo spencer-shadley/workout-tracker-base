@@ -14,8 +14,8 @@ import ExerciseListItem from './ExerciseListItem';
 import { useDrop } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
 import { ExercisesContext } from './ExerciseList';
-import { ExerciseColumnTypes } from '@/components/shared/ExerciseColumnTypes';
-import ExerciseInfo from '@/components/shared/ExerciseInfo';
+import { ExerciseColumnTypes } from '@/components/shared/interfaces/ExerciseColumnTypes';
+import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 interface ExerciseColumnProps {
   title: ExerciseColumnTypes;

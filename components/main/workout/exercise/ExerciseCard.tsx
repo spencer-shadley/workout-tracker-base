@@ -1,4 +1,4 @@
-import ExerciseInfo from '@/components/shared/ExerciseInfo';
+import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { Card, CardContent, IconButton, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import ExerciseStatLabel from './ExerciseStatLabel';

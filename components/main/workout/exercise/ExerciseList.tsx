@@ -1,12 +1,12 @@
-import ExerciseInfo from '@/components/shared/ExerciseInfo';
 import { Grid } from '@mui/material';
-import { makeRandomFakeExercises } from '@/components/shared/MockExerciseInfo';
+import { makeRandomFakeExercises } from '@/components/shared/data/MockExerciseInfo';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React, { createContext, useState } from 'react';
 import ExerciseColumn from './ExerciseColumn';
-import { ExerciseColumnTypes } from '@/components/shared/ExerciseColumnTypes';
+import { ExerciseColumnTypes } from '@/components/shared/interfaces/ExerciseColumnTypes';
+import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 dayjs.extend(relativeTime);
 
 // option to add

@@ -1,9 +1,15 @@
-import { Button } from '@mui/material';
+import { Button, ButtonProps } from '@mui/material';
 import { PropsWithChildren } from 'react';
 
-export default function MainButton({ children }: PropsWithChildren) {
+interface GiantButtonProps extends PropsWithChildren, ButtonProps {}
+
+export default function GiantButton({
+  children,
+  ...otherProps
+}: GiantButtonProps) {
   return (
     <Button
+      {...otherProps}
       variant="outlined"
       color="secondary"
       sx={{

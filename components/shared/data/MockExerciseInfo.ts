@@ -1,4 +1,4 @@
-import ExerciseInfo from './ExerciseInfo';
+import ExerciseInfo from '../interfaces/ExerciseInfo';
 
 const shuffleArray = (array: Array<unknown>) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -32,7 +32,7 @@ const generateExercise = (name: string): ExerciseInfo => {
   };
 };
 
-export const fakeExercises: ExerciseInfo[] = [
+export const sampleExercises: ExerciseInfo[] = [
   generateExercise('pushups'),
   generateExercise('situps'),
   generateExercise('pullups'),
@@ -51,7 +51,7 @@ export const fakeExercises: ExerciseInfo[] = [
 ];
 
 export const makeRandomFakeExercises = (): Array<ExerciseInfo> => {
-  const copy = [...fakeExercises];
+  const copy = [...sampleExercises];
   shuffleArray(copy);
   return copy;
 };
