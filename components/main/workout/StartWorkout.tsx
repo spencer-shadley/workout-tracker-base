@@ -10,7 +10,17 @@ export default function StartWorkout() {
 
   return (
     <Paper sx={{ margin: 2, padding: 2 }} elevation={5}>
-      <WorkoutProvider workoutContext={{ exercises, title: 'Workout' }}>
+      <WorkoutProvider
+        workoutContext={{
+          exercises,
+          title: 'Workout',
+          removeExercise: (exerciseName) => {
+            setExercises(
+              exercises.filter((exercise) => exercise.name !== exerciseName)
+            );
+          },
+        }}
+      >
         <Autocomplete
           fullWidth
           freeSolo

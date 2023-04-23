@@ -5,6 +5,7 @@ import ExerciseStatLabel from './ExerciseStatLabel';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
 import CloseIcon from '@mui/icons-material/Close';
+import { useWorkoutContext } from '../context/WorkoutContextProvider';
 
 interface ExerciseCardProps {
   exercise: ExerciseInfo;
@@ -17,6 +18,8 @@ export default function ExerciseCard({
   isOver,
   shouldShowCloseButton,
 }: ExerciseCardProps) {
+  const { removeExercise } = useWorkoutContext();
+
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.EXERCISE_CARD,
     item: exercise,
@@ -42,6 +45,7 @@ export default function ExerciseCard({
             <IconButton
               onClick={() => {
                 console.log('clicked close button');
+                removeExercise(exercise.name);
               }}
             >
               <CloseIcon
