@@ -6,13 +6,9 @@ import {
   AccordionSummary,
   AccordionDetails,
   Button,
-  Avatar,
-  ListItem,
-  ListItemAvatar,
 } from '@mui/material';
 import AiFormat from '../api/data/AiFormat';
-import ExerciseListItemContent from './ExerciseListItemContent';
-import AIExercise from '../api/data/AIExercise';
+import AiExerciseToListItem from './AiExerciseToListItem';
 
 interface AiWorkoutListProps {
   aiPrompt: string;
@@ -68,23 +64,4 @@ export default function AiWorkoutList({
       </>
     );
   }
-}
-
-interface AiExerciseToListItemProps {
-  aiExercise: AIExercise;
-  stepNumber: number;
-}
-
-function AiExerciseToListItem({
-  aiExercise,
-  stepNumber,
-}: AiExerciseToListItemProps) {
-  return aiExercise ? (
-    <ListItem key={Math.random()}>
-      <ListItemAvatar>
-        <Avatar>{stepNumber++}</Avatar>
-      </ListItemAvatar>
-      <ExerciseListItemContent {...aiExercise} />
-    </ListItem>
-  ) : null;
 }
