@@ -40,6 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <DndProvider backend={HTML5Backend}>
+        <div className="wave" />
+        <div className="wave" />
+        <div className="wave" />
         <Component {...pageProps} />
       </DndProvider>
     </ThemeProvider>
