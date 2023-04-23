@@ -43,6 +43,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="wave" />
         <div className="wave" />
         <div className="wave" />
+        <div className="wave" />
+        <div className="wave" />
+        <div className="wave" />
         <Component {...pageProps} />
       </DndProvider>
     </ThemeProvider>
