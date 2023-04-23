@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
-import AddWorkoutButton from '../shared/AddWorkoutButton';
-import ThemeButton from '../shared/ThemeButton';
+// import AddWorkoutButton from '../shared/AddWorkoutButton';
+// import ThemeButton from '../shared/ThemeButton';
 
 function MainButton() {
   return (
@@ -9,9 +9,11 @@ function MainButton() {
       color="secondary"
       sx={{
         borderRadius: '500px',
-        height: '200px',
+        height: '150px',
         borderColor: 'white',
         color: 'white',
+        width: '100%',
+        maxWidth: '500px',
       }}
     >
       Start a workout
@@ -21,19 +23,33 @@ function MainButton() {
 
 export default function Main() {
   return (
-    <main style={{ height: '100%' }}>
-      <Typography sx={{ color: 'white' }}>
-        Welcome back Spencer. What would you like to do today?
-      </Typography>
+    <main style={{ height: '100%', paddingTop: '50px' }}>
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
           justifyContent: 'space-evenly',
+          alignItems: 'center',
           margin: '0 50px',
         }}
       >
+        <Typography
+          variant="overline"
+          fontSize="5em"
+          lineHeight="1.5em"
+          sx={{
+            color: 'transparent',
+            fill: 'none',
+            strokeWidth: '1px',
+            stroke: '#fff',
+            WebkitTextStrokeWidth: '1px',
+            WebkitTextStrokeColor: '#fff',
+          }}
+        >
+          Welcome back Spencer
+        </Typography>
+
         <MainButton />
         <MainButton />
         <MainButton />
@@ -63,8 +79,8 @@ export default function Main() {
           />
         </CardContent>
       </Card> */}
-      <ThemeButton />
-      <AddWorkoutButton />
+      {/* <ThemeButton />
+      <AddWorkoutButton /> */}
     </main>
   );
 }

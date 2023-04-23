@@ -42,7 +42,7 @@ export default function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <FitnessCenter sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
