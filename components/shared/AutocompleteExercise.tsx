@@ -7,11 +7,14 @@ export default function AutocompleteExercise() {
       fullWidth
       freeSolo
       color="primary"
+      onChange={(event, value) => {
+        console.log('value', value);
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
           margin="normal"
-          label="Find exercise..."
+          label="Find an exercise..."
           type="search"
         />
       )}
