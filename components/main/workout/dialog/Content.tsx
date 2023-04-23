@@ -5,97 +5,10 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import ExerciseList from '../exercise/ExerciseList';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Avatar,
-  Button,
-  Dialog,
-  FormGroup,
-  LinearProgress,
-  List,
-  ListItem,
-  ListItemAvatar,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, Dialog, FormGroup, TextField } from '@mui/material';
 import { askQuestion } from '@/components/api/openai';
-import ExerciseListItemContent from '@/components/ai-generated-workout/ExerciseListItemContent';
-import AiFormat from '@/components/api/data/AiFormat';
-import AIExercise from '@/components/api/data/AIExercise';
+import AiWorkoutList from '@/components/ai-generated-workout/AiWorkoutList';
 dayjs.extend(relativeTime);
-
-interface AiExerciseToListItemProps {
-  aiExercise: AIExercise;
-  stepNumber: number;
-}
-
-function AiExerciseToListItem({
-  aiExercise,
-  stepNumber,
-}: AiExerciseToListItemProps) {
-  return aiExercise ? (
-    <ListItem key={Math.random()}>
-      <ListItemAvatar>
-        <Avatar>{stepNumber++}</Avatar>
-      </ListItemAvatar>
-      <ExerciseListItemContent {...aiExercise} />
-    </ListItem>
-  ) : null;
-}
-
-interface AiWorkoutListProps {
-  aiPrompt: string;
-  rawAiResponse: string;
-  retry: () => void;
-}
-
-function AiWorkoutList({ rawAiResponse, aiPrompt, retry }: AiWorkoutListProps) {
-  if (!rawAiResponse)
-    return (
-      <div style={{ margin: '5' }}>
-        <Typography>Creating a workout just for you...</Typography>
-        <LinearProgress />
-      </div>
-    );
-  try {
-    const aiResponse = JSON.parse(rawAiResponse.trim()) as AiFormat;
-    const { exercises } = aiResponse;
-    return (
-      <>
-        <Typography variant="h2">
-          {aiPrompt.slice(0, aiPrompt.indexOf('.'))}
-        </Typography>
-        <List>
-          {exercises.map((exercise, index) => (
-            <AiExerciseToListItem
-              aiExercise={exercise}
-              key={Math.random()}
-              stepNumber={index + 1}
-            />
-          ))}
-        </List>
-        <Accordion>
-          <AccordionSummary>
-            <Typography>See full details</Typography>
-          </AccordionSummary>
-          <AccordionDetails>{JSON.stringify(rawAiResponse)}</AccordionDetails>
-        </Accordion>
-      </>
-    );
-  } catch (e) {
-    console.error('failed to parse ai response', e);
-    return (
-      <>
-        <Typography>
-          Failed to make a workout, please try a different prompt or try again.
-        </Typography>
-        <Button onClick={() => retry()}>Retry</Button>
-      </>
-    );
-  }
-}
 
 export default function DialogContent() {
   const [aiPrompt, setAiPrompt] = React.useState<string>('');
