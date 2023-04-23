@@ -5,7 +5,7 @@ import {
   Straighten,
   FitnessCenter,
 } from '@mui/icons-material';
-import AddHIITWorkoutDialog from '../main/hiit/dialog/HIITDialogWrapper';
+import AddHIITWorkoutDialog from '../main/workout/dialog/Wrapper';
 import React from 'react';
 
 const HIITWorkoutKey = 'Start HIIT Workout';
@@ -49,7 +49,6 @@ export default function Main() {
         }}
         title={`${HIITWorkoutKey}`}
       />
-      ;
     </>
   );
 }

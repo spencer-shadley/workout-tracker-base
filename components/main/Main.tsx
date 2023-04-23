@@ -1,19 +1,14 @@
+import { Typography } from '@mui/material';
 import AddWorkoutButton from '../shared/AddWorkoutButton';
 import ThemeButton from '../shared/ThemeButton';
-import AddHIITWorkoutDialog from './hiit/dialog/HIITDialogWrapper';
 
 export default function Main() {
   return (
     <main>
-      <h1>Main</h1>
+      <Typography>
+        Welcome back Spencer. What would you like to do today?
+      </Typography>
       <ThemeButton />
-      <AddHIITWorkoutDialog
-        isOpen={true}
-        onClose={function (): void {
-          console.log('Function not implemented.');
-        }}
-        title={'HIIT Workout'}
-      />
       <AddWorkoutButton />
     </main>
   );
