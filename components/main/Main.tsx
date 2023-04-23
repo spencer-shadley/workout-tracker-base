@@ -1,4 +1,7 @@
 import { Button, Typography } from '@mui/material';
+import 'animate.css';
+import TransparentText from '../shared/TransparentText';
+
 // import AddWorkoutButton from '../shared/AddWorkoutButton';
 // import ThemeButton from '../shared/ThemeButton';
 
@@ -23,7 +26,7 @@ function MainButton() {
 
 export default function Main() {
   return (
-    <main style={{ height: '100%', paddingTop: '50px' }}>
+    <main style={{ height: '100dvh', paddingTop: '50px' }}>
       <div
         style={{
           display: 'flex',
@@ -34,21 +37,10 @@ export default function Main() {
           margin: '0 50px',
         }}
       >
-        <Typography
-          variant="overline"
-          fontSize="5em"
-          lineHeight="1.5em"
-          sx={{
-            color: 'transparent',
-            fill: 'none',
-            strokeWidth: '1px',
-            stroke: '#fff',
-            WebkitTextStrokeWidth: '1px',
-            WebkitTextStrokeColor: '#fff',
-          }}
-        >
-          Welcome back Spencer
-        </Typography>
+        <span>
+          <TransparentText>Welcome back</TransparentText>
+          <TransparentText shouldAnimate>Spencer</TransparentText>
+        </span>
 
         <MainButton />
         <MainButton />
