@@ -4,7 +4,16 @@ import ThemeButton from '../shared/ThemeButton';
 
 function MainButton() {
   return (
-    <Button variant="contained" sx={{ borderRadius: '500px', height: '200px' }}>
+    <Button
+      variant="outlined"
+      color="secondary"
+      sx={{
+        borderRadius: '500px',
+        height: '200px',
+        borderColor: 'white',
+        color: 'white',
+      }}
+    >
       Start a workout
     </Button>
   );
@@ -13,7 +22,7 @@ function MainButton() {
 export default function Main() {
   return (
     <main style={{ height: '100%' }}>
-      <Typography>
+      <Typography sx={{ color: 'white' }}>
         Welcome back Spencer. What would you like to do today?
       </Typography>
       <div
