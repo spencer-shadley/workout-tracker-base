@@ -16,66 +16,83 @@ export default function StartWorkout() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);
 
   return (
-    <Paper sx={{ margin: 2, padding: 2 }} elevation={5}>
-      <WorkoutProvider
-        workoutContext={{
-          exercises,
-          title: 'Workout',
-          removeExercise: (exerciseName) => {
-            setExercises(
-              exercises.filter((exercise) => exercise.name !== exerciseName)
-            );
-          },
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Paper
+        sx={{
+          margin: 2,
+          padding: 2,
+          width: '100%',
+          maxWidth: '500px',
         }}
+        elevation={5}
       >
-        <Autocomplete
-          fullWidth
-          noOptionsText="No exercises found"
-          freeSolo
-          selectOnFocus
-          clearOnBlur
-          handleHomeEndKeys
-          onChange={(event, value) => {
-            console.log(event);
-            if (value) {
-              // TODO: add DB
-              const exercise = sampleExercises.find(
-                (exercise) => exercise.name === value
+        <WorkoutProvider
+          workoutContext={{
+            exercises,
+            title: 'Workout',
+            removeExercise: (exerciseName) => {
+              setExercises(
+                exercises.filter((exercise) => exercise.name !== exerciseName)
               );
-              if (exercise) {
-                setExercises([...exercises, exercise]);
-              }
-            }
+            },
           }}
-          renderOption={(props, exerciseName) => (
-            <ExerciseOption
-              exerciseName={exerciseName}
-              handleClick={(exercise) => {
-                console.log('clicked', exercise.name);
-                setExercises([...exercises, exercise]);
-              }}
-            />
+        >
+          <Autocomplete
+            fullWidth
+            noOptionsText="No exercises found"
+            freeSolo
+            selectOnFocus
+            clearOnBlur
+            handleHomeEndKeys
+            onChange={(event, value) => {
+              console.log(event);
+              if (value) {
+                // TODO: add DB
+                const exercise = sampleExercises.find(
+                  (exercise) => exercise.name === value
+                );
+                if (exercise) {
+                  setExercises([...exercises, exercise]);
+                }
+              }
+            }}
+            renderOption={(props, exerciseName) => (
+              <ExerciseOption
+                exerciseName={exerciseName}
+                handleClick={(exercise) => {
+                  console.log('clicked', exercise.name);
+                  setExercises([...exercises, exercise]);
+                }}
+              />
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                margin="normal"
+                label="Find an exercise..."
+                type="search"
+              />
+            )}
+            options={sampleExercises.map((exercise) => exercise.name)}
+          />
+          {exercises.length === 0 ? (
+            <>Add exercises to get started</>
+          ) : (
+            <>
+              <Exercises />
+              <Button>Start workout</Button>
+            </>
           )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              margin="normal"
-              label="Find an exercise..."
-              type="search"
-            />
-          )}
-          options={sampleExercises.map((exercise) => exercise.name)}
-        />
-        {exercises.length === 0 ? (
-          <>Add exercises to get started</>
-        ) : (
-          <>
-            <Exercises />
-            <Button>Start workout</Button>
-          </>
-        )}
-      </WorkoutProvider>
-    </Paper>
+        </WorkoutProvider>
+      </Paper>
+    </div>
   );
 }
 
