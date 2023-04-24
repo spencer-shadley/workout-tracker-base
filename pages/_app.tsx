@@ -8,6 +8,9 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, isSupported } from 'firebase/analytics';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 isSupported().then((supported) => {
   if (supported) {

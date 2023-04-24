@@ -1,9 +1,16 @@
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { useState } from 'react';
-import { Autocomplete, Button, Paper, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  Button,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import Exercises from './exercise/Exercises';
 import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import { WorkoutProvider } from './context/WorkoutContextProvider';
+import ExerciseCard from './exercise/ExerciseCard';
 
 export default function StartWorkout() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);
@@ -23,9 +30,15 @@ export default function StartWorkout() {
       >
         <Autocomplete
           fullWidth
+          noOptionsText="No exercises found"
           freeSolo
+          selectOnFocus
+          clearOnBlur
+          handleHomeEndKeys
           onChange={(event, value) => {
+            console.log(event);
             if (value) {
+              // TODO: add DB
               const exercise = sampleExercises.find(
                 (exercise) => exercise.name === value
               );
@@ -34,6 +47,15 @@ export default function StartWorkout() {
               }
             }
           }}
+          renderOption={(props, exerciseName) => (
+            <ExerciseOption
+              exerciseName={exerciseName}
+              handleClick={(exercise) => {
+                console.log('clicked', exercise.name);
+                setExercises([...exercises, exercise]);
+              }}
+            />
+          )}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -54,5 +76,28 @@ export default function StartWorkout() {
         )}
       </WorkoutProvider>
     </Paper>
+  );
+}
+
+interface ExerciseOptionProps {
+  exerciseName: string;
+  handleClick: (exercise: ExerciseInfo) => void;
+}
+
+function ExerciseOption({ exerciseName, handleClick }: ExerciseOptionProps) {
+  const exercise = sampleExercises.find(
+    (exercise) => exercise.name === exerciseName
+  );
+
+  return exercise ? (
+    <ExerciseCard
+      exercise={exercise}
+      isOver={false}
+      shouldShowCloseButton={false}
+      sx={{ margin: '10px' }}
+      onClick={() => handleClick(exercise)}
+    />
+  ) : (
+    <Typography>{exerciseName} could not be found</Typography>
   );
 }

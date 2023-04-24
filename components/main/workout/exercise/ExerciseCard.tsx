@@ -1,5 +1,11 @@
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
-import { Card, CardContent, IconButton, Typography } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardProps,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import dayjs from 'dayjs';
 import ExerciseStatLabel from './ExerciseStatLabel';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
@@ -7,7 +13,7 @@ import itemTypes from '@/utils/itemType';
 import CloseIcon from '@mui/icons-material/Close';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 
-interface ExerciseCardProps {
+interface ExerciseCardProps extends CardProps {
   exercise: ExerciseInfo;
   isOver: boolean;
   shouldShowCloseButton: boolean;
@@ -17,6 +23,7 @@ export default function ExerciseCard({
   exercise,
   isOver,
   shouldShowCloseButton,
+  ...otherProps
 }: ExerciseCardProps) {
   const { removeExercise } = useWorkoutContext();
 
@@ -31,10 +38,12 @@ export default function ExerciseCard({
   return (
     <Card
       ref={drag}
-      style={{ width: '100dvw', opacity: isDragging ? 0.5 : undefined }}
+      style={{ opacity: isDragging ? 0.5 : undefined }}
       sx={{
         backgroundColor: isDragging && isOver ? 'lightblue' : undefined,
+        width: '100%',
       }}
+      {...otherProps}
     >
       <CardContent>
         <span style={{ display: 'flex', width: '100%' }}>
