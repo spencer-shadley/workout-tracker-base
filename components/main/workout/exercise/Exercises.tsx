@@ -9,8 +9,10 @@ export default function Exercises() {
     useState<boolean>(false);
 
   const { exercises } = useWorkoutContext();
-  const [remainingExerciseTimeInMilliseconds, setRemainingExerciseTimeInMilliseconds] = useState<number>(0);
-    const currentExercise = 
+  const [
+    remainingExerciseTimeInMilliseconds,
+    setRemainingExerciseTimeInMilliseconds,
+  ] = useState<number>(0);
 
   return (
     <div
@@ -27,7 +29,8 @@ export default function Exercises() {
             <ExerciseTimeProvider
               key={exercise.name}
               exerciseTimeContext={{
-                elapsedExerciseTimeInMilliseconds: remainingExerciseTimeInMilliseconds,
+                elapsedExerciseTimeInMilliseconds:
+                  remainingExerciseTimeInMilliseconds,
               }}
             >
               <ExerciseListItem

@@ -10,8 +10,9 @@ import {
 } from '@mui/material';
 import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import { useWorkoutContext } from '../workout/context/WorkoutContextProvider';
-import { useEffect, useState } from 'react';
-import { TimeProvider } from '../workout/context/TimeContextProvider';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { TimeProvider, TimeSlot } from '../workout/context/TimeContextProvider';
+import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 function calculateWorkoutTimeInMilliseconds(
   workoutOptions: WorkoutOptions,
@@ -30,6 +31,71 @@ function calculateWorkoutTimeInMilliseconds(
   );
 }
 
+function calculateRoundTimeInMilliseconds(
+  workoutOptions: WorkoutOptions,
+  numberOfExercises: number
+): number {
+  return (
+    (numberOfExercises *
+      (workoutOptions.exerciseDurationInSeconds +
+        workoutOptions.restBetweenExercisesInSeconds) +
+      workoutOptions.restBetweenRoundsInSeconds) *
+    1000
+  );
+}
+
+function calculateBuckets(
+  workoutOptions: WorkoutOptions,
+  exercises: ExerciseInfo[]
+) {
+  const {
+    numberOfRounds,
+    restBetweenExercisesInSeconds,
+    exerciseDurationInSeconds,
+    restBetweenRoundsInSeconds,
+  } = workoutOptions;
+  const buckets: TimeSlot[] = [];
+  let passedTimeInMilliseconds = 0;
+  for (let round = 0; round < numberOfRounds; round++) {
+    for (let exercise = 0; exercise < exercises.length; exercise++) {
+      const observedExercise = exercises[exercise];
+      buckets.push({
+        containerExercise: observedExercise,
+        isRest: false,
+        endTimeInMilliseconds:
+          passedTimeInMilliseconds + exerciseDurationInSeconds * 1000,
+        startTimeInMilliseconds: passedTimeInMilliseconds,
+        remainingTimeInMilliseconds: exerciseDurationInSeconds * 1000,
+        isActive: false,
+        containerRound: round,
+      });
+      passedTimeInMilliseconds += exerciseDurationInSeconds * 1000;
+      buckets.push({
+        containerExercise: observedExercise,
+        isRest: true,
+        endTimeInMilliseconds:
+          passedTimeInMilliseconds + restBetweenExercisesInSeconds * 1000,
+        startTimeInMilliseconds: passedTimeInMilliseconds,
+        remainingTimeInMilliseconds: restBetweenExercisesInSeconds * 1000,
+        isActive: false,
+        containerRound: round,
+      });
+      passedTimeInMilliseconds += restBetweenExercisesInSeconds * 1000;
+    }
+    buckets.push({
+      containerExercise: undefined,
+      isRest: true,
+      endTimeInMilliseconds:
+        passedTimeInMilliseconds + restBetweenRoundsInSeconds * 1000,
+      startTimeInMilliseconds: passedTimeInMilliseconds,
+      remainingTimeInMilliseconds: restBetweenRoundsInSeconds * 1000,
+      isActive: false,
+      containerRound: round,
+    });
+  }
+  return buckets;
+}
+
 // linear progress per exercise
 // stepper for rounds
 // linear progress for everything
@@ -41,6 +107,7 @@ export default function ActiveWorkout() {
   const [currentRound, setCurrentRound] = useState<number>(0);
   const [timeElapsedInMilliseconds, setTimeElapsedInMilliseconds] =
     useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
 
   const millisecondsLeftInWorkout =
     calculateWorkoutTimeInMilliseconds(workoutOptions, exercises.length) -
@@ -53,11 +120,35 @@ export default function ActiveWorkout() {
     return () => clearInterval(interval);
   }, [timeElapsedInMilliseconds]);
 
+  const roundTimeInMilliseconds = calculateRoundTimeInMilliseconds(
+    workoutOptions,
+    exercises.length
+  );
+  const timeSpentInRoundRestInMilliseconds =
+    currentRound * workoutOptions.restBetweenRoundsInSeconds * 1000;
+
+  const remainingRoundTimeInMilliseconds =
+    (timeElapsedInMilliseconds - timeSpentInRoundRestInMilliseconds) %
+    roundTimeInMilliseconds;
+
+  const buckets = useCallback(() => {
+    return calculateBuckets(workoutOptions, exercises);
+  }, [exercises, workoutOptions]);
+
+  const bucketValues = useMemo(() => {
+    return buckets();
+  }, [buckets]);
+
   return (
     <TimeProvider
       timeContext={{
         currentRound,
-        timeElapsedInMilliseconds,
+        remainingRoundTimeInMilliseconds,
+        currentExercise: '',
+        remainingExerciseTimeInMilliseconds: 0,
+        remainingWorkoutTimeInMilliseconds: millisecondsLeftInWorkout,
+        isRunning,
+        buckets: bucketValues,
       }}
     >
       <Card>
