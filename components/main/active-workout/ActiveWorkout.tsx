@@ -1,21 +1,24 @@
 import { useWorkoutOptionsContext } from '../workout/context/WorkoutOptionsContextProvider';
 import Exercises from '../workout/exercise/Exercises';
-import { Button, ButtonGroup, Typography } from '@mui/material';
+import { Button, ButtonGroup, Card, Typography } from '@mui/material';
 import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import { useWorkoutContext } from '../workout/context/WorkoutContextProvider';
+import Countdown, { CountdownRenderProps, CountdownApi } from 'react-countdown';
 
-function calculateTimeRemaining(
+function calculateTimeRemainingInMilliseconds(
   workoutOptions: WorkoutOptions,
   numberOfExercises: number
 ) {
-  const timePerRound =
+  const secondsPerRound =
     numberOfExercises *
-      (workoutOptions.exerciseDuration + workoutOptions.restBetweenExercises) +
-    workoutOptions.restBetweenRounds -
-    workoutOptions.restBetweenExercises;
+      (workoutOptions.exerciseDurationInSeconds +
+        workoutOptions.restBetweenExercisesInSeconds) +
+    workoutOptions.restBetweenRoundsInSeconds -
+    workoutOptions.restBetweenExercisesInSeconds;
   return (
-    timePerRound * workoutOptions.numberOfRounds -
-    workoutOptions.restBetweenRounds
+    (secondsPerRound * workoutOptions.numberOfRounds -
+      workoutOptions.restBetweenRoundsInSeconds) *
+    1000
   );
 }
 
@@ -29,17 +32,58 @@ export default function ActiveWorkout() {
   //   const {elapsedTime } = https://codesandbox.io/s/priceless-hill-2tbiq?fontsize=14&hidenavigation=1&theme=dark
   return (
     <>
-      <ButtonGroup>
-        <Button>Start</Button>
-        <Button>Pause</Button>
-        <Button>Stop</Button>
-      </ButtonGroup>
-      <Typography>
+      <Card>
+        <ButtonGroup>
+          <Button>Start</Button>
+          <Button onClick={() => countdown.getApi().pause()}>Pause</Button>
+          <Button>Stop</Button>
+        </ButtonGroup>
+
+        <Countdown
+          onPause={() => console.log('paused')}
+          date={
+            Date.now() +
+            calculateTimeRemainingInMilliseconds(
+              workoutOptions,
+              exercises.length
+            )
+          }
+          intervalDelay={0}
+          precision={3}
+          renderer={Timer}
+        />
+
+        {/* <Typography>
         Time remaining{' '}
         {calculateTimeRemaining(workoutOptions, exercises.length)} seconds
-      </Typography>
-      {JSON.stringify(workoutOptions)}
+      </Typography> */}
+        {JSON.stringify(workoutOptions)}
+      </Card>
       <Exercises />
     </>
   );
+}
+
+function Timer({
+  hours,
+  minutes,
+  seconds,
+  completed,
+  milliseconds,
+}: CountdownRenderProps) {
+  console.log(hours, minutes, seconds, completed);
+  if (completed) {
+    // Render a completed state
+    return <h1>done!</h1>;
+  } else {
+    // Render a countdown
+    return (
+      <>
+        <Typography>{hours} hours</Typography>
+        <Typography>{minutes} minutes</Typography>
+        <Typography>{seconds} seconds</Typography>
+        <Typography>{milliseconds} milliseconds</Typography>
+      </>
+    );
+  }
 }
