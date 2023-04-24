@@ -7,6 +7,9 @@ import {
   Slider,
   Typography,
 } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useWorkoutContext } from './context/WorkoutContextProvider';
+import { ActiveWorkoutPageProps } from '@/pages/ActiveWorkoutPage';
 
 function makeMinuteMarks() {
   const maxMinutes = 4;
@@ -26,6 +29,8 @@ export default function WorkoutOptionsDialog({
   isOpen,
   close,
 }: WorkoutOptionsDialogProps) {
+  const router = useRouter();
+  const { exercises } = useWorkoutContext();
   return (
     <Dialog open={isOpen} fullWidth onClose={close}>
       <DialogTitle>Set your workout options</DialogTitle>
@@ -78,7 +83,13 @@ export default function WorkoutOptionsDialog({
         </Button>
         <Button
           onClick={() => {
-            window.location.href = 'ActiveWorkout';
+            const props: ActiveWorkoutPageProps = {
+              exercises,
+            };
+            router.push({
+              pathname: '/ActiveWorkoutPage',
+              query: { props: JSON.stringify(props) },
+            });
           }}
         >
           Start

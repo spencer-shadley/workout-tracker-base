@@ -7,7 +7,7 @@ export default function ExerciseColumn() {
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
     useState<boolean>(false);
 
-  const { exercises, title } = useWorkoutContext();
+  const { exercises } = useWorkoutContext();
 
   return (
     <div
@@ -22,7 +22,7 @@ export default function ExerciseColumn() {
         <List sx={{ overflow: 'auto' }}>
           {exercises.map((exercise) => (
             <ExerciseListItem
-              shouldShowCloseButton={title === 'Workout'}
+              shouldShowCloseButton={false}
               key={exercise.name}
               exercise={exercise}
               isOver={false}

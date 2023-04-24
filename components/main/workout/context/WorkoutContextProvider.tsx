@@ -3,13 +3,11 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 
 export interface WorkoutContextType {
   exercises: ExerciseInfo[];
-  title: string;
   removeExercise: (exerciseName: string) => void;
 }
 
 export const WorkoutContext = createContext<WorkoutContextType>({
   exercises: [],
-  title: '',
   removeExercise: () => console.log('removeExercise not implemented'),
 });
 

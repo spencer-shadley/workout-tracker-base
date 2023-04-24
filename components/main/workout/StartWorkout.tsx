@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {
   Autocomplete,
   Button,
+  Divider,
   Paper,
   TextField,
   Typography,
@@ -19,40 +20,40 @@ export default function StartWorkout() {
     useState<boolean>(false);
 
   return (
-    <div
-      style={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: '100%',
+    <WorkoutProvider
+      workoutContext={{
+        exercises,
+        removeExercise: (exerciseName) => {
+          setExercises(
+            exercises.filter((exercise) => exercise.name !== exerciseName)
+          );
+        },
       }}
     >
-      <Paper
-        sx={{
-          margin: 2,
-          padding: 2,
+      <div
+        style={{
           width: '100%',
-          maxWidth: '500px',
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'center',
+          height: '100%',
         }}
-        elevation={5}
       >
-        <Typography variant="h4" sx={{ alignSelf: 'center' }}>
-          Create a workout
-        </Typography>
-        <WorkoutProvider
-          workoutContext={{
-            exercises,
-            title: 'Workout',
-            removeExercise: (exerciseName) => {
-              setExercises(
-                exercises.filter((exercise) => exercise.name !== exerciseName)
-              );
-            },
+        <Paper
+          sx={{
+            margin: 2,
+            padding: 2,
+            width: '100%',
+            maxWidth: '500px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
+          elevation={5}
         >
+          <Typography variant="h4" sx={{ alignSelf: 'center' }}>
+            Create a workout
+          </Typography>
+
           <Autocomplete
             fullWidth
             noOptionsText="No exercises found"
@@ -91,6 +92,7 @@ export default function StartWorkout() {
             )}
             options={sampleExercises.map((exercise) => exercise.name)}
           />
+          <Divider />
           {exercises.length === 0 ? (
             <>Add exercises to get started</>
           ) : (
@@ -101,13 +103,13 @@ export default function StartWorkout() {
               </Button>
             </>
           )}
-        </WorkoutProvider>
-      </Paper>
-      <WorkoutOptionsDialog
-        isOpen={isWorkoutOptionsDialogOpen}
-        close={() => setIsWorkoutOptionsDialogOpen(false)}
-      />
-    </div>
+        </Paper>
+        <WorkoutOptionsDialog
+          isOpen={isWorkoutOptionsDialogOpen}
+          close={() => setIsWorkoutOptionsDialogOpen(false)}
+        />
+      </div>
+    </WorkoutProvider>
   );
 }
 

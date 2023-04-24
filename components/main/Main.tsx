@@ -1,8 +1,10 @@
 import 'animate.css';
 import TransparentText from '../shared/TransparentText';
 import GiantButton from '../shared/GiantButton';
+import { useRouter } from 'next/router';
 
 export default function Main() {
+  const router = useRouter();
   return (
     <main style={{ height: '100dvh', paddingTop: '50px' }}>
       <div
@@ -22,7 +24,7 @@ export default function Main() {
 
         <GiantButton
           onClick={() => {
-            window.location.href = '/StartWorkoutPage';
+            router.push('StartWorkoutPage');
           }}
         >
           Start a workout
