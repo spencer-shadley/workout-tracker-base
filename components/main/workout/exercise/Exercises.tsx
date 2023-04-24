@@ -1,4 +1,4 @@
-import { Typography, List, Alert, Snackbar } from '@mui/material';
+import { List, Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
 import ExerciseListItem from './ExerciseListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
@@ -10,21 +10,27 @@ export default function ExerciseColumn() {
   const { exercises, title } = useWorkoutContext();
 
   return (
-    <>
-      <Typography variant="h3" textTransform="uppercase" textAlign="center">
-        {title}
-      </Typography>
+    <div
+      style={{
+        flexGrow: 1,
+        height: '100%',
+        maxHeight: '70dvh',
+        overflow: 'auto',
+      }}
+    >
+      <div style={{ height: '100%', overflow: 'auto' }}>
+        <List sx={{ overflow: 'auto' }}>
+          {exercises.map((exercise) => (
+            <ExerciseListItem
+              shouldShowCloseButton={title === 'Workout'}
+              key={exercise.name}
+              exercise={exercise}
+              isOver={false}
+            />
+          ))}
+        </List>
+      </div>
 
-      <List sx={{ overflow: 'auto', maxHeight: '500px' }}>
-        {exercises.map((exercise) => (
-          <ExerciseListItem
-            shouldShowCloseButton={title === 'Workout'}
-            key={exercise.name}
-            exercise={exercise}
-            isOver={false}
-          />
-        ))}
-      </List>
       <Snackbar
         open={showDuplicateExerciseWarning}
         autoHideDuration={1000}
@@ -42,6 +48,6 @@ export default function ExerciseColumn() {
           Exercise already exists
         </Alert>
       </Snackbar>
-    </>
+    </div>
   );
 }

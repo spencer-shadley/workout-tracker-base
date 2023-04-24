@@ -11,9 +11,12 @@ import Exercises from './exercise/Exercises';
 import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import { WorkoutProvider } from './context/WorkoutContextProvider';
 import ExerciseCard from './exercise/ExerciseCard';
+import WorkoutOptionsDialog from './WorkoutOptionsDialog';
 
 export default function StartWorkout() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);
+  const [isWorkoutOptionsDialogOpen, setIsWorkoutOptionsDialogOpen] =
+    useState<boolean>(false);
 
   return (
     <div
@@ -22,6 +25,7 @@ export default function StartWorkout() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        height: '100%',
       }}
     >
       <Paper
@@ -30,9 +34,14 @@ export default function StartWorkout() {
           padding: 2,
           width: '100%',
           maxWidth: '500px',
+          display: 'flex',
+          flexDirection: 'column',
         }}
         elevation={5}
       >
+        <Typography variant="h4" sx={{ alignSelf: 'center' }}>
+          Create a workout
+        </Typography>
         <WorkoutProvider
           workoutContext={{
             exercises,
@@ -87,11 +96,17 @@ export default function StartWorkout() {
           ) : (
             <>
               <Exercises />
-              <Button>Start workout</Button>
+              <Button onClick={() => setIsWorkoutOptionsDialogOpen(true)}>
+                Start workout
+              </Button>
             </>
           )}
         </WorkoutProvider>
       </Paper>
+      <WorkoutOptionsDialog
+        isOpen={isWorkoutOptionsDialogOpen}
+        close={() => setIsWorkoutOptionsDialogOpen(false)}
+      />
     </div>
   );
 }
