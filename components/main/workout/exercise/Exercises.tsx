@@ -2,12 +2,15 @@ import { List, Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
 import ExerciseListItem from './ExerciseListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
+import { ExerciseTimeProvider } from '../context/ExerciseTimeContextProvider';
 
-export default function ExerciseColumn() {
+export default function Exercises() {
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
     useState<boolean>(false);
 
   const { exercises } = useWorkoutContext();
+  const [remainingExerciseTimeInMilliseconds, setRemainingExerciseTimeInMilliseconds] = useState<number>(0);
+    const currentExercise = 
 
   return (
     <div
@@ -21,12 +24,19 @@ export default function ExerciseColumn() {
       <div style={{ height: '100%', overflow: 'auto' }}>
         <List sx={{ overflow: 'auto' }}>
           {exercises.map((exercise) => (
-            <ExerciseListItem
-              shouldShowCloseButton={false}
+            <ExerciseTimeProvider
               key={exercise.name}
-              exercise={exercise}
-              isOver={false}
-            />
+              exerciseTimeContext={{
+                elapsedExerciseTimeInMilliseconds: remainingExerciseTimeInMilliseconds,
+              }}
+            >
+              <ExerciseListItem
+                shouldShowCloseButton={false}
+                key={exercise.name}
+                exercise={exercise}
+                isOver={false}
+              />
+            </ExerciseTimeProvider>
           ))}
         </List>
       </div>
