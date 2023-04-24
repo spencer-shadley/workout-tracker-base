@@ -107,6 +107,9 @@ export default function ActiveWorkout() {
   const [timeElapsedInMilliseconds, setTimeElapsedInMilliseconds] =
     useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [currentBucket, setCurrentBucket] = useState<TimeSlot | undefined>(
+    undefined
+  );
 
   const millisecondsLeftInWorkout =
     calculateWorkoutTimeInMilliseconds(workoutOptions, exercises.length) -
@@ -140,6 +143,19 @@ export default function ActiveWorkout() {
     return x;
   }, [buckets]);
 
+  useEffect(() => {
+    for (const bucket of bucketValues) {
+      if (
+        timeElapsedInMilliseconds < bucket.endTimeInMilliseconds &&
+        timeElapsedInMilliseconds >= bucket.startTimeInMilliseconds
+      ) {
+        bucket.remainingTimeInMilliseconds =
+          bucket.endTimeInMilliseconds - timeElapsedInMilliseconds;
+        setCurrentBucket(bucket);
+      }
+    }
+  }, [bucketValues, timeElapsedInMilliseconds]);
+
   return (
     <TimeProvider
       timeContext={{
@@ -151,6 +167,7 @@ export default function ActiveWorkout() {
         isRunning,
         buckets: bucketValues,
         elapsedTimeInMilliseconds: timeElapsedInMilliseconds,
+        currentBucket: currentBucket ?? bucketValues[0],
       }}
     >
       <Card>

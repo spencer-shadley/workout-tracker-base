@@ -29,20 +29,12 @@ export default function ExerciseCard({
   ...otherProps
 }: ExerciseCardProps) {
   const { removeExercise } = useWorkoutContext();
-  const { buckets, elapsedTimeInMilliseconds } = useTimeContext();
+  const { currentBucket } = useTimeContext();
+  const { remainingTimeInMilliseconds } = currentBucket;
   const { workoutOptions } = useWorkoutOptionsContext();
   const { exerciseDurationInSeconds } = workoutOptions;
-
-  let remainingTime: number | undefined = undefined;
-  for (const bucket of buckets) {
-    if (
-      bucket.containerExercise?.name === exercise.name &&
-      elapsedTimeInMilliseconds < bucket.endTimeInMilliseconds &&
-      elapsedTimeInMilliseconds >= bucket.startTimeInMilliseconds
-    ) {
-      remainingTime = bucket.endTimeInMilliseconds - elapsedTimeInMilliseconds;
-    }
-  }
+  const isExerciseActive =
+    currentBucket.containerExercise?.name === exercise.name;
 
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.EXERCISE_CARD,
@@ -106,16 +98,19 @@ export default function ExerciseCard({
             afterText="lbs"
           />
         </CardContent>
-        {remainingTime && (
+        {isExerciseActive && (
           <Typography variant="h1" justifySelf="center" alignSelf="center">
-            {remainingTime / 1000}
+            {remainingTimeInMilliseconds / 1000}
           </Typography>
         )}
       </span>
-      {remainingTime && (
+      {isExerciseActive && (
         <LinearProgress
           variant="determinate"
-          value={(remainingTime / 1000 / exerciseDurationInSeconds) * 100}
+          value={
+            (remainingTimeInMilliseconds / 1000 / exerciseDurationInSeconds) *
+            100
+          }
         />
       )}
     </Card>
