@@ -135,7 +135,9 @@ export default function ActiveWorkout() {
   }, [exercises, workoutOptions]);
 
   const bucketValues = useMemo(() => {
-    return buckets();
+    const x = buckets();
+    console.log(x);
+    return x;
   }, [buckets]);
 
   return (

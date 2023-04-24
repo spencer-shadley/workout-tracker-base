@@ -4,6 +4,7 @@ import {
   CardContent,
   CardProps,
   IconButton,
+  LinearProgress,
   Typography,
 } from '@mui/material';
 import dayjs from 'dayjs';
@@ -13,6 +14,7 @@ import itemTypes from '@/utils/itemType';
 import CloseIcon from '@mui/icons-material/Close';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import { useTimeContext } from '../context/TimeContextProvider';
+import { useWorkoutOptionsContext } from '../context/WorkoutOptionsContextProvider';
 
 interface ExerciseCardProps extends CardProps {
   exercise: ExerciseInfo;
@@ -28,6 +30,8 @@ export default function ExerciseCard({
 }: ExerciseCardProps) {
   const { removeExercise } = useWorkoutContext();
   const { buckets, elapsedTimeInMilliseconds } = useTimeContext();
+  const { workoutOptions } = useWorkoutOptionsContext();
+  const { exerciseDurationInSeconds } = workoutOptions;
 
   let remainingTime: number | undefined = undefined;
   for (const bucket of buckets) {
@@ -37,7 +41,6 @@ export default function ExerciseCard({
       elapsedTimeInMilliseconds >= bucket.startTimeInMilliseconds
     ) {
       remainingTime = bucket.endTimeInMilliseconds - elapsedTimeInMilliseconds;
-      console.log('bucket', bucket);
     }
   }
 
@@ -59,49 +62,62 @@ export default function ExerciseCard({
       }}
       {...otherProps}
     >
-      <CardContent>
-        <span style={{ display: 'flex', width: '100%' }}>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            {exercise.name}
+      <span style={{ display: 'flex' }}>
+        <CardContent sx={{ flexGrow: 1 }}>
+          <span style={{ display: 'flex', width: '100%' }}>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+              {exercise.name}
+            </Typography>
+            {shouldShowCloseButton && (
+              <IconButton
+                onClick={() => {
+                  removeExercise(exercise.name);
+                }}
+              >
+                <CloseIcon
+                  style={{ alignSelf: 'center', justifySelf: 'flex-end' }}
+                />
+              </IconButton>
+            )}
+          </span>
+
+          <ExerciseStatLabel
+            data={exercise.description}
+            beforeText=""
+            afterText=""
+          />
+          <ExerciseStatLabel
+            data={
+              exercise.lastCompleted
+                ? dayjs().to(dayjs(exercise.lastCompleted))
+                : undefined
+            }
+            beforeText="Last completed"
+            afterText=""
+          />
+          <ExerciseStatLabel
+            data={exercise.numberOfTimesCompleted}
+            beforeText="Completed"
+            afterText="times"
+          />
+          <ExerciseStatLabel
+            data={exercise.maxWeight}
+            beforeText="Max weight"
+            afterText="lbs"
+          />
+        </CardContent>
+        {remainingTime && (
+          <Typography variant="h1" justifySelf="center" alignSelf="center">
+            {remainingTime / 1000}
           </Typography>
-          {shouldShowCloseButton && (
-            <IconButton
-              onClick={() => {
-                removeExercise(exercise.name);
-              }}
-            >
-              <CloseIcon
-                style={{ alignSelf: 'center', justifySelf: 'flex-end' }}
-              />
-            </IconButton>
-          )}
-        </span>
-        <ExerciseStatLabel
-          data={exercise.description}
-          beforeText=""
-          afterText=""
+        )}
+      </span>
+      {remainingTime && (
+        <LinearProgress
+          variant="determinate"
+          value={(remainingTime / 1000 / exerciseDurationInSeconds) * 100}
         />
-        <ExerciseStatLabel data={remainingTime} beforeText="" afterText="" />
-        <ExerciseStatLabel
-          data={
-            exercise.lastCompleted
-              ? dayjs().to(dayjs(exercise.lastCompleted))
-              : undefined
-          }
-          beforeText="Last completed"
-          afterText=""
-        />
-        <ExerciseStatLabel
-          data={exercise.numberOfTimesCompleted}
-          beforeText="Completed"
-          afterText="times"
-        />
-        <ExerciseStatLabel
-          data={exercise.maxWeight}
-          beforeText="Max weight"
-          afterText="lbs"
-        />
-      </CardContent>
+      )}
     </Card>
   );
 }
