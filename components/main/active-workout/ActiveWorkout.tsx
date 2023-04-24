@@ -54,6 +54,11 @@ function calculateBuckets(
     exerciseDurationInSeconds,
     restBetweenRoundsInSeconds,
   } = workoutOptions;
+  const restBetweenExercisesInMilliseconds =
+    restBetweenExercisesInSeconds * 1000;
+  const restBetweenRoundsInMilliseconds = restBetweenRoundsInSeconds * 1000;
+  const exerciseDurationInMilliseconds = exerciseDurationInSeconds * 1000;
+
   const buckets: TimeSlot[] = [];
   let passedTimeInMilliseconds = 0;
   for (let round = 0; round < numberOfRounds; round++) {
@@ -63,32 +68,32 @@ function calculateBuckets(
         containerExercise: observedExercise,
         isRest: false,
         endTimeInMilliseconds:
-          passedTimeInMilliseconds + exerciseDurationInSeconds * 1000,
+          passedTimeInMilliseconds + exerciseDurationInMilliseconds,
         startTimeInMilliseconds: passedTimeInMilliseconds,
-        remainingTimeInMilliseconds: exerciseDurationInSeconds * 1000,
+        remainingTimeInMilliseconds: exerciseDurationInMilliseconds,
         isActive: false,
         containerRound: round,
       });
-      passedTimeInMilliseconds += exerciseDurationInSeconds * 1000;
+      passedTimeInMilliseconds += exerciseDurationInMilliseconds;
       buckets.push({
         containerExercise: observedExercise,
         isRest: true,
         endTimeInMilliseconds:
-          passedTimeInMilliseconds + restBetweenExercisesInSeconds * 1000,
+          passedTimeInMilliseconds + restBetweenExercisesInMilliseconds,
         startTimeInMilliseconds: passedTimeInMilliseconds,
-        remainingTimeInMilliseconds: restBetweenExercisesInSeconds * 1000,
+        remainingTimeInMilliseconds: restBetweenExercisesInMilliseconds,
         isActive: false,
         containerRound: round,
       });
-      passedTimeInMilliseconds += restBetweenExercisesInSeconds * 1000;
+      passedTimeInMilliseconds += restBetweenExercisesInMilliseconds;
     }
     buckets.push({
       containerExercise: undefined,
       isRest: true,
       endTimeInMilliseconds:
-        passedTimeInMilliseconds + restBetweenRoundsInSeconds * 1000,
+        passedTimeInMilliseconds + restBetweenRoundsInMilliseconds,
       startTimeInMilliseconds: passedTimeInMilliseconds,
-      remainingTimeInMilliseconds: restBetweenRoundsInSeconds * 1000,
+      remainingTimeInMilliseconds: restBetweenRoundsInMilliseconds,
       isActive: false,
       containerRound: round,
     });
