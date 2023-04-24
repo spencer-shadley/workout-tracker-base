@@ -44,7 +44,6 @@ export default function ExerciseCard({
           {shouldShowCloseButton && (
             <IconButton
               onClick={() => {
-                console.log('clicked close button');
                 removeExercise(exercise.name);
               }}
             >

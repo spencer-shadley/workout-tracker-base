@@ -25,8 +25,14 @@ export default function StartWorkout() {
           fullWidth
           freeSolo
           onChange={(event, value) => {
-            setExercises([...exercises, sampleExercises[0]]);
-            console.log('value', value);
+            if (value) {
+              const exercise = sampleExercises.find(
+                (exercise) => exercise.name === value
+              );
+              if (exercise) {
+                setExercises([...exercises, exercise]);
+              }
+            }
           }}
           renderInput={(params) => (
             <TextField
