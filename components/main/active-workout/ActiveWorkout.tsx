@@ -111,6 +111,9 @@ export default function ActiveWorkout() {
           <Button
             onClick={() => {
               setTimeElapsedInMilliseconds(0);
+              setCurrentRound(0);
+              setCurrentBucket(undefined);
+              setIsRunning(false);
             }}
           >
             reset
