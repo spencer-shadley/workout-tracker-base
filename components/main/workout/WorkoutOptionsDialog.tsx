@@ -27,7 +27,7 @@ export default function WorkoutOptionsDialog({
   close,
 }: WorkoutOptionsDialogProps) {
   return (
-    <Dialog open={isOpen} fullWidth>
+    <Dialog open={isOpen} fullWidth onClose={close}>
       <DialogTitle>Set your workout options</DialogTitle>
       <DialogContent>
         <Typography>Number of rounds</Typography>
