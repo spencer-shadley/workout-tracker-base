@@ -12,6 +12,7 @@ import { DragSourceMonitor, useDrag } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
 import CloseIcon from '@mui/icons-material/Close';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
+import { useTimeContext } from '../context/TimeContextProvider';
 
 interface ExerciseCardProps extends CardProps {
   exercise: ExerciseInfo;
@@ -26,6 +27,19 @@ export default function ExerciseCard({
   ...otherProps
 }: ExerciseCardProps) {
   const { removeExercise } = useWorkoutContext();
+  const { buckets, elapsedTimeInMilliseconds } = useTimeContext();
+
+  let remainingTime: number | undefined = undefined;
+  for (const bucket of buckets) {
+    if (
+      bucket.containerExercise?.name === exercise.name &&
+      elapsedTimeInMilliseconds < bucket.endTimeInMilliseconds &&
+      elapsedTimeInMilliseconds >= bucket.startTimeInMilliseconds
+    ) {
+      remainingTime = bucket.endTimeInMilliseconds - elapsedTimeInMilliseconds;
+      console.log('bucket', bucket);
+    }
+  }
 
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.EXERCISE_CARD,
@@ -67,6 +81,7 @@ export default function ExerciseCard({
           beforeText=""
           afterText=""
         />
+        <ExerciseStatLabel data={remainingTime} beforeText="" afterText="" />
         <ExerciseStatLabel
           data={
             exercise.lastCompleted

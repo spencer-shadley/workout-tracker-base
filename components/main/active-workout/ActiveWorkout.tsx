@@ -1,18 +1,12 @@
 import { useWorkoutOptionsContext } from '../workout/context/WorkoutOptionsContextProvider';
 import Exercises from '../workout/exercise/Exercises';
-import {
-  Button,
-  Card,
-  Step,
-  StepButton,
-  Stepper,
-  Typography,
-} from '@mui/material';
+import { Button, Card, Typography } from '@mui/material';
 import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import { useWorkoutContext } from '../workout/context/WorkoutContextProvider';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { TimeProvider, TimeSlot } from '../workout/context/TimeContextProvider';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
+import RoundsStepper from './RoundsStepper';
 
 function calculateWorkoutTimeInMilliseconds(
   workoutOptions: WorkoutOptions,
@@ -154,6 +148,7 @@ export default function ActiveWorkout() {
         remainingWorkoutTimeInMilliseconds: millisecondsLeftInWorkout,
         isRunning,
         buckets: bucketValues,
+        elapsedTimeInMilliseconds: timeElapsedInMilliseconds,
       }}
     >
       <Card>
@@ -173,36 +168,6 @@ export default function ActiveWorkout() {
       </Card>
       <Exercises />
     </TimeProvider>
-  );
-}
-
-interface RoundsStepperProps {
-  numberOfRounds: number;
-  currentRound: number;
-  setCurrentRound: (round: number) => void;
-}
-
-function RoundsStepper({
-  numberOfRounds,
-  currentRound,
-  setCurrentRound,
-}: RoundsStepperProps) {
-  const rounds: number[] = [];
-  for (let i = 0; i < numberOfRounds; i++) {
-    rounds.push(i);
-  }
-  return (
-    <Stepper activeStep={currentRound}>
-      {rounds.map((round) => {
-        return (
-          <Step key={round}>
-            <StepButton onClick={() => setCurrentRound(round)}>
-              Round {round + 1}
-            </StepButton>
-          </Step>
-        );
-      })}
-    </Stepper>
   );
 }
 

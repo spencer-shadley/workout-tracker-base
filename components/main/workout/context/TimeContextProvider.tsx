@@ -19,6 +19,7 @@ export interface TimeContextType {
   remainingWorkoutTimeInMilliseconds: number;
   isRunning: boolean;
   buckets: TimeSlot[];
+  elapsedTimeInMilliseconds: number;
 }
 
 export const TimeContext = createContext<TimeContextType>({
@@ -29,6 +30,7 @@ export const TimeContext = createContext<TimeContextType>({
   remainingExerciseTimeInMilliseconds: 0,
   remainingWorkoutTimeInMilliseconds: 0,
   buckets: [],
+  elapsedTimeInMilliseconds: 0,
 });
 
 export const useTimeContext = () => useContext(TimeContext);
