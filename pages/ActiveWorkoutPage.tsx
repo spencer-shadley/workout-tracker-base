@@ -1,14 +1,20 @@
 import ActiveWorkout from '@/components/main/active-workout/ActiveWorkout';
 import { WorkoutProvider } from '@/components/main/workout/context/WorkoutContextProvider';
+import { WorkoutOptionsProvider } from '@/components/main/workout/context/WorkoutOptionsContextProvider';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { useRouter, withRouter } from 'next/router';
 import { useState } from 'react';
 
 export interface ActiveWorkoutPageProps {
   exercises: ExerciseInfo[];
-  // workoutOptions: {
+  workoutOptions: WorkoutOptions;
+}
 
-  // }
+export interface WorkoutOptions {
+  numberOfRounds: number;
+  restBetweenRounds: number;
+  restBetweenExercises: number;
+  exerciseDuration: number;
 }
 
 function ActiveWorkoutPage() {
@@ -27,7 +33,11 @@ function ActiveWorkoutPage() {
         },
       }}
     >
-      <ActiveWorkout />
+      <WorkoutOptionsProvider
+        workoutOptionsContext={{ workoutOptions: { ...props.workoutOptions } }}
+      >
+        <ActiveWorkout />
+      </WorkoutOptionsProvider>
     </WorkoutProvider>
   );
 }

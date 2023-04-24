@@ -9,7 +9,11 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useWorkoutContext } from './context/WorkoutContextProvider';
-import { ActiveWorkoutPageProps } from '@/pages/ActiveWorkoutPage';
+import {
+  ActiveWorkoutPageProps,
+  WorkoutOptions,
+} from '@/pages/ActiveWorkoutPage';
+import { useState } from 'react';
 
 function makeMinuteMarks() {
   const maxMinutes = 4;
@@ -31,6 +35,12 @@ export default function WorkoutOptionsDialog({
 }: WorkoutOptionsDialogProps) {
   const router = useRouter();
   const { exercises } = useWorkoutContext();
+  const [workoutOptions, setWorkoutOptions] = useState<WorkoutOptions>({
+    numberOfRounds: 3,
+    restBetweenRounds: 0,
+    restBetweenExercises: 15,
+    exerciseDuration: 45,
+  });
   return (
     <Dialog open={isOpen} fullWidth onClose={close}>
       <DialogTitle>Set your workout options</DialogTitle>
@@ -38,19 +48,25 @@ export default function WorkoutOptionsDialog({
         <Typography>Number of rounds</Typography>
         <Slider
           step={1}
-          defaultValue={3}
           min={1}
           max={5}
+          value={workoutOptions.numberOfRounds}
           valueLabelDisplay="auto"
           valueLabelFormat={(value) => {
             return `${value} rounds`;
           }}
+          onChange={(event, numberOfRounds) => {
+            setWorkoutOptions({
+              ...workoutOptions,
+              numberOfRounds: numberOfRounds as number,
+            });
+          }}
         />
 
-        <Typography>Break between sets</Typography>
+        <Typography>Rest between exercises</Typography>
         <Slider
           step={5}
-          defaultValue={15}
+          value={workoutOptions.restBetweenExercises}
           min={0}
           max={300}
           valueLabelDisplay="auto"
@@ -58,18 +74,49 @@ export default function WorkoutOptionsDialog({
           valueLabelFormat={(value) => {
             return `${value}s`;
           }}
+          onChange={(event, restBetweenExercises) => {
+            setWorkoutOptions({
+              ...workoutOptions,
+              restBetweenExercises: restBetweenExercises as number,
+            });
+          }}
         />
 
-        <Typography>Break between exercises</Typography>
+        <Typography>Rest between rounds</Typography>
         <Slider
           step={5}
-          defaultValue={15}
+          value={workoutOptions.restBetweenRounds}
           min={0}
           max={300}
           valueLabelDisplay="auto"
           marks={makeMinuteMarks()}
           valueLabelFormat={(value) => {
             return `${value}s`;
+          }}
+          onChange={(event, restBetweenRounds) => {
+            setWorkoutOptions({
+              ...workoutOptions,
+              restBetweenRounds: restBetweenRounds as number,
+            });
+          }}
+        />
+
+        <Typography>Rest between exercises</Typography>
+        <Slider
+          step={5}
+          value={workoutOptions.restBetweenExercises}
+          min={0}
+          max={300}
+          valueLabelDisplay="auto"
+          marks={makeMinuteMarks()}
+          valueLabelFormat={(value) => {
+            return `${value}s`;
+          }}
+          onChange={(event, restBetweenExercises) => {
+            setWorkoutOptions({
+              ...workoutOptions,
+              restBetweenExercises: restBetweenExercises as number,
+            });
           }}
         />
       </DialogContent>
@@ -85,6 +132,7 @@ export default function WorkoutOptionsDialog({
           onClick={() => {
             const props: ActiveWorkoutPageProps = {
               exercises,
+              workoutOptions,
             };
             router.push({
               pathname: '/ActiveWorkoutPage',
