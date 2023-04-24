@@ -37,9 +37,9 @@ export default function WorkoutOptionsDialog({
   const { exercises } = useWorkoutContext();
   const [workoutOptions, setWorkoutOptions] = useState<WorkoutOptions>({
     numberOfRounds: 3,
-    restBetweenRounds: 0,
-    restBetweenExercises: 15,
-    exerciseDuration: 45,
+    restBetweenRoundsInSeconds: 0,
+    restBetweenExercisesInSeconds: 15,
+    exerciseDurationInSeconds: 45,
   });
   return (
     <Dialog open={isOpen} fullWidth onClose={close}>
@@ -66,7 +66,7 @@ export default function WorkoutOptionsDialog({
         <Typography>Rest between exercises</Typography>
         <Slider
           step={5}
-          value={workoutOptions.restBetweenExercises}
+          value={workoutOptions.restBetweenExercisesInSeconds}
           min={0}
           max={300}
           valueLabelDisplay="auto"
@@ -77,7 +77,7 @@ export default function WorkoutOptionsDialog({
           onChange={(event, restBetweenExercises) => {
             setWorkoutOptions({
               ...workoutOptions,
-              restBetweenExercises: restBetweenExercises as number,
+              restBetweenExercisesInSeconds: restBetweenExercises as number,
             });
           }}
         />
@@ -85,7 +85,7 @@ export default function WorkoutOptionsDialog({
         <Typography>Rest between rounds</Typography>
         <Slider
           step={5}
-          value={workoutOptions.restBetweenRounds}
+          value={workoutOptions.restBetweenRoundsInSeconds}
           min={0}
           max={300}
           valueLabelDisplay="auto"
@@ -96,7 +96,7 @@ export default function WorkoutOptionsDialog({
           onChange={(event, restBetweenRounds) => {
             setWorkoutOptions({
               ...workoutOptions,
-              restBetweenRounds: restBetweenRounds as number,
+              restBetweenRoundsInSeconds: restBetweenRounds as number,
             });
           }}
         />
@@ -104,7 +104,7 @@ export default function WorkoutOptionsDialog({
         <Typography>Rest between exercises</Typography>
         <Slider
           step={5}
-          value={workoutOptions.restBetweenExercises}
+          value={workoutOptions.restBetweenExercisesInSeconds}
           min={0}
           max={300}
           valueLabelDisplay="auto"
@@ -115,7 +115,7 @@ export default function WorkoutOptionsDialog({
           onChange={(event, restBetweenExercises) => {
             setWorkoutOptions({
               ...workoutOptions,
-              restBetweenExercises: restBetweenExercises as number,
+              restBetweenExercisesInSeconds: restBetweenExercises as number,
             });
           }}
         />

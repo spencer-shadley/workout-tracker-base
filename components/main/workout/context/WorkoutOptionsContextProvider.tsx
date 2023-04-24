@@ -8,9 +8,9 @@ export interface WorkoutOptionsContextType {
 export const WorkoutOptionsContext = createContext<WorkoutOptionsContextType>({
   workoutOptions: {
     numberOfRounds: 0,
-    restBetweenRounds: 0,
-    restBetweenExercises: 0,
-    exerciseDuration: 0,
+    restBetweenRoundsInSeconds: 0,
+    restBetweenExercisesInSeconds: 0,
+    exerciseDurationInSeconds: 0,
   },
 });
 
