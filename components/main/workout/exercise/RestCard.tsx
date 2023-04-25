@@ -14,13 +14,14 @@ import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
 import { useWorkoutOptionsContext } from '../context/WorkoutOptionsContextProvider';
 
 export function ExerciseOrRestCard(cardProps: CardProps) {
-  const { exercise, isDismissible } = useExerciseCardContext();
+  const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
+  const exerciseType = timeBucket?.exerciseType ?? 'rest';
   const { removeExercise } = useWorkoutContext();
   const { workoutOptions } = useWorkoutOptionsContext();
   const { exerciseDurationInSeconds, restBetweenExercisesInSeconds } =
     workoutOptions;
   const { currentBucket } = useTimeContext();
-  const { exerciseType, containerExercise } = currentBucket;
+  const { containerExercise } = currentBucket;
   const { remainingTimeInMilliseconds } = currentBucket;
   const isExerciseActive = containerExercise?.name === exercise.name;
 
