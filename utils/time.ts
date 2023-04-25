@@ -48,7 +48,7 @@ export function calculateBuckets(
       passedTimeInMilliseconds += exerciseDurationInMilliseconds;
       buckets.push({
         containerExercise: observedExercise,
-        exerciseType: 'rest',
+        exerciseType: 'rest-exercise',
         endTimeInMilliseconds:
           passedTimeInMilliseconds + restBetweenExercisesInMilliseconds,
         startTimeInMilliseconds: passedTimeInMilliseconds,
@@ -60,7 +60,7 @@ export function calculateBuckets(
     }
     buckets.push({
       containerExercise: undefined,
-      exerciseType: 'rest',
+      exerciseType: 'rest-round',
       endTimeInMilliseconds:
         passedTimeInMilliseconds + restBetweenRoundsInMilliseconds,
       startTimeInMilliseconds: passedTimeInMilliseconds,

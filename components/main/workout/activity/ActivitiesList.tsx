@@ -2,7 +2,6 @@ import { List } from '@mui/material';
 import { useState } from 'react';
 import ActivityListItem from './ActivityListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
-import { ExerciseCardProvider } from '../context/ExerciseCardContextProvider';
 import { useTimeContext } from '../context/TimeContextProvider';
 import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
 
@@ -11,7 +10,7 @@ interface ExerciseProps {
 }
 
 export default function ActivitiesList({ shouldIncludeRests }: ExerciseProps) {
-  const { buckets } = useTimeContext();
+  const { currentRound } = useTimeContext();
   const { exercises } = useWorkoutContext();
 
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
@@ -30,36 +29,24 @@ export default function ActivitiesList({ shouldIncludeRests }: ExerciseProps) {
         <List sx={{ overflow: 'auto' }}>
           {exercises.map((exercise, index) => (
             <>
-              <ExerciseCardProvider
-                exerciseCardContext={{
-                  exercise,
-                  isDismissible: false,
-                  timeBucket: buckets.find(
-                    (bucket) =>
-                      bucket.containerExercise?.name === exercise.name &&
-                      bucket.exerciseType === 'exercise'
-                  ),
-                }}
-              >
-                <ActivityListItem key={exercise.name} />
-              </ExerciseCardProvider>
+              <ActivityListItem
+                key={exercise.name}
+                activityType="exercise"
+                exercise={exercise}
+              />
               {shouldIncludeRests && index !== exercises.length - 1 && (
-                <ExerciseCardProvider
-                  exerciseCardContext={{
-                    exercise,
-                    isDismissible: false,
-                    timeBucket: buckets.find(
-                      (bucket) =>
-                        bucket.containerExercise?.name === exercise.name &&
-                        bucket.exerciseType === 'rest'
-                    ),
-                  }}
-                >
-                  <ActivityListItem key={exercise.name + '-rest'} />
-                </ExerciseCardProvider>
+                <ActivityListItem
+                  key={exercise.name + '-rest'}
+                  activityType="rest-exercise"
+                  exercise={exercise}
+                />
               )}
             </>
           ))}
+          <ActivityListItem
+            key={'round-rest-' + currentRound}
+            activityType="rest-round"
+          />
         </List>
       </div>
       {/* TODO: remove? */}

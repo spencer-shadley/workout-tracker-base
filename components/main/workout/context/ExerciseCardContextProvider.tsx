@@ -3,16 +3,13 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 import { TimeSlot } from './TimeContextProvider';
 
 export interface ExerciseCardContextType {
-  exercise: ExerciseInfo;
+  exercise?: ExerciseInfo;
   isDismissible: boolean;
   timeBucket: TimeSlot | undefined;
   progressPercent?: number;
 }
 
 export const ExerciseCardContext = createContext<ExerciseCardContextType>({
-  exercise: {
-    name: '',
-  },
   isDismissible: false,
   timeBucket: {
     remainingTimeInMilliseconds: 0,

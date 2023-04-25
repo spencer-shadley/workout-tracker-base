@@ -13,7 +13,6 @@ export default function ExerciseStatLabel({
   ...otherProps
 }: ExerciseStatLabelProps) {
   return data ? (
-    // TODO: bold the data
     <span
       style={{
         whiteSpace: 'nowrap',

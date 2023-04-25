@@ -6,35 +6,49 @@ import {
   LinearProgress,
   CardProps,
 } from '@mui/material';
-import { useTimeContext } from '../context/TimeContextProvider';
+import { ExerciseType, useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
 import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
-import { useWorkoutOptionsContext } from '../context/WorkoutOptionsContextProvider';
 import ExerciseStatLabels from './exercise/ExerciseStatLabels';
+import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
+
+function getCardTitle(
+  exerciseType: ExerciseType,
+  exerciseName?: string
+): string {
+  switch (exerciseType) {
+    case 'exercise':
+      if (!exerciseName) {
+        break;
+      }
+      return exerciseName;
+    case 'rest-exercise':
+      return 'Rest';
+    case 'rest-round':
+      return 'Round Rest';
+  }
+  console.error('No exercise title found');
+  return 'No title found';
+}
 
 export function ActivityCard(cardProps: CardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
-  const exerciseType = timeBucket?.exerciseType ?? 'rest';
+  const exerciseType: ExerciseType =
+    timeBucket?.exerciseType ?? 'rest-exercise';
   const { removeExercise } = useWorkoutContext();
-  const { workoutOptions } = useWorkoutOptionsContext();
-  const { exerciseDurationInSeconds, restBetweenExercisesInSeconds } =
-    workoutOptions;
   const { currentBucket } = useTimeContext();
   const { containerExercise, exerciseType: currentExerciseType } =
     currentBucket;
   const { remainingTimeInMilliseconds } = currentBucket;
   const isExerciseActive =
-    containerExercise?.name === exercise.name &&
+    containerExercise?.name === exercise?.name &&
     currentExerciseType === exerciseType;
 
   const remainingTimeInSeconds = remainingTimeInMilliseconds / 1000;
-  const duration =
-    exerciseType === 'exercise'
-      ? exerciseDurationInSeconds
-      : restBetweenExercisesInSeconds;
+  const activityDuration = useActivityDurationInSeconds(exerciseType);
   const progressPercent = isExerciseActive
-    ? (remainingTimeInSeconds / duration) * 100
+    ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
 
   return (
@@ -48,9 +62,9 @@ export function ActivityCard(cardProps: CardProps) {
         <CardContent sx={{ flexGrow: 1 }}>
           <span style={{ display: 'flex', width: '100%' }}>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              {exerciseType === 'exercise' ? exercise.name : 'rest'}
+              {getCardTitle(exerciseType, exercise?.name)}
             </Typography>
-            {isDismissible && (
+            {isDismissible && exercise && (
               <IconButton
                 onClick={() => {
                   removeExercise(exercise.name);
@@ -63,7 +77,7 @@ export function ActivityCard(cardProps: CardProps) {
             )}
           </span>
 
-          {exerciseType === 'exercise' && (
+          {exerciseType === 'exercise' && exercise && (
             <ExerciseStatLabels exercise={exercise} />
           )}
         </CardContent>

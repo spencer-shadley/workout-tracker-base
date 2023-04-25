@@ -22,6 +22,7 @@ export default function ActivityOption({
       onClick={() => handleClick(exercise)}
     />
   ) : (
+    // TODO
     // <ExerciseCard
     //   exercise={exercise}
     //   isOver={false}

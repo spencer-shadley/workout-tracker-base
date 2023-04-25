@@ -1,6 +1,8 @@
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { PropsWithChildren, createContext, useContext } from 'react';
 
+export type ExerciseType = 'exercise' | 'rest-round' | 'rest-exercise';
+
 export interface TimeSlot {
   remainingTimeInMilliseconds: number;
   startTimeInMilliseconds: number;
@@ -8,7 +10,7 @@ export interface TimeSlot {
   isActive: boolean;
   containerRound: number;
   containerExercise?: ExerciseInfo;
-  exerciseType: 'exercise' | 'rest';
+  exerciseType: ExerciseType;
 }
 
 export interface TimeContextType {
