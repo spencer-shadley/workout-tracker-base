@@ -48,7 +48,7 @@ export default function ActiveWorkout() {
           </Button>
         </div>
       </Card>
-      <Exercises />
+      <Exercises shouldIncludeRests />
     </TimeProvider>
   );
 }

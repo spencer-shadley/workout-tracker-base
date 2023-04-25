@@ -4,15 +4,18 @@ import ExerciseListItem from './ExerciseListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import { ExerciseTimeProvider } from '../context/ExerciseTimeContextProvider';
 
-export default function Exercises() {
+interface ExerciseProps {
+  shouldIncludeRests?: boolean;
+}
+
+export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
     useState<boolean>(false);
 
   const { exercises } = useWorkoutContext();
-  const [
-    remainingExerciseTimeInMilliseconds,
-    setRemainingExerciseTimeInMilliseconds,
-  ] = useState<number>(0);
+
+  // TODO: remove?
+  const [remainingExerciseTimeInMilliseconds] = useState<number>(0);
 
   return (
     <div
@@ -39,6 +42,14 @@ export default function Exercises() {
                 exercise={exercise}
                 isOver={false}
               />
+              {shouldIncludeRests && (
+                <ExerciseListItem
+                  shouldShowCloseButton={false}
+                  key="rest"
+                  exercise="rest"
+                  isOver={false}
+                />
+              )}
             </ExerciseTimeProvider>
           ))}
         </List>

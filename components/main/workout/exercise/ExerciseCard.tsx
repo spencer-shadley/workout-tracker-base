@@ -15,9 +15,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import { useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutOptionsContext } from '../context/WorkoutOptionsContextProvider';
+import ExerciseStatLabels from './ExerciseStatLabels';
 
 interface ExerciseCardProps extends CardProps {
-  exercise: ExerciseInfo;
+  exercise: ExerciseInfo | 'rest';
   isOver: boolean;
   shouldShowCloseButton: boolean;
 }
@@ -34,6 +35,7 @@ export default function ExerciseCard({
   const { workoutOptions } = useWorkoutOptionsContext();
   const { exerciseDurationInSeconds } = workoutOptions;
   const isExerciseActive =
+    exercise !== 'rest' &&
     currentBucket.containerExercise?.name === exercise.name;
 
   const [{ isDragging }, drag] = useDrag({
@@ -58,9 +60,9 @@ export default function ExerciseCard({
         <CardContent sx={{ flexGrow: 1 }}>
           <span style={{ display: 'flex', width: '100%' }}>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              {exercise.name}
+              {exercise === 'rest' ? 'rest' : exercise.name}
             </Typography>
-            {shouldShowCloseButton && (
+            {shouldShowCloseButton && exercise !== 'rest' && (
               <IconButton
                 onClick={() => {
                   removeExercise(exercise.name);
@@ -73,30 +75,7 @@ export default function ExerciseCard({
             )}
           </span>
 
-          <ExerciseStatLabel
-            data={exercise.description}
-            beforeText=""
-            afterText=""
-          />
-          <ExerciseStatLabel
-            data={
-              exercise.lastCompleted
-                ? dayjs().to(dayjs(exercise.lastCompleted))
-                : undefined
-            }
-            beforeText="Last completed"
-            afterText=""
-          />
-          <ExerciseStatLabel
-            data={exercise.numberOfTimesCompleted}
-            beforeText="Completed"
-            afterText="times"
-          />
-          <ExerciseStatLabel
-            data={exercise.maxWeight}
-            beforeText="Max weight"
-            afterText="lbs"
-          />
+          {exercise !== 'rest' && <ExerciseStatLabels exercise={exercise} />}
         </CardContent>
         {isExerciseActive && (
           <Typography
