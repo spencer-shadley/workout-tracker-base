@@ -9,10 +9,15 @@ import { millisecondsToHumanReadable } from '@/utils/time';
 export default function ActiveWorkout() {
   const { workoutOptions } = useWorkoutOptionsContext();
   const { numberOfRounds } = workoutOptions;
-  const { timeContext, setCurrentRound, toggleIsRunning, reset } =
-    useTimeInformation();
-  const { remainingWorkoutTimeInMilliseconds, currentRound, isRunning } =
-    timeContext;
+  const timeContext = useTimeInformation();
+  const {
+    remainingWorkoutTimeInMilliseconds,
+    currentRound,
+    isRunning,
+    setCurrentRound,
+    toggleIsRunning,
+    reset,
+  } = timeContext;
 
   return (
     <TimeProvider timeContext={timeContext}>

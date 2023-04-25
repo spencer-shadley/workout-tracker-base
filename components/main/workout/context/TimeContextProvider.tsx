@@ -15,10 +15,14 @@ export interface TimeContextType {
   currentRound: number;
   remainingRoundTimeInMilliseconds: number;
   remainingWorkoutTimeInMilliseconds: number;
-  isRunning: boolean;
   buckets: TimeSlot[];
-  elapsedTimeInMilliseconds: number;
   currentBucket: TimeSlot;
+  setCurrentBucket: (bucket: TimeSlot) => void;
+  setCurrentRound: (round: number) => void;
+  elapsedTimeInMilliseconds: number;
+  isRunning: boolean;
+  reset: () => void;
+  toggleIsRunning: () => void;
 }
 
 export const TimeContext = createContext<TimeContextType>({
@@ -35,6 +39,18 @@ export const TimeContext = createContext<TimeContextType>({
     isActive: false,
     containerRound: 0,
     isRest: false,
+  },
+  setCurrentBucket: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  setCurrentRound: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  reset: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  toggleIsRunning: function (): void {
+    throw new Error('Function not implemented.');
   },
 });
 

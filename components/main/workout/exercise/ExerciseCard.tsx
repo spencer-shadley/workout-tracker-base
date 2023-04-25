@@ -99,7 +99,12 @@ export default function ExerciseCard({
           />
         </CardContent>
         {isExerciseActive && (
-          <Typography variant="h1" justifySelf="center" alignSelf="center">
+          <Typography
+            variant="h1"
+            justifySelf="center"
+            alignSelf="center"
+            marginRight={2}
+          >
             {remainingTimeInMilliseconds / 1000}
           </Typography>
         )}

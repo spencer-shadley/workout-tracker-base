@@ -11,18 +11,7 @@ import {
 } from '@/utils/time';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 
-interface TimeInfo {
-  timeContext: TimeContextType;
-  setCurrentBucket: (bucket: TimeSlot) => void;
-  currentRound: number;
-  setCurrentRound: (round: number) => void;
-  elapsedTimeInMilliseconds: number;
-  isRunning: boolean;
-  reset: () => void;
-  toggleIsRunning: () => void;
-}
-
-export default function useTimeInformation(): TimeInfo {
+export default function useTimeInformation(): TimeContextType {
   const { exercises } = useWorkoutContext();
   const { workoutOptions } = useWorkoutOptionsContext();
   const [currentRound, setCurrentRound] = useState<number>(0);
@@ -87,16 +76,6 @@ export default function useTimeInformation(): TimeInfo {
     }
   }, [buckets, elapsedTimeInMilliseconds]);
 
-  const timeContext: TimeContextType = {
-    currentRound,
-    remainingRoundTimeInMilliseconds,
-    remainingWorkoutTimeInMilliseconds,
-    isRunning,
-    buckets,
-    elapsedTimeInMilliseconds,
-    currentBucket: currentBucket ?? buckets[0],
-  };
-
   const reset = () => {
     setTimeElapsedInMilliseconds(0);
     setCurrentRound(0);
@@ -109,12 +88,15 @@ export default function useTimeInformation(): TimeInfo {
   };
 
   return {
-    timeContext,
-    setCurrentBucket,
     currentRound,
-    setCurrentRound,
-    elapsedTimeInMilliseconds,
+    remainingRoundTimeInMilliseconds,
+    remainingWorkoutTimeInMilliseconds,
     isRunning,
+    buckets,
+    elapsedTimeInMilliseconds,
+    currentBucket: currentBucket ?? buckets[0],
+    setCurrentBucket,
+    setCurrentRound,
     toggleIsRunning,
     reset,
   };
