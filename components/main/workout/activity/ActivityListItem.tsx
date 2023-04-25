@@ -1,11 +1,11 @@
 import { ListItem } from '@mui/material';
 import { ActivityCard } from './ActivityCard';
-import { ExerciseType, useTimeContext } from '../context/TimeContextProvider';
+import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { ExerciseCardProvider } from '../context/ExerciseCardContextProvider';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 interface ActivityListItemProps {
-  activityType: ExerciseType;
+  activityType: ActivityType;
   exercise?: ExerciseInfo;
 }
 
@@ -26,7 +26,7 @@ export default function ActivityListItem({
         ),
       }}
     >
-      <ListItem>
+      <ListItem key={`${exercise?.name}-${activityType}`}>
         <ActivityCard />
       </ListItem>
     </ExerciseCardProvider>

@@ -6,7 +6,7 @@ import {
   LinearProgress,
   CardProps,
 } from '@mui/material';
-import { ExerciseType, useTimeContext } from '../context/TimeContextProvider';
+import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
 import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
@@ -16,7 +16,7 @@ import useActivityName from '@/hooks/useActivityName';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
-  const exerciseType: ExerciseType =
+  const exerciseType: ActivityType =
     timeBucket?.exerciseType ?? 'rest-exercise';
   const { removeExercise } = useWorkoutContext();
   const { currentBucket } = useTimeContext();

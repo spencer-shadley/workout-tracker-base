@@ -5,11 +5,13 @@ import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import { useTimeContext } from '../context/TimeContextProvider';
 import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
 
-interface ExerciseProps {
+interface ActivitiesListProps {
   shouldIncludeRests?: boolean;
 }
 
-export default function ActivitiesList({ shouldIncludeRests }: ExerciseProps) {
+export default function ActivitiesList({
+  shouldIncludeRests,
+}: ActivitiesListProps) {
   const { currentRound } = useTimeContext();
   const { exercises } = useWorkoutContext();
 

@@ -50,13 +50,19 @@ export default function useTimeInformation(): TimeContextType {
       const interval = setInterval(() => {
         setTimeElapsedInMilliseconds(elapsedTimeInMilliseconds + 1000);
       }, 1000);
-      setCurrentRound(currentBucket?.containerRound ?? 0);
+      if (remainingWorkoutTimeInMilliseconds <= 0) {
+        setIsRunning(false);
+        setCurrentRound(Number.MAX_SAFE_INTEGER);
+      } else {
+        setCurrentRound(currentBucket?.containerRound ?? 0);
+      }
       return () => clearInterval(interval);
     }
   }, [
     currentBucket?.containerRound,
     elapsedTimeInMilliseconds,
     isRunning,
+    remainingWorkoutTimeInMilliseconds,
     setCurrentRound,
     setTimeElapsedInMilliseconds,
   ]);

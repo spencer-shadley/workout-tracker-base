@@ -1,10 +1,10 @@
-import { ExerciseType } from '@/components/main/workout/context/TimeContextProvider';
+import { ActivityType } from '@/components/main/workout/context/TimeContextProvider';
 
 export default function useActivityName(
-  exerciseType: ExerciseType,
+  activityType: ActivityType,
   exerciseName?: string
 ): string {
-  switch (exerciseType) {
+  switch (activityType) {
     case 'exercise':
       if (!exerciseName) {
         break;
