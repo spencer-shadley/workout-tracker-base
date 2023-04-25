@@ -42,9 +42,7 @@ export default function useTimeInformation(): TimeContextType {
   }, [exercises, workoutOptions]);
 
   const buckets = useMemo(() => {
-    const x = calculatedBuckets();
-    console.log(x);
-    return x;
+    return calculatedBuckets();
   }, [calculatedBuckets]);
 
   useEffect(() => {

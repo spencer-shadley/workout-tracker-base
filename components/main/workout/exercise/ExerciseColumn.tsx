@@ -9,11 +9,10 @@ import {
   TextField,
   Autocomplete,
 } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import ExerciseListItem from './ExerciseListItem';
 import { useDrop } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
-import { ExercisesContext } from './ExerciseList';
 import { ExerciseColumnTypes } from '@/components/shared/interfaces/ExerciseColumnTypes';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
@@ -21,18 +20,12 @@ interface ExerciseColumnProps {
   title: ExerciseColumnTypes;
 }
 
+// TODO: delete and replace with Exercises
 export default function ExerciseColumn({ title }: ExerciseColumnProps) {
   const [filter, setFilter] = useState<string>('');
-  const { exercises, removeExercise } = useContext(ExercisesContext);
-
-  const getExercisesOfColumn = (column: ExerciseColumnTypes) => {
-    return [...exercises.values()].filter(
-      (exercise) => exercise.currentColumn === column
-    );
-  };
 
   const [columnExercises, setColumnExercises] = useState<ExerciseInfo[]>(
-    getExercisesOfColumn(title)
+    exercises.values()
   );
 
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
@@ -47,9 +40,7 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
         }
         setColumnExercises([...columnExercises, droppedExercise]);
       },
-      hover: (draggedExercise: ExerciseInfo) => {
-        removeExercise(draggedExercise.name);
-      },
+      hover: (draggedExercise: ExerciseInfo) => {},
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),

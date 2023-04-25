@@ -7,8 +7,8 @@ export interface TimeSlot {
   endTimeInMilliseconds: number;
   isActive: boolean;
   containerRound: number;
-  isRest: boolean;
   containerExercise?: ExerciseInfo;
+  exerciseType: 'exercise' | 'rest';
 }
 
 export interface TimeContextType {
@@ -38,7 +38,7 @@ export const TimeContext = createContext<TimeContextType>({
     endTimeInMilliseconds: 0,
     isActive: false,
     containerRound: 0,
-    isRest: false,
+    exerciseType: 'exercise',
   },
   setCurrentBucket: function (): void {
     throw new Error('Function not implemented.');

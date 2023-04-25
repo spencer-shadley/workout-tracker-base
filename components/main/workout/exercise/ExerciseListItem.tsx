@@ -1,26 +1,10 @@
 import { ListItem } from '@mui/material';
-import ExerciseCard from './ExerciseCard';
-import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
+import { ExerciseOrRestCard } from './RestCard';
 
-// TODO: make this context
-interface ExerciseListItemProps {
-  exercise: ExerciseInfo | 'rest';
-  isOver: boolean;
-  shouldShowCloseButton: boolean;
-}
-
-export default function ExerciseListItem({
-  exercise,
-  isOver,
-  shouldShowCloseButton,
-}: ExerciseListItemProps) {
+export default function ExerciseListItem() {
   return (
     <ListItem>
-      <ExerciseCard
-        exercise={exercise}
-        isOver={isOver}
-        shouldShowCloseButton={shouldShowCloseButton}
-      />
+      <ExerciseOrRestCard />
     </ListItem>
   );
 }

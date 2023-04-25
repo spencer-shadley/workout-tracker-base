@@ -3,7 +3,6 @@ import { makeRandomFakeExercises } from '@/components/shared/data/MockExerciseIn
 
 import React, { createContext, useState } from 'react';
 import ExerciseColumn from './ExerciseColumn';
-import { ExerciseColumnTypes } from '@/components/shared/interfaces/ExerciseColumnTypes';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 // option to add
@@ -25,14 +24,11 @@ for (const exercise of allExercises) {
 
 export interface ExerciseContext {
   exercises: Map<string, ExerciseInfo>;
-  moveExercise: (exercise: ExerciseInfo, toColumn: ExerciseColumnTypes) => void;
   removeExercise: (name: string) => void;
 }
 
 export const ExercisesContext = createContext<ExerciseContext>({
   exercises: new Map(),
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  moveExercise: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   removeExercise: () => {},
 });
@@ -45,13 +41,6 @@ export default function DialogContent() {
     <ExercisesContext.Provider
       value={{
         exercises,
-        moveExercise: (exercise, toColumn) => {
-          exercises.set(exercise.name, {
-            ...exercise,
-            currentColumn: toColumn,
-          });
-          setExercises(exercises);
-        },
         removeExercise: (exerciseName) => {
           exercises.delete(exerciseName);
           setExercises(exercises);

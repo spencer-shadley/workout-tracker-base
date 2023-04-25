@@ -2,20 +2,19 @@ import { List, Alert, Snackbar } from '@mui/material';
 import { useState } from 'react';
 import ExerciseListItem from './ExerciseListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
-import { ExerciseTimeProvider } from '../context/ExerciseTimeContextProvider';
+import { ExerciseCardProvider } from '../context/ExerciseCardContextProvider';
+import { useTimeContext } from '../context/TimeContextProvider';
 
 interface ExerciseProps {
   shouldIncludeRests?: boolean;
 }
 
 export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
-  const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
-    useState<boolean>(false);
-
+  const { buckets } = useTimeContext();
   const { exercises } = useWorkoutContext();
 
-  // TODO: remove?
-  const [remainingExerciseTimeInMilliseconds] = useState<number>(0);
+  const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
+    useState<boolean>(false);
 
   return (
     <div
@@ -29,28 +28,36 @@ export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
       <div style={{ height: '100%', overflow: 'auto' }}>
         <List sx={{ overflow: 'auto' }}>
           {exercises.map((exercise, index) => (
-            <ExerciseTimeProvider
-              key={exercise.name}
-              exerciseTimeContext={{
-                elapsedExerciseTimeInMilliseconds:
-                  remainingExerciseTimeInMilliseconds,
-              }}
-            >
-              <ExerciseListItem
-                shouldShowCloseButton={false}
-                key={exercise.name}
-                exercise={exercise}
-                isOver={false}
-              />
+            <>
+              <ExerciseCardProvider
+                exerciseCardContext={{
+                  exercise,
+                  isDismissible: false,
+                  timeBucket: buckets.find(
+                    (bucket) =>
+                      bucket.containerExercise?.name === exercise.name &&
+                      bucket.exerciseType === 'exercise'
+                  ),
+                }}
+              >
+                <ExerciseListItem key={exercise.name} />
+              </ExerciseCardProvider>
               {shouldIncludeRests && index !== exercises.length - 1 && (
-                <ExerciseListItem
-                  shouldShowCloseButton={false}
-                  key="rest"
-                  exercise="rest"
-                  isOver={false}
-                />
+                <ExerciseCardProvider
+                  exerciseCardContext={{
+                    exercise,
+                    isDismissible: false,
+                    timeBucket: buckets.find(
+                      (bucket) =>
+                        bucket.containerExercise?.name === exercise.name &&
+                        bucket.exerciseType === 'rest'
+                    ),
+                  }}
+                >
+                  <ExerciseListItem key={exercise.name + '-rest'} />
+                </ExerciseCardProvider>
               )}
-            </ExerciseTimeProvider>
+            </>
           ))}
         </List>
       </div>
