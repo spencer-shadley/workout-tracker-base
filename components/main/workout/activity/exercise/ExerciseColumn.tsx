@@ -20,7 +20,6 @@ interface ExerciseColumnProps {
   title: ExerciseColumnTypes;
 }
 
-// TODO: delete and replace with Exercises
 export default function ExerciseColumn({ title }: ExerciseColumnProps) {
   const [filter, setFilter] = useState<string>('');
 

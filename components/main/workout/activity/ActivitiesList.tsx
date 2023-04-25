@@ -49,7 +49,6 @@ export default function ActivitiesList({ shouldIncludeRests }: ExerciseProps) {
           />
         </List>
       </div>
-      {/* TODO: remove? */}
       <DuplicateExerciseWarning
         showDuplicateExerciseWarning={showDuplicateExerciseWarning}
         setShowDuplicateExerciseWarning={setShowDuplicateExerciseWarning}

@@ -35,10 +35,6 @@ export function ActivityCard(cardProps: CardProps) {
 
   const activityName = useActivityName(exerciseType, exercise?.name);
 
-  // TODO: on activity complete add confetti - https://www.npmjs.com/package/tsparticles-engine
-  // TODO: on round complete add confetti = https://www.npmjs.com/package/tsparticles-engine
-  // TODO: add particles to background = https://www.npmjs.com/package/tsparticles-engine
-  // TODO: add sound on complete
   return (
     <Card
       sx={{
