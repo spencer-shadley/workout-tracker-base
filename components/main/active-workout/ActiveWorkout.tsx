@@ -1,5 +1,5 @@
 import { useWorkoutOptionsContext } from '../workout/context/WorkoutOptionsContextProvider';
-import ActivitiesList from '../workout/exercise/ActivitiesList';
+import ActivitiesList from '../workout/activity/ActivitiesList';
 import { Button, Card, Typography } from '@mui/material';
 import { TimeProvider } from '../workout/context/TimeContextProvider';
 import RoundsStepper from './RoundsStepper';

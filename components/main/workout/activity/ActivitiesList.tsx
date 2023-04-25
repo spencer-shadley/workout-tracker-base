@@ -4,7 +4,7 @@ import ActivityListItem from './ActivityListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import { ExerciseCardProvider } from '../context/ExerciseCardContextProvider';
 import { useTimeContext } from '../context/TimeContextProvider';
-import DuplicateExerciseWarning from './DuplicateExerciseWarning';
+import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
 
 interface ExerciseProps {
   shouldIncludeRests?: boolean;
@@ -62,7 +62,7 @@ export default function ActivitiesList({ shouldIncludeRests }: ExerciseProps) {
           ))}
         </List>
       </div>
-
+      {/* TODO: remove? */}
       <DuplicateExerciseWarning
         showDuplicateExerciseWarning={showDuplicateExerciseWarning}
         setShowDuplicateExerciseWarning={setShowDuplicateExerciseWarning}

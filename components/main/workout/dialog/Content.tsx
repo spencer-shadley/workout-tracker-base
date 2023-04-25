@@ -4,7 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import React from 'react';
-import ExerciseList from '../exercise/ExerciseList';
+import ExerciseList from '../activity/ExerciseList';
 import { Button, Dialog, FormGroup, TextField } from '@mui/material';
 import { askQuestion } from '@/components/api/openai';
 import AiWorkoutList from '@/components/ai-generated-workout/AiWorkoutList';

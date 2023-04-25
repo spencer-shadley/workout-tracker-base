@@ -10,7 +10,7 @@ import {
   Autocomplete,
 } from '@mui/material';
 import { useState } from 'react';
-import ActivityListItem from './ActivityListItem';
+import ActivityListItem from '../ActivityListItem';
 import { useDrop } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
 import { ExerciseColumnTypes } from '@/components/shared/interfaces/ExerciseColumnTypes';

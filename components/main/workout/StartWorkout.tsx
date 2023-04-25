@@ -8,11 +8,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import ActivitiesList from './exercise/ActivitiesList';
+import ActivitiesList from './activity/ActivitiesList';
 import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import { WorkoutProvider } from './context/WorkoutContextProvider';
 import WorkoutOptionsDialog from './WorkoutOptionsDialog';
-import ActivityOption from './exercise/ActivityOption';
+import ActivityOption from './activity/ActivityOption';
 
 export default function StartWorkout() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);

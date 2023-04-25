@@ -6,12 +6,12 @@ import {
   LinearProgress,
   CardProps,
 } from '@mui/material';
-import ExerciseStatLabels from './ExerciseStatLabels';
 import { useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
 import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
 import { useWorkoutOptionsContext } from '../context/WorkoutOptionsContextProvider';
+import ExerciseStatLabels from './exercise/ExerciseStatLabels';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
