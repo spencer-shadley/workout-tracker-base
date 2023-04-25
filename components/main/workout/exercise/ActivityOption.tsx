@@ -1,23 +1,23 @@
 import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { Typography } from '@mui/material';
-import { ExerciseOrRestCard } from './RestCard';
+import { ActivityCard } from './ActivityCard';
 
-interface ExerciseOptionProps {
-  exerciseName: string;
+interface ActivityOptionProps {
+  activityName: string;
   handleClick: (exercise: ExerciseInfo) => void;
 }
 
-export default function ExerciseOption({
-  exerciseName,
+export default function ActivityOption({
+  activityName,
   handleClick,
-}: ExerciseOptionProps) {
+}: ActivityOptionProps) {
   const exercise = sampleExercises.find(
-    (exercise) => exercise.name === exerciseName
+    (exercise) => exercise.name === activityName
   );
 
   return exercise ? (
-    <ExerciseOrRestCard
+    <ActivityCard
       sx={{ margin: '10px' }}
       onClick={() => handleClick(exercise)}
     />
@@ -29,6 +29,6 @@ export default function ExerciseOption({
     //   sx={{ margin: '10px' }}
     //   onClick={() => handleClick(exercise)}
     // />
-    <Typography>{exerciseName} could not be found</Typography>
+    <Typography>{activityName} could not be found</Typography>
   );
 }

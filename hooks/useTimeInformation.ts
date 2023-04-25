@@ -85,6 +85,10 @@ export default function useTimeInformation(): TimeContextType {
     setIsRunning(!isRunning);
   };
 
+  const skipCurrentActivity = () => {
+    setTimeElapsedInMilliseconds(currentBucket?.endTimeInMilliseconds ?? 0);
+  };
+
   return {
     currentRound,
     remainingRoundTimeInMilliseconds,
@@ -97,5 +101,6 @@ export default function useTimeInformation(): TimeContextType {
     setCurrentRound,
     toggleIsRunning,
     reset,
+    skipCurrentActivity,
   };
 }

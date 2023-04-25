@@ -1,15 +1,16 @@
-import { List, Alert, Snackbar } from '@mui/material';
+import { List } from '@mui/material';
 import { useState } from 'react';
-import ExerciseListItem from './ExerciseListItem';
+import ActivityListItem from './ActivityListItem';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import { ExerciseCardProvider } from '../context/ExerciseCardContextProvider';
 import { useTimeContext } from '../context/TimeContextProvider';
+import DuplicateExerciseWarning from './DuplicateExerciseWarning';
 
 interface ExerciseProps {
   shouldIncludeRests?: boolean;
 }
 
-export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
+export default function ActivitiesList({ shouldIncludeRests }: ExerciseProps) {
   const { buckets } = useTimeContext();
   const { exercises } = useWorkoutContext();
 
@@ -40,7 +41,7 @@ export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
                   ),
                 }}
               >
-                <ExerciseListItem key={exercise.name} />
+                <ActivityListItem key={exercise.name} />
               </ExerciseCardProvider>
               {shouldIncludeRests && index !== exercises.length - 1 && (
                 <ExerciseCardProvider
@@ -54,7 +55,7 @@ export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
                     ),
                   }}
                 >
-                  <ExerciseListItem key={exercise.name + '-rest'} />
+                  <ActivityListItem key={exercise.name + '-rest'} />
                 </ExerciseCardProvider>
               )}
             </>
@@ -62,23 +63,10 @@ export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
         </List>
       </div>
 
-      <Snackbar
-        open={showDuplicateExerciseWarning}
-        autoHideDuration={1000}
-        onClose={() => {
-          setShowDuplicateExerciseWarning(false);
-        }}
-      >
-        <Alert
-          onClose={() => {
-            setShowDuplicateExerciseWarning(false);
-          }}
-          severity="warning"
-          sx={{ width: '100%' }}
-        >
-          Exercise already exists
-        </Alert>
-      </Snackbar>
+      <DuplicateExerciseWarning
+        showDuplicateExerciseWarning={showDuplicateExerciseWarning}
+        setShowDuplicateExerciseWarning={setShowDuplicateExerciseWarning}
+      />
     </div>
   );
 }

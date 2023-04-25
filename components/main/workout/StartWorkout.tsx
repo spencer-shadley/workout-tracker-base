@@ -8,11 +8,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import Exercises from './exercise/Exercises';
+import ActivitiesList from './exercise/ActivitiesList';
 import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import { WorkoutProvider } from './context/WorkoutContextProvider';
 import WorkoutOptionsDialog from './WorkoutOptionsDialog';
-import ExerciseOption from './exercise/ExerciseOption';
+import ActivityOption from './exercise/ActivityOption';
 
 export default function StartWorkout() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);
@@ -73,8 +73,8 @@ export default function StartWorkout() {
               }
             }}
             renderOption={(props, exerciseName) => (
-              <ExerciseOption
-                exerciseName={exerciseName}
+              <ActivityOption
+                activityName={exerciseName}
                 handleClick={(exercise) => {
                   setExercises([...exercises, exercise]);
                 }}
@@ -95,7 +95,7 @@ export default function StartWorkout() {
             <>Add exercises to get started</>
           ) : (
             <>
-              <Exercises />
+              <ActivitiesList />
               <Button onClick={() => setIsWorkoutOptionsDialogOpen(true)}>
                 Start workout
               </Button>

@@ -13,7 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
 import { useWorkoutOptionsContext } from '../context/WorkoutOptionsContextProvider';
 
-export function ExerciseOrRestCard(cardProps: CardProps) {
+export function ActivityCard(cardProps: CardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
   const exerciseType = timeBucket?.exerciseType ?? 'rest';
   const { removeExercise } = useWorkoutContext();
@@ -21,9 +21,12 @@ export function ExerciseOrRestCard(cardProps: CardProps) {
   const { exerciseDurationInSeconds, restBetweenExercisesInSeconds } =
     workoutOptions;
   const { currentBucket } = useTimeContext();
-  const { containerExercise } = currentBucket;
+  const { containerExercise, exerciseType: currentExerciseType } =
+    currentBucket;
   const { remainingTimeInMilliseconds } = currentBucket;
-  const isExerciseActive = containerExercise?.name === exercise.name;
+  const isExerciseActive =
+    containerExercise?.name === exercise.name &&
+    currentExerciseType === exerciseType;
 
   const remainingTimeInSeconds = remainingTimeInMilliseconds / 1000;
   const duration =

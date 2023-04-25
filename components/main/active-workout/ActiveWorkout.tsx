@@ -1,5 +1,5 @@
 import { useWorkoutOptionsContext } from '../workout/context/WorkoutOptionsContextProvider';
-import Exercises from '../workout/exercise/Exercises';
+import ActivitiesList from '../workout/exercise/ActivitiesList';
 import { Button, Card, Typography } from '@mui/material';
 import { TimeProvider } from '../workout/context/TimeContextProvider';
 import RoundsStepper from './RoundsStepper';
@@ -17,6 +17,7 @@ export default function ActiveWorkout() {
     setCurrentRound,
     toggleIsRunning,
     reset,
+    skipCurrentActivity,
   } = timeContext;
 
   return (
@@ -46,9 +47,16 @@ export default function ActiveWorkout() {
           >
             reset
           </Button>
+          <Button
+            onClick={() => {
+              skipCurrentActivity();
+            }}
+          >
+            skip
+          </Button>
         </div>
       </Card>
-      <Exercises shouldIncludeRests />
+      <ActivitiesList shouldIncludeRests />
     </TimeProvider>
   );
 }

@@ -10,7 +10,7 @@ import {
   Autocomplete,
 } from '@mui/material';
 import { useState } from 'react';
-import ExerciseListItem from './ExerciseListItem';
+import ActivityListItem from './ActivityListItem';
 import { useDrop } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
 import { ExerciseColumnTypes } from '@/components/shared/interfaces/ExerciseColumnTypes';
@@ -78,7 +78,7 @@ export default function ExerciseColumn({ title }: ExerciseColumnProps) {
             {columnExercises
               .filter((exercise) => exercise.name.includes(filter))
               .map((exercise) => (
-                <ExerciseListItem
+                <ActivityListItem
                   shouldShowCloseButton={title === 'Workout'}
                   key={exercise.name}
                   exercise={exercise}
