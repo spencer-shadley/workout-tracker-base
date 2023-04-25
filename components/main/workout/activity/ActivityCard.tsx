@@ -12,25 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
 import ExerciseStatLabels from './exercise/ExerciseStatLabels';
 import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
-
-function getCardTitle(
-  exerciseType: ExerciseType,
-  exerciseName?: string
-): string {
-  switch (exerciseType) {
-    case 'exercise':
-      if (!exerciseName) {
-        break;
-      }
-      return exerciseName;
-    case 'rest-exercise':
-      return 'Rest';
-    case 'rest-round':
-      return 'Round Rest';
-  }
-  console.error('No exercise title found');
-  return 'No title found';
-}
+import useActivityName from '@/hooks/useActivityName';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
@@ -51,6 +33,8 @@ export function ActivityCard(cardProps: CardProps) {
     ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
 
+  const activityName = useActivityName(exerciseType, exercise?.name);
+
   return (
     <Card
       sx={{
@@ -62,7 +46,7 @@ export function ActivityCard(cardProps: CardProps) {
         <CardContent sx={{ flexGrow: 1 }}>
           <span style={{ display: 'flex', width: '100%' }}>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              {getCardTitle(exerciseType, exercise?.name)}
+              {activityName}
             </Typography>
             {isDismissible && exercise && (
               <IconButton
