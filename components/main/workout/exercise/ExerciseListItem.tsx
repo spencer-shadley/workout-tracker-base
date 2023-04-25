@@ -2,8 +2,9 @@ import { ListItem } from '@mui/material';
 import ExerciseCard from './ExerciseCard';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
+// TODO: make this context
 interface ExerciseListItemProps {
-  exercise: ExerciseInfo;
+  exercise: ExerciseInfo | 'rest';
   isOver: boolean;
   shouldShowCloseButton: boolean;
 }

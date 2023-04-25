@@ -7,8 +7,6 @@ import {
   LinearProgress,
   Typography,
 } from '@mui/material';
-import dayjs from 'dayjs';
-import ExerciseStatLabel from './ExerciseStatLabel';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import itemTypes from '@/utils/itemType';
 import CloseIcon from '@mui/icons-material/Close';

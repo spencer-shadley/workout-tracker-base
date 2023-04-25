@@ -28,7 +28,7 @@ export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
     >
       <div style={{ height: '100%', overflow: 'auto' }}>
         <List sx={{ overflow: 'auto' }}>
-          {exercises.map((exercise) => (
+          {exercises.map((exercise, index) => (
             <ExerciseTimeProvider
               key={exercise.name}
               exerciseTimeContext={{
@@ -42,7 +42,7 @@ export default function Exercises({ shouldIncludeRests }: ExerciseProps) {
                 exercise={exercise}
                 isOver={false}
               />
-              {shouldIncludeRests && (
+              {shouldIncludeRests && index !== exercises.length - 1 && (
                 <ExerciseListItem
                   shouldShowCloseButton={false}
                   key="rest"
