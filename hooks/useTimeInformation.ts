@@ -95,6 +95,10 @@ export default function useTimeInformation(): TimeContextType {
     setTimeElapsedInMilliseconds(currentBucket?.endTimeInMilliseconds ?? 0);
   };
 
+  const jumpToBucket = (bucket: TimeSlot) => {
+    setTimeElapsedInMilliseconds(bucket.startTimeInMilliseconds);
+  };
+
   return {
     currentRound,
     remainingRoundTimeInMilliseconds,
@@ -108,5 +112,6 @@ export default function useTimeInformation(): TimeContextType {
     toggleIsRunning,
     reset,
     skipCurrentActivity,
+    jumpToBucket,
   };
 }

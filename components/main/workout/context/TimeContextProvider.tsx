@@ -26,6 +26,7 @@ export interface TimeContextType {
   reset: () => void;
   toggleIsRunning: () => void;
   skipCurrentActivity: () => void;
+  jumpToBucket: (bucket: TimeSlot) => void;
 }
 
 export const TimeContext = createContext<TimeContextType>({
@@ -56,6 +57,9 @@ export const TimeContext = createContext<TimeContextType>({
     throw new Error('Function not implemented.');
   },
   skipCurrentActivity: function (): void {
+    throw new Error('Function not implemented.');
+  },
+  jumpToBucket: function (): void {
     throw new Error('Function not implemented.');
   },
 });

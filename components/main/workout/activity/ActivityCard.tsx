@@ -5,6 +5,8 @@ import {
   IconButton,
   LinearProgress,
   CardProps,
+  Tooltip,
+  Zoom,
 } from '@mui/material';
 import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
@@ -13,13 +15,14 @@ import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
 import ExerciseStatLabels from './exercise/ExerciseStatLabels';
 import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import useActivityName from '@/hooks/useActivityName';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
   const exerciseType: ActivityType =
     timeBucket?.exerciseType ?? 'rest-exercise';
   const { removeExercise } = useWorkoutContext();
-  const { currentBucket } = useTimeContext();
+  const { currentBucket, jumpToBucket } = useTimeContext();
   const { containerExercise, exerciseType: currentExerciseType } =
     currentBucket;
   const { remainingTimeInMilliseconds } = currentBucket;
@@ -50,6 +53,24 @@ export function ActivityCard(cardProps: CardProps) {
             sx={{ flexGrow: 1, justifySelf: 'center', alignSelf: 'stretch' }}
           >
             {activityName}
+            {timeBucket && (
+              <Tooltip
+                title={`jump to ${activityName}`}
+                arrow
+                TransitionComponent={Zoom}
+              >
+                <IconButton
+                  onClick={() => {
+                    jumpToBucket(timeBucket);
+                  }}
+                >
+                  <SkipNextIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+            {exerciseType === 'exercise' && (
+              <ExerciseStatLabels exercise={exercise} />
+            )}
           </Typography>
           {isDismissible && exercise && (
             <IconButton
@@ -61,10 +82,6 @@ export function ActivityCard(cardProps: CardProps) {
                 style={{ alignSelf: 'center', justifySelf: 'flex-end' }}
               />
             </IconButton>
-          )}
-
-          {exerciseType === 'exercise' && (
-            <ExerciseStatLabels exercise={exercise} />
           )}
         </CardContent>
         {isExerciseActive && (
