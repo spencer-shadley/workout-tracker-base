@@ -35,6 +35,9 @@ export function ActivityCard(cardProps: CardProps) {
 
   const activityName = useActivityName(exerciseType, exercise?.name);
 
+  // TODO: on activity complete add confetti - https://www.npmjs.com/package/tsparticles-engine
+  // TODO: on round complete add confetti = https://www.npmjs.com/package/tsparticles-engine
+  // TODO: add particles to background = https://www.npmjs.com/package/tsparticles-engine
   return (
     <Card
       sx={{
@@ -44,24 +47,26 @@ export function ActivityCard(cardProps: CardProps) {
     >
       <span style={{ display: 'flex' }}>
         <CardContent sx={{ flexGrow: 1 }}>
-          <span style={{ display: 'flex', width: '100%' }}>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              {activityName}
-            </Typography>
-            {isDismissible && exercise && (
-              <IconButton
-                onClick={() => {
-                  removeExercise(exercise.name);
-                }}
-              >
-                <CloseIcon
-                  style={{ alignSelf: 'center', justifySelf: 'flex-end' }}
-                />
-              </IconButton>
-            )}
-          </span>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1, justifySelf: 'center', alignSelf: 'stretch' }}
+          >
+            {activityName}
+          </Typography>
+          {isDismissible && exercise && (
+            <IconButton
+              onClick={() => {
+                removeExercise(exercise.name);
+              }}
+            >
+              <CloseIcon
+                style={{ alignSelf: 'center', justifySelf: 'flex-end' }}
+              />
+            </IconButton>
+          )}
 
-          {exerciseType === 'exercise' && exercise && (
+          {exerciseType === 'exercise' && (
             <ExerciseStatLabels exercise={exercise} />
           )}
         </CardContent>

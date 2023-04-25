@@ -3,13 +3,13 @@ import ExerciseStatLabel from './ExerciseStatLabel';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 interface ExerciseStatLabelsProps {
-  exercise: ExerciseInfo;
+  exercise?: ExerciseInfo;
 }
 
 export default function ExerciseStatLabels({
   exercise,
 }: ExerciseStatLabelsProps) {
-  return (
+  return exercise ? (
     <>
       <ExerciseStatLabel
         data={exercise.description}
@@ -36,5 +36,5 @@ export default function ExerciseStatLabels({
         afterText="lbs"
       />
     </>
-  );
+  ) : null;
 }
