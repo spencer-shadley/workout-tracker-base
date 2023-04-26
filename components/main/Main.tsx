@@ -21,7 +21,7 @@ export default function Main() {
         }}
       >
         <span>
-          <Caption prompt="Give me a short unique but fun greeting" />
+          <Caption question="Give me a short unique but fun greeting" />
           <TransparentText shouldAnimate>Spencer</TransparentText>
         </span>
 
