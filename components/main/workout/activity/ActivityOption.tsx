@@ -12,10 +12,6 @@ export default function ActivityOption({
   exercise,
   handleClick,
 }: ActivityOptionProps) {
-  // const exercise = sampleExercises.find(
-  //   (exercise) => exercise.name === activityName
-  // );
-
   return exercise ? (
     <ActivityCardProvider
       activityCardContext={{
@@ -31,14 +27,6 @@ export default function ActivityOption({
       />
     </ActivityCardProvider>
   ) : (
-    // TODO
-    // <ExerciseCard
-    //   exercise={exercise}
-    //   isOver={false}
-    //   shouldShowCloseButton={false}
-    //   sx={{ margin: '10px' }}
-    //   onClick={() => handleClick(exercise)}
-    // />
     <Typography>could not be found</Typography>
   );
 }
