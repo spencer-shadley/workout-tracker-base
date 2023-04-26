@@ -1,15 +1,11 @@
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { useState } from 'react';
-import { Button, Divider, Paper, Typography } from '@mui/material';
-import ActivitiesList from '../workout/activity/ActivitiesList';
+import { Paper } from '@mui/material';
 import { WorkoutProvider } from '../workout/context/WorkoutContextProvider';
-import WorkoutOptionsDialog from '../workout/WorkoutOptionsDialog';
-import AutoCompleteWorkout from './AutoCompleteWorkout';
+import StartWorkoutContent from './StartWorkoutContent';
 
-export default function StartWorkout() {
+export default function StartWorkoutWrapper() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);
-  const [isWorkoutOptionsDialogOpen, setIsWorkoutOptionsDialogOpen] =
-    useState<boolean>(false);
 
   return (
     <WorkoutProvider
@@ -45,26 +41,8 @@ export default function StartWorkout() {
           }}
           elevation={5}
         >
-          <Typography variant="h4" sx={{ alignSelf: 'center' }}>
-            Create a workout
-          </Typography>
-          <AutoCompleteWorkout />
-          <Divider />
-          {exercises.length === 0 ? (
-            <>Add exercises to get started</>
-          ) : (
-            <>
-              <ActivitiesList />
-              <Button onClick={() => setIsWorkoutOptionsDialogOpen(true)}>
-                Start workout
-              </Button>
-            </>
-          )}
+          <StartWorkoutContent />
         </Paper>
-        <WorkoutOptionsDialog
-          isOpen={isWorkoutOptionsDialogOpen}
-          close={() => setIsWorkoutOptionsDialogOpen(false)}
-        />
       </div>
     </WorkoutProvider>
   );

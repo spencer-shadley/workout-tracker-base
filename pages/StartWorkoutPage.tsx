@@ -1,5 +1,5 @@
-import StartWorkout from '@/components/main/create-workout/StartWorkout';
+import StartWorkoutWrapper from '@/components/main/create-workout/StartWorkoutWrapper';
 
 export default function StartWorkoutPage() {
-  return <StartWorkout />;
+  return <StartWorkoutWrapper />;
 }
