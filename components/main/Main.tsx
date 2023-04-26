@@ -32,6 +32,7 @@ export default function Main() {
             router.push('StartWorkoutPage');
           }}
         >
+          <Caption question='What is another way to say "Start a workout"?' />
           Start a workout
         </GiantButton>
         <GiantButton>Generate a workout with AI</GiantButton>

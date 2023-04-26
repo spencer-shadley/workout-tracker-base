@@ -1,7 +1,9 @@
 import { Configuration, OpenAIApi } from 'openai';
+import throttle from 'lodash/throttle';
+import { logError } from '@/utils/error';
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: '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',
 });
 const openai = new OpenAIApi(configuration);
 
@@ -11,11 +13,23 @@ export interface askQuestionProps {
 }
 
 export async function askQuestion({ question, temperature }: askQuestionProps) {
-  console.log('asked', question);
-  return openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: question,
-    temperature: temperature ?? 0.2,
-    max_tokens: 1500,
+  console.log('askQuestion', question, temperature);
+  return new Promise((resolve: (response: string) => void, reject) => {
+    // throttle(() => {
+    openai
+      .createCompletion({
+        model: 'text-davinci-003',
+        prompt: question,
+        temperature: temperature ?? 0.2,
+        max_tokens: 1500,
+      })
+      .then((response) => {
+        resolve(response.data.choices[0].text ?? '');
+      })
+      .catch((error) => {
+        reject(error);
+        logError(error);
+      });
+    // }, 2000);
   });
 }

@@ -3,36 +3,48 @@ import { Fade, Grow, IconButton, Typography } from '@mui/material';
 import { useState, useEffect, useCallback } from 'react';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
-export default function Caption(props: askQuestionProps) {
+interface CaptionProps extends askQuestionProps {
+  loadingText?: string;
+}
+
+export default function Caption({
+  loadingText,
+  ...askQuestionProps
+}: CaptionProps) {
   const [quote, setQuote] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const updateQuestion = useCallback(
     (updateProps?: Partial<askQuestionProps>) => {
       setIsLoading(true);
-      askQuestion({ ...props, ...updateProps }).then((response) => {
-        setQuote(response.data.choices[0].text ?? '');
+      askQuestion({ ...askQuestionProps, ...updateProps }).then((response) => {
+        setQuote(response);
         setIsLoading(false);
       });
     },
-    [props]
+    [askQuestionProps]
   );
 
   useEffect(() => {
-    updateQuestion();
-  }, [props, updateQuestion]);
+    if (quote === '') {
+      updateQuestion();
+    }
+  }, [quote, updateQuestion]);
+
+  const shouldShow = !!(quote || loadingText);
 
   return (
-    <Fade in={!!quote}>
-      <Grow in={!!quote}>
+    <Fade in={shouldShow}>
+      <Grow in={shouldShow}>
         <span>
           <Typography color="white" variant="caption">
-            {quote}
+            {quote ?? loadingText}
           </Typography>
           <IconButton
             onClick={() => {
               updateQuestion({
-                question: `${props.question}. This time make it something new.`,
+                question: `${askQuestionProps.question}. This time make it something new.`,
+                temperature: 0.9,
               });
             }}
           >
