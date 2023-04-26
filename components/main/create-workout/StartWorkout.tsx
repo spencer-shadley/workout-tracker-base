@@ -1,18 +1,10 @@
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { useState } from 'react';
-import {
-  Autocomplete,
-  Button,
-  Divider,
-  Paper,
-  TextField,
-  Typography,
-} from '@mui/material';
-import ActivitiesList from './activity/ActivitiesList';
-import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
-import { WorkoutProvider } from './context/WorkoutContextProvider';
-import WorkoutOptionsDialog from './WorkoutOptionsDialog';
-import ActivityOption from './activity/ActivityOption';
+import { Button, Divider, Paper, Typography } from '@mui/material';
+import ActivitiesList from '../workout/activity/ActivitiesList';
+import { WorkoutProvider } from '../workout/context/WorkoutContextProvider';
+import WorkoutOptionsDialog from '../workout/WorkoutOptionsDialog';
+import AutoCompleteWorkout from './AutoCompleteWorkout';
 
 export default function StartWorkout() {
   const [exercises, setExercises] = useState<ExerciseInfo[]>([]);
@@ -23,6 +15,9 @@ export default function StartWorkout() {
     <WorkoutProvider
       workoutContext={{
         exercises,
+        addExercise: (exercise) => {
+          setExercises([...exercises, exercise]);
+        },
         removeExercise: (exerciseName) => {
           setExercises(
             exercises.filter((exercise) => exercise.name !== exerciseName)
@@ -53,43 +48,7 @@ export default function StartWorkout() {
           <Typography variant="h4" sx={{ alignSelf: 'center' }}>
             Create a workout
           </Typography>
-
-          <Autocomplete
-            fullWidth
-            noOptionsText="No exercises found"
-            freeSolo
-            selectOnFocus
-            clearOnBlur
-            handleHomeEndKeys
-            onChange={(event, value) => {
-              if (value) {
-                // TODO: add DB
-                const exercise = sampleExercises.find(
-                  (exercise) => exercise.name === value
-                );
-                if (exercise) {
-                  setExercises([...exercises, exercise]);
-                }
-              }
-            }}
-            renderOption={(props, exercise) => (
-              <ActivityOption
-                exercise={exercise}
-                handleClick={(exercise) => {
-                  setExercises([...exercises, exercise]);
-                }}
-              />
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                margin="normal"
-                label="Find an exercise..."
-                type="search"
-              />
-            )}
-            options={sampleExercises}
-          />
+          <AutoCompleteWorkout />
           <Divider />
           {exercises.length === 0 ? (
             <>Add exercises to get started</>
