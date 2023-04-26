@@ -2,6 +2,7 @@ import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import { Autocomplete, TextField } from '@mui/material';
 import ActivityOption from '../workout/activity/ActivityOption';
 import { useWorkoutContext } from '../workout/context/WorkoutContextProvider';
+// const filter = createFilterOptions<ExerciseInfo>();
 
 export default function AutoCompleteWorkout() {
   const { addExercise } = useWorkoutContext();
@@ -25,6 +26,21 @@ export default function AutoCompleteWorkout() {
           }
         }
       }}
+      // TODO
+      //   filterOptions={(options, params) => {
+      // const filtered = filter(options, params);
+      // const { inputValue } = params;
+      // // Suggest the creation of a new value
+      // const isExisting = options.some((option) => inputValue === option.name);
+      // const createExercise: ExerciseInfo = {
+      //   name: inputValue,
+      // };
+      // if (inputValue !== '' && !isExisting) {
+      //   filtered.push(createExercise);
+      //   //   addExercise(createExercise);
+      // }
+      // return exercises;
+      //   }}
       renderOption={(props, exercise) => (
         <ActivityOption
           exercise={exercise}

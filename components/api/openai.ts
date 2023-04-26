@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from 'openai';
-import throttle from 'lodash/throttle';
 import { logError } from '@/utils/error';
 
 const configuration = new Configuration({
