@@ -1,16 +1,13 @@
 import { Step, StepButton, Stepper } from '@mui/material';
+import { useWorkoutOptionsContext } from '../workout/context/WorkoutOptionsContextProvider';
+import { useTimeContext } from '../workout/context/TimeContextProvider';
 
-interface RoundsStepperProps {
-  numberOfRounds: number;
-  currentRound: number;
-  setCurrentRound: (round: number) => void;
-}
+export default function RoundsStepper() {
+  const { workoutOptions } = useWorkoutOptionsContext();
+  const { numberOfRounds } = workoutOptions;
 
-export default function RoundsStepper({
-  numberOfRounds,
-  currentRound,
-  setCurrentRound,
-}: RoundsStepperProps) {
+  const { currentRound, setCurrentRound } = useTimeContext();
+
   const rounds: number[] = [];
   for (let i = 0; i < numberOfRounds; i++) {
     rounds.push(i);

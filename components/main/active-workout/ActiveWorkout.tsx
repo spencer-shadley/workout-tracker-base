@@ -1,4 +1,3 @@
-import { useWorkoutOptionsContext } from '../workout/context/WorkoutOptionsContextProvider';
 import ActivitiesList from '../workout/activity/ActivitiesList';
 import { Card, Typography } from '@mui/material';
 import { TimeProvider } from '../workout/context/TimeContextProvider';
@@ -8,11 +7,8 @@ import { millisecondsToHumanReadable } from '@/utils/time';
 import ButtonControls from './ButtonControls';
 
 export default function ActiveWorkout() {
-  const { workoutOptions } = useWorkoutOptionsContext();
-  const { numberOfRounds } = workoutOptions;
   const timeContext = useTimeInformation();
-  const { remainingWorkoutTimeInMilliseconds, currentRound, setCurrentRound } =
-    timeContext;
+  const { remainingWorkoutTimeInMilliseconds } = timeContext;
 
   return (
     <TimeProvider timeContext={timeContext}>
@@ -21,11 +17,7 @@ export default function ActiveWorkout() {
           Time left in workout{' '}
           {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
         </Typography>
-        <RoundsStepper
-          currentRound={currentRound}
-          numberOfRounds={numberOfRounds}
-          setCurrentRound={setCurrentRound}
-        />
+        <RoundsStepper />
         <ButtonControls />
       </Card>
       <ActivitiesList shouldIncludeRests />

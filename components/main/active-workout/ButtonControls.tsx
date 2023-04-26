@@ -2,9 +2,8 @@ import { Button } from '@mui/material';
 import { useTimeContext } from '../workout/context/TimeContextProvider';
 
 export default function ButtonControls() {
-  const timeContext = useTimeContext();
   const { isRunning, toggleIsRunning, reset, skipCurrentActivity } =
-    timeContext;
+    useTimeContext();
   return (
     <div>
       <Button
