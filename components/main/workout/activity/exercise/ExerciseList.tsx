@@ -2,7 +2,6 @@ import { Grid } from '@mui/material';
 import { makeRandomFakeExercises } from '@/components/shared/data/MockExerciseInfo';
 
 import React, { createContext, useState } from 'react';
-import ExerciseColumn from './ExerciseColumn';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 const mostRecentExercises: ExerciseInfo[] = makeRandomFakeExercises();
@@ -39,8 +38,9 @@ export default function DialogContent() {
       }}
     >
       <Grid container justifyContent="space-evenly" mt={2}>
-        <ExerciseColumn title="Exercises" />
-        <ExerciseColumn title="Workout" />
+        {/* TODO: delete */}
+        {/* <ExerciseColumn title="Exercises" />
+        <ExerciseColumn title="Workout" /> */}
       </Grid>
     </ExercisesContext.Provider>
   );
