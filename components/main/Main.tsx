@@ -1,10 +1,11 @@
 import 'animate.css';
-import TransparentText from '../shared/TransparentText';
 import GiantButton from '../shared/GiantButton';
 import { useRouter } from 'next/router';
 import FitnessQuote from './FitnessQuote';
 import HealthFact from './ai/HealthFact';
 import Caption from './ai/Caption';
+
+const name = 'Spencer';
 
 export default function Main() {
   const router = useRouter();
@@ -21,8 +22,10 @@ export default function Main() {
         }}
       >
         <span>
-          <Caption question="Give me a short unique but fun greeting" />
-          <TransparentText shouldAnimate>Spencer</TransparentText>
+          <Caption
+            prompt={`Give me a short unique but fun greeting for a person named ${name}`}
+            loadingText={name}
+          />
         </span>
 
         <FitnessQuote />
@@ -32,7 +35,7 @@ export default function Main() {
             router.push('StartWorkoutPage');
           }}
         >
-          <Caption question='What is another way to say "Start a workout"?' />
+          <Caption prompt='What is another way to say "Start a workout"?' />
           Start a workout
         </GiantButton>
         <GiantButton>Generate a workout with AI</GiantButton>

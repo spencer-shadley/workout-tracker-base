@@ -6,6 +6,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
     "appbar",
+    "davinci",
     "deadlift",
     "HIIT",
     "jumprope",
@@ -15,6 +16,7 @@
     "pulldowns",
     "pullups",
     "Shadley",
-    "tailwindcss"
+    "tailwindcss",
+    "tanstack"
   ]
 }

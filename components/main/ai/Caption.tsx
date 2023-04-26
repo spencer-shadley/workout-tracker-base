@@ -1,9 +1,10 @@
-import { askQuestion, askQuestionProps } from '@/components/api/openai';
+import { askQuestion } from '@/components/api/openai';
 import { Fade, Grow, IconButton, Typography } from '@mui/material';
 import { useState, useEffect, useCallback } from 'react';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { CreateCompletionRequest } from 'openai';
 
-interface CaptionProps extends askQuestionProps {
+interface CaptionProps extends Partial<CreateCompletionRequest> {
   loadingText?: string;
 }
 
@@ -11,39 +12,42 @@ export default function Caption({
   loadingText,
   ...askQuestionProps
 }: CaptionProps) {
-  const [quote, setQuote] = useState<string>('');
+  const [answer, setAnswer] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const updateQuestion = useCallback(
-    (updateProps?: Partial<askQuestionProps>) => {
+    (updateProps?: CaptionProps) => {
       setIsLoading(true);
-      askQuestion({ ...askQuestionProps, ...updateProps }).then((response) => {
-        setQuote(response);
-        setIsLoading(false);
-      });
+      askQuestion({ ...askQuestionProps, ...updateProps })
+        .then((response) => {
+          setAnswer(response ?? undefined);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     },
     [askQuestionProps]
   );
 
   useEffect(() => {
-    if (quote === '') {
-      updateQuestion();
-    }
-  }, [quote, updateQuestion]);
+    updateQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const shouldShow = !!(quote || loadingText);
+  const shouldShow = true;
 
   return (
     <Fade in={shouldShow}>
       <Grow in={shouldShow}>
         <span>
           <Typography color="white" variant="caption">
-            {quote ?? loadingText}
+            {isLoading ? loadingText ?? 'Loading...' : answer}
           </Typography>
           <IconButton
             onClick={() => {
+              setAnswer(undefined);
               updateQuestion({
-                question: `${askQuestionProps.question}. This time make it something new.`,
+                prompt: `${askQuestionProps.prompt}. This time make it something new.`,
                 temperature: 0.9,
               });
             }}
