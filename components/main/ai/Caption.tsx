@@ -18,7 +18,8 @@ export default function Caption({
   const updateQuestion = useCallback(
     (updateProps?: CaptionProps) => {
       setIsLoading(true);
-      askQuestion({ ...askQuestionProps, ...updateProps })
+      const question = `${askQuestionProps.prompt}. Give me something new every time I ask.`;
+      askQuestion({ ...askQuestionProps, prompt: question, ...updateProps })
         .then((response) => {
           setAnswer(response ?? undefined);
         })
