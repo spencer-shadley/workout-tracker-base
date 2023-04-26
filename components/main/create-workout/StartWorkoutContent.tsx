@@ -4,6 +4,7 @@ import AutoCompleteWorkout from './AutoCompleteWorkout';
 import { useWorkoutContext } from '../workout/context/WorkoutContextProvider';
 import WorkoutOptionsDialog from '../workout/WorkoutOptionsDialog';
 import { useState } from 'react';
+import NoExercises from './NoExercises';
 
 export default function StartWorkoutContent() {
   const { exercises } = useWorkoutContext();
@@ -17,7 +18,7 @@ export default function StartWorkoutContent() {
       <AutoCompleteWorkout />
       <Divider />
       {exercises.length === 0 ? (
-        <>Add exercises to get started</>
+        <NoExercises />
       ) : (
         <>
           <ActivitiesList />
