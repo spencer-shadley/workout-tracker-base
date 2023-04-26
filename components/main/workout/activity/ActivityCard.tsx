@@ -8,25 +8,18 @@ import {
   Tooltip,
   Zoom,
 } from '@mui/material';
-import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
+import { useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
-import { useExerciseCardContext } from '../context/ActivityCardContextProvider';
+import { useActivityCardContext } from '../context/ActivityCardContextProvider';
 import ExerciseStatLabels from './exercise/ExerciseStatLabels';
 import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import useActivityName from '@/hooks/useActivityName';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
-export interface ActivityCardProps extends CardProps {
-  activityType?: ActivityType;
-}
-
-export function ActivityCard({
-  activityType,
-  ...cardProps
-}: ActivityCardProps) {
-  const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
-  activityType = activityType ?? timeBucket?.exerciseType ?? 'rest-exercise';
+export function ActivityCard(cardProps: CardProps) {
+  const { exercise, isDismissible, timeBucket, activityType } =
+    useActivityCardContext();
   const { removeExercise } = useWorkoutContext();
   const { currentBucket, jumpToBucket } = useTimeContext();
   const { containerExercise, exerciseType: currentExerciseType } =

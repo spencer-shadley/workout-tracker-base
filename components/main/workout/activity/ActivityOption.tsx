@@ -22,10 +22,10 @@ export default function ActivityOption({
         exercise,
         isDismissible: false,
         timeBucket: undefined,
+        activityType: 'exercise',
       }}
     >
       <ActivityCard
-        activityType="exercise"
         sx={{ margin: '10px' }}
         onClick={() => handleClick(exercise)}
       />

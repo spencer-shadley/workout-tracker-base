@@ -1,10 +1,10 @@
-import { ListItem } from '@mui/material';
-import { ActivityCard, ActivityCardProps } from './ActivityCard';
+import { CardProps, ListItem } from '@mui/material';
+import { ActivityCard } from './ActivityCard';
 import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
-interface ActivityListItemProps extends ActivityCardProps {
+interface ActivityListItemProps extends CardProps {
   activityType: ActivityType;
   exercise?: ExerciseInfo;
 }
@@ -20,6 +20,7 @@ export default function ActivityListItem({
       activityCardContext={{
         exercise,
         isDismissible: false,
+        activityType,
         timeBucket: buckets.find(
           (bucket) =>
             bucket.containerExercise?.name === exercise?.name &&

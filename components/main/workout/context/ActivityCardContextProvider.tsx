@@ -1,12 +1,13 @@
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { PropsWithChildren, createContext, useContext } from 'react';
-import { TimeSlot } from './TimeContextProvider';
+import { ActivityType, TimeSlot } from './TimeContextProvider';
 
 export interface ActivityCardContextType {
   exercise?: ExerciseInfo;
   isDismissible: boolean;
   timeBucket: TimeSlot | undefined;
   progressPercent?: number;
+  activityType: ActivityType;
 }
 
 export const ActivityCardContext = createContext<ActivityCardContextType>({
@@ -19,9 +20,10 @@ export const ActivityCardContext = createContext<ActivityCardContextType>({
     containerRound: 0,
     exerciseType: 'exercise',
   },
+  activityType: 'exercise',
 });
 
-export const useExerciseCardContext = () => useContext(ActivityCardContext);
+export const useActivityCardContext = () => useContext(ActivityCardContext);
 
 interface ActivityCardContextProviderProps extends PropsWithChildren {
   activityCardContext: ActivityCardContextType;
