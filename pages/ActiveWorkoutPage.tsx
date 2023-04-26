@@ -38,6 +38,9 @@ function ActiveWorkoutPage() {
     <WorkoutProvider
       workoutContext={{
         exercises,
+        addExercise: (exercise) => {
+          setExercises([...exercises, exercise]);
+        },
         removeExercise: (exerciseName) => {
           setExercises(
             exercises.filter((exercise) => exercise.name !== exerciseName)
