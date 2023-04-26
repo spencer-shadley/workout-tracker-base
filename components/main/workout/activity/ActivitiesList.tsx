@@ -45,10 +45,12 @@ export default function ActivitiesList({
               )}
             </>
           ))}
-          <ActivityListItem
-            key={'round-rest-' + currentRound}
-            activityType="rest-round"
-          />
+          {shouldIncludeRests && (
+            <ActivityListItem
+              key={'round-rest-' + currentRound}
+              activityType="rest-round"
+            />
+          )}
         </List>
       </div>
       <DuplicateExerciseWarning
