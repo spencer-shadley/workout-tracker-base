@@ -3,6 +3,8 @@ import TransparentText from '../shared/TransparentText';
 import GiantButton from '../shared/GiantButton';
 import { useRouter } from 'next/router';
 import FitnessQuote from './FitnessQuote';
+import HealthFact from './ai/HealthFact';
+import Caption from './ai/Caption';
 
 export default function Main() {
   const router = useRouter();
@@ -19,7 +21,7 @@ export default function Main() {
         }}
       >
         <span>
-          <TransparentText>Welcome back</TransparentText>
+          <Caption prompt="Give me a short unique but fun greeting" />
           <TransparentText shouldAnimate>Spencer</TransparentText>
         </span>
 
@@ -34,6 +36,8 @@ export default function Main() {
         </GiantButton>
         <GiantButton>Generate a workout with AI</GiantButton>
         <GiantButton>See stats</GiantButton>
+
+        <HealthFact />
       </div>
     </main>
   );

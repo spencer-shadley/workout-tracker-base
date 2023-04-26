@@ -6,19 +6,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export async function askQuestion(question: string) {
+  console.log('asked', question);
   return openai.createCompletion({
     model: 'text-davinci-003',
     prompt: question,
     temperature: 0.2,
     max_tokens: 1500,
-  });
-}
-
-export async function getFitnessQuote(question: string) {
-  return openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: question,
-    temperature: 0.8,
-    max_tokens: 150,
   });
 }
