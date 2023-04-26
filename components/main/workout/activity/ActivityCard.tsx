@@ -17,7 +17,7 @@ import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import useActivityName from '@/hooks/useActivityName';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
-interface ActivityCardProps extends CardProps {
+export interface ActivityCardProps extends CardProps {
   activityType?: ActivityType;
 }
 
