@@ -2,6 +2,7 @@ import 'animate.css';
 import TransparentText from '../shared/TransparentText';
 import GiantButton from '../shared/GiantButton';
 import { useRouter } from 'next/router';
+import FitnessQuote from './FitnessQuote';
 
 export default function Main() {
   const router = useRouter();
@@ -21,6 +22,8 @@ export default function Main() {
           <TransparentText>Welcome back</TransparentText>
           <TransparentText shouldAnimate>Spencer</TransparentText>
         </span>
+
+        <FitnessQuote />
 
         <GiantButton
           onClick={() => {
