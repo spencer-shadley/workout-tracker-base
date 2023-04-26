@@ -1,7 +1,7 @@
 import { ListItem } from '@mui/material';
 import { ActivityCard } from './ActivityCard';
 import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
-import { ExerciseCardProvider } from '../context/ExerciseCardContextProvider';
+import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 
 interface ActivityListItemProps {
@@ -15,8 +15,8 @@ export default function ActivityListItem({
 }: ActivityListItemProps) {
   const { buckets } = useTimeContext();
   return (
-    <ExerciseCardProvider
-      exerciseCardContext={{
+    <ActivityCardProvider
+      activityCardContext={{
         exercise,
         isDismissible: false,
         timeBucket: buckets.find(
@@ -29,6 +29,6 @@ export default function ActivityListItem({
       <ListItem key={`${exercise?.name}-${activityType}`}>
         <ActivityCard />
       </ListItem>
-    </ExerciseCardProvider>
+    </ActivityCardProvider>
   );
 }

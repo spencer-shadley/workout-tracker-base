@@ -1,4 +1,5 @@
 import { ActivityType } from '@/components/main/workout/context/TimeContextProvider';
+import { logError } from '@/utils/error';
 
 export default function useActivityName(
   activityType: ActivityType,
@@ -15,6 +16,6 @@ export default function useActivityName(
     case 'rest-round':
       return 'Round Rest';
   }
-  console.error('No exercise title found');
+  logError('No activity type found');
   return 'No title found';
 }

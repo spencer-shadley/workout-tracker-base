@@ -11,16 +11,22 @@ import {
 import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
-import { useExerciseCardContext } from '../context/ExerciseCardContextProvider';
+import { useExerciseCardContext } from '../context/ActivityCardContextProvider';
 import ExerciseStatLabels from './exercise/ExerciseStatLabels';
 import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import useActivityName from '@/hooks/useActivityName';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
-export function ActivityCard(cardProps: CardProps) {
+interface ActivityCardProps extends CardProps {
+  activityType?: ActivityType;
+}
+
+export function ActivityCard({
+  activityType,
+  ...cardProps
+}: ActivityCardProps) {
   const { exercise, isDismissible, timeBucket } = useExerciseCardContext();
-  const exerciseType: ActivityType =
-    timeBucket?.exerciseType ?? 'rest-exercise';
+  activityType = activityType ?? timeBucket?.exerciseType ?? 'rest-exercise';
   const { removeExercise } = useWorkoutContext();
   const { currentBucket, jumpToBucket } = useTimeContext();
   const { containerExercise, exerciseType: currentExerciseType } =
@@ -28,15 +34,15 @@ export function ActivityCard(cardProps: CardProps) {
   const { remainingTimeInMilliseconds } = currentBucket;
   const isExerciseActive =
     containerExercise?.name === exercise?.name &&
-    currentExerciseType === exerciseType;
+    currentExerciseType === activityType;
 
   const remainingTimeInSeconds = remainingTimeInMilliseconds / 1000;
-  const activityDuration = useActivityDurationInSeconds(exerciseType);
+  const activityDuration = useActivityDurationInSeconds(activityType);
   const progressPercent = isExerciseActive
     ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
 
-  const activityName = useActivityName(exerciseType, exercise?.name);
+  const activityName = useActivityName(activityType, exercise?.name);
 
   return (
     <Card
@@ -68,7 +74,7 @@ export function ActivityCard(cardProps: CardProps) {
                 </IconButton>
               </Tooltip>
             )}
-            {exerciseType === 'exercise' && (
+            {activityType === 'exercise' && (
               <ExerciseStatLabels exercise={exercise} />
             )}
           </Typography>

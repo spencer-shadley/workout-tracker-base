@@ -1,26 +1,35 @@
-import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { Typography } from '@mui/material';
 import { ActivityCard } from './ActivityCard';
+import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 
 interface ActivityOptionProps {
-  activityName: string;
+  exercise: ExerciseInfo;
   handleClick: (exercise: ExerciseInfo) => void;
 }
 
 export default function ActivityOption({
-  activityName,
+  exercise,
   handleClick,
 }: ActivityOptionProps) {
-  const exercise = sampleExercises.find(
-    (exercise) => exercise.name === activityName
-  );
+  // const exercise = sampleExercises.find(
+  //   (exercise) => exercise.name === activityName
+  // );
 
   return exercise ? (
-    <ActivityCard
-      sx={{ margin: '10px' }}
-      onClick={() => handleClick(exercise)}
-    />
+    <ActivityCardProvider
+      activityCardContext={{
+        exercise,
+        isDismissible: false,
+        timeBucket: undefined,
+      }}
+    >
+      <ActivityCard
+        activityType="exercise"
+        sx={{ margin: '10px' }}
+        onClick={() => handleClick(exercise)}
+      />
+    </ActivityCardProvider>
   ) : (
     // TODO
     // <ExerciseCard
@@ -30,6 +39,6 @@ export default function ActivityOption({
     //   sx={{ margin: '10px' }}
     //   onClick={() => handleClick(exercise)}
     // />
-    <Typography>{activityName} could not be found</Typography>
+    <Typography>could not be found</Typography>
   );
 }

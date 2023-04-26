@@ -72,9 +72,9 @@ export default function StartWorkout() {
                 }
               }
             }}
-            renderOption={(props, exerciseName) => (
+            renderOption={(props, exercise) => (
               <ActivityOption
-                activityName={exerciseName}
+                exercise={exercise}
                 handleClick={(exercise) => {
                   setExercises([...exercises, exercise]);
                 }}
@@ -88,7 +88,7 @@ export default function StartWorkout() {
                 type="search"
               />
             )}
-            options={sampleExercises.map((exercise) => exercise.name)}
+            options={sampleExercises}
           />
           <Divider />
           {exercises.length === 0 ? (
