@@ -4,7 +4,6 @@ import { logError } from '@/utils/error';
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
 });
-console.log('process.env.OPEN_AI_KEY', process);
 const openai = new OpenAIApi(configuration);
 
 const tooManyRequests = new Promise(
