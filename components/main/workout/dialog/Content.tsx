@@ -17,7 +17,7 @@ export default function DialogContent() {
 
   const makeWorkout = () => {
     const detailedAiPrompt = `${aiPrompt}. The response should be valid JSON. Only return valid JSON. It is very important that the response is completely valid JSON. The JSON should have a key of "exercises" with a value of an array of exercises, each of which must also be valid JSON. Each exercise should be formatted as valid json with the interface {title:string, numberOfSets: number, numberOfReps: number, description: string}  It is okay for each exercise to have different numberOfSets and numberOfReps. The result should not be a numbered list. The result should be JSON as described earlier. `;
-    askQuestion({ question: detailedAiPrompt }).then((response) => {
+    askQuestion({ prompt: detailedAiPrompt }).then((response) => {
       setAiResponse(response);
     });
     setIsAiDialogOpen(true);
