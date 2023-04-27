@@ -2,10 +2,9 @@ import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/error';
 
 const configuration = new Configuration({
-  apiKey:
-    process.env.OPEN_AI_KEY ??
-    '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',
+  apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
 });
+console.log('process.env.OPEN_AI_KEY', process);
 const openai = new OpenAIApi(configuration);
 
 const tooManyRequests = new Promise(
