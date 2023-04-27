@@ -2,7 +2,9 @@ import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/error';
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey:
+    process.env.OPEN_AI_KEY ??
+    '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',
 });
 const openai = new OpenAIApi(configuration);
 
