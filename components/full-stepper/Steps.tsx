@@ -108,16 +108,26 @@ export default function Steps() {
         {stepInfos.map((step, index) => (
           <div
             key={step.title}
-            className="div-for-step"
-            style={{ height: '100%', flexGrow: 1 }}
+            style={{ height: '100%', flexGrow: 1, alignItems: 'center' }}
           >
             {Math.abs(activeStep - index) <= 2 ? (
-              <>
+              <div
+                style={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyItems: 'center',
+                  alignSelf: 'center',
+                  justifySelf: 'center',
+                  flexGrow: 1,
+                }}
+              >
                 <Link href="/StartWorkoutPage">
                   <Button>{step.title}</Button>
                 </Link>
                 <Typography color="white">{step.quote}</Typography>
-              </>
+              </div>
             ) : null}
           </div>
         ))}
