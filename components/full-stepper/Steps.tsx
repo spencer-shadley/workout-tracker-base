@@ -6,12 +6,17 @@ import {
   StepIconProps,
   StepLabel,
   styled,
+  IconButton,
+  Tooltip,
+  Button,
+  stepConnectorClasses,
+  StepConnector,
 } from '@mui/material';
 import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import SettingsIcon from '@mui/icons-material/Settings';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
 interface StepInfo {
   title: string;
@@ -34,11 +39,11 @@ const stepInfos: StepInfo[] = [
   },
 ];
 
-const ColorlibStepIconRoot = styled('div')<{
+const StepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
-}>(({ theme, ownerState }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+}>(({ ownerState }) => ({
+  backgroundColor: '#fff',
+  opacity: 0.25,
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -48,7 +53,7 @@ const ColorlibStepIconRoot = styled('div')<{
   justifyContent: 'center',
   alignItems: 'center',
   ...(ownerState.active && {
-    backgroundColor: 'transparent',
+    opacity: 0.75,
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
@@ -56,24 +61,35 @@ const ColorlibStepIconRoot = styled('div')<{
   }),
 }));
 
-function ColorlibStepIcon(props: StepIconProps) {
+function StepIcon(props: StepIconProps) {
   const { active, completed, className } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
+    1: <FitnessCenterIcon />,
+    2: <LightbulbIcon />,
+    3: <SettingsIcon />,
   };
 
   return (
-    <ColorlibStepIconRoot
-      ownerState={{ completed, active }}
-      className={className}
-    >
-      {icons[String(props.icon)]}
-    </ColorlibStepIconRoot>
+    <StepIconRoot ownerState={{ completed, active }} className={className}>
+      <IconButton>{icons[String(props.icon)]}</IconButton>
+    </StepIconRoot>
   );
 }
+
+const ColorlibConnector = styled(StepConnector)(() => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 22,
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    height: 2,
+    border: 0,
+    opacity: 0.1,
+    margin: '0 25px',
+    backgroundColor: 'white',
+    borderRadius: 1,
+  },
+}));
 
 export default function Steps() {
   const [activeStep, setActiveStep] = useState(0);
@@ -94,7 +110,7 @@ export default function Steps() {
           <div key={step.title}>
             {Math.abs(activeStep - index) <= 2 ? (
               <>
-                <Typography color="white">{step.title}</Typography>
+                <Button>{step.title}</Button>
                 <Typography color="white">{step.quote}</Typography>
               </>
             ) : null}
@@ -104,15 +120,15 @@ export default function Steps() {
       <Stepper
         alternativeLabel
         activeStep={activeStep}
-        sx={{ flexShrink: 0 }}
-        className="stepper"
+        sx={{ marginBottom: 2 }}
+        connector={<ColorlibConnector />}
       >
         {stepInfos.map((stepInfo) => (
-          <Step key={stepInfo.title}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>
-              {stepInfo.title}
-            </StepLabel>
-          </Step>
+          <Tooltip key={stepInfo.title} title={stepInfo.title}>
+            <Step key={stepInfo.title}>
+              <StepLabel StepIconComponent={StepIcon}></StepLabel>
+            </Step>
+          </Tooltip>
         ))}
       </Stepper>
     </Box>
