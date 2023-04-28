@@ -17,6 +17,7 @@ import SwipeableViews from 'react-swipeable-views';
 import SettingsIcon from '@mui/icons-material/Settings';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import Link from 'next/link';
 
 interface StepInfo {
   title: string;
@@ -97,18 +98,24 @@ export default function Steps() {
   };
 
   return (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <SwipeableViews
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        style={{ flexGrow: 1 }}
+        style={{ flexGrow: 1, height: '100%' }}
       >
         {stepInfos.map((step, index) => (
-          <div key={step.title}>
+          <div
+            key={step.title}
+            className="div-for-step"
+            style={{ height: '100%', flexGrow: 1 }}
+          >
             {Math.abs(activeStep - index) <= 2 ? (
               <>
-                <Button>{step.title}</Button>
+                <Link href="/StartWorkoutPage">
+                  <Button>{step.title}</Button>
+                </Link>
                 <Typography color="white">{step.quote}</Typography>
               </>
             ) : null}
