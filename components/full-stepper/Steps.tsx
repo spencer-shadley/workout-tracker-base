@@ -61,9 +61,7 @@ const StepIconRoot = styled('div')<{
   }),
 }));
 
-function StepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
-
+function StepIcon({ icon, active, completed, className }: StepIconProps) {
   const icons: { [index: string]: React.ReactElement } = {
     1: <FitnessCenterIcon />,
     2: <LightbulbIcon />,
@@ -72,7 +70,7 @@ function StepIcon(props: StepIconProps) {
 
   return (
     <StepIconRoot ownerState={{ completed, active }} className={className}>
-      <IconButton>{icons[String(props.icon)]}</IconButton>
+      <IconButton>{icons[String(icon)]}</IconButton>
     </StepIconRoot>
   );
 }
@@ -123,9 +121,14 @@ export default function Steps() {
         sx={{ marginBottom: 2 }}
         connector={<ColorlibConnector />}
       >
-        {stepInfos.map((stepInfo) => (
+        {stepInfos.map((stepInfo, stepIndex) => (
           <Tooltip key={stepInfo.title} title={stepInfo.title}>
-            <Step key={stepInfo.title}>
+            <Step
+              key={stepInfo.title}
+              onClick={() => {
+                setActiveStep(stepIndex);
+              }}
+            >
               <StepLabel StepIconComponent={StepIcon}></StepLabel>
             </Step>
           </Tooltip>
