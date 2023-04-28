@@ -45,6 +45,7 @@ const StepIconRoot = styled('div')<{
 }>(({ ownerState }) => ({
   backgroundColor: '#fff',
   opacity: 0.25,
+  transition: 'opacity .5s ease-in-out',
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -103,12 +104,16 @@ export default function Steps() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        style={{ flexGrow: 1, height: '100%' }}
+        style={{ flexGrow: 1 }}
+        containerStyle={{ height: '100%' }}
       >
         {stepInfos.map((step, index) => (
           <div
             key={step.title}
-            style={{ height: '100%', flexGrow: 1, alignItems: 'center' }}
+            style={{
+              height: '100%',
+              alignItems: 'center',
+            }}
           >
             {Math.abs(activeStep - index) <= 2 ? (
               <div
@@ -117,16 +122,28 @@ export default function Steps() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyItems: 'center',
-                  alignSelf: 'center',
-                  justifySelf: 'center',
+                  justifyContent: 'space-evenly',
                   flexGrow: 1,
                 }}
               >
                 <Link href="/StartWorkoutPage">
-                  <Button>{step.title}</Button>
+                  <Button>
+                    <Typography variant="h1">{step.title}</Typography>
+                  </Button>
                 </Link>
-                <Typography color="white">{step.quote}</Typography>
+                <div
+                  style={{
+                    display: 'flex',
+                    overflow: 'hidden',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    background: 'black',
+                    color: 'white',
+                  }}
+                ></div>
+                <Typography color="white" variant="subtitle2">
+                  {step.quote}
+                </Typography>
               </div>
             ) : null}
           </div>
