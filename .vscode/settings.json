@@ -6,6 +6,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
     "appbar",
+    "Colorlib",
     "davinci",
     "deadlift",
     "HIIT",
@@ -16,6 +17,7 @@
     "pulldowns",
     "pullups",
     "Shadley",
+    "Swipeable",
     "tailwindcss",
     "tanstack"
   ]
