@@ -6,7 +6,8 @@ export interface StepInfo {
 export const stepInfos: StepInfo[] = [
   {
     title: 'Start workout',
-    aiPrompt: 'Give me a motivational quote to inspire me to workout.',
+    aiPrompt:
+      'Give me exactly one motivational quote to inspire me to workout.',
   },
   {
     title: 'Learn more',

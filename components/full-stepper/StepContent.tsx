@@ -1,4 +1,4 @@
-import { Button, Fade, IconButton, Typography } from '@mui/material';
+import { Button, Fade, IconButton, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { StepInfo } from './stepInfo';
 import { useCallback, useEffect, useState } from 'react';
@@ -11,8 +11,6 @@ interface StepContentProps {
   index: number;
 }
 
-const answersGiven: string[] = [];
-
 export default function StepContent({
   step,
   index,
@@ -24,12 +22,8 @@ export default function StepContent({
   const updateQuestion = useCallback(() => {
     console.log('asking question');
     setIsLoading(true);
-    const question = `${
-      step.aiPrompt
-    }. Make sure your answer is not one of these answers: "${JSON.stringify(
-      answersGiven
-    )}"`;
-    askQuestion({ prompt: question, temperature: 1 })
+    const question = `${step.aiPrompt}`;
+    askQuestion({ prompt: question, temperature: 1.5 })
       .then((response) => {
         setAiAnswer(response ?? undefined);
       })
@@ -79,7 +73,9 @@ export default function StepContent({
                   updateQuestion();
                 }}
               >
-                <RefreshIcon sx={{ color: 'white' }} />
+                <Tooltip title="Get a new answer">
+                  <RefreshIcon sx={{ color: 'white' }} />
+                </Tooltip>
               </IconButton>
             </span>
           </Fade>
