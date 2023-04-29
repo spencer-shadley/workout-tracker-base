@@ -1,6 +1,7 @@
 import {
   Badge,
   Button,
+  Card,
   FormControl,
   InputAdornment,
   List,
@@ -98,9 +99,19 @@ export default function CreateWorkout() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Badge badgeContent={addedExerciseNames.length}>
-                    <PlayCircleOutlineIcon />
-                  </Badge>
+                  <Tooltip
+                    title={
+                      <Card sx={{ fontSize: 14 }}>
+                        {addedExerciseNames.map((exerciseName) => (
+                          <h1 key={exerciseName}>{exerciseName}</h1>
+                        ))}
+                      </Card>
+                    }
+                  >
+                    <Badge badgeContent={addedExerciseNames.length}>
+                      <PlayCircleOutlineIcon />
+                    </Badge>
+                  </Tooltip>
                 </InputAdornment>
               ),
             }}
@@ -119,7 +130,7 @@ export default function CreateWorkout() {
             inputProps={{
               'aria-label': 'hint',
             }}
-          ></TextField>
+          />
         </FormControl>
         {searchText && <GenerateWithAiButton />}
         {isSearching ? <Typography>Searching...</Typography> : <Results />}
