@@ -45,6 +45,7 @@ export default function StepContent({
         height: '100%',
         alignItems: 'center',
         maxWidth: '100%',
+        overflow: 'hidden',
       }}
     >
       {Math.abs(activeStep - index) <= 2 ? (
