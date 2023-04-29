@@ -1,13 +1,32 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 
-export interface CreateWorkoutType {
+interface SearchInputType {
   searchText: string;
   foundExerciseNames: string[];
 }
 
+interface ExercisesCartType {
+  addedExerciseNames: string[];
+  addExerciseNameToCart: (exerciseName: string) => void;
+  removeExerciseNameFromCart: (exerciseName: string) => void;
+}
+
+export interface CreateWorkoutType {
+  searchInput: SearchInputType;
+  exercisesCart: ExercisesCartType;
+}
+
 export const CreateWorkout = createContext<CreateWorkoutType>({
-  searchText: '',
-  foundExerciseNames: [],
+  searchInput: { searchText: '', foundExerciseNames: [] },
+  exercisesCart: {
+    addedExerciseNames: [],
+    addExerciseNameToCart: () => {
+      console.error('add exercise to cart not set');
+    },
+    removeExerciseNameFromCart: () => {
+      console.error('remove exercise from cart not set');
+    },
+  },
 });
 
 export const useCreateWorkout = () => useContext(CreateWorkout);

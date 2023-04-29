@@ -8,7 +8,7 @@ function responseToArray(response: string): string[] {
 export default function searchExercises(search: string): Promise<string[]> {
   return new Promise<string[]>((resolve) => {
     return askQuestion({
-      prompt: `Make me a workout with a focus on ${search}. It is very important ${search}. Return a comma separated list of exercises.`,
+      prompt: `Make me a workout with a focus on ${search}. It is very important ${search}. Return a comma separated list of exercises. Do not end with a period.`,
     }).then((response) => {
       if (response) resolve(responseToArray(response));
       else reject('could not find any exercises');

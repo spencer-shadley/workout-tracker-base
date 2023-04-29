@@ -1,8 +1,16 @@
 import {
+  Badge,
   Button,
   FormControl,
+  InputAdornment,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Paper,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -13,6 +21,11 @@ import {
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
 import searchExercises from '@/api/searchExercises';
+import InfoIcon from '@mui/icons-material/Info';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { askQuestion } from '../api/openai';
+import AddIcon from '@mui/icons-material/Add';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 const hints = [
   'Biceps',
@@ -35,6 +48,7 @@ export default function CreateWorkout() {
   const [foundExercises, setFoundExercises] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
+  const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -61,8 +75,18 @@ export default function CreateWorkout() {
   }, [debouncedSearch]);
 
   const createWorkoutContext: CreateWorkoutType = {
-    searchText,
-    foundExerciseNames: foundExercises,
+    searchInput: { searchText, foundExerciseNames: foundExercises },
+    exercisesCart: {
+      addedExerciseNames,
+      addExerciseNameToCart: (exerciseName: string) => {
+        setAddedExerciseNames([...addedExerciseNames, exerciseName]);
+      },
+      removeExerciseNameFromCart: (exerciseName: string) => {
+        setAddedExerciseNames(
+          addedExerciseNames.filter((name) => name !== exerciseName)
+        );
+      },
+    },
   };
 
   return (
@@ -71,6 +95,15 @@ export default function CreateWorkout() {
         {searchText === '' && <h1>Create an AI powered workout!</h1>}
         <FormControl variant="outlined" fullWidth>
           <TextField
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Badge badgeContent={addedExerciseNames.length}>
+                    <PlayCircleOutlineIcon />
+                  </Badge>
+                </InputAdornment>
+              ),
+            }}
             maxRows={3}
             multiline
             id="outlined-adornment-search"
@@ -86,7 +119,7 @@ export default function CreateWorkout() {
             inputProps={{
               'aria-label': 'hint',
             }}
-          />
+          ></TextField>
         </FormControl>
         {searchText && <GenerateWithAiButton />}
         {isSearching ? <Typography>Searching...</Typography> : <Results />}
@@ -97,13 +130,14 @@ export default function CreateWorkout() {
 }
 
 function Results() {
-  const { foundExerciseNames } = useCreateWorkoutContext();
+  const { searchInput } = useCreateWorkoutContext();
+  const { foundExerciseNames } = searchInput;
   return (
-    <>
+    <List className="w-full">
       {foundExerciseNames.map((exerciseName) => (
         <Result key={exerciseName} exerciseName={exerciseName} />
       ))}
-    </>
+    </List>
   );
 }
 
@@ -112,7 +146,74 @@ interface ResultProps {
 }
 
 function Result({ exerciseName }: ResultProps) {
-  return <h1>{exerciseName}</h1>;
+  const { exercisesCart } = useCreateWorkoutContext();
+  const { addExerciseNameToCart } = exercisesCart;
+  const [exerciseDetailsText, setExerciseDetailsText] = useState<string>('');
+
+  return (
+    <ListItem className="w-full">
+      <ResultIcon
+        tooltip={`Learn more about ${exerciseName}`}
+        prompt={`Tell me about ${exerciseName} in a few sentences`}
+        setDescriptionText={setExerciseDetailsText}
+        icon={<InfoIcon />}
+      />
+      <ListItemText
+        className="flex-grow w-full"
+        primary={exerciseName}
+        secondary={exerciseDetailsText === '' ? undefined : exerciseDetailsText}
+      />
+      <ResultIcon
+        icon={<QuestionMarkIcon />}
+        tooltip={`Learn how to do ${exerciseName}`}
+        prompt={`Tell me how to do the exercise ${exerciseName}`}
+        setDescriptionText={setExerciseDetailsText}
+      />
+      <Tooltip title={`Add ${exerciseName} to workout`}>
+        <ListItemButton
+          onClick={() => {
+            addExerciseNameToCart(exerciseName);
+          }}
+        >
+          <ListItemIcon>
+            <AddIcon />
+          </ListItemIcon>
+        </ListItemButton>
+      </Tooltip>
+    </ListItem>
+  );
+}
+
+interface ResultIconProps {
+  icon: React.ReactNode;
+  tooltip: string;
+  setDescriptionText: (text: string) => void;
+  prompt: string;
+}
+
+function ResultIcon({
+  icon,
+  setDescriptionText,
+  tooltip,
+  prompt,
+}: ResultIconProps) {
+  return (
+    <Tooltip title={tooltip}>
+      <ListItemButton
+        onClick={() => {
+          setDescriptionText('Loading...');
+          askQuestion({
+            prompt,
+            temperature: 1,
+          }).then((answer) => {
+            setDescriptionText(answer);
+          });
+        }}
+      >
+        <ListItemIcon>{icon}</ListItemIcon>
+      </ListItemButton>
+    </Tooltip>
+  );
 }
 
 function GenerateWithAiButton() {
