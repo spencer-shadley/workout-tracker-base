@@ -1,20 +1,20 @@
 export interface StepInfo {
   title: string;
-  quote: string;
+  aiPrompt: string;
 }
 
 export const stepInfos: StepInfo[] = [
   {
     title: 'Start workout',
-    quote: 'Start your workout by clicking the button below',
+    aiPrompt: 'Give me a motivational quote to inspire me to workout.',
   },
   {
     title: 'Learn more',
-    quote:
-      'Research shows that exercise can help prevent cognitive decline and memory loss.',
+    aiPrompt: 'Tell me why working out is important. Keep it somewhat short.',
   },
   {
     title: 'Settings',
-    quote: 'Update your settings to get the most out of your workout.',
+    aiPrompt:
+      'Rephrase "change your default settings" into something fun and unique.',
   },
 ];
