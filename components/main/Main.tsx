@@ -1,15 +1,10 @@
 import 'animate.css';
-import GiantButton from '../shared/GiantButton';
-import { useRouter } from 'next/router';
-import FitnessQuote from './FitnessQuote';
-import HealthFact from './ai/HealthFact';
-import Caption from './ai/Caption';
 import Steps from '../full-stepper/Steps';
 
-const name = 'Spencer';
+// const name = 'Spencer';
 
 export default function Main() {
-  const router = useRouter();
+  // const router = useRouter();
   return <Steps />;
   // return (
   // <main style={{ height: '100dvh', paddingTop: '50px' }}>
