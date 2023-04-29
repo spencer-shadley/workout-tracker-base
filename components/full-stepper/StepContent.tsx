@@ -44,6 +44,7 @@ export default function StepContent({
       style={{
         height: '100%',
         alignItems: 'center',
+        maxWidth: '100%',
       }}
     >
       {Math.abs(activeStep - index) <= 2 ? (
