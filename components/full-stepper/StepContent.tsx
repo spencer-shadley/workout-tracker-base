@@ -1,4 +1,4 @@
-import { Button, Fade, Grow, IconButton, Typography } from '@mui/material';
+import { Button, Fade, IconButton, Typography } from '@mui/material';
 import Link from 'next/link';
 import { StepInfo } from './stepInfo';
 import { useCallback, useEffect, useState } from 'react';
@@ -61,6 +61,7 @@ export default function StepContent({
             alignItems: 'center',
             justifyContent: 'space-evenly',
             flexGrow: 1,
+            padding: '50px',
           }}
         >
           <Link href="/StartWorkoutPage">
@@ -69,22 +70,18 @@ export default function StepContent({
             </Button>
           </Link>
           <Fade in={!isLoading}>
-            <Grow in={!isLoading}>
-              <span>
-                <Typography color="white" variant="caption">
-                  {aiAnswer}
-                </Typography>
-                <IconButton
-                  onClick={() => {
-                    updateQuestion();
-                  }}
-                >
-                  <Fade in={!isLoading}>
-                    <RefreshIcon sx={{ color: 'white' }} />
-                  </Fade>
-                </IconButton>
-              </span>
-            </Grow>
+            <span>
+              <Typography color="white" variant="caption">
+                {aiAnswer}
+              </Typography>
+              <IconButton
+                onClick={() => {
+                  updateQuestion();
+                }}
+              >
+                <RefreshIcon sx={{ color: 'white' }} />
+              </IconButton>
+            </span>
           </Fade>
         </div>
       ) : null}
