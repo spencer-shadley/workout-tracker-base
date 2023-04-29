@@ -59,7 +59,7 @@ export default function StepContent({
           }}
         >
           <Link href="/StartWorkoutPage">
-            <Button>
+            <Button variant="outlined">
               <Typography variant="h1">{step.title}</Typography>
             </Button>
           </Link>
