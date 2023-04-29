@@ -7,7 +7,7 @@ export const stepInfos: StepInfo[] = [
   {
     title: 'Start workout',
     aiPrompt:
-      'Give me exactly one motivational quote to inspire me to workout.',
+      'Give me exactly one motivational quote to inspire me to workout, get active, exercise, or be fit.',
   },
   {
     title: 'Learn more',
