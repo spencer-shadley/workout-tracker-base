@@ -60,7 +60,7 @@ export default function StepContent({
         >
           <Link href="/StartWorkoutPage">
             <Button variant="outlined">
-              <Typography variant="h1">{step.title}</Typography>
+              <Typography variant="h2">{step.title}</Typography>
             </Button>
           </Link>
           <Fade in={!isLoading}>
