@@ -13,7 +13,7 @@ export default function Steps() {
   };
 
   return (
-    <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ height: '100dvh', display: 'flex', flexDirection: 'column' }}>
       <SwipeableViews
         index={activeStep}
         onChangeIndex={handleStepChange}
