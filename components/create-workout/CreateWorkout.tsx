@@ -13,7 +13,7 @@ export default function CreateWorkout() {
   const [foundExercises, setFoundExercises] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const debouncedSearch = useDebounce<string>(searchText, 500);
+  const debouncedSearch = useDebounce<string>(searchText, 2000);
 
   useEffect(() => {
     async function search() {
