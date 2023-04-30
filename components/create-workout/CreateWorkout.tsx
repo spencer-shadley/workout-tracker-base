@@ -27,6 +27,7 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { askQuestion } from '../api/openai';
 import AddIcon from '@mui/icons-material/Add';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
 
 const hints = [
   'Biceps',
@@ -158,11 +159,12 @@ interface ResultProps {
 
 function Result({ exerciseName }: ResultProps) {
   const { exercisesCart } = useCreateWorkoutContext();
-  const { addExerciseNameToCart } = exercisesCart;
+  const { addExerciseNameToCart, addedExerciseNames } = exercisesCart;
   const [exerciseDetailsText, setExerciseDetailsText] = useState<string>('');
+  const isExerciseAdded = addedExerciseNames.includes(exerciseName);
 
   return (
-    <ListItem className="w-full">
+    <ListItem className="w-full hover:bg-slate-200">
       <ResultIcon
         tooltip={`Learn more about ${exerciseName}`}
         prompt={`Tell me about ${exerciseName} in a few sentences`}
@@ -180,14 +182,18 @@ function Result({ exerciseName }: ResultProps) {
         prompt={`Tell me how to do the exercise ${exerciseName}`}
         setDescriptionText={setExerciseDetailsText}
       />
-      <Tooltip title={`Add ${exerciseName} to workout`}>
+      <Tooltip
+        title={`Add ${
+          isExerciseAdded ? 'another' : ''
+        } ${exerciseName} to workout`}
+      >
         <ListItemButton
           onClick={() => {
             addExerciseNameToCart(exerciseName);
           }}
         >
           <ListItemIcon>
-            <AddIcon />
+            {isExerciseAdded ? <CheckIcon /> : <AddIcon />}
           </ListItemIcon>
         </ListItemButton>
       </Tooltip>
