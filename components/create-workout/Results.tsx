@@ -6,7 +6,7 @@ export function Results() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchedExerciseNameResults: foundExerciseNames } = searchInput;
   return (
-    <Card sx={{ padding: '5px 10px' }} className="bg-slate-400">
+    <Card sx={{ padding: '5px 10px' }} className="bg-slate-400 overflow-auto">
       <List className="w-full">
         {foundExerciseNames.map((exerciseName) => (
           <Card key={exerciseName} sx={{ marginBottom: '10px' }}>
