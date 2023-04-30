@@ -1,23 +1,9 @@
-import {
-  Badge,
-  Card,
-  FormControl,
-  Grow,
-  IconButton,
-  InputAdornment,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  TextField,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { FormControl, InputAdornment, TextField } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import ClearIcon from '@mui/icons-material/Clear';
+import { ExerciseCartButton } from './ExerciseCartButton';
+import { GenerateWithAiButton } from './GenerateWithAiButton';
+
 export function ExerciseSearch() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText, setSearchText, currentHint } = searchInput;
@@ -27,7 +13,19 @@ export function ExerciseSearch() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <ExerciseCartButton />
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyItems: 'center',
+                  alignContent: 'center',
+                  height: '100%',
+                  padding: '0',
+                }}
+              >
+                <GenerateWithAiButton />
+                <ExerciseCartButton />
+              </div>
             </InputAdornment>
           ),
         }}
@@ -48,57 +46,5 @@ export function ExerciseSearch() {
         }}
       />
     </FormControl>
-  );
-}
-
-function ExerciseCartButton() {
-  const { exercisesCart } = useCreateWorkoutContext();
-  const { addedExerciseNames } = exercisesCart;
-  return (
-    <Tooltip
-      title={<ExerciseCart />}
-      TransitionComponent={Grow}
-      leaveDelay={1_000}
-    >
-      <Badge badgeContent={addedExerciseNames.length}>
-        <IconButton>
-          <PlayCircleOutlineIcon />
-        </IconButton>
-      </Badge>
-    </Tooltip>
-  );
-}
-
-function ExerciseCart() {
-  const { exercisesCart } = useCreateWorkoutContext();
-  const { addedExerciseNames, removeExerciseNameFromCart } = exercisesCart;
-  return (
-    <Card>
-      {addedExerciseNames.length > 0 ? (
-        <>
-          <Typography variant="subtitle1">Start Your Workout!</Typography>
-          <List>
-            {addedExerciseNames.map((exerciseName) => (
-              <ListItem key={exerciseName}>
-                <ListItemText>{exerciseName}</ListItemText>
-                <ListItemButton
-                  onClick={() => {
-                    removeExerciseNameFromCart(exerciseName);
-                  }}
-                >
-                  <ListItemIcon>
-                    <ClearIcon />
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </>
-      ) : (
-        <Typography variant="subtitle1">
-          First add exercises to your workout!
-        </Typography>
-      )}
-    </Card>
   );
 }

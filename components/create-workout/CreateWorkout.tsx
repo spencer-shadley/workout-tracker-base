@@ -17,6 +17,11 @@ const hints = [
   'Exercises that only require my body',
   'Cardio workout',
   'Exercises that only use dumbbells',
+  'Help me to rehabilitate from my hip injury',
+  'Workout out an elderly person with a bad back can do',
+  'Help me get toned biceps',
+  'Get a six pack',
+  'Focus on strength',
 ];
 
 function getRandomHint() {

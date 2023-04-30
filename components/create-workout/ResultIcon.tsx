@@ -17,6 +17,7 @@ export function ResultIcon({
   return (
     <Tooltip title={tooltip}>
       <ListItemButton
+        sx={{ padding: 0 }}
         onClick={() => {
           setDescriptionText('Loading...');
           askQuestion({

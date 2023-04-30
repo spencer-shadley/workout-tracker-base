@@ -8,7 +8,7 @@ import {
 import { useState } from 'react';
 import { useCreateWorkoutContext as useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import InfoIcon from '@mui/icons-material/Info';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import SchoolIcon from '@mui/icons-material/School';
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import { ResultIcon } from './ResultIcon';
@@ -23,7 +23,7 @@ export default function Result({ exerciseName }: ResultProps) {
   const isExerciseAdded = addedExerciseNames.includes(exerciseName);
 
   return (
-    <ListItem className="w-full hover:bg-slate-200">
+    <ListItem className="w-full hover:bg-slate-200 ">
       <ResultIcon
         tooltip={`Learn more about ${exerciseName}`}
         prompt={`Tell me about ${exerciseName} in a few sentences`}
@@ -36,7 +36,7 @@ export default function Result({ exerciseName }: ResultProps) {
         secondary={exerciseDetailsText === '' ? undefined : exerciseDetailsText}
       />
       <ResultIcon
-        icon={<QuestionMarkIcon />}
+        icon={<SchoolIcon />}
         tooltip={`Learn how to do ${exerciseName}`}
         prompt={`Tell me how to do the exercise ${exerciseName}`}
         setDescriptionText={setExerciseDetailsText}
