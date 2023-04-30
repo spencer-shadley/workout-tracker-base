@@ -11,8 +11,13 @@ export function ExerciseCartButton() {
       title={<ExerciseCart />}
       TransitionComponent={Grow}
       leaveDelay={1000}
+      arrow
     >
-      <Badge badgeContent={addedExerciseNames.length}>
+      <Badge
+        badgeContent={addedExerciseNames.length}
+        overlap="circular"
+        color="info"
+      >
         <IconButton>
           <PlayCircleOutlineIcon />
         </IconButton>

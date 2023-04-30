@@ -1,12 +1,14 @@
-import { Icon, IconButton } from '@mui/material';
+import { Icon, IconButton, Tooltip } from '@mui/material';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 
 export function GenerateWithAiButton() {
   return (
-    <IconButton>
-      <Icon>
-        <AutoFixHighIcon />
-      </Icon>
-    </IconButton>
+    <Tooltip title="Auto generate full workout" arrow>
+      <IconButton>
+        <Icon>
+          <AutoFixHighIcon />
+        </Icon>
+      </IconButton>
+    </Tooltip>
   );
 }
