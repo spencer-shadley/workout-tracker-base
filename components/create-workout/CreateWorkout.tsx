@@ -1,23 +1,11 @@
-import {
-  Badge,
-  Button,
-  Card,
-  FormControl,
-  InputAdornment,
-  Paper,
-  TextField,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CreateWorkoutProvider,
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
 import searchExercises from '@/api/searchExercises';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import { Results } from './Results';
+import CreateWorkoutContent from './CreateWorkoutContent';
 
 const hints = [
   'Biceps',
@@ -37,7 +25,7 @@ function getRandomHint() {
 
 export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');
-  const [foundExercises, setFoundExercises] = useState<string[]>([]);
+  const [foundExerciseNames, setFoundExercises] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
   const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
@@ -67,7 +55,13 @@ export default function CreateWorkout() {
   }, [debouncedSearch]);
 
   const createWorkoutContext: CreateWorkoutType = {
-    searchInput: { searchText, foundExerciseNames: foundExercises },
+    searchInput: {
+      isSearching,
+      searchText,
+      searchedExerciseNameResults: foundExerciseNames,
+      setSearchText,
+      currentHint,
+    },
     exercisesCart: {
       addedExerciseNames,
       addExerciseNameToCart: (exerciseName: string) => {
@@ -83,58 +77,7 @@ export default function CreateWorkout() {
 
   return (
     <CreateWorkoutProvider createWorkout={createWorkoutContext}>
-      <Paper className="h-screen opacity-80 p-4">
-        {searchText === '' && <h1>Create an AI powered workout!</h1>}
-        <FormControl variant="outlined" fullWidth>
-          <TextField
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Tooltip
-                    title={
-                      <Card sx={{ fontSize: 14 }}>
-                        {addedExerciseNames.map((exerciseName) => (
-                          <h1 key={exerciseName}>{exerciseName}</h1>
-                        ))}
-                      </Card>
-                    }
-                  >
-                    <Badge badgeContent={addedExerciseNames.length}>
-                      <PlayCircleOutlineIcon />
-                    </Badge>
-                  </Tooltip>
-                </InputAdornment>
-              ),
-            }}
-            maxRows={3}
-            multiline
-            id="outlined-adornment-search"
-            variant="outlined"
-            value={searchText}
-            label={currentHint}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setSearchText(event.target.value);
-            }}
-            fullWidth
-            className="w-full opacity-100"
-            aria-describedby="create-workout-hint-text"
-            inputProps={{
-              'aria-label': 'hint',
-            }}
-          />
-        </FormControl>
-        {searchText && <GenerateWithAiButton />}
-        {isSearching ? <Typography>Searching...</Typography> : <Results />}
-        {searchText && foundExercises.length === 0 && <NewExerciseButton />}
-      </Paper>
+      <CreateWorkoutContent />
     </CreateWorkoutProvider>
   );
-}
-
-function GenerateWithAiButton() {
-  return <Button>Generate full workout with AI</Button>;
-}
-
-function NewExerciseButton() {
-  return <Button>New Exercise</Button>;
 }

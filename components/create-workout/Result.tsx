@@ -6,7 +6,7 @@ import {
   Tooltip,
 } from '@mui/material';
 import { useState } from 'react';
-import { useCreateWorkout as useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
+import { useCreateWorkoutContext as useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import InfoIcon from '@mui/icons-material/Info';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import AddIcon from '@mui/icons-material/Add';

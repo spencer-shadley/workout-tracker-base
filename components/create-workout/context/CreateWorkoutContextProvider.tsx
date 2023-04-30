@@ -2,7 +2,10 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 
 interface SearchInputType {
   searchText: string;
-  foundExerciseNames: string[];
+  setSearchText: (searchText: string) => void;
+  searchedExerciseNameResults: string[];
+  currentHint: string;
+  isSearching: boolean;
 }
 
 interface ExercisesCartType {
@@ -17,7 +20,15 @@ export interface CreateWorkoutType {
 }
 
 export const CreateWorkout = createContext<CreateWorkoutType>({
-  searchInput: { searchText: '', foundExerciseNames: [] },
+  searchInput: {
+    isSearching: false,
+    searchText: '',
+    currentHint: '',
+    searchedExerciseNameResults: [],
+    setSearchText: () => {
+      console.error('set search text not set');
+    },
+  },
   exercisesCart: {
     addedExerciseNames: [],
     addExerciseNameToCart: () => {
@@ -29,7 +40,7 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
   },
 });
 
-export const useCreateWorkout = () => useContext(CreateWorkout);
+export const useCreateWorkoutContext = () => useContext(CreateWorkout);
 
 interface CreateWorkoutProviderProps extends PropsWithChildren {
   createWorkout: CreateWorkoutType;
