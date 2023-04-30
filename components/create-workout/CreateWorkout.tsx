@@ -33,7 +33,7 @@ export default function CreateWorkout() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentHint(getRandomHint());
-    }, 10000);
+    }, 10_000);
     return () => {
       clearInterval(intervalId);
     };

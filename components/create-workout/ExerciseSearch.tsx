@@ -2,17 +2,24 @@ import {
   Badge,
   Card,
   FormControl,
+  Grow,
+  IconButton,
   InputAdornment,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   TextField,
   Tooltip,
+  Typography,
 } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-
+import ClearIcon from '@mui/icons-material/Clear';
 export function ExerciseSearch() {
-  const { exercisesCart, searchInput } = useCreateWorkoutContext();
-  const { addedExerciseNames } = exercisesCart;
+  const { searchInput } = useCreateWorkoutContext();
   const { searchText, setSearchText, currentHint } = searchInput;
   return (
     <FormControl variant="outlined" fullWidth>
@@ -20,19 +27,7 @@ export function ExerciseSearch() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <Tooltip
-                title={
-                  <Card sx={{ fontSize: 14 }}>
-                    {addedExerciseNames.map((exerciseName) => (
-                      <h1 key={exerciseName}>{exerciseName}</h1>
-                    ))}
-                  </Card>
-                }
-              >
-                <Badge badgeContent={addedExerciseNames.length}>
-                  <PlayCircleOutlineIcon />
-                </Badge>
-              </Tooltip>
+              <ExerciseCartButton />
             </InputAdornment>
           ),
         }}
@@ -53,5 +48,45 @@ export function ExerciseSearch() {
         }}
       />
     </FormControl>
+  );
+}
+
+function ExerciseCartButton() {
+  const { exercisesCart } = useCreateWorkoutContext();
+  const { addedExerciseNames } = exercisesCart;
+  return (
+    <Tooltip
+      title={<ExerciseCart />}
+      TransitionComponent={Grow}
+      leaveDelay={1_000}
+    >
+      <Badge badgeContent={addedExerciseNames.length}>
+        <IconButton>
+          <PlayCircleOutlineIcon />
+        </IconButton>
+      </Badge>
+    </Tooltip>
+  );
+}
+
+function ExerciseCart() {
+  const { exercisesCart } = useCreateWorkoutContext();
+  const { addedExerciseNames } = exercisesCart;
+  return (
+    <Card>
+      <Typography variant="subtitle1">Start Your Workout!</Typography>
+      <List>
+        {addedExerciseNames.map((exerciseName) => (
+          <ListItem key={exerciseName}>
+            <ListItemText>{exerciseName}</ListItemText>
+            <ListItemButton>
+              <ListItemIcon>
+                <ClearIcon />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Card>
   );
 }
