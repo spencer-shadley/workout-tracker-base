@@ -47,6 +47,7 @@ export default function Result({ exerciseName }: ResultProps) {
         } ${exerciseName} to workout`}
       >
         <ListItemButton
+          sx={{ padding: 0 }}
           onClick={() => {
             addExerciseNameToCart(exerciseName);
           }}
