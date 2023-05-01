@@ -1,6 +1,6 @@
 import { Dialog, DialogTitle } from '@mui/material';
 import { SummaryDialogActions } from './SummaryDialogActions';
-import { SummaryDialogContent } from './SummaryDialogContent';
+import { SummaryContent } from './SummaryDialogContent';
 import {
   SummaryDialogProvider,
   SummaryDialogType,
@@ -19,7 +19,7 @@ export function SummaryDialog(props: SummaryDialogType) {
         onClose={handleClose}
       >
         <DialogTitle>Workout Summary</DialogTitle>
-        <SummaryDialogContent />
+        <SummaryContent />
         <SummaryDialogActions />
       </Dialog>
     </SummaryDialogProvider>

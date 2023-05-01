@@ -2,7 +2,7 @@ import { DialogContent, List } from '@mui/material';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { SummaryDialogContentListItem } from './SummaryDialogContentListItem';
 
-export function SummaryDialogContent() {
+export function SummaryContent() {
   const { exercisesCart } = useCreateWorkoutContext();
   const { addedExerciseNames } = exercisesCart;
   return (

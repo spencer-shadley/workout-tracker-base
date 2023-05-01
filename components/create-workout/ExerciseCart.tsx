@@ -1,40 +1,14 @@
-import {
-  Card,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { Card, Typography } from '@mui/material';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
-import ClearIcon from '@mui/icons-material/Clear';
+import { SummaryContent } from './summary-dialog/SummaryDialogContent';
 
 export function ExerciseCart() {
   const { exercisesCart } = useCreateWorkoutContext();
-  const { addedExerciseNames, removeExerciseNameFromCart } = exercisesCart;
+  const { addedExerciseNames } = exercisesCart;
   return (
     <Card>
       {addedExerciseNames.length > 0 ? (
-        <>
-          <Typography variant="subtitle1">Start Your Workout!</Typography>
-          <List>
-            {addedExerciseNames.map((exerciseName) => (
-              <ListItem key={exerciseName}>
-                <ListItemText>{exerciseName}</ListItemText>
-                <ListItemButton
-                  onClick={() => {
-                    removeExerciseNameFromCart(exerciseName);
-                  }}
-                >
-                  <ListItemIcon>
-                    <ClearIcon />
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </>
+        <SummaryContent />
       ) : (
         <Typography variant="subtitle1">
           First add exercises to your workout!
