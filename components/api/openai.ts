@@ -1,6 +1,6 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/error';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
@@ -66,11 +66,20 @@ export async function askQuestion(
   });
 }
 
-export function useOpenAi(initialProps: Partial<CreateCompletionRequest>) {
-  return useQuery<string>({
+export function useOpenAi(
+  initialProps: Partial<CreateCompletionRequest>,
+  queryOptionOverrides?: UseQueryOptions<string>
+) {
+  const defaultQueryOptions: UseQueryOptions<string> = {
     queryKey: [initialProps.prompt],
     queryFn: () => askQuestion(initialProps),
     cacheTime: 1000 * 60 * 60 * 24, // 1 day,
     staleTime: 1000 * 60 * 60 * 24, // 1 day,
+    suspense: true,
+  };
+
+  return useQuery<string>({
+    ...defaultQueryOptions,
+    ...queryOptionOverrides,
   });
 }

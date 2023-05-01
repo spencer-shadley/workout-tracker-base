@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   CreateWorkoutProvider,
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
-import searchExercises, { useSearchExercises } from '@/api/searchExercises';
+import { responseToArray, useSearchExercises } from '@/api/searchExercises';
 import CreateWorkoutContent from './CreateWorkoutContent';
 
 const hints = [
@@ -31,8 +31,6 @@ function getRandomHint() {
 
 export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');
-  const [foundExerciseNames, setFoundExercises] = useState<string[]>([]);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
   const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
 
@@ -47,29 +45,20 @@ export default function CreateWorkout() {
 
   const debouncedSearch = useDebounce<string>(searchText, 2000);
 
-  const x = useSearchExercises(debouncedSearch + ' from tanstack');
-  console.log('search exercises tanstack', x);
+  const { isLoading, data: rawSearchedExerciseNameResults } =
+    useSearchExercises(debouncedSearch);
 
-  useEffect(() => {
-    async function search() {
-      setIsSearching(true);
-      const exercises = await searchExercises(debouncedSearch);
-      setFoundExercises(exercises);
-      setIsSearching(false);
-    }
-
-    if (debouncedSearch) {
-      search();
-    }
-  }, [debouncedSearch]);
+  const searchedExerciseNameResults = useMemo(() => {
+    return responseToArray(rawSearchedExerciseNameResults ?? '') ?? [];
+  }, [rawSearchedExerciseNameResults]);
 
   const createWorkoutContext: CreateWorkoutType = {
     searchInput: {
-      isSearching,
+      isSearching: isLoading,
       searchText,
-      searchedExerciseNameResults: foundExerciseNames,
       setSearchText,
       currentHint,
+      searchedExerciseNameResults,
     },
     exercisesCart: {
       addedExerciseNames,
