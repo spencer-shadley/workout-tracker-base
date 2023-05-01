@@ -40,7 +40,12 @@ isSupported().then((supported) => {
 
 const queryClient = new QueryClient();
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App(props: AppProps) {
+  console.log(props);
+  return <h1>test</h1>;
+}
+
+export function AppGood({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <DndProvider backend={HTML5Backend}>
