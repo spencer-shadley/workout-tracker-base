@@ -6,11 +6,9 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const tooManyRequests = new Promise(
-  (resolve: (response: string) => void, reject) => {
-    reject('too many requests');
-  }
-);
+const tooManyRequests = new Promise((resolve: (response: string) => void) => {
+  resolve('too many requests'); // resolve to avoid crashes
+});
 
 const IS_DEBUG = false;
 
