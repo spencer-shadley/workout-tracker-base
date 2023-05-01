@@ -1,5 +1,6 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/error';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
@@ -62,5 +63,14 @@ export async function askQuestion(
       .finally(() => {
         --numberOfActiveRequests;
       });
+  });
+}
+
+export function useOpenAi(initialProps: Partial<CreateCompletionRequest>) {
+  return useQuery<string>({
+    queryKey: [initialProps.prompt],
+    queryFn: () => askQuestion(initialProps),
+    cacheTime: 1000 * 60 * 60 * 24, // 1 day,
+    staleTime: 1000 * 60 * 60 * 24, // 1 day,
   });
 }

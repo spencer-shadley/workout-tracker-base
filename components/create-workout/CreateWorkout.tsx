@@ -4,7 +4,7 @@ import {
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
-import searchExercises from '@/api/searchExercises';
+import searchExercises, { useSearchExercises } from '@/api/searchExercises';
 import CreateWorkoutContent from './CreateWorkoutContent';
 
 const hints = [
@@ -46,6 +46,9 @@ export default function CreateWorkout() {
   }, []);
 
   const debouncedSearch = useDebounce<string>(searchText, 2000);
+
+  const x = useSearchExercises(debouncedSearch + ' from tanstack');
+  console.log('search exercises tanstack', x);
 
   useEffect(() => {
     async function search() {

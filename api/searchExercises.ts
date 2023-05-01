@@ -1,4 +1,4 @@
-import { askQuestion } from '@/components/api/openai';
+import { askQuestion, useOpenAi } from '@/components/api/openai';
 import { reject } from 'lodash';
 
 function responseToArray(response: string): string[] {
@@ -21,5 +21,11 @@ export function searchExercisesOld(searchText: string) {
     setTimeout(() => {
       resolve([searchText, 'exercise 1', 'exercise 2']);
     }, 500);
+  });
+}
+
+export function useSearchExercises(search: string) {
+  return useOpenAi({
+    prompt: `Make me a workout with a focus on ${search}. It is very important ${search}. Return a comma separated list of exercises. Do not end with a period.`,
   });
 }

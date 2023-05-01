@@ -4,8 +4,8 @@ import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 import dayjs from 'dayjs';
@@ -52,6 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <div className="wave" />
           <div className="wave" />
           <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </DndProvider>
     </ThemeProvider>
