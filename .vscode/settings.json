@@ -21,6 +21,7 @@
     "Shadley",
     "Swipeable",
     "tailwindcss",
-    "tanstack"
+    "tanstack",
+    "usehooks"
   ]
 }
