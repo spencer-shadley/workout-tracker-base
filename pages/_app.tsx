@@ -1,16 +1,16 @@
-// import '@/styles/globals.css';
+import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 
 import type { AppProps } from 'next/app';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-// import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 dayjs.extend(relativeTime);
 
 isSupported().then((supported) => {
@@ -38,27 +38,27 @@ isSupported().then((supported) => {
   }
 });
 
-// const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 // export default function App(props: AppProps) {
 //   console.log(props);
 //   return <h1>test</h1>;
 // }
 
-export function AppGood({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
       <DndProvider backend={HTML5Backend}>
-        {/* <QueryClientProvider client={queryClient}> */}
-        <div className="wave" />
-        <div className="wave" />
-        <div className="wave" />
-        <div className="wave" />
-        <div className="wave" />
-        <div className="wave" />
-        <Component {...pageProps} />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        {/* </QueryClientProvider> */}
+        <QueryClientProvider client={queryClient}>
+          <div className="wave" />
+          <div className="wave" />
+          <div className="wave" />
+          <div className="wave" />
+          <div className="wave" />
+          <div className="wave" />
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </DndProvider>
     </ThemeProvider>
   );
