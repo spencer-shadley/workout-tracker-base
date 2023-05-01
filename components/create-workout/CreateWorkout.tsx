@@ -4,8 +4,11 @@ import {
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
-import { responseToArray, useSearchExercises } from '@/api/searchExercises';
 import CreateWorkoutContent from './CreateWorkoutContent';
+import {
+  useSearchExercises,
+  responseToArray,
+} from '@/hooks/openai/useSearchExercises';
 
 const hints = [
   'Biceps',

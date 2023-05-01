@@ -1,5 +1,5 @@
 import 'animate.css';
-import Steps from '../stepper/Steps';
+import Steps from '../home-stepper/Steps';
 
 // const name = 'Spencer';
 

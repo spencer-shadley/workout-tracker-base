@@ -1,8 +1,8 @@
-import { askQuestion } from '@/components/api/openai';
 import { Fade, Grow, IconButton, Typography } from '@mui/material';
 import { useState, useEffect, useCallback } from 'react';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { CreateCompletionRequest } from 'openai';
+import { askQuestion } from '@/hooks/openai/askQuestion';
 
 interface CaptionProps extends Partial<CreateCompletionRequest> {
   loadingText?: string;

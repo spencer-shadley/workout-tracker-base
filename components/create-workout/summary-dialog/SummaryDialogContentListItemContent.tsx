@@ -5,10 +5,10 @@ import {
   Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { askQuestion } from '@/components/api/openai';
 import { logError } from '@/utils/error';
 import CloseIcon from '@mui/icons-material/Close';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+import { askQuestion } from '@/hooks/openai/askQuestion';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;

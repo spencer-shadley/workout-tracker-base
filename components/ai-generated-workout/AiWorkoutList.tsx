@@ -7,7 +7,7 @@ import {
   AccordionDetails,
   Button,
 } from '@mui/material';
-import AiFormat from '../api/data/AiFormat';
+import AiFormat from '../../pages/api/data/AiFormat';
 import AiExerciseToListItem from './AiExerciseToListItem';
 
 interface AiWorkoutListProps {

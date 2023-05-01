@@ -1,5 +1,5 @@
 import { ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
-import { askQuestion } from '../../api/openai';
+import { askQuestion } from '../../../hooks/openai/askQuestion';
 
 interface ResultIconProps {
   icon: React.ReactNode;

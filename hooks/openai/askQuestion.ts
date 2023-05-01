@@ -1,6 +1,5 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/error';
-import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
@@ -44,7 +43,7 @@ export async function askQuestion(
   if (IS_DEBUG) {
     return new Promise((resolve: (response: string) => void) => {
       setTimeout(() => {
-        resolve('random: ' + Math.random());
+        resolve(`random: ${Math.random()}`);
         --numberOfActiveRequests;
       }, 2000);
     });
@@ -63,23 +62,5 @@ export async function askQuestion(
       .finally(() => {
         --numberOfActiveRequests;
       });
-  });
-}
-
-export function useOpenAi(
-  initialProps: Partial<CreateCompletionRequest>,
-  queryOptionOverrides?: UseQueryOptions<string>
-) {
-  const defaultQueryOptions: UseQueryOptions<string> = {
-    queryKey: [initialProps.prompt],
-    queryFn: () => askQuestion(initialProps),
-    cacheTime: 1000 * 60 * 60 * 24, // 1 day,
-    staleTime: 1000 * 60 * 60 * 24, // 1 day,
-    suspense: true,
-  };
-
-  return useQuery<string>({
-    ...defaultQueryOptions,
-    ...queryOptionOverrides,
   });
 }

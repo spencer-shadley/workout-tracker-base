@@ -1,5 +1,5 @@
 import { Typography, Chip } from '@mui/material';
-import AIExercise from '../api/data/AIExercise';
+import AIExercise from '../../pages/api/data/AIExercise';
 
 export default function ExerciseListItemContent({
   title,

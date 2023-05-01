@@ -1,5 +1,5 @@
 import { ListItem, ListItemAvatar, Avatar } from '@mui/material';
-import AIExercise from '../api/data/AIExercise';
+import AIExercise from '../../pages/api/data/AIExercise';
 import ExerciseListItemContent from './ExerciseListItemContent';
 
 interface AiExerciseToListItemProps {

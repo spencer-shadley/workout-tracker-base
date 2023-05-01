@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "check-types": "tsc --noemit",
+    "lint": "npm run check-types && next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -15,10 +16,6 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
     "@tanstack/react-query": "^4.29.5",
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
-    "@types/react-dom": "18.0.11",
-    "@types/react-swipeable-views": "^0.13.1",
     "add": "^2.0.6",
     "animate.css": "^4.1.1",
     "autoprefixer": "10.4.14",
@@ -47,8 +44,13 @@
     "@tanstack/react-query-devtools": "^4.29.6",
     "@types/lodash": "^4.14.194",
     "@types/react-swipeable-views-utils": "^0.13.4",
+    "@types/use-sync-external-store": "^0.0.3",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.7",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11",
+    "@types/react-swipeable-views": "^0.13.1"
   }
 }

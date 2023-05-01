@@ -2,7 +2,7 @@ import { Button, Fade, IconButton, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { StepInfo } from './stepInfo';
 import { useCallback, useEffect, useState } from 'react';
-import { askQuestion } from '../api/openai';
+import { askQuestion } from '../../hooks/openai/askQuestion';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 interface StepContentProps {
