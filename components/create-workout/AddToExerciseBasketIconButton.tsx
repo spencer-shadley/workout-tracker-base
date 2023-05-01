@@ -1,5 +1,5 @@
 import { ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
-import { useCreateWorkoutContext as useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
+import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 
