@@ -46,6 +46,7 @@ const queryClient = new QueryClient();
 // }
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log(Component, pageProps);
   return (
     <ThemeProvider>
       <DndProvider backend={HTML5Backend}>
@@ -56,7 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <div className="wave" />
           <div className="wave" />
           <div className="wave" />
-          <Component {...pageProps} />
+          {/* <Component {...pageProps} /> */}
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </DndProvider>
