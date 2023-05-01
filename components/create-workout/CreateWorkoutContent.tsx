@@ -1,6 +1,6 @@
 import { Button, Paper, Typography } from '@mui/material';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
-import { Results } from './Results';
+import { Results } from './results/Results';
 import { ExerciseSearch } from './ExerciseSearch';
 
 export default function CreateWorkoutContent() {

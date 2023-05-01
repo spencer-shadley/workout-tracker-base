@@ -8,7 +8,7 @@ export function ExerciseSearch() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText, setSearchText, currentHint } = searchInput;
   return (
-    <Card className="p-4 my-4">
+    <Card className="p-4 my-4" elevation={5}>
       <FormControl variant="outlined" fullWidth>
         <TextField
           InputProps={{

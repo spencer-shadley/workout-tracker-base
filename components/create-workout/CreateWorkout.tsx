@@ -22,6 +22,7 @@ const hints = [
   'Help me get toned biceps',
   'Get a six pack',
   'Focus on strength',
+  "Let's get big and swole!",
 ];
 
 function getRandomHint() {
