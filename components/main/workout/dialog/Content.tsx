@@ -1,14 +1,16 @@
+import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Button, Dialog, FormGroup, TextField } from '@mui/material';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React from 'react';
-import { Button, Dialog, FormGroup, TextField } from '@mui/material';
+dayjs.extend(relativeTime);
+
 import AiWorkoutList from '@/components/ai-generated-workout/AiWorkoutList';
 import ExerciseList from '../activity/exercise/ExerciseList';
-import { askQuestion } from '@/hooks/openai/askQuestion';
-dayjs.extend(relativeTime);
+
+import { askQuestion } from '@/api/askQuestion';
 
 export default function DialogContent() {
   const [aiPrompt, setAiPrompt] = React.useState<string>('');

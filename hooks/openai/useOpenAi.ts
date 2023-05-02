@@ -1,6 +1,6 @@
 import { CreateCompletionRequest } from 'openai';
-import { askQuestion } from './askQuestion';
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
+import { askQuestion } from '@/api/askQuestion';
 
 export function useOpenAi(
   initialProps: Partial<CreateCompletionRequest>,

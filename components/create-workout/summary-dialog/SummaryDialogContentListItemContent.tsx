@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { logError } from '@/utils/error';
 import CloseIcon from '@mui/icons-material/Close';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
-import { askQuestion } from '@/hooks/openai/askQuestion';
+import { askQuestion } from '@/api/askQuestion';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
