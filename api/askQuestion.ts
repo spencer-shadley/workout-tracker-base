@@ -20,6 +20,7 @@ export async function askQuestion(
   initialProps: Partial<CreateCompletionRequest>
 ) {
   console.log('askQuestion', initialProps);
+
   ++numberOfActiveRequests;
   if (numberOfActiveRequests > MAX_NUMBER_OF_ACTIVE_REQUESTS) {
     logError('too many requests');

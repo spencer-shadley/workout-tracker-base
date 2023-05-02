@@ -6,6 +6,8 @@ export function useOpenAi(
   initialProps: Partial<CreateCompletionRequest>,
   queryOptionOverrides?: UseQueryOptions<string>
 ) {
+  if (!initialProps.prompt) throw new Error('Prompt is required');
+
   const defaultQueryOptions: UseQueryOptions<string> = {
     queryKey: [initialProps.prompt],
     queryFn: () => askQuestion(initialProps),
