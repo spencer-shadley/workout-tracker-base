@@ -11,9 +11,6 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import tryInitFirebase from '@/utils/initFirebase';
-
-tryInitFirebase();
 
 const queryClient = new QueryClient();
 

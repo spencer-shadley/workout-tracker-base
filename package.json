@@ -21,7 +21,6 @@
     "dayjs": "^1.11.7",
     "eslint": "8.39.00",
     "eslint-config-next": "13.3.4",
-    "firebase": "^9.21.0",
     "next": "13.3.4",
     "next-themes": "^0.2.1",
     "openai": "^3.2.1",
