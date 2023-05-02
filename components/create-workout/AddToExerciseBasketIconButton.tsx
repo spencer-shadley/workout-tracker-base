@@ -6,6 +6,7 @@ import CheckIcon from '@mui/icons-material/Check';
 interface AddToExerciseBasketIconButtonProps {
   exerciseName: string;
 }
+
 export function AddToExerciseBasketIconButton({
   exerciseName,
 }: AddToExerciseBasketIconButtonProps) {
