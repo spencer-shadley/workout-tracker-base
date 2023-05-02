@@ -1,5 +1,5 @@
-import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import { PropsWithChildren, createContext, useContext } from 'react';
+import { WorkoutOptions } from '../WorkoutOptions';
 
 export interface WorkoutOptionsContextType {
   workoutOptions: WorkoutOptions;

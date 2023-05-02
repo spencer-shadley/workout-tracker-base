@@ -1,6 +1,6 @@
 import { TimeSlot } from '@/components/main/workout/context/TimeContextProvider';
-import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import ExerciseInfo from '../components/shared/interfaces/ExerciseInfo';
+import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
 
 export function millisecondsToHumanReadable(milliseconds: number): string {
   const hoursRemaining = Math.floor(milliseconds / 1000 / 60 / 60);

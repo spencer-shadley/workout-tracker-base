@@ -9,9 +9,9 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useWorkoutContext } from './context/WorkoutContextProvider';
-import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import { useState } from 'react';
 import { logError } from '@/utils/error';
+import { WorkoutOptions } from './WorkoutOptions';
 
 function makeMinuteMarks() {
   const maxMinutes = 4;
