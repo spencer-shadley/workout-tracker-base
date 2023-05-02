@@ -15,7 +15,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log(Component, pageProps);
   return (
     <ThemeProvider>
       <DndProvider backend={HTML5Backend}>

@@ -3,13 +3,9 @@ import { WorkoutProvider } from '@/components/main/workout/context/WorkoutContex
 import { WorkoutOptionsProvider } from '@/components/main/workout/context/WorkoutOptionsContextProvider';
 import { sampleExercises } from '@/components/shared/data/MockExerciseInfo';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
+import { logError } from '@/utils/error';
 import { useRouter, withRouter } from 'next/router';
 import { useState } from 'react';
-
-export interface ActiveWorkoutPageProps {
-  exercises: ExerciseInfo[];
-  workoutOptions: WorkoutOptions;
-}
 
 export interface WorkoutOptions {
   numberOfRounds: number;
@@ -19,20 +15,23 @@ export interface WorkoutOptions {
 }
 
 function ActiveWorkoutPage() {
-  const { query } = useRouter();
+  const { isFallback } = useRouter();
 
-  const props: ActiveWorkoutPageProps = query?.props
-    ? (JSON.parse(query.props as string) as ActiveWorkoutPageProps)
-    : {
-        exercises: sampleExercises.slice(0, 3),
-        workoutOptions: {
-          numberOfRounds: 3,
-          restBetweenRoundsInSeconds: 20,
-          restBetweenExercisesInSeconds: 15,
-          exerciseDurationInSeconds: 45,
-        },
-      };
+  const props = {
+    exercises: sampleExercises.slice(0, 3),
+    workoutOptions: {
+      numberOfRounds: 3,
+      restBetweenRoundsInSeconds: 20,
+      restBetweenExercisesInSeconds: 15,
+      exerciseDurationInSeconds: 45,
+    },
+  };
   const [exercises, setExercises] = useState<ExerciseInfo[]>(props.exercises);
+
+  if (isFallback) {
+    logError('isFallback is true, cannot render ActiveWorkoutPage');
+    return <h1>Fallback for active workout page</h1>;
+  }
 
   return (
     <WorkoutProvider

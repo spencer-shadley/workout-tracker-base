@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "heroku": "yarn build && heroku local",
     "check-types": "tsc --noemit",
     "lint": "npm run check-types && next lint"
   },

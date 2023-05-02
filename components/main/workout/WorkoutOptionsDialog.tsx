@@ -9,11 +9,9 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useWorkoutContext } from './context/WorkoutContextProvider';
-import {
-  ActiveWorkoutPageProps,
-  WorkoutOptions,
-} from '@/pages/ActiveWorkoutPage';
+import { WorkoutOptions } from '@/pages/ActiveWorkoutPage';
 import { useState } from 'react';
+import { logError } from '@/utils/error';
 
 function makeMinuteMarks() {
   const maxMinutes = 4;
@@ -34,6 +32,8 @@ export default function WorkoutOptionsDialog({
   close,
 }: WorkoutOptionsDialogProps) {
   const router = useRouter();
+  const { isFallback } = router;
+
   const { exercises } = useWorkoutContext();
   const [workoutOptions, setWorkoutOptions] = useState<WorkoutOptions>({
     numberOfRounds: 3,
@@ -41,6 +41,12 @@ export default function WorkoutOptionsDialog({
     restBetweenExercisesInSeconds: 15,
     exerciseDurationInSeconds: 45,
   });
+
+  if (isFallback) {
+    logError('isFallback is true, cannot render WorkoutOptionsDialog');
+    return <h1>Fallback for options dialog</h1>;
+  }
+
   return (
     <Dialog open={isOpen} fullWidth onClose={close}>
       <DialogTitle>Set your workout options</DialogTitle>
@@ -130,7 +136,7 @@ export default function WorkoutOptionsDialog({
         </Button>
         <Button
           onClick={() => {
-            const props: ActiveWorkoutPageProps = {
+            const props = {
               exercises,
               workoutOptions,
             };
