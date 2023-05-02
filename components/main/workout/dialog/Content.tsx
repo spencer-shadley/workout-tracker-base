@@ -1,6 +1,4 @@
 import React from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Button, Dialog, FormGroup, TextField } from '@mui/material';
 
 import dayjs from 'dayjs';
@@ -27,43 +25,41 @@ export default function DialogContent() {
 
   return (
     <>
-      <DndProvider backend={HTML5Backend}>
-        <FormGroup
-          sx={{ marginTop: 3 }}
-          row
-          onSubmit={() => {
-            console.log('submit');
+      <FormGroup
+        sx={{ marginTop: 3 }}
+        row
+        onSubmit={() => {
+          console.log('submit');
+        }}
+      >
+        <TextField
+          sx={{ flexGrow: 1 }}
+          type="text"
+          label="Ask for a workout"
+          value={aiPrompt}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setAiPrompt(event.target.value);
+          }}
+        />
+        <Button
+          disabled={!aiPrompt}
+          type="submit"
+          onClick={() => {
+            makeWorkout();
           }}
         >
-          <TextField
-            sx={{ flexGrow: 1 }}
-            type="text"
-            label="Ask for a workout"
-            value={aiPrompt}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setAiPrompt(event.target.value);
-            }}
-          />
-          <Button
-            disabled={!aiPrompt}
-            type="submit"
-            onClick={() => {
-              makeWorkout();
-            }}
-          >
-            Make custom workout
-          </Button>
-          <Button
-            onClick={() => {
-              setAiPrompt('make a tricep workout');
-              makeWorkout();
-            }}
-          >
-            Make example workout
-          </Button>
-        </FormGroup>
-        <ExerciseList />
-      </DndProvider>
+          Make custom workout
+        </Button>
+        <Button
+          onClick={() => {
+            setAiPrompt('make a tricep workout');
+            makeWorkout();
+          }}
+        >
+          Make example workout
+        </Button>
+      </FormGroup>
+      <ExerciseList />
       <Dialog
         open={isAiDialogOpen}
         onClose={() => {
