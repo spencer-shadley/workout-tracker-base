@@ -37,30 +37,46 @@ export default function CreateWorkout() {
     return responseToArray(rawSearchedExerciseNameResults ?? '') ?? [];
   }, [rawSearchedExerciseNameResults]);
 
-  const createWorkoutContext: CreateWorkoutType = {
-    searchInput: {
-      isSearching: isLoading,
-      searchText,
-      setSearchText,
-      currentHint,
-      searchedExerciseNameResults,
-    },
-    exercisesCart: {
-      addedExerciseNames,
-      addExerciseNameToCart: (exerciseName: string) => {
-        setAddedExerciseNames([...addedExerciseNames, exerciseName]);
+  const createWorkoutContext: CreateWorkoutType = useMemo(() => {
+    return {
+      searchInput: {
+        isSearching: isLoading,
+        searchText,
+        setSearchText,
+        currentHint,
+        searchedExerciseNameResults,
       },
-      removeExerciseNameFromCart: (exerciseName: string) => {
-        setAddedExerciseNames(
-          addedExerciseNames.filter((name) => name !== exerciseName)
-        );
+      exercisesCart: {
+        addedExerciseNames,
+        addExerciseNameToCart: (exerciseName: string) => {
+          setAddedExerciseNames([...addedExerciseNames, exerciseName]);
+        },
+        removeExerciseNameFromCart: (exerciseName: string) => {
+          setAddedExerciseNames(
+            addedExerciseNames.filter((name) => name !== exerciseName)
+          );
+        },
       },
-    },
-    aiPreferences: {
-      answerStyle,
-      setAnswerStyle,
-    },
-  };
+      aiPreferences: {
+        answerStyle,
+        setAnswerStyle,
+      },
+    };
+  }, [
+    addedExerciseNames,
+    answerStyle,
+    currentHint,
+    isLoading,
+    searchText,
+    searchedExerciseNameResults,
+  ]);
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      'createWorkoutContext',
+      JSON.stringify(createWorkoutContext)
+    );
+  }, [createWorkoutContext]);
 
   return (
     <CreateWorkoutProvider createWorkout={createWorkoutContext}>

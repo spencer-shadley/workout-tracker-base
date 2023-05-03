@@ -34,9 +34,6 @@ export default function ResponseStyleOptions() {
     <Accordion sx={{ opacity: 1 }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Settings</Typography>
-        <Typography sx={{ color: 'text.secondary', marginLeft: '5px' }}>
-          update how the answers are phrased
-        </Typography>
       </AccordionSummary>
       <AccordionDetails>
         <FormControl fullWidth>
@@ -48,7 +45,6 @@ export default function ResponseStyleOptions() {
             value={answerStyle}
             label={answerStyle}
             onChange={(e) => {
-              console.log(e.target.value);
               setAnswerStyle(e.target.value as string);
             }}
           >
