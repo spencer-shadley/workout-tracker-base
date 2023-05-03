@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  AnswerStyle,
   CreateWorkoutProvider,
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
@@ -15,6 +16,9 @@ export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
   const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
+  const [answerStyle, setAnswerStyle] = useState<AnswerStyle>(
+    AnswerStyle.PersonalTrainer
+  );
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -51,6 +55,10 @@ export default function CreateWorkout() {
           addedExerciseNames.filter((name) => name !== exerciseName)
         );
       },
+    },
+    aiPreferences: {
+      answerStyle,
+      setAnswerStyle,
     },
   };
 

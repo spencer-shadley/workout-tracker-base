@@ -16,8 +16,8 @@ const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <BackgroundWaves />
       <QueryClientProvider client={queryClient}>
+        <BackgroundWaves />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

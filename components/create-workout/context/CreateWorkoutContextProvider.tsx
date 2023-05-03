@@ -1,3 +1,4 @@
+import { logError } from '@/utils/error';
 import { PropsWithChildren, createContext, useContext } from 'react';
 
 interface SearchInputType {
@@ -6,6 +7,30 @@ interface SearchInputType {
   searchedExerciseNameResults: string[];
   currentHint: string;
   isSearching: boolean;
+}
+
+export enum AnswerStyle {
+  PersonalTrainer = 'Indian person with a strong Indian accent',
+  Shakespeare = 'Shakespeare with Old English',
+  Rap = 'rap',
+  Haiku = 'haiku',
+  Scared = 'scared',
+  Trump = 'Donald Trump',
+  Biden = 'mentally ill deranged person with bad memory and a low IQ',
+  Uwu = 'streamer girl with lots of really cute uwu speak',
+  Southern = 'Texan cowboy with a really rough speaking pattern',
+  Spy = 'a covert spy who does not want to actually reveal any info about the exercise or activity at all. Nothing at all.',
+  Sergeant = 'commanding army sergeant barking orders and insults at you',
+  Caveman = 'caveman',
+  Alien = 'an alien who does not know what a human is',
+  Joke = 'a joke. Include a joke about this exercise',
+  Angry = 'an extremely angry irritated person who is very mad at you',
+  DogOwner = 'someone who cannot stop bringing up how cute their dog is',
+}
+
+interface AiPreferences {
+  answerStyle: AnswerStyle;
+  setAnswerStyle: (answerStyle: AnswerStyle) => void;
 }
 
 interface ExercisesCartType {
@@ -17,6 +42,7 @@ interface ExercisesCartType {
 export interface CreateWorkoutType {
   searchInput: SearchInputType;
   exercisesCart: ExercisesCartType;
+  aiPreferences: AiPreferences;
 }
 
 export const CreateWorkout = createContext<CreateWorkoutType>({
@@ -26,16 +52,22 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
     currentHint: '',
     searchedExerciseNameResults: [],
     setSearchText: () => {
-      console.error('set search text not set');
+      logError('set search text not set');
     },
   },
   exercisesCart: {
     addedExerciseNames: [],
     addExerciseNameToCart: () => {
-      console.error('add exercise to cart not set');
+      logError('add exercise to cart not set');
     },
     removeExerciseNameFromCart: () => {
-      console.error('remove exercise from cart not set');
+      logError('remove exercise from cart not set');
+    },
+  },
+  aiPreferences: {
+    answerStyle: AnswerStyle.PersonalTrainer,
+    setAnswerStyle: () => {
+      logError('set answer style not set');
     },
   },
 });
