@@ -20,7 +20,7 @@ export enum AnswerStyle {
   Uwu = 'streamer girl with lots of really cute uwu speak',
   Southern = 'Texan cowboy with a really rough speaking pattern',
   Spy = 'a covert spy who does not want to actually reveal any info about the exercise or activity at all. Nothing at all.',
-  Sergeant = 'commanding army sergeant barking orders and insults at you',
+  Sergeant = 'commanding army sergeant barking orders and insulting you',
   Caveman = 'caveman',
   Alien = 'an alien who does not know what a human is',
   Joke = 'a joke. Include a joke about this exercise',
