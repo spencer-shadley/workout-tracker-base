@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
-import { makeRandomFakeExercises } from '@/components/shared/data/MockExerciseInfo';
 
 import React, { createContext, useState } from 'react';
 import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
+import { makeRandomFakeExercises } from '@/api/data/MockExerciseInfo';
 
 const mostRecentExercises: ExerciseInfo[] = makeRandomFakeExercises();
 const mostUsedExercises: ExerciseInfo[] = [...mostRecentExercises];

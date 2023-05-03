@@ -1,4 +1,4 @@
-import ExerciseInfo from '../interfaces/ExerciseInfo';
+import ExerciseInfo from '../../components/shared/interfaces/ExerciseInfo';
 
 const shuffleArray = (array: Array<unknown>) => {
   for (let i = array.length - 1; i > 0; i--) {
