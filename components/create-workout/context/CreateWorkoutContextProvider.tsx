@@ -9,28 +9,68 @@ interface SearchInputType {
   isSearching: boolean;
 }
 
-export enum AnswerStyle {
-  PersonalTrainer = 'a news anchor reporting on your exercise routine as if it were breaking news',
-  Shakespeare = 'Shakespeare with Old English',
-  Rap = 'rap',
-  Haiku = 'haiku',
-  Scared = 'scared',
-  Trump = 'Donald Trump',
-  Biden = 'mentally ill deranged person with bad memory and a low IQ',
-  Uwu = 'streamer girl with lots of really cute uwu speak',
-  Southern = 'Texan cowboy with a really rough speaking pattern',
-  Spy = 'a covert spy who does not want to actually reveal any info about the exercise or activity at all. Nothing at all.',
-  Sergeant = 'commanding army sergeant barking orders and insulting you',
-  Caveman = 'caveman',
-  Alien = 'an alien who does not know what a human is',
-  Joke = 'a joke. Include a joke about this exercise',
-  Angry = 'an extremely angry irritated person who is very mad at you',
-  DogOwner = 'someone who cannot stop bringing up how cute their dog is',
+export interface AnswerType {
+  displayLabel: string;
+  styleModifier: string;
 }
 
+export const answerTypes: AnswerType[] = [
+  {
+    displayLabel: 'PersonalTrainer',
+    styleModifier:
+      'a news anchor reporting on your exercise routine as if it were breaking news',
+  },
+  {
+    displayLabel: 'Shakespeare',
+    styleModifier: 'Shakespeare with Old English',
+  },
+  { displayLabel: 'Rap', styleModifier: 'rap' },
+  { displayLabel: 'Haiku', styleModifier: 'haiku' },
+  { displayLabel: 'Scared', styleModifier: 'scared' },
+  { displayLabel: 'Trump', styleModifier: 'Donald Trump' },
+  {
+    displayLabel: 'Biden',
+    styleModifier: 'mentally ill deranged person with bad memory and a low IQ',
+  },
+  {
+    displayLabel: 'Uwu',
+    styleModifier: 'streamer girl with lots of really cute uwu speak',
+  },
+  {
+    displayLabel: 'Southern',
+    styleModifier: 'Texan cowboy with a really rough speaking pattern',
+  },
+  {
+    displayLabel: 'Spy',
+    styleModifier:
+      'a covert spy who does not want to actually reveal any info about the exercise or activity at all. Nothing at all.',
+  },
+  {
+    displayLabel: 'Sergeant',
+    styleModifier: 'commanding army sergeant barking orders and insulting you',
+  },
+  { displayLabel: 'Caveman', styleModifier: 'caveman' },
+  {
+    displayLabel: 'Alien',
+    styleModifier: 'an alien who does not know what a human is',
+  },
+  {
+    displayLabel: 'Joke',
+    styleModifier: 'a joke. Include a joke about this exercise',
+  },
+  {
+    displayLabel: 'Angry',
+    styleModifier: 'an extremely angry irritated person who is very mad at you',
+  },
+  {
+    displayLabel: 'DogOwner',
+    styleModifier: 'someone who cannot stop bringing up how cute their dog is',
+  },
+];
+
 interface AiPreferences {
-  answerStyle: AnswerStyle;
-  setAnswerStyle: (answerStyle: AnswerStyle) => void;
+  answerStyle: string;
+  setAnswerStyle: (answerStyle: string) => void;
 }
 
 interface ExercisesCartType {
@@ -65,7 +105,7 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
     },
   },
   aiPreferences: {
-    answerStyle: AnswerStyle.PersonalTrainer,
+    answerStyle: answerTypes[0].styleModifier,
     setAnswerStyle: () => {
       logError('set answer style not set');
     },

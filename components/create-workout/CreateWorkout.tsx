@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  AnswerStyle,
   CreateWorkoutProvider,
   CreateWorkoutType,
+  answerTypes,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
 import CreateWorkoutContent from './CreateWorkoutContent';
@@ -16,8 +16,8 @@ export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
   const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
-  const [answerStyle, setAnswerStyle] = useState<AnswerStyle>(
-    AnswerStyle.PersonalTrainer
+  const [answerStyle, setAnswerStyle] = useState<string>(
+    answerTypes[0].styleModifier
   );
 
   useEffect(() => {
