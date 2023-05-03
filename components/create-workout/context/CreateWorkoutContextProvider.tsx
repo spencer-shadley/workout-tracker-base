@@ -10,7 +10,7 @@ interface SearchInputType {
 }
 
 export enum AnswerStyle {
-  PersonalTrainer = 'Indian person with a strong Indian accent',
+  PersonalTrainer = 'personal trainer',
   Shakespeare = 'Shakespeare with Old English',
   Rap = 'rap',
   Haiku = 'haiku',
