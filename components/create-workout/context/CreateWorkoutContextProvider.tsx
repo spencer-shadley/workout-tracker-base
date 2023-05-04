@@ -69,8 +69,8 @@ export const answerTypes: AnswerType[] = [
 ];
 
 interface AiPreferences {
-  answerStyle: string;
-  setAnswerStyle: (answerStyle: string) => void;
+  aiStyle: string;
+  setAiStyle: (answerStyle: string) => void;
 }
 
 interface ExercisesCartType {
@@ -105,8 +105,8 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
     },
   },
   aiPreferences: {
-    answerStyle: answerTypes[0].styleModifier,
-    setAnswerStyle: () => {
+    aiStyle: answerTypes[0].styleModifier,
+    setAiStyle: () => {
       logError('set answer style not set');
     },
   },

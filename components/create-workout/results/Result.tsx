@@ -11,7 +11,7 @@ interface ResultProps {
 }
 export default function Result({ exerciseName }: ResultProps) {
   const { aiPreferences } = useCreateWorkoutContext();
-  const { answerStyle } = aiPreferences;
+  const { aiStyle: answerStyle } = aiPreferences;
   const [exerciseDetailsText, setExerciseDetailsText] = useState<string>('');
 
   return (

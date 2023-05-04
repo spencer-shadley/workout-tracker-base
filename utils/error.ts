@@ -1,4 +1,4 @@
-export function logError(message: string, error?: Error) {
+export function logError(error: unknown) {
   console.error(error);
   console.trace();
 }
