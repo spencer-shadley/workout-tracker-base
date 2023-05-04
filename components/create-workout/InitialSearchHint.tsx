@@ -1,4 +1,5 @@
 import {
+  Divider,
   List,
   ListItem,
   ListItemButton,
@@ -20,22 +21,25 @@ export function InitialSearchHint() {
     <>
       <Typography variant="overline">Example searches</Typography>
       <List>
-        {randomHints.map((hint) => (
-          <ListItem key={hint}>
-            <ListItemButton
-              onClick={() => {
-                setSearchText(hint);
-              }}
-            >
-              <SwitchAccessShortcutIcon
-                sx={{
-                  marginRight: '10px',
-                  color: 'gray',
+        {randomHints.map((hint, index) => (
+          <>
+            <ListItem key={hint}>
+              <ListItemButton
+                onClick={() => {
+                  setSearchText(hint);
                 }}
-              />
-              <ListItemText>{hint}</ListItemText>
-            </ListItemButton>
-          </ListItem>
+              >
+                <SwitchAccessShortcutIcon
+                  sx={{
+                    marginRight: '10px',
+                    color: 'gray',
+                  }}
+                />
+                <ListItemText>{hint}</ListItemText>
+              </ListItemButton>
+            </ListItem>
+            {index < randomHints.length - 1 && <Divider />}
+          </>
         ))}
       </List>
     </>
