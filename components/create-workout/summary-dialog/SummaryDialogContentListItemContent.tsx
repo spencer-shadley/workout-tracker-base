@@ -7,8 +7,8 @@ import {
 import { useEffect, useState } from 'react';
 import { logError } from '@/utils/error';
 import CloseIcon from '@mui/icons-material/Close';
-import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { askQuestion } from '@/api/askQuestion';
+import { useRemoveExerciseName } from '@/hooks/useSessionStorage';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
@@ -16,8 +16,7 @@ interface SummaryDialogContentListItemContentProps {
 export function SummaryDialogContentListItemContent({
   exerciseName,
 }: SummaryDialogContentListItemContentProps) {
-  const { exercisesCart } = useCreateWorkoutContext();
-  const { removeExerciseNameFromCart } = exercisesCart;
+  const removeExerciseName = useRemoveExerciseName;
   const [description, setDescription] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export function SummaryDialogContentListItemContent({
         <Tooltip title={`Remove ${exerciseName}`} arrow>
           <IconButton
             onClick={() => {
-              removeExerciseNameFromCart(exerciseName);
+              removeExerciseName(exerciseName);
             }}
           >
             <CloseIcon />

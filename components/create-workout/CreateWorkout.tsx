@@ -14,7 +14,6 @@ import { getRandomHint } from './hints';
 export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
-  const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -42,26 +41,9 @@ export default function CreateWorkout() {
         currentHint,
         searchedExerciseNameResults,
       },
-      exercisesCart: {
-        addedExerciseNames,
-        addExerciseNameToCart: (exerciseName: string) => {
-          setAddedExerciseNames([...addedExerciseNames, exerciseName]);
-        },
-        removeExerciseNameFromCart: (exerciseName: string) => {
-          setAddedExerciseNames(
-            addedExerciseNames.filter((name) => name !== exerciseName)
-          );
-        },
-      },
     };
     return context;
-  }, [
-    addedExerciseNames,
-    currentHint,
-    isLoading,
-    searchText,
-    searchedExerciseNameResults,
-  ]);
+  }, [currentHint, isLoading, searchText, searchedExerciseNameResults]);
 
   return (
     <CreateWorkoutProvider createWorkout={createWorkoutContext}>

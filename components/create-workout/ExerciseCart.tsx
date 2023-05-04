@@ -1,13 +1,13 @@
 import { Card, Typography } from '@mui/material';
-import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import { SummaryContent } from './summary-dialog/SummaryDialogContent';
+import { useGetExerciseNames } from '@/hooks/useSessionStorage';
 
 export function ExerciseCart() {
-  const { exercisesCart } = useCreateWorkoutContext();
-  const { addedExerciseNames } = exercisesCart;
+  const exerciseNames = useGetExerciseNames();
+
   return (
     <Card>
-      {addedExerciseNames.length > 0 ? (
+      {exerciseNames.length > 0 ? (
         <SummaryContent />
       ) : (
         <Typography variant="subtitle1">

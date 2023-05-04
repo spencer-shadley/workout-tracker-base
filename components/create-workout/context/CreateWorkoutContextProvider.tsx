@@ -68,15 +68,8 @@ export const answerTypes: AnswerType[] = [
   },
 ];
 
-interface ExercisesCartType {
-  addedExerciseNames: string[];
-  addExerciseNameToCart: (exerciseName: string) => void;
-  removeExerciseNameFromCart: (exerciseName: string) => void;
-}
-
 export interface CreateWorkoutType {
   searchInput: SearchInputType;
-  exercisesCart: ExercisesCartType;
 }
 
 export const CreateWorkout = createContext<CreateWorkoutType>({
@@ -87,15 +80,6 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
     searchedExerciseNameResults: [],
     setSearchText: () => {
       logError('set search text not set');
-    },
-  },
-  exercisesCart: {
-    addedExerciseNames: [],
-    addExerciseNameToCart: () => {
-      logError('add exercise to cart not set');
-    },
-    removeExerciseNameFromCart: () => {
-      logError('remove exercise from cart not set');
     },
   },
 });

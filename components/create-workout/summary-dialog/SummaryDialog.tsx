@@ -5,19 +5,15 @@ import {
   SummaryDialogProvider,
   SummaryDialogType,
 } from './context/SummaryDialogContextProvider';
-import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+import { useGetExerciseNames } from '@/hooks/useSessionStorage';
 
 export function SummaryDialog(props: SummaryDialogType) {
-  const { exercisesCart } = useCreateWorkoutContext();
-  const { addedExerciseNames } = exercisesCart;
+  const exerciseNames = useGetExerciseNames();
 
   const { isOpen, close: handleClose } = props;
   return (
     <SummaryDialogProvider summaryDialogContext={props}>
-      <Dialog
-        open={isOpen && addedExerciseNames.length > 0}
-        onClose={handleClose}
-      >
+      <Dialog open={isOpen && exerciseNames.length > 0} onClose={handleClose}>
         <DialogTitle>Workout Summary</DialogTitle>
         <SummaryContent />
         <SummaryDialogActions />

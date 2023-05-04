@@ -37,6 +37,15 @@ export function useAddExerciseName(exerciseName: string) {
   };
 }
 
+export function useRemoveExerciseName(exerciseName: string) {
+  const [sessionInfo, setSessionInfo] = useSession();
+
+  return () => {
+    sessionInfo.selectedExercises.filter((name) => name !== exerciseName);
+    setSessionInfo(sessionInfo);
+  };
+}
+
 export function useGetExerciseNames() {
   const [sessionInfo] = useSession();
   const { selectedExercises } = sessionInfo;

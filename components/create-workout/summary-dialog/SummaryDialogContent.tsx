@@ -1,14 +1,14 @@
 import { DialogContent, List } from '@mui/material';
-import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { SummaryDialogContentListItem } from './SummaryDialogContentListItem';
+import { useGetExerciseNames } from '@/hooks/useSessionStorage';
 
 export function SummaryContent() {
-  const { exercisesCart } = useCreateWorkoutContext();
-  const { addedExerciseNames } = exercisesCart;
+  const exerciseNames = useGetExerciseNames();
+
   return (
     <DialogContent>
       <List>
-        {addedExerciseNames.map((exerciseName, index) => (
+        {exerciseNames.map((exerciseName, index) => (
           <SummaryDialogContentListItem
             key={exerciseName}
             exerciseName={exerciseName}
