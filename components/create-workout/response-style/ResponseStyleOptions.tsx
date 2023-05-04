@@ -1,8 +1,4 @@
 import {
-  Accordion,
-  AccordionSummary,
-  Typography,
-  AccordionDetails,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,7 +10,6 @@ import {
   AnswerType,
   answerTypes,
 } from '../context/CreateWorkoutContextProvider';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useAiStyle } from '@/hooks/useLocalStorage';
 import { useState } from 'react';
 
@@ -27,19 +22,6 @@ function ResponseStyleMenuOption({ answerStyle }: ResponseStyleOptionsProps) {
     <option value={answerStyle.styleModifier}>
       {answerStyle.displayLabel}
     </option>
-  );
-}
-
-export default function ResponseStyleOptions() {
-  return (
-    <Accordion sx={{ opacity: 1 }}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>Settings</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <ResponseStyleOption />
-      </AccordionDetails>
-    </Accordion>
   );
 }
 

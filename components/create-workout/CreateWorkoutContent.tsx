@@ -2,7 +2,6 @@ import { Button, Paper, Typography } from '@mui/material';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import { Results } from './results/Results';
 import { ExerciseSearch } from './ExerciseSearch';
-import ResponseStyleOptions from './response-style/ResponseStyleOptions';
 import { InitialSearchHint } from './InitialSearchHint';
 
 export default function CreateWorkoutContent() {
@@ -12,7 +11,6 @@ export default function CreateWorkoutContent() {
   return (
     <Paper className="h-screen opacity-80 p-4 flex flex-col">
       {searchText === '' && <h1>Create an AI powered workout!</h1>}
-      <ResponseStyleOptions />
       <ExerciseSearch />
       {searchText && <GenerateWithAiButton />}
       <div className="overflow-auto">
