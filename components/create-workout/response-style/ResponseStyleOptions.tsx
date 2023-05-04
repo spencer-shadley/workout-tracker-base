@@ -49,7 +49,12 @@ export function ResponseStyleOption() {
 
   return (
     <>
-      <FormControl fullWidth>
+      <FormControl
+        fullWidth
+        sx={{
+          marginTop: '10px',
+        }}
+      >
         <InputLabel id="response-style-select">Answer Style</InputLabel>
         <Select
           native

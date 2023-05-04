@@ -10,7 +10,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 import BackgroundWaves from '@/components/shared/BackgroundWaves';
-import { Dialog, DialogContent, Fab } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, Fab } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ResponseStyleOption } from '@/components/create-workout/response-style/ResponseStyleOptions';
 import { useState } from 'react';
@@ -40,6 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <SettingsIcon />
       </Fab>
       <Dialog open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}>
+        <DialogTitle>Settings</DialogTitle>
         <DialogContent>
           <ResponseStyleOption />
         </DialogContent>
