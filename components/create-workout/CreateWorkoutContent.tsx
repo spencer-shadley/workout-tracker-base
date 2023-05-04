@@ -8,7 +8,6 @@ import { InitialSearchHint } from './InitialSearchHint';
 export default function CreateWorkoutContent() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText, searchedExerciseNameResults, isSearching } = searchInput;
-  console.log(isSearching);
 
   return (
     <Paper className="h-screen opacity-80 p-4 flex flex-col">
