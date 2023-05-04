@@ -1,4 +1,4 @@
-const hints = [
+export const hints = [
   'Biceps',
   'Bench press',
   'Legs',
