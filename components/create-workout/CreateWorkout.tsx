@@ -27,7 +27,6 @@ export default function CreateWorkout() {
   const debouncedSearch = useDebounce<string>(searchText, 2000);
   const { isLoading, data: rawSearchedExerciseNameResults } =
     useSearchExercises(debouncedSearch);
-  console.log(isLoading);
 
   const searchedExerciseNameResults = useMemo(() => {
     return responseToArray(rawSearchedExerciseNameResults ?? '') ?? [];

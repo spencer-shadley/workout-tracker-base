@@ -23,6 +23,7 @@
     "dayjs": "^1.11.7",
     "eslint": "8.39.00",
     "eslint-config-next": "13.3.4",
+    "lodash": "^4.17.21",
     "next": "13.3.4",
     "next-themes": "^0.2.1",
     "openai": "^3.2.1",

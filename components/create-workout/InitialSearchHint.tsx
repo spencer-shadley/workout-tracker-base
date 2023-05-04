@@ -8,6 +8,9 @@ import {
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import { hints } from './hints';
 import SwitchAccessShortcutIcon from '@mui/icons-material/SwitchAccessShortcut';
+import shuffle from 'lodash/shuffle';
+
+const randomHints = shuffle(hints);
 
 export function InitialSearchHint() {
   const { searchInput } = useCreateWorkoutContext();
@@ -17,7 +20,7 @@ export function InitialSearchHint() {
     <>
       <Typography variant="overline">Example searches</Typography>
       <List>
-        {hints.map((hint) => (
+        {randomHints.map((hint) => (
           <ListItem key={hint}>
             <ListItemButton
               onClick={() => {
