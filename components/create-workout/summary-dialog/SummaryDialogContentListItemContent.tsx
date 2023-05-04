@@ -4,11 +4,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { logError } from '@/utils/logger';
 import CloseIcon from '@mui/icons-material/Close';
 import { askQuestion } from '@/api/askQuestion';
-import { removeExerciseName } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
@@ -16,7 +16,13 @@ interface SummaryDialogContentListItemContentProps {
 export function SummaryDialogContentListItemContent({
   exerciseName,
 }: SummaryDialogContentListItemContentProps) {
+  const [exercises, setExercises] = useSelectedExercises();
   const [description, setDescription] = useState<string | null>(null);
+
+  const removeExercise = useCallback(() => {
+    const filteredExercises = exercises.filter((name) => name !== exerciseName);
+    setExercises(filteredExercises);
+  }, [exerciseName, exercises, setExercises]);
 
   useEffect(() => {
     askQuestion({
@@ -40,7 +46,7 @@ export function SummaryDialogContentListItemContent({
         <Tooltip title={`Remove ${exerciseName}`} arrow>
           <IconButton
             onClick={() => {
-              removeExerciseName(exerciseName);
+              removeExercise();
             }}
           >
             <CloseIcon />

@@ -5,10 +5,10 @@ import {
   SummaryDialogProvider,
   SummaryDialogType,
 } from './context/SummaryDialogContextProvider';
-import { useGetExerciseNames } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 export function SummaryDialog(props: SummaryDialogType) {
-  const exerciseNames = useGetExerciseNames();
+  const [exerciseNames] = useSelectedExercises();
 
   const { isOpen, close: handleClose } = props;
   return (

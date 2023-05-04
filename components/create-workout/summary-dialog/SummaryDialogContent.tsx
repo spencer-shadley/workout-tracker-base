@@ -1,9 +1,9 @@
 import { DialogContent, List } from '@mui/material';
 import { SummaryDialogContentListItem } from './SummaryDialogContentListItem';
-import { useGetExerciseNames } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 export function SummaryContent() {
-  const exerciseNames = useGetExerciseNames();
+  const [exerciseNames] = useSelectedExercises();
 
   return (
     <DialogContent>

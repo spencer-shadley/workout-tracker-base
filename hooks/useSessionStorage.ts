@@ -1,83 +1,47 @@
-import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
-import { logDebug, logError } from '@/utils/logger';
-import { useSessionStorage } from 'usehooks-ts';
-
-const sessionStorageKey = 'ai-workout-info';
-
-export const initialSession: SessionInfo = {
-  selectedExercises: [],
-  options: {
-    numberOfRounds: 3,
-    restBetweenRoundsInSeconds: 90,
-    restBetweenExercisesInSeconds: 15,
-    exerciseDurationInSeconds: 45,
-  },
-};
-
 /**
- * Information about the workout session
- * Essentially anything that is relevant across pages
+ * Information about the session -
+ * essentially anything that is relevant across pages.
+ *
  * Things only relevant to a particular page should
  * be stored in a relevant React Context instead
  */
-export interface SessionInfo {
-  selectedExercises: string[];
-  options: WorkoutOptions;
+
+import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
+import { useSessionStorage } from 'usehooks-ts';
+
+const selectedExercisesKey = 'selected-exercises';
+const optionsKey = 'options';
+
+const initialOptions: WorkoutOptions = {
+  numberOfRounds: 3,
+  restBetweenRoundsInSeconds: 90,
+  restBetweenExercisesInSeconds: 15,
+  exerciseDurationInSeconds: 45,
+};
+
+export function useSelectedExercises() {
+  return useSessionStorage<string[]>(selectedExercisesKey, []);
 }
 
-function useSession() {
-  return useSessionStorage<SessionInfo>(sessionStorageKey, initialSession);
+export function useOptions() {
+  return useSessionStorage<WorkoutOptions>(optionsKey, initialOptions);
 }
 
 export function useAddExerciseName(exerciseName: string) {
-  const [sessionInfo, setSessionInfo] = useSession();
+  const [selectedExercises, setSelectedExercises] = useSelectedExercises();
 
   return () => {
-    sessionInfo.selectedExercises.push(exerciseName);
-    setSessionInfo(sessionInfo);
+    setSelectedExercises([...selectedExercises, exerciseName]);
   };
 }
 
 export function useRemoveExerciseName(exerciseName: string) {
-  const [sessionInfo, setSessionInfo] = useSession();
+  const [selectedExercises, setSelectedExercises] = useSelectedExercises();
 
   return () => {
-    sessionInfo.selectedExercises.filter((name) => name !== exerciseName);
-    setSessionInfo(sessionInfo);
-  };
-}
-
-export function removeExerciseName(exerciseName: string) {
-  try {
-    const rawSessionStorage = sessionStorage.getItem(sessionStorageKey) ?? '';
-    const sessionInfo: SessionInfo = JSON.parse(
-      rawSessionStorage
-    ) as SessionInfo;
-    const { selectedExercises } = sessionInfo;
-    const updatedExercises = selectedExercises.filter(
+    const filteredExercises = selectedExercises.filter(
       (name) => name !== exerciseName
     );
-    const updatedSessionInfo: SessionInfo = {
-      ...sessionInfo,
-      selectedExercises: updatedExercises,
-    };
-    sessionStorage.setItem(
-      sessionStorageKey,
-      JSON.stringify(updatedSessionInfo)
-    );
-    logDebug(`removed exercise name ${exerciseName}`);
-  } catch (e) {
-    logError(e);
-  }
-}
-
-export function useGetExerciseNames() {
-  const [sessionInfo] = useSession();
-  const { selectedExercises } = sessionInfo;
-  return selectedExercises;
-}
-
-export function useSetSessionInfo(sessionInfo: SessionInfo) {
-  const [, setSessionInfo] = useSession();
-  return () => setSessionInfo(sessionInfo);
+    setSelectedExercises(filteredExercises);
+  };
 }

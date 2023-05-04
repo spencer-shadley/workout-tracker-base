@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import {
   useAddExerciseName,
-  useGetExerciseNames,
+  useSelectedExercises,
 } from '@/hooks/useSessionStorage';
 
 interface AddToExerciseBasketIconButtonProps {
@@ -14,7 +14,7 @@ export function AddToExerciseBasketIconButton({
   exerciseName,
 }: AddToExerciseBasketIconButtonProps) {
   const addExerciseName = useAddExerciseName(exerciseName);
-  const exerciseNames = useGetExerciseNames();
+  const [exerciseNames] = useSelectedExercises();
   const isExerciseAdded = exerciseNames.includes(exerciseName);
 
   return (

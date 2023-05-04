@@ -1,9 +1,9 @@
 import { Card, Typography } from '@mui/material';
 import { SummaryContent } from './summary-dialog/SummaryDialogContent';
-import { useGetExerciseNames } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 export function ExerciseCart() {
-  const exerciseNames = useGetExerciseNames();
+  const [exerciseNames] = useSelectedExercises();
 
   return (
     <Card>

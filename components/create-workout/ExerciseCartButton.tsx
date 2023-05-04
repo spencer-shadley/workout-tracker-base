@@ -4,10 +4,10 @@ import { ExerciseCart } from './ExerciseCart';
 import { useMemo, useState } from 'react';
 import { SummaryDialog } from './summary-dialog/SummaryDialog';
 import { SummaryDialogType } from './summary-dialog/context/SummaryDialogContextProvider';
-import { useGetExerciseNames } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 export function ExerciseCartButton() {
-  const exerciseNames = useGetExerciseNames();
+  const [exerciseNames] = useSelectedExercises();
 
   const [showDialog, setShowDialog] = useState(false);
 
