@@ -11,10 +11,9 @@ import {
 import {
   AnswerType,
   answerTypes,
-  useCreateWorkoutContext,
 } from '../context/CreateWorkoutContextProvider';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { setLocalStorageAiStyle } from '@/utils/localStorage';
+import { useAiStyle } from '@/hooks/useLocalStorage';
 
 interface ResponseStyleOptionsProps {
   answerStyle: AnswerType;
@@ -29,8 +28,8 @@ function ResponseStyleMenuOption({ answerStyle }: ResponseStyleOptionsProps) {
 }
 
 export default function ResponseStyleOptions() {
-  const { aiPreferences } = useCreateWorkoutContext();
-  const { aiStyle, setAiStyle } = aiPreferences;
+  const [aiStyle, setAiStyle] = useAiStyle();
+
   return (
     <Accordion sx={{ opacity: 1 }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -46,9 +45,7 @@ export default function ResponseStyleOptions() {
             value={aiStyle}
             label={aiStyle}
             onChange={(e) => {
-              const aiStyle = e.target.value as string;
-              setAiStyle(aiStyle);
-              setLocalStorageAiStyle(aiStyle);
+              setAiStyle(e.target.value);
             }}
           >
             <MenuItem value={10}>ten</MenuItem>

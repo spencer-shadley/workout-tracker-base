@@ -68,11 +68,6 @@ export const answerTypes: AnswerType[] = [
   },
 ];
 
-interface AiPreferences {
-  aiStyle: string;
-  setAiStyle: (answerStyle: string) => void;
-}
-
 interface ExercisesCartType {
   addedExerciseNames: string[];
   addExerciseNameToCart: (exerciseName: string) => void;
@@ -82,7 +77,6 @@ interface ExercisesCartType {
 export interface CreateWorkoutType {
   searchInput: SearchInputType;
   exercisesCart: ExercisesCartType;
-  aiPreferences: AiPreferences;
 }
 
 export const CreateWorkout = createContext<CreateWorkoutType>({
@@ -102,12 +96,6 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
     },
     removeExerciseNameFromCart: () => {
       logError('remove exercise from cart not set');
-    },
-  },
-  aiPreferences: {
-    aiStyle: answerTypes[0].styleModifier,
-    setAiStyle: () => {
-      logError('set answer style not set');
     },
   },
 });

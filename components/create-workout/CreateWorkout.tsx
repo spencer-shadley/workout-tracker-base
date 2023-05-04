@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   CreateWorkoutProvider,
   CreateWorkoutType,
-  answerTypes,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
 import CreateWorkoutContent from './CreateWorkoutContent';
@@ -16,9 +15,6 @@ export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
   const [addedExerciseNames, setAddedExerciseNames] = useState<string[]>([]);
-  const [answerStyle, setAnswerStyle] = useState<string>(
-    answerTypes[0].styleModifier
-  );
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -38,10 +34,10 @@ export default function CreateWorkout() {
   }, [rawSearchedExerciseNameResults]);
 
   const createWorkoutContext: CreateWorkoutType = useMemo(() => {
-    return {
+    const context: CreateWorkoutType = {
       searchInput: {
-        isSearching: isLoading,
         searchText,
+        isSearching: isLoading,
         setSearchText,
         currentHint,
         searchedExerciseNameResults,
@@ -57,26 +53,15 @@ export default function CreateWorkout() {
           );
         },
       },
-      aiPreferences: {
-        answerStyle,
-        setAnswerStyle,
-      },
     };
+    return context;
   }, [
     addedExerciseNames,
-    answerStyle,
     currentHint,
     isLoading,
     searchText,
     searchedExerciseNameResults,
   ]);
-
-  useEffect(() => {
-    sessionStorage.setItem(
-      'createWorkoutContext',
-      JSON.stringify(createWorkoutContext)
-    );
-  }, [createWorkoutContext]);
 
   return (
     <CreateWorkoutProvider createWorkout={createWorkoutContext}>

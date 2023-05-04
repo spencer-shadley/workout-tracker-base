@@ -2,7 +2,7 @@ import { ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
-import { addExercise } from '@/utils/sessionStorage';
+import { useAddExerciseName } from '@/hooks/useSessionStorage';
 
 interface AddToExerciseBasketIconButtonProps {
   exerciseName: string;
@@ -14,6 +14,8 @@ export function AddToExerciseBasketIconButton({
   const { exercisesCart } = useCreateWorkoutContext();
   const { addedExerciseNames } = exercisesCart;
 
+  const addExerciseName = useAddExerciseName(exerciseName);
+
   const isExerciseAdded = addedExerciseNames.includes(exerciseName);
   return (
     <Tooltip
@@ -24,7 +26,7 @@ export function AddToExerciseBasketIconButton({
       <ListItemButton
         sx={{ padding: 0 }}
         onClick={() => {
-          addExercise(exerciseName);
+          addExerciseName();
         }}
       >
         <ListItemIcon>

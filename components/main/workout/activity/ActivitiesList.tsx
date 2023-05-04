@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ActivityListItem from './ActivityListItem';
 import { useTimeContext } from '../context/TimeContextProvider';
 import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
-import { getSessionInfo } from '@/utils/sessionStorage';
+import { useGetExerciseNames } from '@/hooks/useSessionStorage';
 
 interface ActivitiesListProps {
   shouldIncludeRests?: boolean;
@@ -13,7 +13,7 @@ export default function ActivitiesList({
   shouldIncludeRests,
 }: ActivitiesListProps) {
   const { currentRound } = useTimeContext();
-  const { selectedExercises } = getSessionInfo();
+  const selectedExercises = useGetExerciseNames();
 
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
     useState<boolean>(false);
