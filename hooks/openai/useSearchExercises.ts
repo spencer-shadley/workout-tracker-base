@@ -1,4 +1,4 @@
-import { logError } from '@/utils/error';
+import { logError } from '@/utils/logger';
 import { useOpenAi } from './useOpenAi';
 
 export function responseToArray(response: string): string[] {

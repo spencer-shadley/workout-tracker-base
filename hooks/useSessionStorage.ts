@@ -1,4 +1,5 @@
 import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
+import { logDebug, logError } from '@/utils/logger';
 import { useSessionStorage } from 'usehooks-ts';
 
 const sessionStorageKey = 'ai-workout-info';
@@ -44,6 +45,30 @@ export function useRemoveExerciseName(exerciseName: string) {
     sessionInfo.selectedExercises.filter((name) => name !== exerciseName);
     setSessionInfo(sessionInfo);
   };
+}
+
+export function removeExerciseName(exerciseName: string) {
+  try {
+    const rawSessionStorage = sessionStorage.getItem(sessionStorageKey) ?? '';
+    const sessionInfo: SessionInfo = JSON.parse(
+      rawSessionStorage
+    ) as SessionInfo;
+    const { selectedExercises } = sessionInfo;
+    const updatedExercises = selectedExercises.filter(
+      (name) => name !== exerciseName
+    );
+    const updatedSessionInfo: SessionInfo = {
+      ...sessionInfo,
+      selectedExercises: updatedExercises,
+    };
+    sessionStorage.setItem(
+      sessionStorageKey,
+      JSON.stringify(updatedSessionInfo)
+    );
+    logDebug(`removed exercise name ${exerciseName}`);
+  } catch (e) {
+    logError(e);
+  }
 }
 
 export function useGetExerciseNames() {

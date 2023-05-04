@@ -1,5 +1,5 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
-import { logError } from '@/utils/error';
+import { logError } from '@/utils/logger';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,

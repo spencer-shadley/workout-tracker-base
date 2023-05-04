@@ -10,7 +10,7 @@ import {
 import { useRouter } from 'next/router';
 import { useWorkoutContext } from './context/WorkoutContextProvider';
 import { useState } from 'react';
-import { logError } from '@/utils/error';
+import { logError } from '@/utils/logger';
 import { WorkoutOptions } from './WorkoutOptions';
 
 function makeMinuteMarks() {

@@ -1,4 +1,4 @@
-import { logError } from '@/utils/error';
+import { logError } from '@/utils/logger';
 import { PropsWithChildren, createContext, useContext } from 'react';
 
 interface SearchInputType {

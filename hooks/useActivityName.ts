@@ -1,5 +1,5 @@
 import { ActivityType } from '@/components/main/workout/context/TimeContextProvider';
-import { logError } from '@/utils/error';
+import { logError } from '@/utils/logger';
 
 export default function useActivityName(
   activityType: ActivityType,

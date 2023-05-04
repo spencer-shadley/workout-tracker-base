@@ -5,10 +5,10 @@ import {
   Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { logError } from '@/utils/error';
+import { logError } from '@/utils/logger';
 import CloseIcon from '@mui/icons-material/Close';
 import { askQuestion } from '@/api/askQuestion';
-import { useRemoveExerciseName } from '@/hooks/useSessionStorage';
+import { removeExerciseName } from '@/hooks/useSessionStorage';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
@@ -16,7 +16,6 @@ interface SummaryDialogContentListItemContentProps {
 export function SummaryDialogContentListItemContent({
   exerciseName,
 }: SummaryDialogContentListItemContentProps) {
-  const removeExerciseName = useRemoveExerciseName;
   const [description, setDescription] = useState<string | null>(null);
 
   useEffect(() => {
