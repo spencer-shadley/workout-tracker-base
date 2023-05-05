@@ -22,7 +22,7 @@ export function InitialSearchHint() {
       <Typography variant="overline">Example searches</Typography>
       <List>
         {randomHints.map((hint, index) => (
-          <>
+          <div key={hint}>
             <ListItem key={hint}>
               <ListItemButton
                 onClick={() => {
@@ -39,7 +39,7 @@ export function InitialSearchHint() {
               </ListItemButton>
             </ListItem>
             {index < randomHints.length - 1 && <Divider />}
-          </>
+          </div>
         ))}
       </List>
     </>
