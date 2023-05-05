@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { useState, useEffect } from 'react';
 import { askQuestion } from '@/api/askQuestion';
@@ -34,7 +34,7 @@ export function AiDialog({ showDialog, setShowDialog }: AiDialogProps) {
       });
   }, [searchText, setSelectedExercises, showDialog]);
 
-  if (isSearching) return <Typography>Searching...</Typography>;
+  if (isSearching) return <CircularProgress />;
 
   return (
     <SummaryDialog close={() => setShowDialog(false)} isOpen={showDialog} />
