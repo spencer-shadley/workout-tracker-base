@@ -4,11 +4,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
-import { logError } from '@/utils/logger';
+import { useCallback, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { askQuestion } from '@/api/askQuestion';
 import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { askQuestion } from '@/api/askQuestion';
+import { logError } from '@/utils/logger';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
@@ -24,21 +24,34 @@ export function SummaryDialogContentListItemContent({
     setExercises(filteredExercises);
   }, [exerciseName, exercises, setExercises]);
 
-  useEffect(() => {
-    askQuestion({
-      prompt: `Give me a brief description for the exercise ${exerciseName}`,
-    })
-      .then((response) => {
-        setDescription(response);
-      })
-      .catch((error) => {
-        setDescription('Failed to load description');
-        logError(error);
-      });
-  }, [exerciseName]);
+  // useEffect(() => {
+  //   askQuestion({
+  //     prompt: `Give me a brief description for the exercise ${exerciseName}`,
+  //   })
+  //     .then((response) => {
+  //       setDescription(response);
+  //     })
+  //     .catch((error) => {
+  //       setDescription('Failed to load description');
+  //       logError(error);
+  //     });
+  // }, [exerciseName]);
 
   return (
-    <article>
+    <article
+      onClick={() => {
+        askQuestion({
+          prompt: `Give me a brief description for the exercise ${exerciseName}`,
+        })
+          .then((response) => {
+            setDescription(response);
+          })
+          .catch((error) => {
+            setDescription('Failed to load description');
+            logError(error);
+          });
+      }}
+    >
       <span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
         <Typography variant="h5" flexGrow={1}>
           {exerciseName}
@@ -53,7 +66,9 @@ export function SummaryDialogContentListItemContent({
           </IconButton>
         </Tooltip>
       </span>
-      <DialogContentText>{description ?? 'Loading...'}</DialogContentText>
+      <DialogContentText>
+        {description ?? 'Click for description'}
+      </DialogContentText>
     </article>
   );
 }

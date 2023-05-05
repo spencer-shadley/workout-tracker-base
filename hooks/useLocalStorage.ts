@@ -41,7 +41,6 @@ export function getCachedResponse(prompt: string): string | null {
     (cachedResponse) => cachedResponse.prompt === prompt
   );
   const response = cachedResponse?.response ?? null;
-  console.info('Got from cache', prompt, response);
   return response;
 }
 
@@ -53,7 +52,6 @@ export function addCachedResponse(prompt: string, response: string) {
   const cachedResponses = getCachedResponses();
   cachedResponses.push({ prompt, response });
   localStorage.setItem(cachedResponsesKey, JSON.stringify(cachedResponses));
-  console.info('Added to cache', prompt, response);
 }
 
 function getItem<T>(key: string, defaultValue: T): T {

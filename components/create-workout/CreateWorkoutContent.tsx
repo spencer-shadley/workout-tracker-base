@@ -12,7 +12,6 @@ export default function CreateWorkoutContent() {
     <Paper className="h-screen opacity-80 p-4 flex flex-col">
       {searchText === '' && <h1>Create an AI powered workout!</h1>}
       <ExerciseSearch />
-      {searchText && <GenerateWithAiButton />}
       <div className="overflow-auto">
         {isSearching ? (
           <Typography>Searching...</Typography>
@@ -27,10 +26,6 @@ export default function CreateWorkoutContent() {
       )}
     </Paper>
   );
-}
-
-function GenerateWithAiButton() {
-  return <Button>Generate full workout with AI</Button>;
 }
 
 function NewExerciseButton() {

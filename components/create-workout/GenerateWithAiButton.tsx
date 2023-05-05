@@ -1,14 +1,25 @@
 import { Icon, IconButton, Tooltip } from '@mui/material';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import { useState } from 'react';
+import { AiDialog } from './summary-dialog/AiDialog';
+import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 
 export function GenerateWithAiButton() {
+  const [showDialog, setShowDialog] = useState<boolean>(false);
+  const { searchInput } = useCreateWorkoutContext();
+  const { searchText } = searchInput;
   return (
-    <Tooltip title="Auto generate full workout" arrow>
-      <IconButton>
-        <Icon>
-          <AutoFixHighIcon />
-        </Icon>
-      </IconButton>
-    </Tooltip>
+    searchText && (
+      <>
+        <Tooltip title="Auto generate full workout" arrow>
+          <IconButton onClick={() => setShowDialog(true)}>
+            <Icon>
+              <AutoFixHighIcon />
+            </Icon>
+          </IconButton>
+        </Tooltip>
+        <AiDialog showDialog={showDialog} setShowDialog={setShowDialog} />
+      </>
+    )
   );
 }

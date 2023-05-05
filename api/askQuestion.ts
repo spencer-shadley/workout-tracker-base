@@ -17,7 +17,7 @@ export async function askQuestion(
   initialProps: Partial<CreateCompletionRequest>
 ) {
   console.log('askQuestion', initialProps);
-  const prompt: string = (initialProps.prompt as string) ?? '';
+  const prompt: string = ((initialProps.prompt as string) ?? '').trim();
 
   const cachedResponse = getCachedResponse(prompt);
   if (cachedResponse) {
@@ -55,7 +55,8 @@ export async function askQuestion(
     openai
       .createCompletion(props)
       .then((response) => {
-        const data: string = response.data.choices[0].text ?? '';
+        let data: string = response.data.choices[0].text ?? '';
+        data = data.trim();
         addCachedResponse(prompt, data);
         resolve(data);
       })
