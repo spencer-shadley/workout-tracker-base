@@ -15,11 +15,19 @@ dayjs.extend(relativeTime);
 
 import BackgroundWaves from '@/components/shared/BackgroundWaves';
 import Settings from '../components/shared/Settings';
+import { useEffect, useState } from 'react';
+import { Typography } from '@mui/material';
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
+  const [isPageLoaded, setIsPageLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsPageLoaded(true);
+  }, []);
+
+  return isPageLoaded ? (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <BackgroundWaves />
@@ -28,5 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Settings />
       </Hydrate>
     </QueryClientProvider>
+  ) : (
+    <Typography>Loading...</Typography>
   );
 }
