@@ -52,7 +52,8 @@ export const answerTypes: AnswerType[] = [
   { displayLabel: 'Caveman', styleModifier: 'caveman' },
   {
     displayLabel: 'Alien',
-    styleModifier: 'an alien who does not know what a human is',
+    styleModifier:
+      'an alien who does not know what a human is. The alien is confused by the human doing the exercise',
   },
   {
     displayLabel: 'Joke',

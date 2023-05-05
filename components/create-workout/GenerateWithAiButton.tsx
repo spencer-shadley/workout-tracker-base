@@ -9,17 +9,19 @@ export function GenerateWithAiButton() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText } = searchInput;
   return (
-    searchText && (
-      <>
-        <Tooltip title="Auto generate full workout" arrow>
-          <IconButton onClick={() => setShowDialog(true)}>
-            <Icon>
-              <AutoFixHighIcon />
-            </Icon>
-          </IconButton>
-        </Tooltip>
-        <AiDialog showDialog={showDialog} setShowDialog={setShowDialog} />
-      </>
-    )
+    <>
+      {searchText && (
+        <>
+          <Tooltip title="Auto generate full workout" arrow>
+            <IconButton onClick={() => setShowDialog(true)}>
+              <Icon>
+                <AutoFixHighIcon />
+              </Icon>
+            </IconButton>
+          </Tooltip>
+          <AiDialog showDialog={showDialog} setShowDialog={setShowDialog} />
+        </>
+      )}
+    </>
   );
 }
