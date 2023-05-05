@@ -12,13 +12,12 @@ import { useTimeContext } from '../context/TimeContextProvider';
 import { useWorkoutContext } from '../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
 import { useActivityCardContext } from '../context/ActivityCardContextProvider';
-import ExerciseStatLabels from './exercise/ExerciseStatLabels';
 import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import useActivityName from '@/hooks/useActivityName';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 export function ActivityCard(cardProps: CardProps) {
-  const { exercise, isDismissible, timeBucket, activityType } =
+  const { exerciseName, isDismissible, timeBucket, activityType } =
     useActivityCardContext();
   const { removeExercise } = useWorkoutContext();
   const { currentBucket, jumpToBucket } = useTimeContext();
@@ -26,8 +25,7 @@ export function ActivityCard(cardProps: CardProps) {
     currentBucket;
   const { remainingTimeInMilliseconds } = currentBucket;
   const isExerciseActive =
-    containerExercise?.name === exercise?.name &&
-    currentExerciseType === activityType;
+    containerExercise === exerciseName && currentExerciseType === activityType;
 
   const remainingTimeInSeconds = remainingTimeInMilliseconds / 1000;
   const activityDuration = useActivityDurationInSeconds(activityType);
@@ -35,7 +33,7 @@ export function ActivityCard(cardProps: CardProps) {
     ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
 
-  const activityName = useActivityName(activityType, exercise?.name);
+  const activityName = useActivityName(activityType, exerciseName);
 
   return (
     <Card
@@ -67,14 +65,11 @@ export function ActivityCard(cardProps: CardProps) {
                 </IconButton>
               </Tooltip>
             )}
-            {activityType === 'exercise' && (
-              <ExerciseStatLabels exercise={exercise} />
-            )}
           </Typography>
-          {isDismissible && exercise && (
+          {isDismissible && exerciseName && (
             <IconButton
               onClick={() => {
-                removeExercise(exercise.name);
+                removeExercise(exerciseName);
               }}
             >
               <CloseIcon

@@ -1,14 +1,13 @@
-import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { PropsWithChildren, createContext, useContext } from 'react';
 
 export interface WorkoutContextType {
   removeExercise: (exerciseName: string) => void;
-  addExercise: (exercise: ExerciseInfo) => void;
+  addExercise: (exercise: string) => void;
 }
 
 export const WorkoutContext = createContext<WorkoutContextType>({
   removeExercise: () => console.log('removeExercise not implemented'),
-  addExercise: function (): void {
+  addExercise(): void {
     throw new Error('Function not implemented.');
   },
 });

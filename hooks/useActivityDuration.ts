@@ -1,10 +1,10 @@
 import { ActivityType } from '@/components/main/workout/context/TimeContextProvider';
-import { useWorkoutOptionsContext } from '@/components/main/workout/context/WorkoutOptionsContextProvider';
+import { useOptions } from './useLocalStorage';
 
 export default function useActivityDurationInSeconds(
   activityType: ActivityType
 ) {
-  const { workoutOptions } = useWorkoutOptionsContext();
+  const [workoutOptions] = useOptions();
   const {
     exerciseDurationInSeconds,
     restBetweenExercisesInSeconds,

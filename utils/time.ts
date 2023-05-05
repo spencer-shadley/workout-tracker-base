@@ -1,6 +1,7 @@
 import { TimeSlot } from '@/components/main/workout/context/TimeContextProvider';
-import ExerciseInfo from '../components/shared/interfaces/ExerciseInfo';
 import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
+import { getOptions } from '@/hooks/useLocalStorage';
+import { getExerciseNames } from '@/hooks/useSessionStorage';
 
 export function millisecondsToHumanReadable(milliseconds: number): string {
   const hoursRemaining = Math.floor(milliseconds / 1000 / 60 / 60);
@@ -15,16 +16,17 @@ export function millisecondsToHumanReadable(milliseconds: number): string {
   return `${hoursRemaining} hours, ${minutesRemaining} minutes, ${secondsRemaining} seconds`;
 }
 
-export function calculateBuckets(
-  workoutOptions: WorkoutOptions,
-  exercises: ExerciseInfo[]
-) {
+export function calculateBuckets() {
+  const options = getOptions();
   const {
     numberOfRounds,
     restBetweenExercisesInSeconds,
     exerciseDurationInSeconds,
     restBetweenRoundsInSeconds,
-  } = workoutOptions;
+  } = options;
+
+  const exercises = getExerciseNames();
+
   const restBetweenExercisesInMilliseconds =
     restBetweenExercisesInSeconds * 1000;
   const restBetweenRoundsInMilliseconds = restBetweenRoundsInSeconds * 1000;
@@ -33,8 +35,7 @@ export function calculateBuckets(
   const buckets: TimeSlot[] = [];
   let passedTimeInMilliseconds = 0;
   for (let round = 0; round < numberOfRounds; round++) {
-    for (let exercise = 0; exercise < exercises.length; exercise++) {
-      const observedExercise = exercises[exercise];
+    for (const observedExercise of exercises) {
       buckets.push({
         containerExercise: observedExercise,
         exerciseType: 'exercise',

@@ -6,6 +6,7 @@ interface ExerciseStatLabelProps extends TypographyProps {
   afterText: string;
 }
 
+// TODO: unused - delete?
 export default function ExerciseStatLabel({
   data,
   beforeText,

@@ -10,7 +10,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 import BackgroundWaves from '@/components/shared/BackgroundWaves';
-import { Settings } from './Settings';
+import Settings from '../components/shared/Settings';
 
 const queryClient = new QueryClient();
 

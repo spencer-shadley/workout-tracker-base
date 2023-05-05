@@ -6,25 +6,13 @@
  * be stored in a relevant React Context instead
  */
 
-import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
 import { useSessionStorage } from 'usehooks-ts';
+import { tryParse } from './useLocalStorage';
 
 const selectedExercisesKey = 'selected-exercises';
-const optionsKey = 'options';
-
-const initialOptions: WorkoutOptions = {
-  numberOfRounds: 3,
-  restBetweenRoundsInSeconds: 90,
-  restBetweenExercisesInSeconds: 15,
-  exerciseDurationInSeconds: 45,
-};
 
 export function useSelectedExercises() {
   return useSessionStorage<string[]>(selectedExercisesKey, []);
-}
-
-export function useOptions() {
-  return useSessionStorage<WorkoutOptions>(optionsKey, initialOptions);
 }
 
 export function useAddExerciseName(exerciseName: string) {
@@ -44,4 +32,13 @@ export function useRemoveExerciseName(exerciseName: string) {
     );
     setSelectedExercises(filteredExercises);
   };
+}
+
+export function getExerciseNames(): string[] {
+  if (typeof window === 'undefined') {
+    return [];
+  }
+
+  const rawExerciseNames = sessionStorage.getItem(selectedExercisesKey) ?? '';
+  return tryParse<string[]>(rawExerciseNames, []);
 }

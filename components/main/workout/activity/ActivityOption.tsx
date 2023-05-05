@@ -1,21 +1,20 @@
-import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { Typography } from '@mui/material';
 import { ActivityCard } from './ActivityCard';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 
 interface ActivityOptionProps {
-  exercise: ExerciseInfo;
-  handleClick: (exercise: ExerciseInfo) => void;
+  exerciseName: string;
+  handleClick: (exerciseName: string) => void;
 }
 
 export default function ActivityOption({
-  exercise,
+  exerciseName,
   handleClick,
 }: ActivityOptionProps) {
-  return exercise ? (
+  return exerciseName ? (
     <ActivityCardProvider
       activityCardContext={{
-        exercise,
+        exerciseName,
         isDismissible: false,
         timeBucket: undefined,
         activityType: 'exercise',
@@ -23,7 +22,7 @@ export default function ActivityOption({
     >
       <ActivityCard
         sx={{ margin: '10px' }}
-        onClick={() => handleClick(exercise)}
+        onClick={() => handleClick(exerciseName)}
       />
     </ActivityCardProvider>
   ) : (

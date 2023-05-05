@@ -3,7 +3,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { ResponseStyleOption } from '@/components/create-workout/response-style/ResponseStyleOptions';
 import { useState } from 'react';
 
-export function Settings() {
+export default function Settings() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
   return (

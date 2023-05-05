@@ -1,9 +1,8 @@
-import ExerciseInfo from '@/components/shared/interfaces/ExerciseInfo';
 import { PropsWithChildren, createContext, useContext } from 'react';
 import { ActivityType, TimeSlot } from './TimeContextProvider';
 
 export interface ActivityCardContextType {
-  exercise?: ExerciseInfo;
+  exerciseName?: string;
   isDismissible: boolean;
   timeBucket: TimeSlot | undefined;
   progressPercent?: number;

@@ -2,18 +2,18 @@ import {
   TimeContextType,
   TimeSlot,
 } from '@/components/main/workout/context/TimeContextProvider';
-import { useWorkoutContext } from '@/components/main/workout/context/WorkoutContextProvider';
-import { useWorkoutOptionsContext } from '@/components/main/workout/context/WorkoutOptionsContextProvider';
 import {
   calculateBuckets,
   calculateRoundTimeInMilliseconds,
   calculateWorkoutTimeInMilliseconds,
 } from '@/utils/time';
 import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useSelectedExercises } from './useSessionStorage';
+import { useOptions } from './useLocalStorage';
 
 export default function useTimeInformation(): TimeContextType {
-  const { exercises } = useWorkoutContext();
-  const { workoutOptions } = useWorkoutOptionsContext();
+  const [exercises] = useSelectedExercises();
+  const [workoutOptions] = useOptions();
   const [currentRound, setCurrentRound] = useState<number>(0);
   const [elapsedTimeInMilliseconds, setTimeElapsedInMilliseconds] =
     useState<number>(0);
@@ -38,26 +38,28 @@ export default function useTimeInformation(): TimeContextType {
     roundTimeInMilliseconds;
 
   const calculatedBuckets = useCallback(() => {
-    return calculateBuckets(workoutOptions, exercises);
-  }, [exercises, workoutOptions]);
+    return calculateBuckets();
+  }, []);
 
   const buckets = useMemo(() => {
     return calculatedBuckets();
   }, [calculatedBuckets]);
 
   useEffect(() => {
-    if (isRunning) {
-      const interval = setInterval(() => {
-        setTimeElapsedInMilliseconds(elapsedTimeInMilliseconds + 1000);
-      }, 1000);
-      if (remainingWorkoutTimeInMilliseconds <= 0) {
-        setIsRunning(false);
-        setCurrentRound(Number.MAX_SAFE_INTEGER);
-      } else {
-        setCurrentRound(currentBucket?.containerRound ?? 0);
-      }
-      return () => clearInterval(interval);
+    if (!isRunning) {
+      return;
     }
+
+    const interval = setInterval(() => {
+      setTimeElapsedInMilliseconds(elapsedTimeInMilliseconds + 1000);
+    }, 1000);
+    if (remainingWorkoutTimeInMilliseconds <= 0) {
+      setIsRunning(false);
+      setCurrentRound(Number.MAX_SAFE_INTEGER);
+    } else {
+      setCurrentRound(currentBucket?.containerRound ?? 0);
+    }
+    return () => clearInterval(interval);
   }, [
     currentBucket?.containerRound,
     elapsedTimeInMilliseconds,

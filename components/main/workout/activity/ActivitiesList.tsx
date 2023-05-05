@@ -13,7 +13,7 @@ export default function ActivitiesList({
   shouldIncludeRests,
 }: ActivitiesListProps) {
   const { currentRound } = useTimeContext();
-  const selectedExercises = useGetExerciseNames();
+  const [selectedExercises] = useSelectedExercises();
 
   const [showDuplicateExerciseWarning, setShowDuplicateExerciseWarning] =
     useState<boolean>(false);
@@ -34,13 +34,13 @@ export default function ActivitiesList({
               <ActivityListItem
                 key={exerciseName}
                 activityType="exercise"
-                exercise={{ name: exerciseName }}
+                exerciseName={exerciseName}
               />
               {shouldIncludeRests && index !== selectedExercises.length - 1 && (
                 <ActivityListItem
                   key={`${exerciseName}-rest`}
                   activityType="rest-exercise"
-                  exercise={{ name: exerciseName }}
+                  exerciseName={exerciseName}
                 />
               )}
             </>

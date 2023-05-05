@@ -8,10 +8,10 @@ import {
   Typography,
 } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useWorkoutContext } from './context/WorkoutContextProvider';
 import { useState } from 'react';
 import { logError } from '@/utils/logger';
 import { WorkoutOptions } from './WorkoutOptions';
+import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 function makeMinuteMarks() {
   const maxMinutes = 4;
@@ -34,7 +34,7 @@ export default function WorkoutOptionsDialog({
   const router = useRouter();
   const { isFallback } = router;
 
-  const { exercises } = useWorkoutContext();
+  const [exercises] = useSelectedExercises();
   const [workoutOptions, setWorkoutOptions] = useState<WorkoutOptions>({
     numberOfRounds: 3,
     restBetweenRoundsInSeconds: 0,
