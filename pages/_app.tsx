@@ -16,7 +16,7 @@ dayjs.extend(relativeTime);
 import BackgroundWaves from '@/components/shared/BackgroundWaves';
 import Settings from '../components/shared/Settings';
 import { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +37,14 @@ export default function App({ Component, pageProps }: AppProps) {
       </Hydrate>
     </QueryClientProvider>
   ) : (
-    <Typography>Loading...</Typography>
+    <Box sx={{ display: 'flex' }}>
+      <CircularProgress
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+        }}
+      />
+    </Box>
   );
 }
