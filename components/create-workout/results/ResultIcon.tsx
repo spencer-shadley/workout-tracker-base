@@ -1,31 +1,19 @@
-import { askQuestion } from '@/api/askQuestion';
-import { ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
+import { Tooltip, ListItemButton, ListItemIcon } from '@mui/material';
 
 interface ResultIconProps {
   icon: React.ReactNode;
   tooltip: string;
-  setDescriptionText: (text: string) => void;
   prompt: string;
+  setShouldShow: (shouldShow: boolean) => void;
 }
 
-export function ResultIcon({
-  icon,
-  setDescriptionText,
-  tooltip,
-  prompt,
-}: ResultIconProps) {
+export function ResultIcon({ icon, tooltip, setShouldShow }: ResultIconProps) {
   return (
-    <Tooltip title={tooltip}>
+    <Tooltip title={tooltip} key={tooltip}>
       <ListItemButton
         sx={{ padding: 0 }}
         onClick={() => {
-          setDescriptionText('Loading...');
-          askQuestion({
-            prompt,
-            temperature: 1,
-          }).then((answer) => {
-            setDescriptionText(answer);
-          });
+          setShouldShow(true);
         }}
       >
         <ListItemIcon>{icon}</ListItemIcon>

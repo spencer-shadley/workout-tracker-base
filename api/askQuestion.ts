@@ -1,14 +1,11 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/logger';
+import { addCachedResponse, getCachedResponse } from '@/hooks/useLocalStorage';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
-const tooManyRequests = new Promise((resolve: (response: string) => void) => {
-  resolve('too many requests'); // resolve to avoid crashes
-});
 
 const IS_DEBUG = false;
 
@@ -20,11 +17,17 @@ export async function askQuestion(
   initialProps: Partial<CreateCompletionRequest>
 ) {
   console.log('askQuestion', initialProps);
+  const prompt: string = (initialProps.prompt as string) ?? '';
+
+  const cachedResponse = getCachedResponse(prompt);
+  if (cachedResponse) {
+    return Promise.resolve(`cached response: ${cachedResponse}`);
+  }
 
   ++numberOfActiveRequests;
   if (numberOfActiveRequests > MAX_NUMBER_OF_ACTIVE_REQUESTS) {
     logError('too many requests');
-    return tooManyRequests;
+    return Promise.reject('too many requests');
   }
 
   const defaultProps: CreateCompletionRequest = {
@@ -52,7 +55,9 @@ export async function askQuestion(
     openai
       .createCompletion(props)
       .then((response) => {
-        resolve(response.data.choices[0].text ?? '');
+        const data: string = response.data.choices[0].text ?? '';
+        addCachedResponse(prompt, data);
+        resolve(data);
       })
       .catch((error) => {
         reject(error);
