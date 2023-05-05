@@ -16,25 +16,23 @@ export function AiDialog({ showDialog, setShowDialog }: AiDialogProps) {
 
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const [selectedExercices, setSelectedExercises] = useSelectedExercises();
-
-  const [workoutResponse, setWorkoutResponse] = useState<string[]>([]);
+  const [, setSelectedExercises] = useSelectedExercises();
 
   useEffect(() => {
+    if (!showDialog) return;
+
     setIsSearching(true);
     askQuestion({
       prompt: `Generate a workout alternating between antagonist and protagonist exercises. Focus on ${searchText}. Return the response as an array of exercise names. Only use double quotes, no single quotes.`,
     })
       .then((response) => {
         const parsed = tryParse<string[]>(response, []);
-        console.log(parsed);
-        setWorkoutResponse(parsed);
         setSelectedExercises(parsed);
       })
       .finally(() => {
         setIsSearching(false);
       });
-  }, [searchText, setSelectedExercises]);
+  }, [searchText, setSelectedExercises, showDialog]);
 
   if (isSearching) return <Typography>Searching...</Typography>;
 
