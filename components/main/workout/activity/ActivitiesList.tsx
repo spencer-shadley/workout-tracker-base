@@ -19,11 +19,7 @@ export default function ActivitiesList({
     useState<boolean>(false);
 
   return (
-    <div
-      style={{
-        overflow: 'auto',
-      }}
-    >
+    <div className="h-full overflow-y-auto justify-middle">
       <List>
         {selectedExercises.map((exerciseName, index) => (
           <div key={exerciseName}>
