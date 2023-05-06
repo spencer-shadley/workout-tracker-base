@@ -17,7 +17,7 @@ export default function Settings() {
   return (
     <>
       <Fab
-        size="small"
+        size="medium"
         color="secondary"
         aria-label="settings"
         sx={{
