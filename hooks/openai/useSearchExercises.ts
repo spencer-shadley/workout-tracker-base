@@ -9,6 +9,5 @@ export function useSearchExercises(search: string) {
     initialProps: {
       prompt: `Make me a workout with a focus on ${search}. It is very important ${search}. Return a comma separated list of exercises. Do not end with a period.`,
     },
-    shouldSkipFetch: !search,
   });
 }
