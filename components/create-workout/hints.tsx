@@ -19,6 +19,7 @@ export const hints = [
   'Focus on strength',
   'Outdoor exercises with just my body',
   "Let's get big and swole!",
+  'Exercises someone with ED syndrome can do',
 ];
 
 export function getRandomHint() {
