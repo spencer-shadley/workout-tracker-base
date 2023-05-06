@@ -1,14 +1,16 @@
 import {
+  CircularProgress,
   DialogContentText,
   IconButton,
+  Skeleton,
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelectedExercises } from '@/hooks/useSessionStorage';
-import { askQuestion } from '@/api/askQuestion';
 import { logError } from '@/utils/logger';
+import { useOpenAi } from '@/hooks/openai/useOpenAi';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
@@ -17,39 +19,49 @@ export function SummaryDialogContentListItemContent({
   exerciseName,
 }: SummaryDialogContentListItemContentProps) {
   const [exercises, setExercises] = useSelectedExercises();
-  const [description, setDescription] = useState<string | null>(null);
 
   const removeExercise = useCallback(() => {
     const filteredExercises = exercises.filter((name) => name !== exerciseName);
     setExercises(filteredExercises);
   }, [exerciseName, exercises, setExercises]);
 
-  // useEffect(() => {
-  //   askQuestion({
-  //     prompt: `Give me a brief description for the exercise ${exerciseName}`,
-  //   })
-  //     .then((response) => {
-  //       setDescription(response);
-  //     })
-  //     .catch((error) => {
-  //       setDescription('Failed to load description');
-  //       logError(error);
-  //     });
-  // }, [exerciseName]);
+  const {
+    data: description,
+    error,
+    isFetching,
+    isLoading,
+    refetch,
+  } = useOpenAi({
+    prompt: `Give me a brief description for the exercise ${exerciseName}`,
+    queryOptionOverrides: {
+      enabled: false,
+    },
+  });
+
+  function DescriptionText() {
+    const text = (
+      <DialogContentText>
+        {description ? description : 'Click to load description'}
+      </DialogContentText>
+    );
+
+    if (isLoading || isFetching) {
+      return <Skeleton>{text}</Skeleton>;
+    }
+
+    if (error) {
+      logError(error);
+      return <DialogContentText>Error fetching description</DialogContentText>;
+    }
+
+    return text;
+  }
 
   return (
     <article
+      className="cursor-pointer"
       onClick={() => {
-        askQuestion({
-          prompt: `Give me a brief description for the exercise ${exerciseName}`,
-        })
-          .then((response) => {
-            setDescription(response);
-          })
-          .catch((error) => {
-            setDescription('Failed to load description');
-            logError(error);
-          });
+        refetch();
       }}
     >
       <span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -66,9 +78,7 @@ export function SummaryDialogContentListItemContent({
           </IconButton>
         </Tooltip>
       </span>
-      <DialogContentText>
-        {description ?? 'Click for description'}
-      </DialogContentText>
+      <DescriptionText />
     </article>
   );
 }
