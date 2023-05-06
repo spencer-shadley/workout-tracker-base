@@ -65,7 +65,7 @@ export default function StepContent({
             </Button>
           </Link>
           <Fade in={!isLoading}>
-            <span>
+            <span className="flex">
               <Typography color="white" variant="caption">
                 {aiAnswer}
               </Typography>
