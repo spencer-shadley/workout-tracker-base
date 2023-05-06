@@ -28,7 +28,6 @@ export function SummaryDialogContentListItemContent({
     data: description,
     error,
     isFetching,
-    isLoading,
     refetch,
   } = useOpenAi({
     prompt: `Give me a brief description for the exercise ${exerciseName}`,
@@ -44,7 +43,7 @@ export function SummaryDialogContentListItemContent({
       </DialogContentText>
     );
 
-    if (isLoading || isFetching) {
+    if (isFetching) {
       return <Skeleton>{text}</Skeleton>;
     }
 
@@ -58,12 +57,12 @@ export function SummaryDialogContentListItemContent({
 
   return (
     <article
-      className="cursor-pointer"
+      className="w-full cursor-pointer"
       onClick={() => {
         refetch();
       }}
     >
-      <span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+      <span style={{ display: 'flex', alignItems: 'center' }}>
         <Typography variant="h5" flexGrow={1}>
           {exerciseName}
         </Typography>
