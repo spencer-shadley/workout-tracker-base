@@ -7,13 +7,11 @@ import { useDebugValue, useState } from 'react';
 interface useOpenAiProps {
   initialProps: Partial<CreateCompletionRequest>;
   queryOptionOverrides?: UseQueryOptions<string>;
-  shouldSkipFetch?: boolean;
 }
 
 export function useOpenAi({
   initialProps,
   queryOptionOverrides,
-  shouldSkipFetch,
 }: useOpenAiProps) {
   console.log('useOpenAi', initialProps);
   if (!initialProps.prompt) throw new Error('Prompt is required');
@@ -22,14 +20,10 @@ export function useOpenAi({
   const defaultQueryOptions: UseQueryOptions<string> = {
     queryKey: [initialProps.prompt],
     queryFn: () => {
-      if (shouldSkipFetch) {
-        return Promise.resolve('');
-      }
       return askQuestion(initialProps);
     },
     cacheTime: 1000 * 60 * 60 * 24, // 1 day,
     staleTime: 1000 * 60 * 60 * 24, // 1 day,
-    suspense: true,
   };
 
   console.log(

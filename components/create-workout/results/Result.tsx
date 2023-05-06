@@ -1,13 +1,11 @@
 import { ListItem, ListItemText } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
 import { ResultIcon } from './ResultIcon';
 import { AddToExerciseBasketIconButton } from '../AddToExerciseBasketIconButton';
 import { useAiStyle } from '@/hooks/useLocalStorage';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { useManualAskQuestion, useOpenAi } from '@/hooks/openai/useOpenAi';
-import { askQuestion } from '@/api/askQuestion';
+import { useOpenAi } from '@/hooks/openai/useOpenAi';
 
 interface ResultProps {
   exerciseName: string;
@@ -46,36 +44,16 @@ interface ListItemWithDetailsProps {
   exerciseName: string;
 }
 
-// TODO: why is this failing??
 function ListItemWithDetails({ exerciseName }: ListItemWithDetailsProps) {
   const [aiStyle] = useAiStyle();
-  const [exerciseDetailsText, setExerciseDetailsText] = useState<string>('');
 
   const prompt = `Tell me about ${exerciseName} in a few sentences. Answer in the style of ${aiStyle}`;
 
-  // working - manual call
-  useEffect(() => {
-    askQuestion({ prompt }).then((data) => {
-      setExerciseDetailsText(data);
-    });
-  }, [prompt]);
-
-  // throws infinite re-render error - useSWR
-  // const { data } = useManualAskQuestion(prompt);
-  // useEffect(() => {
-  //   setExerciseDetailsText(data ?? '');
-  // }, [data]);
-
-  // throws weird rendering error - tanstack query
-  // const { data } = useOpenAi({
-  //   initialProps: {
-  //     prompt,
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   setExerciseDetailsText(data ?? '');
-  // }, [data]);
+  const { data: exerciseDetailsText } = useOpenAi({
+    initialProps: {
+      prompt,
+    },
+  });
 
   return (
     <ListItemText
