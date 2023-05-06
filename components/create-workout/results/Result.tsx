@@ -50,9 +50,7 @@ function ListItemWithDetails({ exerciseName }: ListItemWithDetailsProps) {
   const prompt = `Tell me about ${exerciseName} in a few sentences. Answer in the style of ${aiStyle}`;
 
   const { data: exerciseDetailsText } = useOpenAi({
-    initialProps: {
-      prompt,
-    },
+    prompt,
   });
 
   return (
