@@ -12,7 +12,11 @@ export function ExerciseCartButton() {
   const [showDialog, setShowDialog] = useState(false);
 
   const summaryDialogProps = useMemo((): SummaryDialogType => {
-    return { isOpen: showDialog, close: () => setShowDialog(false) };
+    return {
+      isOpen: showDialog,
+      close: () => setShowDialog(false),
+      isLoading: false,
+    };
   }, [showDialog]);
 
   return selectedExercises.length > 0 ? (

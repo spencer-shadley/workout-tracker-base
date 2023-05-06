@@ -3,6 +3,7 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 export interface SummaryDialogType {
   isOpen: boolean;
   close: () => void;
+  isLoading: boolean;
 }
 
 export const SummaryDialogContext = createContext<SummaryDialogType>({
@@ -10,6 +11,7 @@ export const SummaryDialogContext = createContext<SummaryDialogType>({
   close: () => {
     console.error('close not set');
   },
+  isLoading: false,
 });
 
 export const useSummaryDialogContext = () => useContext(SummaryDialogContext);

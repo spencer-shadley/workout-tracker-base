@@ -1,4 +1,3 @@
-import { Skeleton } from '@mui/material';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { tryParse } from '@/hooks/useLocalStorage';
 import { SummaryDialog } from './SummaryDialog';
@@ -38,9 +37,11 @@ export function AiDialog({ showDialog, setShowDialog }: AiDialogProps) {
     }
   }, [rawWorkoutString, setSelectedExercises]);
 
-  if (isFetching) return <Skeleton />;
-
   return showDialog ? (
-    <SummaryDialog close={() => setShowDialog(false)} isOpen={showDialog} />
+    <SummaryDialog
+      close={() => setShowDialog(false)}
+      isOpen={showDialog}
+      isLoading={isFetching}
+    />
   ) : null;
 }
