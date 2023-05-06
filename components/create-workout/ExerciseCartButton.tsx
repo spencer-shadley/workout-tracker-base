@@ -7,7 +7,7 @@ import { SummaryDialogType } from './summary-dialog/context/SummaryDialogContext
 import { useSelectedExercises } from '@/hooks/useSessionStorage';
 
 export function ExerciseCartButton() {
-  const [exerciseNames] = useSelectedExercises();
+  const [selectedExercises] = useSelectedExercises();
 
   const [showDialog, setShowDialog] = useState(false);
 
@@ -15,7 +15,7 @@ export function ExerciseCartButton() {
     return { isOpen: showDialog, close: () => setShowDialog(false) };
   }, [showDialog]);
 
-  return (
+  return selectedExercises.length > 0 ? (
     <>
       <Tooltip
         title={<ExerciseCart />}
@@ -24,7 +24,7 @@ export function ExerciseCartButton() {
         arrow
       >
         <Badge
-          badgeContent={exerciseNames.length}
+          badgeContent={selectedExercises.length}
           overlap="circular"
           color="info"
         >
@@ -39,5 +39,5 @@ export function ExerciseCartButton() {
       </Tooltip>
       <SummaryDialog {...summaryDialogProps} />
     </>
-  );
+  ) : null;
 }
