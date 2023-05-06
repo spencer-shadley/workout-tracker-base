@@ -1,6 +1,5 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { logError } from '@/utils/logger';
-import { addCachedResponse, getCachedResponse } from '@/hooks/useLocalStorage';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
@@ -17,12 +16,8 @@ export async function askQuestion(
   initialProps: Partial<CreateCompletionRequest>
 ) {
   console.log('askQuestion', initialProps);
-  const prompt: string = ((initialProps.prompt as string) ?? '').trim();
 
-  const cachedResponse = getCachedResponse(prompt);
-  if (cachedResponse) {
-    return Promise.resolve(`cached response: ${cachedResponse}`);
-  }
+  initialProps.prompt = ((initialProps.prompt as string) ?? '').trim();
 
   ++numberOfActiveRequests;
   if (numberOfActiveRequests > MAX_NUMBER_OF_ACTIVE_REQUESTS) {
@@ -57,7 +52,6 @@ export async function askQuestion(
       .then((response) => {
         let data: string = response.data.choices[0].text ?? '';
         data = data.trim();
-        addCachedResponse(prompt, data);
         resolve(data);
       })
       .catch((error) => {
