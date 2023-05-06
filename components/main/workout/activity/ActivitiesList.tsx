@@ -21,38 +21,33 @@ export default function ActivitiesList({
   return (
     <div
       style={{
-        flexGrow: 1,
-        height: '100%',
-        maxHeight: '70dvh',
         overflow: 'auto',
       }}
     >
-      <div style={{ height: '100%', overflow: 'auto' }}>
-        <List sx={{ overflow: 'auto' }}>
-          {selectedExercises.map((exerciseName, index) => (
-            <>
+      <List>
+        {selectedExercises.map((exerciseName, index) => (
+          <div key={exerciseName}>
+            <ActivityListItem
+              key={exerciseName}
+              activityType="exercise"
+              exerciseName={exerciseName}
+            />
+            {shouldIncludeRests && index !== selectedExercises.length - 1 && (
               <ActivityListItem
-                key={exerciseName}
-                activityType="exercise"
+                key={`${exerciseName}-rest`}
+                activityType="rest-exercise"
                 exerciseName={exerciseName}
               />
-              {shouldIncludeRests && index !== selectedExercises.length - 1 && (
-                <ActivityListItem
-                  key={`${exerciseName}-rest`}
-                  activityType="rest-exercise"
-                  exerciseName={exerciseName}
-                />
-              )}
-            </>
-          ))}
-          {shouldIncludeRests && (
-            <ActivityListItem
-              key={`round-rest-${currentRound}`}
-              activityType="rest-round"
-            />
-          )}
-        </List>
-      </div>
+            )}
+          </div>
+        ))}
+        {shouldIncludeRests && (
+          <ActivityListItem
+            key={`round-rest-${currentRound}`}
+            activityType="rest-round"
+          />
+        )}
+      </List>
       <DuplicateExerciseWarning
         showDuplicateExerciseWarning={showDuplicateExerciseWarning}
         setShowDuplicateExerciseWarning={setShowDuplicateExerciseWarning}

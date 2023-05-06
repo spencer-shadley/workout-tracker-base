@@ -12,15 +12,17 @@ export default function ActiveWorkout() {
 
   return (
     <TimeProvider timeContext={timeContext}>
-      <Card>
-        <Typography>
-          Time left in workout{' '}
-          {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
-        </Typography>
-        <RoundsStepper />
-        <ButtonControls />
-      </Card>
-      <ActivitiesList shouldIncludeRests />
+      <div className="flex flex-col h-screen">
+        <Card>
+          <Typography>
+            Time left in workout{' '}
+            {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
+          </Typography>
+          <RoundsStepper />
+          <ButtonControls />
+        </Card>
+        <ActivitiesList shouldIncludeRests />
+      </div>
     </TimeProvider>
   );
 }
