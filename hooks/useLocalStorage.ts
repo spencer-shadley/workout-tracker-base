@@ -28,7 +28,7 @@ export function getOptions(): WorkoutOptions {
 
 export function tryParse<T>(jsonString: string, defaultValue: T): T {
   try {
-    return JSON.parse(jsonString);
+    return JSON.parse(jsonString) as T;
   } catch (e) {
     logError(e);
     return defaultValue;
