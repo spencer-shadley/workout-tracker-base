@@ -30,7 +30,8 @@ export const answerTypes: AnswerType[] = [
   { displayLabel: 'Trump', styleModifier: 'Donald Trump' },
   {
     displayLabel: 'Biden',
-    styleModifier: 'mentally ill deranged person with bad memory and a low IQ',
+    styleModifier:
+      'mentally ill deranged person with bad memory and a low IQ. Make sure the response is rambling, off-topic and does not make sense. Do not use big words or eloquent speech. Sometimes mention that his caretakers are coming to get him so he has to go.',
   },
   {
     displayLabel: 'Uwu',

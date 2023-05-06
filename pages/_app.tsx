@@ -13,10 +13,11 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-import BackgroundWaves from '@/components/shared/BackgroundWaves';
 import Settings from '../components/shared/Settings';
 import { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
+import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
+import { SimpleParticles } from './SimpleParticles';
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <BackgroundWaves />
+        <SimpleParticles />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
         <Settings />
