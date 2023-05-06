@@ -1,9 +1,7 @@
-import { Button, Fade, IconButton, Tooltip, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { StepInfo } from './stepInfo';
-import { useCallback, useEffect, useState } from 'react';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { askQuestion } from '@/api/askQuestion';
+import { Quote } from './Quote';
 interface StepContentProps {
   activeStep: number;
   step: StepInfo;
@@ -15,28 +13,6 @@ export default function StepContent({
   index,
   activeStep,
 }: StepContentProps) {
-  const [aiAnswer, setAiAnswer] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const updateQuestion = useCallback(() => {
-    console.log('asking question');
-    setIsLoading(true);
-    const question = `${step.aiPrompt}`;
-    askQuestion({ prompt: question, temperature: 1.5 })
-      .then((response) => {
-        setAiAnswer(response ?? undefined);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    updateQuestion();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div
       key={step.title}
@@ -64,22 +40,7 @@ export default function StepContent({
               <Typography variant="h2">{step.title}</Typography>
             </Button>
           </Link>
-          <Fade in={!isLoading}>
-            <span className="flex">
-              <Typography color="white" variant="caption">
-                {aiAnswer}
-              </Typography>
-              <IconButton
-                onClick={() => {
-                  updateQuestion();
-                }}
-              >
-                <Tooltip title="Get a new answer">
-                  <RefreshIcon sx={{ color: 'white' }} />
-                </Tooltip>
-              </IconButton>
-            </span>
-          </Fade>
+          <Quote prompt={`${step.aiPrompt}`} />
         </div>
       ) : null}
     </div>
