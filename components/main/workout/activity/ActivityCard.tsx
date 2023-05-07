@@ -1,10 +1,22 @@
-import { Card, CardContent, LinearProgress, CardProps } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardContent,
+  LinearProgress,
+  CardProps,
+  Typography,
+} from '@mui/material';
 import { useTimeContext } from '../context/TimeContextProvider';
 import { useActivityCardContext } from '../context/ActivityCardContextProvider';
 import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import { ActiveExercise } from './ActiveExercise';
 import { ExerciseTitle } from './ExerciseTitle';
 import { ActivityCardCloseButton } from './ActivityCardCloseButton';
+
+import youtubeSearch from 'youtube-search';
+
+import ReactPlayer from 'react-player/lazy';
+import { useEffect, useState } from 'react';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exerciseName, activityType } = useActivityCardContext();
@@ -22,6 +34,35 @@ export function ActivityCard(cardProps: CardProps) {
   const progressPercent = isExerciseActive
     ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
+
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [showVideo, setShowVideo] = useState<boolean>(false);
+  const [hasYoutubeQuotaExceeded, setHasYoutubeQuotaExceeded] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (!showVideo || hasYoutubeQuotaExceeded) {
+      return;
+    }
+
+    const opts: youtubeSearch.YouTubeSearchOptions = {
+      maxResults: 1,
+      key: 'AIzaSyBKLpjDurJWREpz9oQu_FWh-nwrNoKDkzA',
+      type: 'video',
+    };
+
+    youtubeSearch(`how to do ${exerciseName}`, opts, (err, results) => {
+      if (err) {
+        setHasYoutubeQuotaExceeded(true);
+        return console.log(err);
+      }
+
+      console.dir(results);
+      if (results?.length) {
+        setVideoUrl(results[0].link);
+      }
+    });
+  }, [exerciseName, hasYoutubeQuotaExceeded, showVideo]);
 
   return (
     <Card
@@ -42,6 +83,18 @@ export function ActivityCard(cardProps: CardProps) {
       {progressPercent !== null && (
         <LinearProgress variant="determinate" value={progressPercent} />
       )}
+      {hasYoutubeQuotaExceeded ? (
+        <Typography>YouTube limit exceeded</Typography>
+      ) : (
+        <Button
+          onClick={() => {
+            setShowVideo(true);
+          }}
+        >
+          show
+        </Button>
+      )}
+      {videoUrl && showVideo && <ReactPlayer url={videoUrl} />}
     </Card>
   );
 }
