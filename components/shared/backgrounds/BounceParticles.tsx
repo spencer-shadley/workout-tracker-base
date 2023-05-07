@@ -13,7 +13,7 @@ export function BounceParticles() {
       id="tsparticles"
       init={particlesInit}
       options={{
-        fps_limit: 60,
+        fps_limit: 120,
         interactivity: {
           detect_on: 'canvas',
           events: {
@@ -106,10 +106,17 @@ export function BounceParticles() {
               sync: false,
             },
             random: false,
-            value: 0.5,
+            value: 0.75,
           },
           shape: {
-            type: 'circle',
+            type: 'image',
+            image: [
+              {
+                src: 'https://freepngimg.com/save/138210-vector-dumbbells-fitness-free-hd-image/512x512',
+                width: 202,
+                height: 200,
+              },
+            ],
           },
           size: {
             anim: {
@@ -118,8 +125,8 @@ export function BounceParticles() {
               speed: 40,
               sync: false,
             },
-            random: { enable: true, minimumValue: 5 },
-            value: 10,
+            random: { enable: true, minimumValue: 10 },
+            value: 30,
           },
         },
         polygon: {
