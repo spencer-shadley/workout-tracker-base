@@ -13,7 +13,7 @@ export interface TimeSlot {
 }
 
 export interface TimeContextType {
-  currentRound: number;
+  currentRound: number | null;
   remainingRoundTimeInMilliseconds: number;
   remainingWorkoutTimeInMilliseconds: number;
   buckets: TimeSlot[];
@@ -26,6 +26,8 @@ export interface TimeContextType {
   toggleIsRunning: () => void;
   skipCurrentActivity: () => void;
   jumpToBucket: (bucket: TimeSlot) => void;
+  workoutCompletionTime: number | null;
+  mostRecentCompletedExerciseTime: number | null;
 }
 
 export const TimeContext = createContext<TimeContextType>({
@@ -43,24 +45,26 @@ export const TimeContext = createContext<TimeContextType>({
     containerRound: 0,
     exerciseType: 'exercise',
   },
-  setCurrentBucket: function (): void {
+  setCurrentBucket(): void {
     throw new Error('Function not implemented.');
   },
-  setCurrentRound: function (): void {
+  setCurrentRound(): void {
     throw new Error('Function not implemented.');
   },
-  reset: function (): void {
+  reset(): void {
     throw new Error('Function not implemented.');
   },
-  toggleIsRunning: function (): void {
+  toggleIsRunning(): void {
     throw new Error('Function not implemented.');
   },
-  skipCurrentActivity: function (): void {
+  skipCurrentActivity(): void {
     throw new Error('Function not implemented.');
   },
-  jumpToBucket: function (): void {
+  jumpToBucket(): void {
     throw new Error('Function not implemented.');
   },
+  workoutCompletionTime: null,
+  mostRecentCompletedExerciseTime: null,
 });
 
 export const useTimeContext = () => useContext(TimeContext);

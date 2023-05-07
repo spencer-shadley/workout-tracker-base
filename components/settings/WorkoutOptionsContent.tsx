@@ -32,6 +32,25 @@ export function WorkoutOptionsContent() {
         }}
       />
 
+      <Typography>Exercise duration</Typography>
+      <Slider
+        step={5}
+        value={options.exerciseDurationInSeconds}
+        min={5}
+        max={120}
+        valueLabelDisplay="auto"
+        marks={makeMinuteMarks()}
+        valueLabelFormat={(value) => {
+          return `${value}s`;
+        }}
+        onChange={(event, updated) => {
+          setOptions({
+            ...options,
+            exerciseDurationInSeconds: updated as number,
+          });
+        }}
+      />
+
       <Typography>Rest between exercises</Typography>
       <Slider
         step={5}
