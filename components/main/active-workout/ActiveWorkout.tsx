@@ -22,7 +22,7 @@ export default function ActiveWorkout() {
         <Fireworks />
       )}
       <TimeProvider timeContext={timeContext}>
-        <div className="flex flex-col h-screen overflow-hidden">
+        <div className="flex flex-col h-[100dvh] overflow-hidden">
           <Typography className="text-gray-100">
             Time left in workout{' '}
             {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}

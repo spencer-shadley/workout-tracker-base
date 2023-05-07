@@ -9,7 +9,7 @@ export default function CreateWorkoutContent() {
   const { searchText, searchedExerciseNameResults, isSearching } = searchInput;
 
   return (
-    <Paper className="h-screen opacity-80 p-4 flex flex-col">
+    <Paper className="h-[100dvh] opacity-80 p-4 flex flex-col">
       {searchText === '' && <h1>Create an AI powered workout!</h1>}
       <ExerciseSearch />
       <div className="overflow-auto">
