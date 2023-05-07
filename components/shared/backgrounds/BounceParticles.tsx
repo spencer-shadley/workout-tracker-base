@@ -63,13 +63,6 @@ export function BounceParticles() {
           color: {
             value: '#ffffff',
           },
-          line_linked: {
-            color: '#ffffff',
-            distance: 150,
-            enable: true,
-            opacity: 0.4,
-            width: 1,
-          },
           move: {
             attract: {
               enable: false,
