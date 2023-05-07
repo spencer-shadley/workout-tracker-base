@@ -13,21 +13,30 @@ export default function ActivityListItem({
   exerciseName,
   ...activityCardProps
 }: ActivityListItemProps) {
-  const { buckets } = useTimeContext();
+  const { buckets, elapsedTimeInMilliseconds } = useTimeContext();
+  const activityBucket = buckets.find(
+    (bucket) =>
+      bucket.containerExercise === exerciseName &&
+      bucket.exerciseType === activityType
+  );
+  const activityEndTime: number = activityBucket
+    ? activityBucket.endTimeInMilliseconds
+    : Number.MAX_SAFE_INTEGER;
+  const isComplete = activityEndTime > elapsedTimeInMilliseconds;
+
   return (
     <ActivityCardProvider
       activityCardContext={{
         exerciseName,
         isDismissible: false,
         activityType,
-        timeBucket: buckets.find(
-          (bucket) =>
-            bucket.containerExercise === exerciseName &&
-            bucket.exerciseType === activityType
-        ),
+        timeBucket: activityBucket,
       }}
     >
-      <ListItem key={`${exerciseName}-${activityType}`}>
+      <ListItem
+        key={`${exerciseName}-${activityType}`}
+        className={isComplete ? '' : 'opacity-25'}
+      >
         <ActivityCard {...activityCardProps} />
       </ListItem>
     </ActivityCardProvider>
