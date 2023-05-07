@@ -19,9 +19,9 @@ export default function ActiveWorkout() {
             {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
           </Typography>
           <RoundsStepper />
-          <ButtonControls />
         </Card>
         <ActivitiesList shouldIncludeRests />
+        <ButtonControls />
       </div>
     </TimeProvider>
   );
