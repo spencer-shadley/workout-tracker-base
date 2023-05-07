@@ -13,7 +13,7 @@ export default function RoundsStepper() {
     rounds.push(i);
   }
   return (
-    <Stepper activeStep={currentRound} nonLinear className="mb-2">
+    <Stepper activeStep={currentRound ?? 0} nonLinear className="mb-2">
       {rounds.map((round) => {
         return (
           <Step key={round}>
