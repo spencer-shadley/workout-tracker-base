@@ -35,7 +35,7 @@ export default function StepContent({
             padding: '50px',
           }}
         >
-          <Link href="/StartWorkoutPage">
+          <Link className="bounce rectangle" href="/StartWorkoutPage">
             <Button variant="outlined">
               <Typography variant="h2">{step.title}</Typography>
             </Button>

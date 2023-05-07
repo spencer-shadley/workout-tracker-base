@@ -19,7 +19,12 @@ import { Box, CircularProgress } from '@mui/material';
 import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
 import { SimpleParticles } from '../components/shared/backgrounds/SimpleParticles';
 import { useBackgroundPreference } from '@/hooks/useLocalStorage';
-import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
+import {
+  bounce,
+  particles,
+} from '@/components/shared/backgrounds/backgroundsTypes';
+import { Fireworks } from '@/components/shared/backgrounds/Fireworks';
+import { BounceParticles } from '@/components/shared/backgrounds/BounceParticles';
 
 const queryClient = new QueryClient();
 
@@ -37,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <BackgroundWaves />
         {backgroundPreference === particles && <SimpleParticles />}
+        {backgroundPreference === bounce && <BounceParticles />}
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
         <Settings />

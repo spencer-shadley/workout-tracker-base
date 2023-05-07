@@ -16,7 +16,7 @@ import { PropsWithChildren, useState } from 'react';
 import { WorkoutOptionsContent } from '../main/workout/WorkoutOptionsContent';
 import { useBackgroundPreference } from '@/hooks/useLocalStorage';
 import { logError } from '@/utils/logger';
-import { colors, particles } from './backgrounds/backgroundsTypes';
+import { bounce, colors, particles } from './backgrounds/backgroundsTypes';
 
 export default function Settings() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -24,6 +24,7 @@ export default function Settings() {
   return (
     <>
       <Fab
+        className="bounce circle"
         size="medium"
         color="secondary"
         aria-label="settings"
@@ -81,6 +82,9 @@ function BackgroundOptions() {
             case colors:
               setBackgroundOption(colors);
               break;
+            case bounce:
+              setBackgroundOption(bounce);
+              break;
             default:
               logError(`Invalid background option ${value}`);
           }
@@ -88,6 +92,7 @@ function BackgroundOptions() {
       >
         <MenuItem value={particles}>{particles}</MenuItem>
         <MenuItem value={colors}>{colors}</MenuItem>
+        <MenuItem value={bounce}>{bounce}</MenuItem>
       </Select>
     </FormControl>
   );

@@ -48,7 +48,7 @@ export default function WorkoutStepper({
               setActiveStep(stepIndex);
             }}
           >
-            <StepLabel StepIconComponent={StepIcon}></StepLabel>
+            <StepLabel StepIconComponent={StepIcon} />
           </Step>
         </Tooltip>
       ))}
