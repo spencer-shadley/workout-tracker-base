@@ -5,6 +5,7 @@ import {
   LinearProgress,
   CardProps,
   Typography,
+  Link,
 } from '@mui/material';
 import { useTimeContext } from '../context/TimeContextProvider';
 import { useActivityCardContext } from '../context/ActivityCardContextProvider';
@@ -84,16 +85,23 @@ export function ActivityCard(cardProps: CardProps) {
         <LinearProgress variant="determinate" value={progressPercent} />
       )}
       {hasYoutubeQuotaExceeded ? (
-        <Typography>YouTube limit exceeded</Typography>
-      ) : (
+        <Link
+          href={encodeURI(
+            `https://www.youtube.com/results?search_query=how+to+do+${exerciseName}`
+          )}
+          target="_blank"
+        >
+          YouTube limit exceeded - click to search manually
+        </Link>
+      ) : activityType === 'exercise' ? (
         <Button
           onClick={() => {
             setShowVideo(true);
           }}
         >
-          show
+          show video
         </Button>
-      )}
+      ) : null}
       {videoUrl && showVideo && <ReactPlayer url={videoUrl} />}
     </Card>
   );
