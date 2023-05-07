@@ -15,21 +15,23 @@ export default function ActiveWorkout() {
   const { exerciseType } = currentBucket;
 
   return (
-    <TimeProvider timeContext={timeContext}>
-      <div className="flex flex-col h-screen overflow-hidden">
-        <Typography className="text-gray-100">
-          Time left in workout{' '}
-          {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
-        </Typography>
-        <RoundsStepper />
-        <ActivitiesList shouldIncludeRests />
-        <TimerControls />
-      </div>
+    <>
       {exerciseType === 'exercise' || !isRunning ? (
         <Background />
       ) : (
         <Fireworks />
       )}
-    </TimeProvider>
+      <TimeProvider timeContext={timeContext}>
+        <div className="flex flex-col h-screen overflow-hidden">
+          <Typography className="text-gray-100">
+            Time left in workout{' '}
+            {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
+          </Typography>
+          <RoundsStepper />
+          <ActivitiesList shouldIncludeRests />
+          <TimerControls />
+        </div>
+      </TimeProvider>
+    </>
   );
 }

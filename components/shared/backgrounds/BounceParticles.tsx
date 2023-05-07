@@ -10,6 +10,7 @@ export function BounceParticles() {
 
   return (
     <Particles
+      className="absolute top-0"
       id="tsparticles"
       init={particlesInit}
       options={{
