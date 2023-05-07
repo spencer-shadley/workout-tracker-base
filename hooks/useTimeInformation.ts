@@ -71,7 +71,10 @@ export default function useTimeInformation(): TimeContextType {
         bucket.remainingTimeInMilliseconds =
           bucket.endTimeInMilliseconds - elapsedTimeInMilliseconds;
 
-        if (currentBucket !== bucket) {
+        if (
+          currentBucket !== bucket &&
+          currentBucket?.exerciseType === 'exercise'
+        ) {
           setMostRecentCompletedExerciseTime(Date.now());
         }
 

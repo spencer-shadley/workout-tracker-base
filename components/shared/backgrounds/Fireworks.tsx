@@ -14,12 +14,6 @@ export function Fireworks() {
       init={particlesInit}
       options={{
         name: 'Fireworks',
-        background: {
-          opacity: 0,
-        },
-        fullScreen: {
-          enable: true,
-        },
         emitters: {
           direction: 'top',
           life: {

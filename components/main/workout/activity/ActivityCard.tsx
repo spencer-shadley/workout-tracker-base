@@ -5,8 +5,6 @@ import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import { ActiveExercise } from './ActiveExercise';
 import { ExerciseTitle } from './ExerciseTitle';
 import { ActivityCardCloseButton } from './ActivityCardCloseButton';
-import { useEffect, useState } from 'react';
-import { Fireworks } from '@/components/shared/backgrounds/Fireworks';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exerciseName, activityType } = useActivityCardContext();
@@ -24,18 +22,6 @@ export function ActivityCard(cardProps: CardProps) {
   const progressPercent = isExerciseActive
     ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
-
-  const [shouldShowSuccess, setShouldShowSuccess] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (remainingTimeInSeconds <= 1 && currentExerciseType === 'exercise') {
-      setShouldShowSuccess(true);
-      setTimeout(() => {
-        setShouldShowSuccess(false);
-      }, 5000);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [remainingTimeInMilliseconds]);
 
   return (
     <Card
@@ -56,7 +42,6 @@ export function ActivityCard(cardProps: CardProps) {
       {progressPercent !== null && (
         <LinearProgress variant="determinate" value={progressPercent} />
       )}
-      {shouldShowSuccess && <Fireworks />}
     </Card>
   );
 }
