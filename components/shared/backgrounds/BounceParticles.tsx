@@ -84,7 +84,7 @@ export function BounceParticles() {
             enable: true,
             outModes: {
               default: 'bounce',
-              top: 'none',
+              top: 'destroy',
               bottom: 'destroy',
             },
             random: false,
