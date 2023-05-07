@@ -4,7 +4,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, cloneElement, isValidElement } from 'react';
 
 export default function TimerControls() {
   const {
@@ -56,11 +56,18 @@ function TimerControl({ children, onClick, sx, tooltip }: TimerControlProps) {
   const fullSx: SxProps<Theme> = {
     ...sx,
   };
+  let childrenWithColor = children;
+
+  if (isValidElement(childrenWithColor)) {
+    childrenWithColor = cloneElement(childrenWithColor, {
+      color: 'action',
+    } as unknown as HTMLDivElement);
+  }
 
   return (
     <Tooltip title={tooltip} arrow>
       <Fab onClick={onClick} sx={fullSx} className="bg-gray-300">
-        {children}
+        {childrenWithColor}
       </Fab>
     </Tooltip>
   );
