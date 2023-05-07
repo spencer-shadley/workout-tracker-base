@@ -6,7 +6,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { PropsWithChildren } from 'react';
 
-export default function ButtonControls() {
+export default function TimerControls() {
   const {
     isRunning,
     toggleIsRunning,
