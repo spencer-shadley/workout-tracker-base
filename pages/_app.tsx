@@ -16,21 +16,11 @@ dayjs.extend(relativeTime);
 import Settings from '../components/shared/Settings';
 import { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
-import { SimpleParticles } from '../components/shared/backgrounds/SimpleParticles';
-import { useBackgroundPreference } from '@/hooks/useLocalStorage';
-import {
-  bounce,
-  particles,
-} from '@/components/shared/backgrounds/backgroundsTypes';
-import { Fireworks } from '@/components/shared/backgrounds/Fireworks';
-import { BounceParticles } from '@/components/shared/backgrounds/BounceParticles';
+import Background from '@/components/shared/backgrounds/Background';
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [backgroundPreference] = useBackgroundPreference();
-
   const [isPageLoaded, setIsPageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -40,9 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return isPageLoaded ? (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <BackgroundWaves />
-        {backgroundPreference === particles && <SimpleParticles />}
-        {backgroundPreference === bounce && <BounceParticles />}
+        <Background />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
         <Settings />

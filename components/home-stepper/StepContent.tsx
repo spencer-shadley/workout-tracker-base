@@ -2,6 +2,7 @@ import { Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { StepInfo } from './stepInfo';
 import { Quote } from './Quote';
+import RectangleBouncer from '../shared/RectangeBouncer';
 interface StepContentProps {
   activeStep: number;
   step: StepInfo;
@@ -35,11 +36,13 @@ export default function StepContent({
             padding: '50px',
           }}
         >
-          <Link className="bounce rectangle" href="/StartWorkoutPage">
-            <Button variant="outlined">
-              <Typography variant="h2">{step.title}</Typography>
-            </Button>
-          </Link>
+          <RectangleBouncer>
+            <Link href="/StartWorkoutPage">
+              <Button variant="outlined">
+                <Typography variant="h2">{step.title}</Typography>
+              </Button>
+            </Link>
+          </RectangleBouncer>
           <Quote prompt={`${step.aiPrompt}`} />
         </div>
       ) : null}
