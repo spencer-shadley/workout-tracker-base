@@ -17,11 +17,15 @@ import Settings from '../components/shared/Settings';
 import { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
-import { SimpleParticles } from './SimpleParticles';
+import { SimpleParticles } from '../components/shared/backgrounds/SimpleParticles';
+import { useBackgroundPreference } from '@/hooks/useLocalStorage';
+import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [backgroundPreference] = useBackgroundPreference();
+
   const [isPageLoaded, setIsPageLoaded] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <BackgroundWaves />
-        <SimpleParticles />
+        {backgroundPreference === particles && <SimpleParticles />}
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
         <Settings />

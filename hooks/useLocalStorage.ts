@@ -1,14 +1,19 @@
 import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
+import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
 import { logError } from '@/utils/logger';
 import { useLocalStorage } from 'usehooks-ts';
 
 const aiStyleKey = 'ai-style';
+const optionsKey = 'options';
+const backgroundKey = 'background';
 
 export function useAiStyle() {
   return useLocalStorage(aiStyleKey, 'Personal Trainer');
 }
 
-const optionsKey = 'options';
+export function useBackgroundPreference() {
+  return useLocalStorage<string>(backgroundKey, particles);
+}
 
 const initialOptions: WorkoutOptions = {
   numberOfRounds: 3,

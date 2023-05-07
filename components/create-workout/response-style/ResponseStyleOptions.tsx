@@ -1,11 +1,4 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Snackbar,
-  Grow,
-} from '@mui/material';
+import { FormControl, InputLabel, Select, Snackbar, Grow } from '@mui/material';
 import {
   AnswerType,
   answerTypes,
@@ -49,7 +42,6 @@ export function ResponseStyleOption() {
             setIsSuccessAlertOpen(true);
           }}
         >
-          <MenuItem value={10}>ten</MenuItem>
           {answerTypes.map((answer) => (
             <ResponseStyleMenuOption
               key={answer.styleModifier}
