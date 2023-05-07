@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-import Settings from '../components/shared/Settings';
+import Settings from '../components/settings/Settings';
 import { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import Background from '@/components/shared/backgrounds/Background';

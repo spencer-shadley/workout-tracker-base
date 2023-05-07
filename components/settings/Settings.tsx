@@ -9,8 +9,8 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ResponseStyleOption } from '@/components/create-workout/response-style/ResponseStyleOptions';
 import { PropsWithChildren, useState } from 'react';
-import { WorkoutOptionsContent } from '../main/workout/WorkoutOptionsContent';
-import { BackgroundOptions } from './BackgroundOptions';
+import { WorkoutOptionsContent } from './WorkoutOptionsContent';
+import { BackgroundOptions } from '../shared/BackgroundOptions';
 
 export default function Settings() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);

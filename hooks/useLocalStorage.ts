@@ -1,4 +1,4 @@
-import { WorkoutOptions } from '@/components/main/workout/WorkoutOptions';
+import { WorkoutOptions } from '@/components/settings/WorkoutOptions';
 import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
 import { logError } from '@/utils/logger';
 import { useLocalStorage } from 'usehooks-ts';

@@ -1,6 +1,14 @@
 import { Slider, Typography } from '@mui/material';
 import { useOptions } from '@/hooks/useLocalStorage';
-import { makeMinuteMarks } from './WorkoutOptionsDialog';
+
+function makeMinuteMarks() {
+  const maxMinutes = 4;
+  const marks = [];
+  for (let i = 1; i <= maxMinutes; i++) {
+    marks.push({ value: i * 60, label: `${i}m` });
+  }
+  return marks;
+}
 
 export function WorkoutOptionsContent() {
   const [options, setOptions] = useOptions();
