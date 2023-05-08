@@ -31,13 +31,14 @@ export function AddOrRemoveFromCartButtons({
   } from workout`;
   const removeExerciseTooltip =
     numberInCart > 1 ? removeAllTooltip : removeTooltip;
+  const addTooltip = `Add ${
+    isExerciseAdded ? 'another' : ''
+  } ${exerciseName} to workout`;
 
   return (
     <ButtonGroup>
       <CircleListItemButton
-        tooltipTitle={`Add ${
-          isExerciseAdded ? 'another' : ''
-        } ${exerciseName} to workout`}
+        tooltipTitle={addTooltip}
         badgeContent={numberInCart}
         badgeSx={{ marginRight: '10px' }}
         icon={<AddIcon />}

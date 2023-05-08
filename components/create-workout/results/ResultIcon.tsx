@@ -11,12 +11,12 @@ export function ResultIcon({ icon, tooltip, setShouldShow }: ResultIconProps) {
   return (
     <Tooltip title={tooltip} key={tooltip}>
       <ListItemButton
-        sx={{ padding: 0 }}
+        sx={{ padding: '5px 5px', borderRadius: '100px' }}
         onClick={() => {
           setShouldShow(true);
         }}
       >
-        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemIcon sx={{ minWidth: '0px' }}>{icon}</ListItemIcon>
       </ListItemButton>
     </Tooltip>
   );
