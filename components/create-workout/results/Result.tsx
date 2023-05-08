@@ -10,6 +10,7 @@ import { useAddStyle } from '@/hooks/openai/useAddStyle';
 interface ResultProps {
   exerciseName: string;
 }
+
 export default function Result({ exerciseName }: ResultProps) {
   const [shouldShow, setShouldShow] = useState<boolean>(false);
 
