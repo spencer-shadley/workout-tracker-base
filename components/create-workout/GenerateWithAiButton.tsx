@@ -1,4 +1,4 @@
-import { Icon, IconButton, Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import { useState } from 'react';
 import { AiDialog } from './summary-dialog/AiDialog';
@@ -14,9 +14,7 @@ export function GenerateWithAiButton() {
         <>
           <Tooltip title="Auto generate full workout" arrow>
             <IconButton onClick={() => setShowDialog(true)}>
-              <Icon>
-                <AutoFixHighIcon />
-              </Icon>
+              <AutoFixHighIcon />
             </IconButton>
           </Tooltip>
           <AiDialog showDialog={showDialog} setShowDialog={setShowDialog} />
