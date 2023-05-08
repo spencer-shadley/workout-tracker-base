@@ -22,6 +22,7 @@ export interface TimeContextType {
   setCurrentRound: (round: number) => void;
   elapsedTimeInSeconds: number;
   isRunning: boolean;
+  pause: () => void;
   reset: () => void;
   toggleIsRunning: () => void;
   skipCurrentActivity: () => void;
@@ -65,6 +66,9 @@ export const TimeContext = createContext<TimeContextType>({
   },
   workoutCompletionTime: null,
   mostRecentCompletedExerciseTime: null,
+  pause: function (): void {
+    throw new Error('Function not implemented.');
+  },
 });
 
 export const useTimeContext = () => useContext(TimeContext);

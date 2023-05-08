@@ -133,6 +133,10 @@ export default function useTimeInformation(): TimeContextType {
     setTimeElapsedInSeconds(bucket.startTimeInSeconds);
   };
 
+  const pause = () => {
+    setIsRunning(false);
+  };
+
   const timeInfo = {
     currentRound,
     remainingRoundTimeInSeconds,
@@ -144,6 +148,7 @@ export default function useTimeInformation(): TimeContextType {
     setCurrentBucket,
     setCurrentRound,
     toggleIsRunning,
+    pause,
     reset,
     skipCurrentActivity,
     jumpToBucket,
