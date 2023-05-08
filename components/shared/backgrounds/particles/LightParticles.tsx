@@ -333,7 +333,7 @@ export default function LightParticles() {
               height: 1080,
             },
             limit: 0,
-            value: 30,
+            value: 10,
           },
           opacity: {
             random: {
@@ -494,7 +494,7 @@ export default function LightParticles() {
               opacity: 1,
             },
             particles: {
-              enable: false,
+              enable: true,
               frequency: 0.05,
               opacity: 1,
             },
