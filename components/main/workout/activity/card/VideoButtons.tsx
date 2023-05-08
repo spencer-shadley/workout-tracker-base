@@ -1,4 +1,4 @@
-import { Button, Link } from '@mui/material';
+import { Button, Link, Typography } from '@mui/material';
 import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import ReactPlayer from 'react-player/lazy';
 import useVideo from './hooks/useVideo';
@@ -18,7 +18,9 @@ export function VideoButtons() {
 
   return activityType === 'exercise' ? (
     <>
-      {!hasYoutubeQuotaExceeded && (
+      {hasYoutubeQuotaExceeded ? (
+        <Typography>YouTube Quota Exceeded</Typography>
+      ) : (
         <Button
           onClick={() => {
             pause();

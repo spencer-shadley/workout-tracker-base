@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import youtubeSearch from 'youtube-search';
 import { useActivityCardContext } from '../../../context/ActivityCardContextProvider';
+import { logError } from '@/utils/logger';
 
 export default function useVideo() {
   const { exerciseName } = useActivityCardContext();
@@ -34,6 +35,8 @@ export default function useVideo() {
       console.dir(results);
       if (results?.length) {
         setVideoUrl(results[0].link);
+      } else {
+        logError(`No video found for exercise ${exerciseName}`);
       }
     });
   }, [exerciseName, hasYoutubeQuotaExceeded, shouldShowVideo]);
