@@ -4,6 +4,7 @@ import { logError } from '@/utils/logger';
 import {
   bounce,
   colors,
+  light,
   particles,
   seaAnemone,
 } from './backgrounds/backgroundsTypes';
@@ -39,6 +40,9 @@ export function BackgroundOptions() {
             case seaAnemone:
               setBackgroundOption(seaAnemone);
               break;
+            case light:
+              setBackgroundOption(light);
+              break;
             default:
               logError(`Invalid background option ${value}`);
           }
@@ -48,6 +52,7 @@ export function BackgroundOptions() {
         <MenuItem value={colors}>{colors}</MenuItem>
         <MenuItem value={bounce}>{bounce}</MenuItem>
         <MenuItem value={seaAnemone}>{seaAnemone}</MenuItem>
+        <MenuItem value={light}>{light}</MenuItem>
       </Select>
     </FormControl>
   );

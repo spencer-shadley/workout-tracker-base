@@ -2,8 +2,9 @@ import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
 import { useBackgroundPreference } from '@/hooks/useLocalStorage';
 import { BounceParticles } from './particles/BounceParticles';
 import { SimpleParticles } from './particles/SimpleParticles';
-import { particles, bounce, seaAnemone } from './backgroundsTypes';
+import { particles, bounce, seaAnemone, light } from './backgroundsTypes';
 import SeaAnemoneParticles from './particles/SeaAnemoneParticles';
+import LightParticles from './particles/LightParticles';
 
 export default function Background() {
   const [backgroundPreference] = useBackgroundPreference();
@@ -18,6 +19,9 @@ export default function Background() {
       break;
     case seaAnemone:
       background = <SeaAnemoneParticles />;
+      break;
+    case light:
+      background = <LightParticles />;
       break;
     default:
       background = null;
