@@ -5,7 +5,7 @@ import {
   SummaryDialogProvider,
   SummaryDialogType,
 } from './context/SummaryDialogContextProvider';
-import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 
 export function SummaryDialog(props: SummaryDialogType) {
   const [exerciseNames] = useSelectedExercises();

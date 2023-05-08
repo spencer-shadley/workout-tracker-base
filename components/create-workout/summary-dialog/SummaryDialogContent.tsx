@@ -6,7 +6,7 @@ import {
   Stack,
 } from '@mui/material';
 import { SummaryDialogContentListItem } from './SummaryDialogContentListItem';
-import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { useSummaryDialogContext } from './context/SummaryDialogContextProvider';
 
 export function SummaryContent() {

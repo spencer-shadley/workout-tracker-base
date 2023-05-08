@@ -1,6 +1,6 @@
 import { ListItemButton } from '@mui/material';
 import { useCreateWorkoutContext as useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
-import { useAddExerciseName } from '@/hooks/useSessionStorage';
+import { useAddExerciseName } from '@/hooks/storage/useSessionStorage';
 
 export function NewExerciseButton() {
   const { searchInput } = useCreateWorkoutContext();

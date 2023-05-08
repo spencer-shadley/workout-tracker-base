@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { logError } from '@/utils/logger';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
 

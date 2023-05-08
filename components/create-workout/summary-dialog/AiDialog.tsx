@@ -1,7 +1,7 @@
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { tryParse } from '@/hooks/useLocalStorage';
 import { SummaryDialog } from './SummaryDialog';
-import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
 import { useEffect } from 'react';
 

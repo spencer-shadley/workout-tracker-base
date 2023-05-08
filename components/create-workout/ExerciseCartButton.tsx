@@ -4,7 +4,7 @@ import { ExerciseCart } from './ExerciseCart';
 import { useMemo, useState } from 'react';
 import { SummaryDialog } from './summary-dialog/SummaryDialog';
 import { SummaryDialogType } from './summary-dialog/context/SummaryDialogContextProvider';
-import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 
 export function ExerciseCartButton() {
   const [selectedExercises] = useSelectedExercises();

@@ -5,7 +5,7 @@ import {
   useAddExerciseName,
   useRemoveExerciseName,
   useSelectedExercises,
-} from '@/hooks/useSessionStorage';
+} from '@/hooks/storage/useSessionStorage';
 import { CircleListItemButton } from './CircleListItemButton';
 
 interface AddOrRemoveFromCartButtonsProps {
