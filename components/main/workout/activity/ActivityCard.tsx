@@ -4,7 +4,6 @@ import {
   CardContent,
   LinearProgress,
   CardProps,
-  Typography,
   Link,
 } from '@mui/material';
 import { useTimeContext } from '../context/TimeContextProvider';
