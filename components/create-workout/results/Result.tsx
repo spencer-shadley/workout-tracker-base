@@ -3,7 +3,7 @@ import { useState } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
 import { ResultIcon } from './ResultIcon';
-import { AddToExerciseBasketIconButton } from '../AddToExerciseBasketIconButton';
+import { AddOrRemoveFromCartButtons } from '../icons/AddOrRemoveFromCartButtons';
 import { useAiStyle } from '@/hooks/useLocalStorage';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
 
@@ -16,7 +16,7 @@ export default function Result({ exerciseName }: ResultProps) {
 
   return (
     <ListItem className="w-full hover:bg-slate-200 content-between">
-      <AddToExerciseBasketIconButton exerciseName={exerciseName} />
+      <AddOrRemoveFromCartButtons exerciseName={exerciseName} />
       {shouldShow ? (
         <ListItemWithDetails exerciseName={exerciseName} />
       ) : (

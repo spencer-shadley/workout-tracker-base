@@ -4,11 +4,11 @@ import Result from './Result';
 
 export function Results() {
   const { searchInput } = useCreateWorkoutContext();
-  const { searchedExerciseNameResults: foundExerciseNames } = searchInput;
+  const { searchedExerciseNameResults } = searchInput;
   return (
-    <Card sx={{ padding: '5px 10px' }} className="bg-slate-400" elevation={10}>
+    <Card sx={{ padding: '5px 10px' }} className="bg-slate-500" elevation={10}>
       <List className="w-full">
-        {foundExerciseNames.map((exerciseName) => (
+        {searchedExerciseNameResults.map((exerciseName) => (
           <Card key={exerciseName} sx={{ marginBottom: '10px' }}>
             <Result exerciseName={exerciseName} />
           </Card>
