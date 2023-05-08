@@ -5,9 +5,9 @@ import useActivityName from '@/hooks/useActivityName';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 export function ExerciseTitle() {
+  const { jumpToBucket } = useTimeContext();
   const { exerciseName, timeBucket, activityType } = useActivityCardContext();
   const activityName = useActivityName(activityType, exerciseName);
-  const { jumpToBucket } = useTimeContext();
 
   return (
     <Typography

@@ -2,7 +2,7 @@ import ActivitiesList from '../workout/activity/ActivitiesList';
 import { Typography } from '@mui/material';
 import { TimeProvider } from '../workout/context/TimeContextProvider';
 import RoundsStepper from './RoundsStepper';
-import useTimeInformation from '@/hooks/useTimeInformation';
+import useTimeInformation from '@/hooks/time/useTimeInformation';
 import { secondsToHumanReadable } from '@/utils/time';
 import TimerControls from './TimerControls';
 import Background from '@/components/shared/backgrounds/Background';

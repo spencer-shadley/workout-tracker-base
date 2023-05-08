@@ -41,6 +41,7 @@ export default function ActivitiesList({
           <ActivityListItem
             key={`round-rest-${currentRound}`}
             activityType="rest-round"
+            exerciseName={`Round ${currentRound} Rest`}
           />
         )}
       </List>

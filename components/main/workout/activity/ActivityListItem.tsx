@@ -1,7 +1,8 @@
 import { CardProps, ListItem } from '@mui/material';
 import { ActivityCard } from './ActivityCard';
-import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
+import { ActivityType } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
+import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 
 interface ActivityListItemProps extends CardProps {
   activityType: ActivityType;
@@ -13,16 +14,10 @@ export default function ActivityListItem({
   exerciseName,
   ...activityCardProps
 }: ActivityListItemProps) {
-  const { buckets, elapsedTimeInSeconds } = useTimeContext();
-  const activityBucket = buckets.find(
-    (bucket) =>
-      bucket.containerExercise === exerciseName &&
-      bucket.exerciseType === activityType
+  const { activityBucket, isComplete } = useActivityBucket(
+    exerciseName,
+    activityType
   );
-  const activityEndTime: number = activityBucket
-    ? activityBucket.endTimeInSeconds
-    : Number.MAX_SAFE_INTEGER;
-  const isComplete = activityEndTime > elapsedTimeInSeconds;
 
   return (
     <ActivityCardProvider
