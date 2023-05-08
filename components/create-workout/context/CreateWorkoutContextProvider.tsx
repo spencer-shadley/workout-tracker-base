@@ -17,8 +17,7 @@ export interface AnswerType {
 export const answerTypes: AnswerType[] = [
   {
     displayLabel: 'PersonalTrainer',
-    styleModifier:
-      'a news anchor reporting on your exercise routine as if it were breaking news',
+    styleModifier: 'an informed but relaxed and personal fitness trainer',
   },
   {
     displayLabel: 'Shakespeare',
