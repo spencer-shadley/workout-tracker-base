@@ -80,28 +80,31 @@ export function ActivityCard(cardProps: CardProps) {
           <ActiveExercise remainingTimeInSeconds={remainingTimeInSeconds} />
         )}
       </span>
+
+      {activityType === 'exercise' && (
+        <>
+          <Button
+            onClick={() => {
+              setShowVideo(true);
+            }}
+          >
+            show video
+          </Button>
+
+          <Link
+            href={encodeURI(
+              `https://www.youtube.com/results?search_query=how+to+do+${exerciseName}`
+            )}
+            target="_blank"
+          >
+            <Button>Search on YouTube</Button>
+          </Link>
+        </>
+      )}
+      {videoUrl && showVideo && <ReactPlayer url={videoUrl} />}
       {progressPercent !== null && (
         <LinearProgress variant="determinate" value={progressPercent} />
       )}
-      {hasYoutubeQuotaExceeded ? (
-        <Link
-          href={encodeURI(
-            `https://www.youtube.com/results?search_query=how+to+do+${exerciseName}`
-          )}
-          target="_blank"
-        >
-          YouTube limit exceeded - click to search manually
-        </Link>
-      ) : activityType === 'exercise' ? (
-        <Button
-          onClick={() => {
-            setShowVideo(true);
-          }}
-        >
-          show video
-        </Button>
-      ) : null}
-      {videoUrl && showVideo && <ReactPlayer url={videoUrl} />}
     </Card>
   );
 }
