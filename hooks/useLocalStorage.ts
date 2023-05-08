@@ -11,6 +11,10 @@ export function useAiStyle() {
   return useLocalStorage(aiStyleKey, 'Personal Trainer');
 }
 
+export function getAiStyle(): string {
+  return getItem<string>(aiStyleKey, 'Personal Trainer');
+}
+
 export function useBackgroundPreference() {
   return useLocalStorage<string>(backgroundKey, particles);
 }
