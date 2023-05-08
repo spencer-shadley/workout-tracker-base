@@ -1,5 +1,5 @@
 import { ListItemText, Skeleton } from '@mui/material';
-import { useAiStyle } from '@/hooks/useLocalStorage';
+import { useAiStyle } from '@/hooks/storage/useLocalStorage';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 
