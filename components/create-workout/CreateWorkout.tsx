@@ -3,7 +3,7 @@ import {
   CreateWorkoutProvider,
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
-import useDebounce from '@/hooks/useDebounce';
+import useDebounce from '@/hooks/utils/useDebounce';
 import CreateWorkoutContent from './results/create-workout-content/CreateWorkoutContent';
 import {
   useSearchExercises,
