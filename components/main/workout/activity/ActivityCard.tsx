@@ -83,13 +83,15 @@ export function ActivityCard(cardProps: CardProps) {
 
       {activityType === 'exercise' && (
         <>
-          <Button
-            onClick={() => {
-              setShowVideo(true);
-            }}
-          >
-            show video
-          </Button>
+          {!hasYoutubeQuotaExceeded && (
+            <Button
+              onClick={() => {
+                setShowVideo(true);
+              }}
+            >
+              show video
+            </Button>
+          )}
 
           <Link
             href={encodeURI(

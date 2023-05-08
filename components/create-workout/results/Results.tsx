@@ -1,7 +1,7 @@
 import { Card, List } from '@mui/material';
 import { useCreateWorkoutContext as useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
-import Result from './Result';
-import { ResultCard } from './ResultCard';
+import Result from './result/Result';
+import { ResultCard } from './result/ResultCard';
 import { NewExerciseButton } from './NewExerciseButton';
 import { useEffect, useState } from 'react';
 

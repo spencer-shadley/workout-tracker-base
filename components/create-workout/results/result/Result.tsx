@@ -3,19 +3,16 @@ import { useState } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
 import { ResultIcon } from './ResultIcon';
-import { AddOrRemoveFromCartButtons } from '../icons/AddOrRemoveFromCartButtons';
-import { ListItemWithDetails } from './ListItemWithDetails';
+import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
+import { ListItemWithDetails } from '../ListItemWithDetails';
 import { useAddStyle } from '@/hooks/openai/useAddStyle';
-import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
 
 interface ResultProps {
   exerciseName: string;
 }
 
 export default function Result({ exerciseName }: ResultProps) {
-  const { searchInput } = useCreateWorkoutContext();
-  const { isSearching } = searchInput;
-
   const [shouldShowDetails, setShouldShowDetails] = useState<boolean>(false);
 
   const aboutPrompt = useAddStyle(
@@ -25,24 +22,13 @@ export default function Result({ exerciseName }: ResultProps) {
     `Provide an enumerated list of steps for how to do the exercise ${exerciseName}`
   );
 
-  const listItemText = isSearching ? (
-    <div className="w-full grow">
-      <Skeleton
-        width={`${Math.random() * 100}%`}
-        sx={{ marginRight: '20px' }}
-      />
-    </div>
-  ) : (
-    <ListItemText className="flex-grow w-full" primary={exerciseName} />
-  );
-
   return (
     <ListItem className="w-full hover:bg-slate-200 content-between">
       <AddOrRemoveFromCartButtons exerciseName={exerciseName} />
       {shouldShowDetails ? (
         <ListItemWithDetails exerciseName={exerciseName} />
       ) : (
-        listItemText
+        <ResultListItemText exerciseName={exerciseName} />
       )}
       <div className="flex flex-col space-y-2">
         <ResultIcon
@@ -59,5 +45,25 @@ export default function Result({ exerciseName }: ResultProps) {
         />
       </div>
     </ListItem>
+  );
+}
+
+interface ResultListItemTextProps {
+  exerciseName: string;
+}
+
+function ResultListItemText({ exerciseName }: ResultListItemTextProps) {
+  const { searchInput } = useCreateWorkoutContext();
+  const { isSearching } = searchInput;
+
+  return isSearching ? (
+    <div className="w-full grow">
+      <Skeleton
+        width={`${Math.random() * 100}%`}
+        sx={{ marginRight: '20px' }}
+      />
+    </div>
+  ) : (
+    <ListItemText className="flex-grow w-full" primary={exerciseName} />
   );
 }
