@@ -1,4 +1,4 @@
-import { ListItemText } from '@mui/material';
+import { ListItemText, Skeleton } from '@mui/material';
 import { useAiStyle } from '@/hooks/useLocalStorage';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
 
@@ -20,7 +20,7 @@ export function ListItemWithDetails({
     <ListItemText
       className="flex-grow w-full"
       primary={exerciseName}
-      secondary={exerciseDetailsText ?? 'Loading...'}
+      secondary={exerciseDetailsText ?? <Skeleton sx={{ fontSize: '3rem' }} />}
     />
   );
 }
