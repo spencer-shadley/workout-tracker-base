@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material';
-import { useWorkoutContext } from '../context/WorkoutContextProvider';
+import { useWorkoutContext } from '../../context/WorkoutContextProvider';
 import CloseIcon from '@mui/icons-material/Close';
-import { useActivityCardContext } from '../context/ActivityCardContextProvider';
+import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 
 export function ActivityCardCloseButton() {
   const { exerciseName, isDismissible } = useActivityCardContext();

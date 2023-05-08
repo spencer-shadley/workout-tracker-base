@@ -1,5 +1,5 @@
 import { CardProps, ListItem } from '@mui/material';
-import { ActivityCard } from './ActivityCard';
+import { ActivityCard } from './card/ActivityCard';
 import { ActivityType } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';

@@ -1,6 +1,6 @@
 import { Typography, IconButton, Tooltip, Zoom } from '@mui/material';
-import { useTimeContext } from '../context/TimeContextProvider';
-import { useActivityCardContext } from '../context/ActivityCardContextProvider';
+import { useTimeContext } from '../../context/TimeContextProvider';
+import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import useActivityName from '@/hooks/activity/useActivityName';
 

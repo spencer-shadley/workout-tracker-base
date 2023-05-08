@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { ActivityCard } from './ActivityCard';
+import { ActivityCard } from './card/ActivityCard';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 
 interface ActivityOptionProps {

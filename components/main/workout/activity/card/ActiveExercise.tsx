@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { useTimeContext } from '../context/TimeContextProvider';
+import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ActiveExercise() {
   const { currentBucket } = useTimeContext();
