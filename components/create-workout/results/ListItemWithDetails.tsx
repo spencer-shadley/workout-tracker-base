@@ -1,6 +1,7 @@
 import { ListItemText, Skeleton } from '@mui/material';
 import { useAiStyle } from '@/hooks/useLocalStorage';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
+import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 
 interface ListItemWithDetailsProps {
   exerciseName: string;
@@ -8,6 +9,8 @@ interface ListItemWithDetailsProps {
 export function ListItemWithDetails({
   exerciseName,
 }: ListItemWithDetailsProps) {
+  const { searchInput } = useCreateWorkoutContext();
+  const { isSearching } = searchInput;
   const [aiStyle] = useAiStyle();
 
   const prompt = `Tell me about ${exerciseName} in a few sentences. Answer in the style of ${aiStyle}`;
@@ -19,7 +22,7 @@ export function ListItemWithDetails({
   return (
     <ListItemText
       className="flex-grow w-full"
-      primary={exerciseName}
+      primary={isSearching ? '' : exerciseName}
       secondary={exerciseDetailsText ?? <Skeleton sx={{ fontSize: '3rem' }} />}
     />
   );
