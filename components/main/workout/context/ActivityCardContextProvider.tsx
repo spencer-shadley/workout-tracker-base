@@ -12,9 +12,9 @@ export interface ActivityCardContextType {
 export const ActivityCardContext = createContext<ActivityCardContextType>({
   isDismissible: false,
   timeBucket: {
-    remainingTimeInMilliseconds: 0,
-    startTimeInMilliseconds: 0,
-    endTimeInMilliseconds: 0,
+    remainingTimeInSeconds: 0,
+    startTimeInSeconds: 0,
+    endTimeInSeconds: 0,
     isActive: false,
     containerRound: 0,
     exerciseType: 'exercise',

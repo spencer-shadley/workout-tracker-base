@@ -13,16 +13,16 @@ export default function ActivityListItem({
   exerciseName,
   ...activityCardProps
 }: ActivityListItemProps) {
-  const { buckets, elapsedTimeInMilliseconds } = useTimeContext();
+  const { buckets, elapsedTimeInSeconds } = useTimeContext();
   const activityBucket = buckets.find(
     (bucket) =>
       bucket.containerExercise === exerciseName &&
       bucket.exerciseType === activityType
   );
   const activityEndTime: number = activityBucket
-    ? activityBucket.endTimeInMilliseconds
+    ? activityBucket.endTimeInSeconds
     : Number.MAX_SAFE_INTEGER;
-  const isComplete = activityEndTime > elapsedTimeInMilliseconds;
+  const isComplete = activityEndTime > elapsedTimeInSeconds;
 
   return (
     <ActivityCardProvider

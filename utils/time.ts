@@ -3,15 +3,15 @@ import { WorkoutOptions } from '@/components/settings/WorkoutOptions';
 import { getOptions } from '@/hooks/useLocalStorage';
 import { getExerciseNames } from '@/hooks/useSessionStorage';
 
-export function millisecondsToHumanReadable(milliseconds: number): string {
-  const hoursRemaining = Math.floor(milliseconds / 1000 / 60 / 60);
-  milliseconds -= hoursRemaining * 1000 * 60 * 60;
+export function secondsToHumanReadable(seconds: number): string {
+  const hoursRemaining = Math.floor(seconds / 60 / 60);
+  seconds -= hoursRemaining * 60 * 60;
 
-  const minutesRemaining = Math.floor(milliseconds / 1000 / 60);
-  milliseconds -= minutesRemaining * 1000 * 60;
+  const minutesRemaining = Math.floor(seconds / 60);
+  seconds -= minutesRemaining * 60;
 
-  const secondsRemaining = Math.floor(milliseconds / 1000);
-  milliseconds -= secondsRemaining * 1000;
+  const secondsRemaining = Math.floor(seconds);
+  seconds -= secondsRemaining;
 
   return `${hoursRemaining} hours, ${minutesRemaining} minutes, ${secondsRemaining} seconds`;
 }
@@ -27,45 +27,37 @@ export function calculateBuckets() {
 
   const exercises = getExerciseNames();
 
-  const restBetweenExercisesInMilliseconds =
-    restBetweenExercisesInSeconds * 1000;
-  const restBetweenRoundsInMilliseconds = restBetweenRoundsInSeconds * 1000;
-  const exerciseDurationInMilliseconds = exerciseDurationInSeconds * 1000;
-
   const buckets: TimeSlot[] = [];
-  let passedTimeInMilliseconds = 0;
+  let passedTimeInSeconds = 0;
   for (let round = 0; round < numberOfRounds; round++) {
     for (const observedExercise of exercises) {
       buckets.push({
         containerExercise: observedExercise,
         exerciseType: 'exercise',
-        endTimeInMilliseconds:
-          passedTimeInMilliseconds + exerciseDurationInMilliseconds,
-        startTimeInMilliseconds: passedTimeInMilliseconds,
-        remainingTimeInMilliseconds: exerciseDurationInMilliseconds,
+        endTimeInSeconds: passedTimeInSeconds + exerciseDurationInSeconds,
+        startTimeInSeconds: passedTimeInSeconds,
+        remainingTimeInSeconds: exerciseDurationInSeconds,
         isActive: false,
         containerRound: round,
       });
-      passedTimeInMilliseconds += exerciseDurationInMilliseconds;
+      passedTimeInSeconds += exerciseDurationInSeconds;
       buckets.push({
         containerExercise: observedExercise,
         exerciseType: 'rest-exercise',
-        endTimeInMilliseconds:
-          passedTimeInMilliseconds + restBetweenExercisesInMilliseconds,
-        startTimeInMilliseconds: passedTimeInMilliseconds,
-        remainingTimeInMilliseconds: restBetweenExercisesInMilliseconds,
+        endTimeInSeconds: passedTimeInSeconds + restBetweenExercisesInSeconds,
+        startTimeInSeconds: passedTimeInSeconds,
+        remainingTimeInSeconds: restBetweenExercisesInSeconds,
         isActive: false,
         containerRound: round,
       });
-      passedTimeInMilliseconds += restBetweenExercisesInMilliseconds;
+      passedTimeInSeconds += restBetweenExercisesInSeconds;
     }
     buckets.push({
       containerExercise: undefined,
       exerciseType: 'rest-round',
-      endTimeInMilliseconds:
-        passedTimeInMilliseconds + restBetweenRoundsInMilliseconds,
-      startTimeInMilliseconds: passedTimeInMilliseconds,
-      remainingTimeInMilliseconds: restBetweenRoundsInMilliseconds,
+      endTimeInSeconds: passedTimeInSeconds + restBetweenRoundsInSeconds,
+      startTimeInSeconds: passedTimeInSeconds,
+      remainingTimeInSeconds: restBetweenRoundsInSeconds,
       isActive: false,
       containerRound: round,
     });
@@ -73,7 +65,7 @@ export function calculateBuckets() {
   return buckets;
 }
 
-export function calculateWorkoutTimeInMilliseconds(
+export function calculateWorkoutTimeInSeconds(
   workoutOptions: WorkoutOptions,
   numberOfExercises: number
 ) {
@@ -84,21 +76,19 @@ export function calculateWorkoutTimeInMilliseconds(
     workoutOptions.restBetweenRoundsInSeconds -
     workoutOptions.restBetweenExercisesInSeconds;
   return (
-    (secondsPerRound * workoutOptions.numberOfRounds -
-      workoutOptions.restBetweenRoundsInSeconds) *
-    1000
+    secondsPerRound * workoutOptions.numberOfRounds -
+    workoutOptions.restBetweenRoundsInSeconds
   );
 }
 
-export function calculateRoundTimeInMilliseconds(
+export function calculateRoundTimeInSeconds(
   workoutOptions: WorkoutOptions,
   numberOfExercises: number
 ): number {
   return (
-    (numberOfExercises *
+    numberOfExercises *
       (workoutOptions.exerciseDurationInSeconds +
         workoutOptions.restBetweenExercisesInSeconds) +
-      workoutOptions.restBetweenRoundsInSeconds) *
-    1000
+    workoutOptions.restBetweenRoundsInSeconds
   );
 }

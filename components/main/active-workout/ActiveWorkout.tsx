@@ -3,14 +3,14 @@ import { Typography } from '@mui/material';
 import { TimeProvider } from '../workout/context/TimeContextProvider';
 import RoundsStepper from './RoundsStepper';
 import useTimeInformation from '@/hooks/useTimeInformation';
-import { millisecondsToHumanReadable } from '@/utils/time';
+import { secondsToHumanReadable } from '@/utils/time';
 import TimerControls from './TimerControls';
 import Background from '@/components/shared/backgrounds/Background';
 import { Fireworks } from '@/components/shared/backgrounds/particles/Fireworks';
 
 export default function ActiveWorkout() {
   const timeContext = useTimeInformation();
-  const { remainingWorkoutTimeInMilliseconds, currentBucket, isRunning } =
+  const { remainingWorkoutTimeInSeconds, currentBucket, isRunning } =
     timeContext;
   const { exerciseType } = currentBucket;
 
@@ -25,7 +25,7 @@ export default function ActiveWorkout() {
         <div className="flex flex-col h-[100dvh] overflow-hidden">
           <Typography className="text-gray-100">
             Time left in workout{' '}
-            {millisecondsToHumanReadable(remainingWorkoutTimeInMilliseconds)}
+            {secondsToHumanReadable(remainingWorkoutTimeInSeconds)}
           </Typography>
           <RoundsStepper />
           <ActivitiesList shouldIncludeRests />

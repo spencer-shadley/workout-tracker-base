@@ -4,8 +4,8 @@ import {
 } from '@/components/main/workout/context/TimeContextProvider';
 import {
   calculateBuckets,
-  calculateRoundTimeInMilliseconds,
-  calculateWorkoutTimeInMilliseconds,
+  calculateRoundTimeInSeconds,
+  calculateWorkoutTimeInSeconds,
 } from '@/utils/time';
 import {
   useState,
@@ -23,8 +23,7 @@ export default function useTimeInformation(): TimeContextType {
   const [workoutOptions] = useOptions();
 
   const [currentRound, setCurrentRound] = useState<number | null>(null);
-  const [elapsedTimeInMilliseconds, setTimeElapsedInMilliseconds] =
-    useState<number>(0);
+  const [elapsedTimeInSeconds, setTimeElapsedInSeconds] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [currentBucket, setCurrentBucket] = useState<TimeSlot | undefined>(
     undefined
@@ -35,34 +34,34 @@ export default function useTimeInformation(): TimeContextType {
   const [mostRecentCompletedExerciseTime, setMostRecentCompletedExerciseTime] =
     useState<number | null>(null);
 
-  const remainingWorkoutTimeInMilliseconds =
-    calculateWorkoutTimeInMilliseconds(workoutOptions, exercises.length) -
-    elapsedTimeInMilliseconds;
+  const remainingWorkoutTimeInSeconds =
+    calculateWorkoutTimeInSeconds(workoutOptions, exercises.length) -
+    elapsedTimeInSeconds;
 
-  const roundTimeInMilliseconds = calculateRoundTimeInMilliseconds(
+  const roundTimeInSeconds = calculateRoundTimeInSeconds(
     workoutOptions,
     exercises.length
   );
 
-  const timeSpentInRoundRestInMilliseconds =
+  const timeSpentInRoundRestInSeconds =
     currentRound === null
       ? 0
-      : currentRound * workoutOptions.restBetweenRoundsInSeconds * 1000;
+      : currentRound * workoutOptions.restBetweenRoundsInSeconds;
 
-  const remainingRoundTimeInMilliseconds =
-    (elapsedTimeInMilliseconds - timeSpentInRoundRestInMilliseconds) %
-    roundTimeInMilliseconds;
+  const remainingRoundTimeInSeconds =
+    (elapsedTimeInSeconds - timeSpentInRoundRestInSeconds) % roundTimeInSeconds;
 
   const calculatedBuckets = useCallback(() => {
     return calculateBuckets();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workoutOptions]);
 
   const buckets = useMemo(() => {
     return calculatedBuckets();
   }, [calculatedBuckets]);
 
   useEffect(() => {
-    const hasTimeLeftInWorkout = remainingWorkoutTimeInMilliseconds > 0;
+    const hasTimeLeftInWorkout = remainingWorkoutTimeInSeconds > 0;
 
     setWorkoutCompletionTime(hasTimeLeftInWorkout ? null : Date.now());
     setCurrentRound(getCurrentRound(hasTimeLeftInWorkout, currentBucket));
@@ -70,12 +69,12 @@ export default function useTimeInformation(): TimeContextType {
 
     for (const bucket of buckets) {
       const isBucketActive =
-        elapsedTimeInMilliseconds < bucket.endTimeInMilliseconds &&
-        elapsedTimeInMilliseconds >= bucket.startTimeInMilliseconds;
+        elapsedTimeInSeconds < bucket.endTimeInSeconds &&
+        elapsedTimeInSeconds >= bucket.startTimeInSeconds;
 
       if (isBucketActive) {
-        bucket.remainingTimeInMilliseconds =
-          bucket.endTimeInMilliseconds - elapsedTimeInMilliseconds;
+        bucket.remainingTimeInSeconds =
+          bucket.endTimeInSeconds - elapsedTimeInSeconds;
 
         if (
           currentBucket !== bucket &&
@@ -87,12 +86,23 @@ export default function useTimeInformation(): TimeContextType {
         setCurrentBucket(bucket);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [buckets, currentBucket, elapsedTimeInMilliseconds]);
+  }, [
+    buckets,
+    currentBucket,
+    elapsedTimeInSeconds,
+    isRunning,
+    remainingWorkoutTimeInSeconds,
+    workoutOptions,
+  ]);
+
+  useEffect(() => {
+    setIsRunning(false);
+    reset();
+  }, [workoutOptions]);
 
   useInterval(
     () => {
-      setTimeElapsedInMilliseconds(elapsedTimeInMilliseconds + 1000);
+      setTimeElapsedInSeconds(elapsedTimeInSeconds + 1);
     },
     isRunning ? 1000 : null
   );
@@ -105,7 +115,7 @@ export default function useTimeInformation(): TimeContextType {
   }
 
   const reset = () => {
-    setTimeElapsedInMilliseconds(0);
+    setTimeElapsedInSeconds(0);
     setCurrentRound(0);
     setCurrentBucket(undefined);
     setIsRunning(false);
@@ -116,20 +126,20 @@ export default function useTimeInformation(): TimeContextType {
   };
 
   const skipCurrentActivity = () => {
-    setTimeElapsedInMilliseconds(currentBucket?.endTimeInMilliseconds ?? 0);
+    setTimeElapsedInSeconds(currentBucket?.endTimeInSeconds ?? 0);
   };
 
   const jumpToBucket = (bucket: TimeSlot) => {
-    setTimeElapsedInMilliseconds(bucket.startTimeInMilliseconds);
+    setTimeElapsedInSeconds(bucket.startTimeInSeconds);
   };
 
   const timeInfo = {
     currentRound,
-    remainingRoundTimeInMilliseconds,
-    remainingWorkoutTimeInMilliseconds,
+    remainingRoundTimeInSeconds,
+    remainingWorkoutTimeInSeconds,
     isRunning,
     buckets,
-    elapsedTimeInMilliseconds,
+    elapsedTimeInSeconds,
     currentBucket: currentBucket ?? buckets[0],
     setCurrentBucket,
     setCurrentRound,

@@ -3,9 +3,9 @@ import { PropsWithChildren, createContext, useContext } from 'react';
 export type ActivityType = 'exercise' | 'rest-round' | 'rest-exercise';
 
 export interface TimeSlot {
-  remainingTimeInMilliseconds: number;
-  startTimeInMilliseconds: number;
-  endTimeInMilliseconds: number;
+  remainingTimeInSeconds: number;
+  startTimeInSeconds: number;
+  endTimeInSeconds: number;
   isActive: boolean;
   containerRound: number;
   containerExercise?: string;
@@ -14,13 +14,13 @@ export interface TimeSlot {
 
 export interface TimeContextType {
   currentRound: number | null;
-  remainingRoundTimeInMilliseconds: number;
-  remainingWorkoutTimeInMilliseconds: number;
+  remainingRoundTimeInSeconds: number;
+  remainingWorkoutTimeInSeconds: number;
   buckets: TimeSlot[];
   currentBucket: TimeSlot;
   setCurrentBucket: (bucket: TimeSlot) => void;
   setCurrentRound: (round: number) => void;
-  elapsedTimeInMilliseconds: number;
+  elapsedTimeInSeconds: number;
   isRunning: boolean;
   reset: () => void;
   toggleIsRunning: () => void;
@@ -33,14 +33,14 @@ export interface TimeContextType {
 export const TimeContext = createContext<TimeContextType>({
   currentRound: 0,
   isRunning: false,
-  remainingRoundTimeInMilliseconds: 0,
-  remainingWorkoutTimeInMilliseconds: 0,
+  remainingRoundTimeInSeconds: 0,
+  remainingWorkoutTimeInSeconds: 0,
   buckets: [],
-  elapsedTimeInMilliseconds: 0,
+  elapsedTimeInSeconds: 0,
   currentBucket: {
-    remainingTimeInMilliseconds: 0,
-    startTimeInMilliseconds: 0,
-    endTimeInMilliseconds: 0,
+    remainingTimeInSeconds: 0,
+    startTimeInSeconds: 0,
+    endTimeInSeconds: 0,
     isActive: false,
     containerRound: 0,
     exerciseType: 'exercise',

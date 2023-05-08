@@ -24,12 +24,11 @@ export function ActivityCard(cardProps: CardProps) {
   const {
     containerExercise,
     exerciseType: currentExerciseType,
-    remainingTimeInMilliseconds,
+    remainingTimeInSeconds,
   } = currentBucket;
   const isExerciseActive =
     containerExercise === exerciseName && currentExerciseType === activityType;
 
-  const remainingTimeInSeconds = remainingTimeInMilliseconds / 1000;
   const activityDuration = useActivityDurationInSeconds(activityType);
   const progressPercent = isExerciseActive
     ? (remainingTimeInSeconds / activityDuration) * 100
@@ -76,9 +75,7 @@ export function ActivityCard(cardProps: CardProps) {
           <ExerciseTitle />
           <ActivityCardCloseButton />
         </CardContent>
-        {isExerciseActive && (
-          <ActiveExercise remainingTimeInSeconds={remainingTimeInSeconds} />
-        )}
+        {isExerciseActive && <ActiveExercise />}
       </span>
 
       {activityType === 'exercise' && (
