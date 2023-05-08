@@ -13,7 +13,7 @@ export default function LightParticles() {
           position: '',
           repeat: '',
           size: '',
-          opacity: 1,
+          opacity: 0,
         },
         backgroundMask: {
           composite: 'destination-out',

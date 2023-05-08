@@ -4,6 +4,8 @@ import { loadFull } from 'tsparticles';
 import type { ISourceOptions, Engine } from 'tsparticles-engine';
 
 interface ParticlesWrapperProps {
+  // genereate options here: https://particles.js.org/
+  // examples - https://particles.js.org/samples/presets/index.html
   options: ISourceOptions;
 }
 
