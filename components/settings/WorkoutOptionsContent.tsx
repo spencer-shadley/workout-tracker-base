@@ -1,5 +1,5 @@
+import { useOptions } from '@/hooks/storage/useLocalStorage';
 import { Slider, Typography } from '@mui/material';
-import { useOptions } from '@/hooks/useLocalStorage';
 
 function makeMinuteMarks() {
   const maxMinutes = 4;

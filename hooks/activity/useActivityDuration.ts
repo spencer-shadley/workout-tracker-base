@@ -1,5 +1,5 @@
 import { ActivityType } from '@/components/main/workout/context/TimeContextProvider';
-import { useOptions } from './useLocalStorage';
+import { useOptions } from '../storage/useLocalStorage';
 
 export default function useActivityDurationInSeconds(
   activityType: ActivityType

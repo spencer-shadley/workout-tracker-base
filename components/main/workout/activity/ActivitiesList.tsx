@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ActivityListItem from './ActivityListItem';
 import { useTimeContext } from '../context/TimeContextProvider';
 import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
-import { useSelectedExercises } from '@/hooks/useSessionStorage';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 
 interface ActivitiesListProps {
   shouldIncludeRests?: boolean;

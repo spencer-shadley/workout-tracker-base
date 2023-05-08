@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import { useTimeContext } from '../context/TimeContextProvider';
 import { useActivityCardContext } from '../context/ActivityCardContextProvider';
-import useActivityDurationInSeconds from '@/hooks/useActivityDuration';
 import { ActiveExercise } from './ActiveExercise';
 import { ExerciseTitle } from './ExerciseTitle';
 import { ActivityCardCloseButton } from './ActivityCardCloseButton';
@@ -17,6 +16,7 @@ import youtubeSearch from 'youtube-search';
 
 import ReactPlayer from 'react-player/lazy';
 import { useEffect, useState } from 'react';
+import useActivityDurationInSeconds from '@/hooks/activity/useActivityDuration';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exerciseName, activityType } = useActivityCardContext();

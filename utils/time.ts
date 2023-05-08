@@ -1,7 +1,7 @@
 import { TimeSlot } from '@/components/main/workout/context/TimeContextProvider';
 import { WorkoutOptions } from '@/components/settings/WorkoutOptions';
-import { getOptions } from '@/hooks/useLocalStorage';
-import { getExerciseNames } from '@/hooks/useSessionStorage';
+import { getOptions } from '@/hooks/storage/useLocalStorage';
+import { getExerciseNames } from '@/hooks/storage/useSessionStorage';
 
 export function secondsToHumanReadable(seconds: number): string {
   const hoursRemaining = Math.floor(seconds / 60 / 60);

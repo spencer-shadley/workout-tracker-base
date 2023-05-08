@@ -3,7 +3,7 @@ import {
   AnswerType,
   answerTypes,
 } from '../context/CreateWorkoutContextProvider';
-import { useAiStyle } from '@/hooks/useLocalStorage';
+import { useAiStyle } from '@/hooks/storage/useLocalStorage';
 import { useState } from 'react';
 
 interface ResponseStyleOptionsProps {

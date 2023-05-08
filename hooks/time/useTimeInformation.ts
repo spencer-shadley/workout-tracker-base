@@ -14,8 +14,8 @@ import {
   useEffect,
   useDebugValue,
 } from 'react';
-import { useSelectedExercises } from '../useSessionStorage';
-import { useOptions } from '../useLocalStorage';
+import { useSelectedExercises } from '../storage/useSessionStorage';
+import { useOptions } from '../storage/useLocalStorage';
 import { useInterval } from 'usehooks-ts';
 
 export default function useTimeInformation(): TimeContextType {

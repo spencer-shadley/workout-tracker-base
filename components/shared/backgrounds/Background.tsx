@@ -1,5 +1,5 @@
 import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
-import { useBackgroundPreference } from '@/hooks/useLocalStorage';
+import { useBackgroundPreference } from '@/hooks/storage/useLocalStorage';
 import { BounceParticles } from './particles/BounceParticles';
 import { SimpleParticles } from './particles/SimpleParticles';
 import { particles, bounce, seaAnemone, light } from './backgroundsTypes';

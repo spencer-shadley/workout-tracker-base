@@ -1,4 +1,4 @@
-import { useAiStyle } from '../useLocalStorage';
+import { useAiStyle } from '../storage/useLocalStorage';
 
 export function useAddStyle(prompt: string): string {
   const [aiStyle] = useAiStyle();

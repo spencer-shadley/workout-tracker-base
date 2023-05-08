@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useBackgroundPreference } from '@/hooks/useLocalStorage';
+import { useBackgroundPreference } from '@/hooks/storage/useLocalStorage';
 import { logError } from '@/utils/logger';
 import {
   bounce,

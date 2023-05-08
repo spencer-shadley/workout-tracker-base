@@ -10,7 +10,6 @@ export function useActivityBucket(
 ) {
   const { buckets, elapsedTimeInSeconds, currentRound } = useTimeContext();
 
-  // find anything with a container exercise
   const activityBucket =
     buckets.find(
       (bucket) =>
