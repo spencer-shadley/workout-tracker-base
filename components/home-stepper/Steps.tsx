@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { stepInfos } from './stepInfo';
 import WorkoutStepper from './WorkoutStepper';
-import StepContent from './StepContent';
+import StepContent from './step-content/StepContent';
 
 export default function Steps() {
   const [activeStep, setActiveStep] = useState(0);

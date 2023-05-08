@@ -6,6 +6,7 @@ import { useLocalStorage } from 'usehooks-ts';
 const aiStyleKey = 'ai-style';
 const optionsKey = 'options';
 const backgroundKey = 'background';
+const tutorialKey = 'tutorial';
 
 export function useAiStyle() {
   return useLocalStorage(aiStyleKey, 'Personal Trainer');
@@ -50,4 +51,13 @@ function getItem<T>(key: string, defaultValue: T): T {
 
   const rawData = localStorage.getItem(key) ?? '';
   return tryParse<T>(rawData, defaultValue);
+}
+
+// TODO: add tutorial throughout
+export function useTutorial(key: string) {
+  const [isFirstTime, setIsFirstTime] = useLocalStorage<boolean>(
+    `${tutorialKey}-${key}`,
+    true
+  );
+  return { isFirstTime, setIsFirstTime };
 }

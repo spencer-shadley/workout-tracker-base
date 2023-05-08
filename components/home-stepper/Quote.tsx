@@ -5,6 +5,7 @@ import { useOpenAi } from '@/hooks/openai/useOpenAi';
 interface QuoteProps {
   prompt: string;
 }
+
 export function Quote({ prompt }: QuoteProps) {
   const {
     data: aiAnswer,

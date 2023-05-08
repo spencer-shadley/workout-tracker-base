@@ -4,7 +4,7 @@ import {
   CreateWorkoutType,
 } from './context/CreateWorkoutContextProvider';
 import useDebounce from '@/hooks/useDebounce';
-import CreateWorkoutContent from './CreateWorkoutContent';
+import CreateWorkoutContent from './results/create-workout-content/CreateWorkoutContent';
 import {
   useSearchExercises,
   responseToArray,

@@ -4,6 +4,7 @@ import { Url } from 'next/dist/shared/lib/router/router';
 export interface StepInfo {
   title: string;
   aiPrompt: string;
+  tutorial?: string;
   url?: Url;
   dialogContent?: string;
 }
@@ -11,6 +12,8 @@ export interface StepInfo {
 export const stepInfos: StepInfo[] = [
   {
     title: 'Create workout',
+    tutorial:
+      'Looks like this is your first time here! Try clicking here to make your first workout - all powered by AI!',
     aiPrompt:
       'Give me exactly one motivational quote to inspire me to workout, get active, exercise, or be fit.',
     url: '/CreateWorkoutPage',
