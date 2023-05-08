@@ -1,18 +1,8 @@
-import { useCallback } from 'react';
-import type { Engine } from 'tsparticles-engine';
-import Particles from 'react-particles';
-import { loadFull } from 'tsparticles';
+import ParticlesWrapper from './ParticlesWrapper';
 
 export function BounceParticles() {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine);
-  }, []);
-
   return (
-    <Particles
-      className="absolute top-0"
-      id="tsparticles"
-      init={particlesInit}
+    <ParticlesWrapper
       options={{
         fps_limit: 120,
         interactivity: {

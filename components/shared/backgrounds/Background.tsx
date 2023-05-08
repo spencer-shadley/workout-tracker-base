@@ -1,7 +1,7 @@
 import BackgroundWaves from '@/components/shared/backgrounds/BackgroundWaves';
 import { useBackgroundPreference } from '@/hooks/useLocalStorage';
-import { BounceParticles } from './BounceParticles';
-import { SimpleParticles } from './SimpleParticles';
+import { BounceParticles } from './particles/BounceParticles';
+import { SimpleParticles } from './particles/SimpleParticles';
 import { particles, bounce } from './backgroundsTypes';
 
 export default function Background() {
