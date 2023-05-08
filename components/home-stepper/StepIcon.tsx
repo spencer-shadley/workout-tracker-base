@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { StepIconProps, IconButton } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
+import InfoIcon from '@mui/icons-material/Info';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
@@ -36,7 +36,7 @@ export default function StepIcon({
   const icons: { [index: string]: React.ReactElement } = {
     1: <FitnessCenterIcon />,
     2: <LightbulbIcon />,
-    3: <SettingsIcon />,
+    3: <InfoIcon />,
   };
 
   return (

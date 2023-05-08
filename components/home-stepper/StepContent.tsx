@@ -1,8 +1,16 @@
-import { Button, Typography } from '@mui/material';
+import {
+  Button,
+  ButtonProps,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from '@mui/material';
 import Link from 'next/link';
 import { StepInfo } from './stepInfo';
 import { Quote } from './Quote';
 import RectangleBouncer from '../shared/RectangleBouncer';
+import { useState } from 'react';
 
 interface StepContentProps {
   activeStep: number;
@@ -15,7 +23,7 @@ export default function StepContent({
   index,
   activeStep,
 }: StepContentProps) {
-  const { title, aiPrompt, url } = step;
+  const { title, aiPrompt, url, dialogContent } = step;
 
   return (
     <div
@@ -40,15 +48,54 @@ export default function StepContent({
           }}
         >
           <RectangleBouncer>
-            <Link href={url}>
-              <Button variant="outlined">
-                <Typography variant="h2">{title}</Typography>
-              </Button>
-            </Link>
+            {url && (
+              <Link href={url}>
+                <TitleButton title={title} />
+              </Link>
+            )}
+            {dialogContent && (
+              <InfoDialog content={dialogContent} title={title} />
+            )}
           </RectangleBouncer>
           <Quote prompt={aiPrompt} />
         </div>
       ) : null}
     </div>
+  );
+}
+
+interface InfoDialogProps {
+  content: string;
+  title: string;
+}
+
+function InfoDialog({ content, title }: InfoDialogProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <>
+      <TitleButton
+        title={title}
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      />
+      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+        <DialogTitle>TODO: Info Dialog</DialogTitle>
+        <DialogContent>{content}</DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+interface TitleButtonProps extends ButtonProps {
+  title: string;
+}
+
+function TitleButton({ title, ...buttonProps }: TitleButtonProps) {
+  return (
+    <Button variant="outlined" {...buttonProps}>
+      <Typography variant="h2">{title}</Typography>
+    </Button>
   );
 }
