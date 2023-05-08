@@ -7,7 +7,13 @@ import {
   calculateRoundTimeInMilliseconds,
   calculateWorkoutTimeInMilliseconds,
 } from '@/utils/time';
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useDebugValue,
+} from 'react';
 import { useSelectedExercises } from './useSessionStorage';
 import { useOptions } from './useLocalStorage';
 import { useInterval } from 'usehooks-ts';
@@ -60,7 +66,7 @@ export default function useTimeInformation(): TimeContextType {
 
     setWorkoutCompletionTime(hasTimeLeftInWorkout ? null : Date.now());
     setCurrentRound(getCurrentRound(hasTimeLeftInWorkout, currentBucket));
-    setIsRunning(hasTimeLeftInWorkout);
+    setIsRunning(isRunning && hasTimeLeftInWorkout);
 
     for (const bucket of buckets) {
       const isBucketActive =
@@ -117,7 +123,7 @@ export default function useTimeInformation(): TimeContextType {
     setTimeElapsedInMilliseconds(bucket.startTimeInMilliseconds);
   };
 
-  return {
+  const timeInfo = {
     currentRound,
     remainingRoundTimeInMilliseconds,
     remainingWorkoutTimeInMilliseconds,
@@ -134,4 +140,8 @@ export default function useTimeInformation(): TimeContextType {
     workoutCompletionTime,
     mostRecentCompletedExerciseTime,
   };
+
+  useDebugValue(timeInfo);
+
+  return timeInfo;
 }
