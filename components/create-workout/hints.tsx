@@ -1,3 +1,5 @@
+import { sample } from 'lodash';
+
 export const searchHints = [
   'Biceps',
   'Bench press',
@@ -30,8 +32,7 @@ export const hintFraming = [
 ];
 
 export function getRandomHint() {
-  const searchHint =
-    searchHints[Math.floor(Math.random() * searchHints.length)];
-  const hintFrame = hintFraming[Math.floor(Math.random() * hintFraming.length)];
+  const searchHint = sample(searchHints);
+  const hintFrame = sample(hintFraming);
   return `${hintFrame} Like "${searchHint}".`;
 }
