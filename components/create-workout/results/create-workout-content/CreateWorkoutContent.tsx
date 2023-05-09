@@ -1,7 +1,7 @@
 import { Paper } from '@mui/material';
 import { Results } from '../Results';
 import { ExerciseSearch } from '../../ExerciseSearch';
-import { InitialSearchHint } from '../../InitialSearchHint';
+import { InitialSearchHint } from '../../hints/InitialSearchHint';
 import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
 
 export default function CreateWorkoutContent() {

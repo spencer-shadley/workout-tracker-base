@@ -9,7 +9,7 @@ import {
   useSearchExercises,
   responseToArray,
 } from '@/hooks/openai/useSearchExercises';
-import { getRandomHint } from './hints';
+import { getRandomHint } from './hints/hints';
 
 export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>('');

@@ -31,6 +31,12 @@ export const hintFraming = [
   'Search for something specific to your exact scenario!',
 ];
 
+export const advancedHints = [
+  'Exclude [X equipment]',
+  'Only show exercises with [X equipment]',
+  'On a 1-10 scale, I want to feel [X intensity]',
+];
+
 export function getRandomHint() {
   const searchHint = sample(searchHints);
   const hintFrame = sample(hintFraming);
