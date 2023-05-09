@@ -11,9 +11,7 @@ export default function CreateWorkoutContent() {
   return (
     <Paper className="h-[100dvh] opacity-90 p-4 flex flex-col">
       <ExerciseSearch />
-      <div className="overflow-auto">
-        {searchText ? <Results /> : <InitialSearchHint />}
-      </div>
+      {searchText ? <Results /> : <InitialSearchHint />}
     </Paper>
   );
 }
