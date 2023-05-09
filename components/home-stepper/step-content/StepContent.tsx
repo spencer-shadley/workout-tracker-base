@@ -38,13 +38,13 @@ export default function StepContent({ step }: StepContentProps) {
         <RectangleBouncer>
           {url && (
             <Link href={url}>
-              <TitleButton title={title} />
+              <TitleButton buttonText={title} />
             </Link>
           )}
           {dialogContent && (
             <InfoDialog
               content={dialogContent}
-              title={title}
+              buttonText={title}
               tutorial={tutorial}
             />
           )}

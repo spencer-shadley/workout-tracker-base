@@ -2,7 +2,7 @@ import { Divider, Typography } from '@mui/material';
 
 export function HowToSearchText() {
   return (
-    <article className="flex-1 flex-col">
+    <article className="flex-1 flex-col h-full">
       <Typography variant="overline">Example searches</Typography>
       <br />
       <Typography variant="body2">

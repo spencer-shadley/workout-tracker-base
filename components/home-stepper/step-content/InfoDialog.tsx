@@ -1,25 +1,23 @@
-import { Dialog, DialogContent, DialogTitle, Tooltip } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import { TitleButton } from './TitleButton';
 
 interface InfoDialogProps {
   content: string;
-  title: string;
+  buttonText: string;
   tutorial?: string;
 }
-export function InfoDialog({ content, title, tutorial }: InfoDialogProps) {
+export function InfoDialog({ content, buttonText }: InfoDialogProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
-      <Tooltip title={tutorial}>
-        <TitleButton
-          title={title}
-          onClick={() => {
-            setIsOpen(true);
-          }}
-        />
-      </Tooltip>
+      <TitleButton
+        buttonText={buttonText}
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      />
       <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
         <DialogTitle>TODO: Info Dialog</DialogTitle>
         <DialogContent>{content}</DialogContent>

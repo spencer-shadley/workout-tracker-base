@@ -4,17 +4,18 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  ListProps,
 } from '@mui/material';
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import SwitchAccessShortcutIcon from '@mui/icons-material/SwitchAccessShortcut';
 import { randomHints } from './InitialSearchHint';
 
-export function ExampleSearches() {
+export function ExampleSearches(props: ListProps) {
   const { searchInput } = useCreateWorkoutContext();
   const { setSearchText } = searchInput;
 
   return (
-    <List className="flex-2">
+    <List {...props}>
       {randomHints.map((hint, index) => (
         <div key={hint}>
           <ListItem key={hint}>
