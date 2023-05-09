@@ -7,11 +7,11 @@ import {
   Typography,
 } from '@mui/material';
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
-import { hints } from './hints';
+import { searchHints } from './hints';
 import SwitchAccessShortcutIcon from '@mui/icons-material/SwitchAccessShortcut';
 import shuffle from 'lodash/shuffle';
 
-const randomHints = shuffle(hints);
+const randomHints = shuffle(searchHints);
 
 export function InitialSearchHint() {
   const { searchInput } = useCreateWorkoutContext();

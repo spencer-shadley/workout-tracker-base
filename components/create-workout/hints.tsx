@@ -1,4 +1,4 @@
-export const hints = [
+export const searchHints = [
   'Biceps',
   'Bench press',
   'Legs',
@@ -22,6 +22,16 @@ export const hints = [
   'Exercises someone with ED syndrome can do',
 ];
 
+export const hintFraming = [
+  'Search for anything!',
+  'Be specific, generic, or in-between!',
+  'Search exercises, workouts, equipment, conditions, etc.',
+  'Search for something specific to your exact scenario!',
+];
+
 export function getRandomHint() {
-  return `Try "${hints[Math.floor(Math.random() * hints.length)]}"`;
+  const searchHint =
+    searchHints[Math.floor(Math.random() * searchHints.length)];
+  const hintFrame = hintFraming[Math.floor(Math.random() * hintFraming.length)];
+  return `${hintFrame} Like "${searchHint}"`;
 }
