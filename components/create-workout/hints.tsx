@@ -33,5 +33,5 @@ export function getRandomHint() {
   const searchHint =
     searchHints[Math.floor(Math.random() * searchHints.length)];
   const hintFrame = hintFraming[Math.floor(Math.random() * hintFraming.length)];
-  return `${hintFrame} Like "${searchHint}"`;
+  return `${hintFrame} Like "${searchHint}".`;
 }
