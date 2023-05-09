@@ -35,7 +35,6 @@ export function ExerciseSearch() {
             setSearchText(event.target.value);
           }}
           fullWidth
-          className="w-full opacity-100"
           aria-describedby="create-workout-hint-text"
           inputProps={{
             'aria-label': 'hint',
