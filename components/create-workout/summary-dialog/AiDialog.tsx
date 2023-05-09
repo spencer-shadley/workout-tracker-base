@@ -1,6 +1,6 @@
 import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { tryParse } from '@/hooks/storage/useLocalStorage';
-import { SummaryDialog } from './SummaryDialog';
+import { SummaryDialogWrapper } from './SummaryDialogWrapper';
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
 import { useEffect } from 'react';
@@ -38,7 +38,7 @@ export function AiDialog({ showDialog, setShowDialog }: AiDialogProps) {
   }, [rawWorkoutString, setSelectedExercises]);
 
   return showDialog ? (
-    <SummaryDialog
+    <SummaryDialogWrapper
       close={() => setShowDialog(false)}
       isOpen={showDialog}
       isLoading={isFetching}
