@@ -8,7 +8,13 @@ export function ExerciseSearch() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText, setSearchText, currentHint } = searchInput;
   return (
-    <Card className="p-4 my-4" elevation={5}>
+    <Card
+      className="p-4 my-4"
+      elevation={5}
+      sx={{
+        overflow: 'visible',
+      }}
+    >
       <FormControl variant="outlined" fullWidth>
         <TextField
           InputProps={{
@@ -30,9 +36,6 @@ export function ExerciseSearch() {
           }}
           fullWidth
           className="w-full opacity-100"
-          sx={{
-            marginBottom: '30px',
-          }}
           aria-describedby="create-workout-hint-text"
           inputProps={{
             'aria-label': 'hint',
