@@ -7,7 +7,7 @@ import { ActivityCardCloseButton } from './ActivityCardCloseButton';
 
 import useActivityDurationInSeconds from '@/hooks/activity/useActivityDuration';
 import { VideoButtons } from './VideoButtons';
-import { MuscleGroupChips } from './MuscleGroupChips';
+import { MuscleGroupsChips } from './MuscleGroupsChips';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exerciseName, activityType } = useActivityCardContext();
@@ -37,7 +37,7 @@ export function ActivityCard(cardProps: CardProps) {
           <ExerciseTitle />
           <ActivityCardCloseButton />
           {activityType === 'exercise' && (
-            <MuscleGroupChips exerciseName={exerciseName ?? ''} />
+            <MuscleGroupsChips exerciseName={exerciseName ?? ''} />
           )}
         </CardContent>
         {isExerciseActive && <ActiveExercise />}

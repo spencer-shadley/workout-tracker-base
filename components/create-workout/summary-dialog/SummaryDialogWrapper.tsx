@@ -12,7 +12,11 @@ export function SummaryDialogWrapper(props: SummaryDialogType) {
   const { isOpen, close: handleClose } = props;
   return (
     <SummaryDialogProvider summaryDialogContext={props}>
-      <Dialog open={isOpen && exerciseNames.length > 0} onClose={handleClose}>
+      <Dialog
+        open={isOpen && exerciseNames.length > 0}
+        onClose={handleClose}
+        fullWidth
+      >
         <Summary />
       </Dialog>
     </SummaryDialogProvider>

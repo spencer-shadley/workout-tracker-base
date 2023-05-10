@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
-import { MuscleGroupChips } from '@/components/main/workout/activity/card/MuscleGroupChips';
+import { MuscleGroupsChips } from '@/components/main/workout/activity/card/MuscleGroupsChips';
 import { TextSkeleton } from '../../../shared/TextSkeleton';
 
 interface ResultListItemTextProps {
@@ -17,7 +17,7 @@ export function ResultListItemText({ exerciseName }: ResultListItemTextProps) {
       ) : (
         <Typography variant="overline">{exerciseName}</Typography>
       )}
-      <MuscleGroupChips exerciseName={exerciseName} />
+      <MuscleGroupsChips exerciseName={exerciseName} />
     </div>
   );
 }

@@ -16,6 +16,7 @@ export function DescriptionText({ exerciseName }: { exerciseName: string }) {
 
   return (
     <Accordion
+      elevation={0}
       TransitionProps={{ unmountOnExit: true }}
       expanded={shouldShowDescription}
       onChange={() => setShouldShowDescription(!shouldShowDescription)}
@@ -23,7 +24,7 @@ export function DescriptionText({ exerciseName }: { exerciseName: string }) {
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <DialogContentText variant="subtitle2">
-          Click to {shouldShowDescription ? 'hide' : 'show'} description
+          {shouldShowDescription ? 'Hide' : 'Show'} description
         </DialogContentText>
       </AccordionSummary>
       <DescriptionDetails exerciseName={exerciseName} />

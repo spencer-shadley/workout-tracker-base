@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { DescriptionText } from './DescriptionText';
-import { MuscleGroupChips } from '@/components/main/workout/activity/card/MuscleGroupChips';
+import { MuscleGroupsChips } from '@/components/main/workout/activity/card/MuscleGroupsChips';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;
@@ -25,7 +25,7 @@ export function SummaryDialogContentListItemContent({
           <Typography variant="overline" fontSize={20}>
             {exerciseName}
           </Typography>
-          <MuscleGroupChips exerciseName={exerciseName} />
+          <MuscleGroupsChips exerciseName={exerciseName} />
         </div>
         <Tooltip title={`Remove ${exerciseName}`} arrow>
           <IconButton
