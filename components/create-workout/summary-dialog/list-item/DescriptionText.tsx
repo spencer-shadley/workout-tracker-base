@@ -1,20 +1,46 @@
-import { DialogContentText, Skeleton } from '@mui/material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  DialogContentText,
+  Skeleton,
+} from '@mui/material';
 import { logError } from '@/utils/logger';
-import { UseQueryResult } from '@tanstack/react-query';
+import { useState } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useOpenAi } from '@/hooks/openai/useOpenAi';
 
-export function DescriptionText({
-  isFetching: isLoading,
-  error,
-  data: description,
-}: UseQueryResult<string, unknown>) {
-  const text = (
-    <DialogContentText variant="subtitle2">
-      {description ? description : 'Click to load description'}
-    </DialogContentText>
+export function DescriptionText({ exerciseName }: { exerciseName: string }) {
+  const [shouldShowDescription, setShouldShowDescription] =
+    useState<boolean>(false);
+
+  return (
+    <Accordion
+      TransitionProps={{ unmountOnExit: true }}
+      expanded={shouldShowDescription}
+      onChange={() => setShouldShowDescription(!shouldShowDescription)}
+    >
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <DialogContentText variant="subtitle2">
+          Click to {shouldShowDescription ? 'hide' : 'show'} description
+        </DialogContentText>
+      </AccordionSummary>
+      <DescriptionDetails exerciseName={exerciseName} />
+    </Accordion>
   );
+}
+
+function DescriptionDetails({ exerciseName }: { exerciseName: string }) {
+  const {
+    isFetching: isLoading,
+    error,
+    data: description,
+  } = useOpenAi({
+    prompt: `Give me a brief description for the exercise ${exerciseName}`,
+  });
 
   if (isLoading) {
-    return <Skeleton>{text}</Skeleton>;
+    return <Skeleton />;
   }
 
   if (error) {
@@ -22,5 +48,5 @@ export function DescriptionText({
     return <DialogContentText>Error fetching description</DialogContentText>;
   }
 
-  return text;
+  return <AccordionDetails>{description}</AccordionDetails>;
 }
