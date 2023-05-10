@@ -11,15 +11,10 @@ import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 import { useEffect, useRef } from 'react';
 
 export function ActivityCard(cardProps: CardProps) {
-  const { exerciseName, activityType } = useActivityCardContext();
+  const { exerciseName, activityType, isExerciseActive } =
+    useActivityCardContext();
   const { currentBucket } = useTimeContext();
-  const {
-    containerExercise,
-    exerciseType: currentExerciseType,
-    remainingTimeInSeconds,
-  } = currentBucket;
-  const isExerciseActive =
-    containerExercise === exerciseName && currentExerciseType === activityType;
+  const { remainingTimeInSeconds } = currentBucket;
 
   const activityDuration = useActivityDurationInSeconds(activityType);
   const progressPercent = isExerciseActive

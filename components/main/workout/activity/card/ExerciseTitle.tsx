@@ -6,14 +6,20 @@ import useActivityName from '@/hooks/activity/useActivityName';
 
 export function ExerciseTitle() {
   const { jumpToBucket } = useTimeContext();
-  const { exerciseName, timeBucket, activityType } = useActivityCardContext();
+  const { exerciseName, timeBucket, activityType, isExerciseActive } =
+    useActivityCardContext();
   const activityName = useActivityName(activityType, exerciseName);
 
   return (
     <Typography
       variant="h5"
       component="div"
-      sx={{ flexGrow: 1, justifySelf: 'center', alignSelf: 'stretch' }}
+      sx={{
+        flexGrow: 1,
+        justifySelf: 'center',
+        alignSelf: 'stretch',
+        fontSize: isExerciseActive ? '4rem' : undefined,
+      }}
     >
       {activityName}
       {timeBucket && (

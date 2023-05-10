@@ -1,6 +1,6 @@
 import { CardProps, ListItem } from '@mui/material';
 import { ActivityCard } from './card/ActivityCard';
-import { ActivityType } from '../context/TimeContextProvider';
+import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 
@@ -18,6 +18,12 @@ export default function ActivityListItem({
     exerciseName,
     activityType
   );
+  const { currentBucket } = useTimeContext();
+  const { containerExercise, exerciseType: currentExerciseType } =
+    currentBucket;
+
+  const isExerciseActive =
+    containerExercise === exerciseName && currentExerciseType === activityType;
 
   return (
     <ActivityCardProvider
@@ -26,6 +32,7 @@ export default function ActivityListItem({
         isDismissible: false,
         activityType,
         timeBucket: activityBucket,
+        isExerciseActive,
       }}
     >
       <ListItem
