@@ -1,4 +1,4 @@
-import { Button, Link, Typography } from '@mui/material';
+import { Button, Link, Skeleton, Typography } from '@mui/material';
 import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import ReactPlayer from 'react-player/lazy';
 import useVideo from './hooks/useVideo';
@@ -35,7 +35,13 @@ export function VideoButtons() {
         <Button onClick={() => pause()}>Search on YouTube</Button>
       </Link>
 
-      {videoUrl && shouldShowVideo && <ReactPlayer url={videoUrl} />}
+      {videoUrl && shouldShowVideo && (
+        <ReactPlayer
+          width={'100%'}
+          fallback={<Skeleton variant="rectangular" />}
+          url={videoUrl}
+        />
+      )}
     </>
   ) : null;
 }
