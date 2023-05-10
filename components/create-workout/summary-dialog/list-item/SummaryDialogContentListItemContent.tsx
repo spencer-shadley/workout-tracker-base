@@ -20,7 +20,7 @@ export function SummaryDialogContentListItemContent({
 
   return (
     <article className="w-full">
-      <span className="flex items-center mb-5">
+      <span className="flex items-center">
         <div className="flex-1 ">
           <Typography variant="overline" fontSize={20}>
             {exerciseName}

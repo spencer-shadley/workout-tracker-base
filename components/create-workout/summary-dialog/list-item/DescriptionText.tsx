@@ -20,9 +20,9 @@ export function DescriptionText({ exerciseName }: { exerciseName: string }) {
       TransitionProps={{ unmountOnExit: true }}
       expanded={shouldShowDescription}
       onChange={() => setShouldShowDescription(!shouldShowDescription)}
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', padding: 0 }}
     >
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary sx={{ padding: 0 }} expandIcon={<ExpandMoreIcon />}>
         <DialogContentText variant="subtitle2">
           {shouldShowDescription ? 'Hide' : 'Show'} description
         </DialogContentText>
@@ -50,5 +50,5 @@ function DescriptionDetails({ exerciseName }: { exerciseName: string }) {
     return <DialogContentText>Error fetching description</DialogContentText>;
   }
 
-  return <AccordionDetails>{description}</AccordionDetails>;
+  return <AccordionDetails sx={{ padding: 0 }}>{description}</AccordionDetails>;
 }
