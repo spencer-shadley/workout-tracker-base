@@ -24,6 +24,7 @@ export function ExampleSearches(props: ListProps) {
           <ListItem sx={{ display: 'flex' }} key={hint}>
             <ListItemText sx={{ flexGrow: 1 }}>{hint}</ListItemText>
             <Button
+              color="info"
               onClick={() => {
                 setShowDialog(true);
               }}
@@ -32,6 +33,7 @@ export function ExampleSearches(props: ListProps) {
               generate
             </Button>
             <Button
+              color="info"
               onClick={() => {
                 setSearchText(hint);
               }}
