@@ -8,6 +8,7 @@ import { ActivityCardCloseButton } from './ActivityCardCloseButton';
 import useActivityDurationInSeconds from '@/hooks/activity/useActivityDuration';
 import { VideoButtons } from './VideoButtons';
 import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
+import { useEffect, useRef } from 'react';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exerciseName, activityType } = useActivityCardContext();
@@ -25,8 +26,15 @@ export function ActivityCard(cardProps: CardProps) {
     ? (remainingTimeInSeconds / activityDuration) * 100
     : null;
 
+  const fieldRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fieldRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [isExerciseActive]);
+
   return (
     <Card
+      ref={fieldRef}
       sx={{
         width: '100%',
       }}
