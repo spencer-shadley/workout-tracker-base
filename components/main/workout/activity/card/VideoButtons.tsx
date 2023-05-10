@@ -10,10 +10,10 @@ export function VideoButtons() {
 
   const {
     videoUrl,
-    setShouldShowVideo: setShowVideo,
+    setShouldShowVideo,
     hasYoutubeQuotaExceeded,
     youtubeSearchUrl,
-    shouldShowVideo: showVideo,
+    shouldShowVideo,
   } = useVideo();
 
   return activityType === 'exercise' ? (
@@ -24,10 +24,10 @@ export function VideoButtons() {
         <Button
           onClick={() => {
             pause();
-            setShowVideo(true);
+            setShouldShowVideo(!shouldShowVideo);
           }}
         >
-          show video
+          {shouldShowVideo ? 'hide video' : 'show video'}
         </Button>
       )}
 
@@ -35,7 +35,7 @@ export function VideoButtons() {
         <Button onClick={() => pause()}>Search on YouTube</Button>
       </Link>
 
-      {videoUrl && showVideo && <ReactPlayer url={videoUrl} />}
+      {videoUrl && shouldShowVideo && <ReactPlayer url={videoUrl} />}
     </>
   ) : null;
 }
