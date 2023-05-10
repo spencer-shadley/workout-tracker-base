@@ -72,13 +72,14 @@ export default function useTimeInformation(): TimeContextType {
         elapsedTimeInSeconds < bucket.endTimeInSeconds &&
         elapsedTimeInSeconds >= bucket.startTimeInSeconds;
 
+      const activityDuration =
+        bucket.endTimeInSeconds - bucket.startTimeInSeconds;
+      bucket.progressPercent = isBucketActive
+        ? (bucket.remainingTimeInSeconds / activityDuration) * 100
+        : 0;
       if (isBucketActive) {
-        const activityDuration =
-          bucket.endTimeInSeconds - bucket.startTimeInSeconds;
         bucket.remainingTimeInSeconds =
           bucket.endTimeInSeconds - elapsedTimeInSeconds;
-        bucket.progressPercent =
-          (bucket.remainingTimeInSeconds / activityDuration) * 100;
 
         if (
           currentBucket !== bucket &&
@@ -88,6 +89,7 @@ export default function useTimeInformation(): TimeContextType {
         }
 
         setCurrentBucket(bucket);
+      } else {
       }
     }
   }, [
