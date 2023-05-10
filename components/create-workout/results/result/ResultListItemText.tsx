@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
-import { MuscleGroupsChips } from '@/components/main/workout/activity/card/MuscleGroupsChips';
+import { MuscleGroupsChips } from '@/components/main/workout/activity/card/muscle-group-chips/MuscleGroupsChips';
 import { TextSkeleton } from '../../../shared/TextSkeleton';
 
 interface ResultListItemTextProps {

@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { DescriptionText } from './DescriptionText';
-import { MuscleGroupsChips } from '@/components/main/workout/activity/card/MuscleGroupsChips';
+import { MuscleGroupsChips } from '@/components/main/workout/activity/card/muscle-group-chips/MuscleGroupsChips';
 
 interface SummaryDialogContentListItemContentProps {
   exerciseName: string;

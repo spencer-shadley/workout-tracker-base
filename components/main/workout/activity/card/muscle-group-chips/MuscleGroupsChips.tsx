@@ -1,6 +1,6 @@
-import { Chip } from '@mui/material';
 import useMuscleGroups from './hooks/useMuscleGroups';
-import { ChipsSkeleton } from '../../../../shared/ChipsSkeleton';
+import { ChipsSkeleton } from '../../../../../shared/ChipsSkeleton';
+import { MuscleGroupChip } from './MuscleGroupChip';
 
 export function MuscleGroupsChips({ exerciseName }: { exerciseName: string }) {
   const { muscleGroups, isFetching: isLoading } = useMuscleGroups(exerciseName);
@@ -11,7 +11,7 @@ export function MuscleGroupsChips({ exerciseName }: { exerciseName: string }) {
         <ChipsSkeleton />
       ) : (
         muscleGroups.map((muscleGroup) => (
-          <Chip key={muscleGroup} label={muscleGroup} />
+          <MuscleGroupChip key={muscleGroup} muscleGroup={muscleGroup} />
         ))
       )}
     </div>

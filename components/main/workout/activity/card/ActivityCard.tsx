@@ -7,7 +7,7 @@ import { ActivityCardCloseButton } from './ActivityCardCloseButton';
 
 import useActivityDurationInSeconds from '@/hooks/activity/useActivityDuration';
 import { VideoButtons } from './VideoButtons';
-import { MuscleGroupsChips } from './MuscleGroupsChips';
+import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 
 export function ActivityCard(cardProps: CardProps) {
   const { exerciseName, activityType } = useActivityCardContext();
