@@ -21,7 +21,11 @@ export function Results() {
   }, [isSearching, searchedExerciseNameResults]);
 
   return (
-    <Card sx={{ padding: '5px 10px' }} className="bg-slate-500" elevation={10}>
+    <Card
+      sx={{ padding: '5px 10px', overflow: 'auto', height: '100%' }}
+      className="bg-slate-500"
+      elevation={10}
+    >
       <List className="w-full">
         {names.map((exerciseName) => (
           <ResultCard key={exerciseName} exerciseName={exerciseName}>
