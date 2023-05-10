@@ -3,7 +3,7 @@ import {
   TimeSlot,
 } from '@/components/main/workout/context/TimeContextProvider';
 import {
-  calculateBuckets,
+  createTimeBuckets,
   calculateRoundTimeInSeconds,
   calculateWorkoutTimeInSeconds,
 } from '@/utils/time';
@@ -52,7 +52,7 @@ export default function useTimeInformation(): TimeContextType {
     (elapsedTimeInSeconds - timeSpentInRoundRestInSeconds) % roundTimeInSeconds;
 
   const calculatedBuckets = useCallback(() => {
-    return calculateBuckets();
+    return createTimeBuckets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workoutOptions]);
 

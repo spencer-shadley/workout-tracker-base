@@ -16,7 +16,7 @@ export function secondsToHumanReadable(seconds: number): string {
   return `${hoursRemaining} hours, ${minutesRemaining} minutes, ${secondsRemaining} seconds`;
 }
 
-export function calculateBuckets() {
+export function createTimeBuckets() {
   const options = getOptions();
   const {
     numberOfRounds,
