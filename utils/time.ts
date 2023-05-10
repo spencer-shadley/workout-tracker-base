@@ -39,6 +39,7 @@ export function calculateBuckets() {
         remainingTimeInSeconds: exerciseDurationInSeconds,
         isActive: false,
         containerRound: round,
+        progressPercent: 0,
       });
       passedTimeInSeconds += exerciseDurationInSeconds;
       buckets.push({
@@ -49,6 +50,7 @@ export function calculateBuckets() {
         remainingTimeInSeconds: restBetweenExercisesInSeconds,
         isActive: false,
         containerRound: round,
+        progressPercent: 0,
       });
       passedTimeInSeconds += restBetweenExercisesInSeconds;
     }
@@ -60,6 +62,7 @@ export function calculateBuckets() {
       remainingTimeInSeconds: restBetweenRoundsInSeconds,
       isActive: false,
       containerRound: round,
+      progressPercent: 0,
     });
   }
   return buckets;
