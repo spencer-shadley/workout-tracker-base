@@ -8,6 +8,7 @@ export function ActiveExercise() {
   return (
     <Typography
       variant="h1"
+      fontSize={200}
       justifySelf="center"
       alignSelf="center"
       marginRight={2}

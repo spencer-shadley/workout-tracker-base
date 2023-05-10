@@ -37,7 +37,7 @@ export function VideoButtons() {
 
       {videoUrl && shouldShowVideo && (
         <ReactPlayer
-          width={'100%'}
+          width="100%"
           fallback={<Skeleton variant="rectangular" />}
           url={videoUrl}
         />
