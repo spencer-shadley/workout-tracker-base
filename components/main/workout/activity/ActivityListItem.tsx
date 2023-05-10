@@ -3,6 +3,7 @@ import { ActivityCard } from './card/ActivityCard';
 import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
+import useActivityDurationInSeconds from '@/hooks/activity/useActivityDuration';
 
 interface ActivityListItemProps extends CardProps {
   activityType: ActivityType;
@@ -19,11 +20,19 @@ export default function ActivityListItem({
     activityType
   );
   const { currentBucket } = useTimeContext();
-  const { containerExercise, exerciseType: currentExerciseType } =
-    currentBucket;
+  const {
+    containerExercise,
+    exerciseType: currentExerciseType,
+    remainingTimeInSeconds,
+  } = currentBucket;
 
   const isExerciseActive =
     containerExercise === exerciseName && currentExerciseType === activityType;
+
+  const activityDuration = useActivityDurationInSeconds(activityType);
+  const progressPercent = isExerciseActive
+    ? (remainingTimeInSeconds / activityDuration) * 100
+    : null;
 
   return (
     <ActivityCardProvider
@@ -33,6 +42,7 @@ export default function ActivityListItem({
         activityType,
         timeBucket: activityBucket,
         isExerciseActive,
+        progressPercent,
       }}
     >
       <ListItem
