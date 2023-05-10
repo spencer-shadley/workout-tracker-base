@@ -5,7 +5,7 @@ import {
   Skeleton,
   Stack,
 } from '@mui/material';
-import { SummaryDialogContentListItem } from './SummaryDialogContentListItem';
+import { SummaryDialogContentListItem } from './list-item/SummaryDialogContentListItem';
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 import { useSummaryDialogContext } from './context/SummaryDialogContextProvider';
 
