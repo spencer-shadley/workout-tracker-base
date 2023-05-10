@@ -3,7 +3,7 @@ import { ActivityCard } from './card/ActivityCard';
 import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
-import useActivityDurationInSeconds from '@/hooks/activity/useActivityDuration';
+import { useEffect, useState } from 'react';
 
 interface ActivityListItemProps extends CardProps {
   activityType: ActivityType;
@@ -20,19 +20,16 @@ export default function ActivityListItem({
     activityType
   );
   const { currentBucket } = useTimeContext();
-  const {
-    containerExercise,
-    exerciseType: currentExerciseType,
-    remainingTimeInSeconds,
-  } = currentBucket;
+  const { containerExercise, exerciseType: currentExerciseType } =
+    currentBucket;
 
-  const isExerciseActive =
-    containerExercise === exerciseName && currentExerciseType === activityType;
+  const [isExerciseActive, setIsExerciseActive] = useState(false);
 
-  const activityDuration = useActivityDurationInSeconds(activityType);
-  const progressPercent = isExerciseActive
-    ? (remainingTimeInSeconds / activityDuration) * 100
-    : null;
+  useEffect(() => {
+    setIsExerciseActive(
+      containerExercise === exerciseName && currentExerciseType === activityType
+    );
+  }, [activityType, containerExercise, currentExerciseType, exerciseName]);
 
   return (
     <ActivityCardProvider
@@ -42,7 +39,6 @@ export default function ActivityListItem({
         activityType,
         timeBucket: activityBucket,
         isExerciseActive,
-        progressPercent,
       }}
     >
       <ListItem

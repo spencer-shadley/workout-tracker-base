@@ -6,18 +6,17 @@ export interface ActivityCardContextType {
   isDismissible: boolean;
   timeBucket: TimeSlot | undefined;
   isExerciseActive: boolean;
-  progressPercent: number | null;
   activityType: ActivityType;
 }
 
 export const ActivityCardContext = createContext<ActivityCardContextType>({
   isDismissible: false,
   isExerciseActive: false,
-  progressPercent: 0,
   timeBucket: {
     remainingTimeInSeconds: 0,
     startTimeInSeconds: 0,
     endTimeInSeconds: 0,
+    progressPercent: 0,
     isActive: false,
     containerRound: 0,
     exerciseType: 'exercise',

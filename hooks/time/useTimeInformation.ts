@@ -73,8 +73,12 @@ export default function useTimeInformation(): TimeContextType {
         elapsedTimeInSeconds >= bucket.startTimeInSeconds;
 
       if (isBucketActive) {
+        const activityDuration =
+          bucket.endTimeInSeconds - bucket.startTimeInSeconds;
         bucket.remainingTimeInSeconds =
           bucket.endTimeInSeconds - elapsedTimeInSeconds;
+        bucket.progressPercent =
+          (bucket.remainingTimeInSeconds / activityDuration) * 100;
 
         if (
           currentBucket !== bucket &&

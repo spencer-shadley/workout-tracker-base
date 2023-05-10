@@ -6,6 +6,7 @@ export interface TimeSlot {
   remainingTimeInSeconds: number;
   startTimeInSeconds: number;
   endTimeInSeconds: number;
+  progressPercent: number;
   isActive: boolean;
   containerRound: number;
   containerExercise?: string;
@@ -42,6 +43,7 @@ export const TimeContext = createContext<TimeContextType>({
     remainingTimeInSeconds: 0,
     startTimeInSeconds: 0,
     endTimeInSeconds: 0,
+    progressPercent: 0,
     isActive: false,
     containerRound: 0,
     exerciseType: 'exercise',
