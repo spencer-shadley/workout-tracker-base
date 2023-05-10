@@ -48,7 +48,7 @@ export function SimpleParticles() {
               default: 'bounce',
             },
             random: false,
-            speed: 0.2,
+            speed: 0.4,
             straight: false,
           },
           number: {
