@@ -19,6 +19,7 @@ export function DescriptionText({ exerciseName }: { exerciseName: string }) {
       TransitionProps={{ unmountOnExit: true }}
       expanded={shouldShowDescription}
       onChange={() => setShouldShowDescription(!shouldShowDescription)}
+      sx={{ width: '100%' }}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <DialogContentText variant="subtitle2">
