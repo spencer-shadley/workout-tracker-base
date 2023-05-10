@@ -7,8 +7,10 @@ import { ActivityCardCloseButton } from './ActivityCardCloseButton';
 import { VideoButtons } from './VideoButtons';
 import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 import { useEffect, useRef } from 'react';
+import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ActivityCard(cardProps: CardProps) {
+  const { isRunning } = useTimeContext();
   const { exerciseName, activityType, isExerciseActive, timeBucket } =
     useActivityCardContext();
 
@@ -17,8 +19,10 @@ export function ActivityCard(cardProps: CardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cardRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [isExerciseActive]);
+    if (isRunning) {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isExerciseActive, isRunning]);
 
   return (
     <Card

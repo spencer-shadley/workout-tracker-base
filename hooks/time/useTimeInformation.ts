@@ -101,10 +101,17 @@ export default function useTimeInformation(): TimeContextType {
     workoutOptions,
   ]);
 
+  const reset = useCallback(() => {
+    setTimeElapsedInSeconds(0);
+    setCurrentRound(0);
+    setCurrentBucket(undefined);
+    setIsRunning(false);
+  }, []);
+
   useEffect(() => {
     setIsRunning(false);
     reset();
-  }, [workoutOptions]);
+  }, [reset, workoutOptions]);
 
   useInterval(
     () => {
@@ -119,13 +126,6 @@ export default function useTimeInformation(): TimeContextType {
   ): number | null {
     return hasTimeLeftInWorkout ? currentBucket?.containerRound ?? 0 : null;
   }
-
-  const reset = () => {
-    setTimeElapsedInSeconds(0);
-    setCurrentRound(0);
-    setCurrentBucket(undefined);
-    setIsRunning(false);
-  };
 
   const toggleIsRunning = () => {
     setIsRunning(!isRunning);
