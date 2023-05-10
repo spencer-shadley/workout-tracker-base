@@ -1,4 +1,4 @@
-import { ListItemButton } from '@mui/material';
+import { ListItemButton, Typography } from '@mui/material';
 import { useCreateWorkoutContext as useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
 import { useAddExerciseName } from '@/hooks/storage/useSessionStorage';
 
@@ -7,8 +7,10 @@ export function NewExerciseButton() {
   const { searchText } = searchInput;
   const addExerciseName = useAddExerciseName(searchText);
   return (
-    <ListItemButton
-      onClick={() => addExerciseName()}
-    >{`Add "${searchText}"`}</ListItemButton>
+    <ListItemButton onClick={() => addExerciseName()}>
+      <Typography>Add &quot;</Typography>
+      <Typography variant="overline">{searchText}</Typography>
+      <Typography>&quot; to workout</Typography>
+    </ListItemButton>
   );
 }
