@@ -1,19 +1,9 @@
 import { Chip } from '@mui/material';
-import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import useMuscleGroups from './hooks/useMuscleGroups';
 import { ChipsSkeleton } from '../../../../shared/ChipsSkeleton';
 
-export function MuscleGroupChips() {
-  const { exerciseName, activityType } = useActivityCardContext();
-
-  const { muscleGroups, isFetching: isLoading } = useMuscleGroups(
-    exerciseName,
-    activityType
-  );
-
-  if (activityType !== 'exercise') {
-    return null;
-  }
+export function MuscleGroupChips({ exerciseName }: { exerciseName: string }) {
+  const { muscleGroups, isFetching: isLoading } = useMuscleGroups(exerciseName);
 
   return (
     <div className="flex gap-1 max-w-xs flex-wrap">

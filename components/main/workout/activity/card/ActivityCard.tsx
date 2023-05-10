@@ -36,7 +36,9 @@ export function ActivityCard(cardProps: CardProps) {
         <CardContent sx={{ flexGrow: 1 }}>
           <ExerciseTitle />
           <ActivityCardCloseButton />
-          <MuscleGroupChips />
+          {activityType === 'exercise' && (
+            <MuscleGroupChips exerciseName={exerciseName ?? ''} />
+          )}
         </CardContent>
         {isExerciseActive && <ActiveExercise />}
       </span>

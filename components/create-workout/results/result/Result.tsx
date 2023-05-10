@@ -1,4 +1,4 @@
-import { ListItem, ListItemText, Skeleton } from '@mui/material';
+import { ListItem } from '@mui/material';
 import { useState } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
@@ -6,7 +6,7 @@ import { ResultIcon } from './ResultIcon';
 import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
 import { ListItemWithDetails } from '../ListItemWithDetails';
 import { useAddStyle } from '@/hooks/openai/useAddStyle';
-import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
+import { ResultListItemText } from './ResultListItemText';
 
 interface ResultProps {
   exerciseName: string;
@@ -45,25 +45,5 @@ export default function Result({ exerciseName }: ResultProps) {
         />
       </div>
     </ListItem>
-  );
-}
-
-interface ResultListItemTextProps {
-  exerciseName: string;
-}
-
-function ResultListItemText({ exerciseName }: ResultListItemTextProps) {
-  const { searchInput } = useCreateWorkoutContext();
-  const { isSearching } = searchInput;
-
-  return isSearching ? (
-    <div className="w-full grow">
-      <Skeleton
-        width={`${Math.random() * 100}%`}
-        sx={{ marginRight: '20px' }}
-      />
-    </div>
-  ) : (
-    <ListItemText className="flex-grow w-full" primary={exerciseName} />
   );
 }
