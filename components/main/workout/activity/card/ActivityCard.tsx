@@ -1,6 +1,6 @@
 import { Card, CardContent, LinearProgress, CardProps } from '@mui/material';
 import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
-import { ActiveExercise } from './ActiveExercise';
+import { ActiveExerciseTimer } from './ActiveExerciseTimer';
 import { ExerciseTitle } from './ExerciseTitle';
 import { ActivityCardCloseButton } from './ActivityCardCloseButton';
 
@@ -40,7 +40,7 @@ export function ActivityCard(cardProps: CardProps) {
             <MuscleGroupsChips exerciseName={exerciseName ?? ''} />
           )}
         </CardContent>
-        {isExerciseActive && <ActiveExercise />}
+        {isExerciseActive && <ActiveExerciseTimer />}
       </span>
       <VideoButtons />
       {progressPercent !== null && (
