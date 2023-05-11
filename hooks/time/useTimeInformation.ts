@@ -31,8 +31,6 @@ export default function useTimeInformation(): TimeContextType {
   const [workoutCompletionTime, setWorkoutCompletionTime] = useState<
     number | null
   >(null);
-  const [mostRecentCompletedExerciseTime, setMostRecentCompletedExerciseTime] =
-    useState<number | null>(null);
 
   const remainingWorkoutTimeInSeconds =
     calculateWorkoutTimeInSeconds(workoutOptions, exercises.length) -
@@ -80,13 +78,6 @@ export default function useTimeInformation(): TimeContextType {
       if (isBucketActive) {
         bucket.remainingTimeInSeconds =
           bucket.endTimeInSeconds - elapsedTimeInSeconds;
-
-        if (
-          currentBucket !== bucket &&
-          currentBucket?.activityType === 'exercise'
-        ) {
-          setMostRecentCompletedExerciseTime(Date.now());
-        }
 
         setCurrentBucket(bucket);
       } else {
@@ -159,7 +150,6 @@ export default function useTimeInformation(): TimeContextType {
     skipCurrentActivity,
     jumpToBucket,
     workoutCompletionTime,
-    mostRecentCompletedExerciseTime,
   };
 
   useDebugValue(timeInfo);
