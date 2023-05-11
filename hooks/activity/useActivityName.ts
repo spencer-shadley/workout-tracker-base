@@ -6,6 +6,8 @@ export default function useActivityName(
   exerciseName?: string
 ): string {
   switch (activityType) {
+    case 'prep':
+      return 'Get Ready!';
     case 'exercise':
       if (!exerciseName) {
         break;

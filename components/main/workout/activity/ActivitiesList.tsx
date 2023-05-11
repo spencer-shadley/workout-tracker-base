@@ -21,6 +21,13 @@ export default function ActivitiesList({
   return (
     <div className="h-full overflow-y-auto justify-middle">
       <List>
+        {shouldIncludeRests && (
+          <ActivityListItem
+            key={`prep-time-${currentRound}`}
+            activityType="prep"
+            exerciseName={`Prep for Round ${currentRound}`}
+          />
+        )}
         {selectedExercises.map((exerciseName, index) => (
           <div key={exerciseName}>
             <ActivityListItem
