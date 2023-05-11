@@ -1,23 +1,14 @@
-import {
-  TimeContextType,
-  TimeSlot,
-} from '@/components/main/workout/context/TimeContextProvider';
-import {
-  createTimeBuckets,
-  calculateRoundTimeInSeconds,
-  calculateWorkoutTimeInSeconds,
-} from '@/utils/time';
-import {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-  useDebugValue,
-} from 'react';
-import { useSelectedExercises } from '../storage/useSessionStorage';
-import { useOptions } from '../storage/useLocalStorage';
+import { useCallback, useDebugValue, useEffect, useMemo, useState } from 'react';
 import { useInterval } from 'usehooks-ts';
-import { updateScreenLock, release } from '../../utils/screenLock';
+
+import { TimeContextType, TimeSlot } from '@/components/main/workout/context/TimeContextProvider';
+import {
+    calculateRoundTimeInSeconds, calculateWorkoutTimeInSeconds, createTimeBuckets
+} from '@/utils/time';
+
+import { release, updateScreenLock } from '../../utils/screenLock';
+import { useOptions } from '../storage/useLocalStorage';
+import { useSelectedExercises } from '../storage/useSessionStorage';
 
 export default function useTimeInformation(): TimeContextType {
   const [exercises] = useSelectedExercises();
