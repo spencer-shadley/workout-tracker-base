@@ -7,8 +7,12 @@ import { ActivityCardCloseButton } from './ActivityCardCloseButton';
 import { VideoButtons } from './VideoButtons';
 import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 import { useEffect, useRef } from 'react';
+import { useTimeContext } from '../../context/TimeContextProvider';
+
+const progressColor = '#1976d2';
 
 export function ActivityCard(cardProps: CardProps) {
+  const { isRunning } = useTimeContext();
   const { exerciseName, activityType, isExerciseActive, timeBucket } =
     useActivityCardContext();
 
@@ -17,7 +21,10 @@ export function ActivityCard(cardProps: CardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cardRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isRunning) {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isExerciseActive]);
 
   return (
@@ -25,6 +32,8 @@ export function ActivityCard(cardProps: CardProps) {
       ref={cardRef}
       sx={{
         width: '100%',
+        border: isExerciseActive ? `5px solid ${progressColor}` : undefined,
+        borderBottom: 0,
       }}
       {...cardProps}
     >
