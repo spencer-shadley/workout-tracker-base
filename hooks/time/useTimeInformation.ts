@@ -17,6 +17,7 @@ import {
 import { useSelectedExercises } from '../storage/useSessionStorage';
 import { useOptions } from '../storage/useLocalStorage';
 import { useInterval } from 'usehooks-ts';
+import { updateScreenLock, release } from '../../utils/screenLock';
 
 export default function useTimeInformation(): TimeContextType {
   const [exercises] = useSelectedExercises();
@@ -103,6 +104,14 @@ export default function useTimeInformation(): TimeContextType {
     setIsRunning(false);
     reset();
   }, [reset, workoutOptions]);
+
+  useEffect(() => {
+    if (isRunning) {
+      updateScreenLock();
+    } else {
+      release();
+    }
+  }, [isRunning]);
 
   useInterval(
     () => {

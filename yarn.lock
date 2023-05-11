@@ -497,6 +497,11 @@
   resolved "https://registry.yarnpkg.com/@total-typescript/ts-reset/-/ts-reset-0.4.2.tgz#c564c173ba09973968e1046c93965b7a257878a4"
   integrity sha512-vqd7ZUDSrXFVT1n8b2kc3LnklncDQFPvR58yUS1kEP23/nHPAO9l1lMjUfnPrXYYk4Hj54rrLKMW5ipwk7k09A==
 
+"@types/dom-screen-wake-lock@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/dom-screen-wake-lock/-/dom-screen-wake-lock-1.0.1.tgz#8f125f91821d49f51feee95e6db128eb6974aea9"
+  integrity sha512-WJQas3OFGcC8AeMzaa7FwzzbNNfanuV2R12kQYNp4BkUMghsRz5JxJ5RgVhJifhw7t0s6LvRSWZArmKbMDZ+5g==
+
 "@types/json-schema@^7.0.9":
   version "7.0.11"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
