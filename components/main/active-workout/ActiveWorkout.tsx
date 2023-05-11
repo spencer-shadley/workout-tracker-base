@@ -12,7 +12,7 @@ export default function ActiveWorkout() {
   const timeContext = useTimeInformation();
   const { remainingWorkoutTimeInSeconds, currentBucket, isRunning } =
     timeContext;
-  const { exerciseType } = currentBucket;
+  const { activityType: exerciseType } = currentBucket;
 
   return (
     <>

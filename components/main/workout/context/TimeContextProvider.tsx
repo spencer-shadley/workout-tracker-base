@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 
-export type ActivityType = 'exercise' | 'rest-round' | 'rest-exercise';
+export type ActivityType = 'exercise' | 'rest-round' | 'rest-exercise' | 'prep';
 
 export interface TimeSlot {
   remainingTimeInSeconds: number;
@@ -10,7 +10,7 @@ export interface TimeSlot {
   isActive: boolean;
   containerRound: number;
   containerExercise?: string;
-  exerciseType: ActivityType;
+  activityType: ActivityType;
 }
 
 export interface TimeContextType {
@@ -46,7 +46,7 @@ export const TimeContext = createContext<TimeContextType>({
     progressPercent: 0,
     isActive: false,
     containerRound: 0,
-    exerciseType: 'exercise',
+    activityType: 'exercise',
   },
   setCurrentBucket(): void {
     throw new Error('Function not implemented.');

@@ -83,7 +83,7 @@ export default function useTimeInformation(): TimeContextType {
 
         if (
           currentBucket !== bucket &&
-          currentBucket?.exerciseType === 'exercise'
+          currentBucket?.activityType === 'exercise'
         ) {
           setMostRecentCompletedExerciseTime(Date.now());
         }

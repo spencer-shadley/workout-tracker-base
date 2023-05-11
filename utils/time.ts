@@ -16,6 +16,8 @@ export function secondsToHumanReadable(seconds: number): string {
   return `${hoursRemaining} hours, ${minutesRemaining} minutes, ${secondsRemaining} seconds`;
 }
 
+// TODO: move to options?
+const prepTimeInSeconds = 5;
 export function createTimeBuckets() {
   const options = getOptions();
   const {
@@ -30,40 +32,59 @@ export function createTimeBuckets() {
   const buckets: TimeSlot[] = [];
   let passedTimeInSeconds = 0;
   for (let round = 0; round < numberOfRounds; round++) {
+    const prepTimeSlot: TimeSlot = {
+      containerExercise: undefined,
+      activityType: 'prep',
+      endTimeInSeconds: passedTimeInSeconds + prepTimeInSeconds,
+      containerRound: round,
+      startTimeInSeconds: passedTimeInSeconds,
+      remainingTimeInSeconds: prepTimeInSeconds,
+      isActive: false,
+      progressPercent: 0,
+    };
+    passedTimeInSeconds += prepTimeInSeconds;
+    buckets.push(prepTimeSlot);
+
     for (const observedExercise of exercises) {
-      buckets.push({
+      const exerciseTimeSlot: TimeSlot = {
         containerExercise: observedExercise,
-        exerciseType: 'exercise',
+        activityType: 'exercise',
         endTimeInSeconds: passedTimeInSeconds + exerciseDurationInSeconds,
         startTimeInSeconds: passedTimeInSeconds,
         remainingTimeInSeconds: exerciseDurationInSeconds,
         isActive: false,
         containerRound: round,
         progressPercent: 0,
-      });
+      };
       passedTimeInSeconds += exerciseDurationInSeconds;
-      buckets.push({
+      buckets.push(exerciseTimeSlot);
+
+      const exerciseRestTimeSlot: TimeSlot = {
         containerExercise: observedExercise,
-        exerciseType: 'rest-exercise',
+        activityType: 'rest-exercise',
         endTimeInSeconds: passedTimeInSeconds + restBetweenExercisesInSeconds,
         startTimeInSeconds: passedTimeInSeconds,
         remainingTimeInSeconds: restBetweenExercisesInSeconds,
         isActive: false,
         containerRound: round,
         progressPercent: 0,
-      });
+      };
+      buckets.push(exerciseRestTimeSlot);
       passedTimeInSeconds += restBetweenExercisesInSeconds;
     }
-    buckets.push({
+
+    const roundRestTimeSlot: TimeSlot = {
       containerExercise: undefined,
-      exerciseType: 'rest-round',
+      activityType: 'rest-round',
       endTimeInSeconds: passedTimeInSeconds + restBetweenRoundsInSeconds,
       startTimeInSeconds: passedTimeInSeconds,
       remainingTimeInSeconds: restBetweenRoundsInSeconds,
       isActive: false,
       containerRound: round,
       progressPercent: 0,
-    });
+    };
+    buckets.push(roundRestTimeSlot);
+    passedTimeInSeconds += restBetweenRoundsInSeconds;
   }
   return buckets;
 }

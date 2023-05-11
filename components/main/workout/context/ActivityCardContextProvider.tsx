@@ -19,7 +19,7 @@ export const ActivityCardContext = createContext<ActivityCardContextType>({
     progressPercent: 0,
     isActive: false,
     containerRound: 0,
-    exerciseType: 'exercise',
+    activityType: 'exercise',
   },
   activityType: 'exercise',
 });

@@ -20,7 +20,7 @@ export default function ActivityListItem({
     activityType
   );
   const { currentBucket } = useTimeContext();
-  const { containerExercise, exerciseType: currentExerciseType } =
+  const { containerExercise, activityType: currentExerciseType } =
     currentBucket;
 
   const [isExerciseActive, setIsExerciseActive] = useState(false);

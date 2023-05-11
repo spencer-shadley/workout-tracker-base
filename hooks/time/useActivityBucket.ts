@@ -14,11 +14,11 @@ export function useActivityBucket(
     buckets.find(
       (bucket) =>
         bucket.containerExercise === exerciseName &&
-        bucket.exerciseType === activityType
+        bucket.activityType === activityType
     ) ??
     buckets.find(
       (bucket) =>
-        bucket.exerciseType === 'rest-round' &&
+        bucket.activityType === 'rest-round' &&
         bucket.containerRound === currentRound
     );
 
