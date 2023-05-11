@@ -6,8 +6,12 @@ import useActivityName from '@/hooks/activity/useActivityName';
 
 export function ExerciseTitle() {
   const { jumpToBucket } = useTimeContext();
-  const { exerciseName, timeBucket, activityType, isExerciseActive } =
-    useActivityCardContext();
+  const {
+    exerciseName,
+    timeBucket,
+    activityType,
+    isActive: isExerciseActive,
+  } = useActivityCardContext();
   const activityName = useActivityName(activityType, exerciseName);
 
   return (

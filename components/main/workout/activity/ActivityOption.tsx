@@ -18,7 +18,7 @@ export default function ActivityOption({
         isDismissible: false,
         timeBucket: undefined,
         activityType: 'exercise',
-        isExerciseActive: false,
+        isActive: false,
       }}
     >
       <ActivityCard

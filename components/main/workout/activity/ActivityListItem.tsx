@@ -4,6 +4,7 @@ import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import { useEffect, useState } from 'react';
+import { logError } from '@/utils/logger';
 
 interface ActivityListItemProps extends CardProps {
   activityType: ActivityType;
@@ -23,13 +24,34 @@ export default function ActivityListItem({
   const { containerExercise, activityType: currentExerciseType } =
     currentBucket;
 
-  const [isExerciseActive, setIsExerciseActive] = useState(false);
+  const [isActive, setIsExerciseActive] = useState(false);
 
   useEffect(() => {
-    setIsExerciseActive(
-      containerExercise === exerciseName && currentExerciseType === activityType
-    );
-  }, [activityType, containerExercise, currentExerciseType, exerciseName]);
+    switch (activityType) {
+      case 'prep':
+        setIsExerciseActive(currentBucket.activityType === 'prep');
+        break;
+      case 'exercise':
+        setIsExerciseActive(currentBucket.containerExercise === exerciseName);
+        break;
+      case 'rest-exercise':
+        setIsExerciseActive(currentBucket.containerExercise === exerciseName);
+        break;
+      case 'rest-round':
+        setIsExerciseActive(currentBucket.activityType === 'rest-round');
+        break;
+      default:
+        setIsExerciseActive(false);
+        logError(`activityType not found ${activityType}`);
+    }
+  }, [
+    activityType,
+    containerExercise,
+    currentBucket.activityType,
+    currentBucket.containerExercise,
+    currentExerciseType,
+    exerciseName,
+  ]);
 
   return (
     <ActivityCardProvider
@@ -38,7 +60,7 @@ export default function ActivityListItem({
         isDismissible: false,
         activityType,
         timeBucket: activityBucket,
-        isExerciseActive,
+        isActive,
       }}
     >
       <ListItem

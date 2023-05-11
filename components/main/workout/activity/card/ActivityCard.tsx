@@ -13,7 +13,7 @@ const progressColor = '#1976d2';
 
 export function ActivityCard(cardProps: CardProps) {
   const { isRunning } = useTimeContext();
-  const { exerciseName, activityType, isExerciseActive, timeBucket } =
+  const { exerciseName, activityType, isActive, timeBucket } =
     useActivityCardContext();
 
   const progressPercent = timeBucket?.progressPercent;
@@ -25,14 +25,14 @@ export function ActivityCard(cardProps: CardProps) {
       cardRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isExerciseActive]);
+  }, [isActive]);
 
   return (
     <Card
       ref={cardRef}
       sx={{
         width: '100%',
-        border: isExerciseActive ? `5px solid ${progressColor}` : undefined,
+        border: isActive ? `5px solid ${progressColor}` : undefined,
         borderBottom: 0,
       }}
       {...cardProps}
@@ -45,7 +45,7 @@ export function ActivityCard(cardProps: CardProps) {
             <MuscleGroupsChips exerciseName={exerciseName ?? ''} />
           )}
         </CardContent>
-        {isExerciseActive && <ActiveExerciseTimer />}
+        {isActive && <ActiveExerciseTimer />}
       </span>
       <VideoButtons />
       {progressPercent !== null && (
