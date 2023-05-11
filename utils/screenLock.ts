@@ -3,7 +3,7 @@ import { logError } from '@/utils/logger';
 let screenLock: WakeLockSentinel | null;
 updateScreenLock();
 
-if (document) {
+if (typeof window !== "undefined") {
   document.addEventListener('visibilitychange', async () => {
     if (screenLock !== null && document.visibilityState === 'visible') {
       screenLock = await navigator.wakeLock.request('screen');
@@ -12,7 +12,7 @@ if (document) {
 }
 
 function isScreenLockSupported() {
-  return navigator && 'wakeLock' in navigator;
+  return typeof window !== "undefined" && 'wakeLock' in navigator;
 }
 
 export function release() {
@@ -24,7 +24,7 @@ export function release() {
 }
 
 export async function updateScreenLock() {
-  if (!isScreenLockSupported()) {
+  if (typeof window === "undefined" || !isScreenLockSupported()) {
     logError('Screen Lock not supported');
     return;
   }

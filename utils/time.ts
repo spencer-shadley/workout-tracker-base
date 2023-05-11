@@ -86,6 +86,7 @@ export function createTimeBuckets() {
     buckets.push(roundRestTimeSlot);
     passedTimeInSeconds += restBetweenRoundsInSeconds;
   }
+
   return buckets;
 }
 
