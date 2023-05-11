@@ -18,7 +18,7 @@ export function ActiveExerciseTimer() {
     >
       <Typography
         variant="h1"
-        fontSize={'90dvw'}
+        fontSize={remainingTimeInSeconds > 99 ? '50dvw' : '90dvw'}
         sx={{
           textShadow: '0px 0px 10px rgba(255,255,255,255.5)',
         }}
