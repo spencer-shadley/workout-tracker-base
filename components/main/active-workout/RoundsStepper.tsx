@@ -12,6 +12,7 @@ export default function RoundsStepper() {
   for (let i = 0; i < numberOfRounds; i++) {
     rounds.push(i);
   }
+
   return (
     <Stepper activeStep={currentRound ?? 0} nonLinear className="mb-2">
       {rounds.map((round) => {

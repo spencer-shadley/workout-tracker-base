@@ -45,5 +45,6 @@ function makeSkeletonNames() {
   for (let i = 0; i < 10; i++) {
     names.push(`${Math.random()}`);
   }
+
   return names;
 }
