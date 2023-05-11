@@ -12,12 +12,14 @@ export default function useActivityName(
       if (!exerciseName) {
         break;
       }
+
       return exerciseName;
     case 'rest-exercise':
       return 'Rest';
     case 'rest-round':
       return 'Round Rest';
   }
+
   logError('No activity type found');
   return 'No title found';
 }
