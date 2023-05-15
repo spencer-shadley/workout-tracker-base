@@ -7,8 +7,6 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const IS_DEBUG = false;
-
 // each request costs money - safety to avoid massive charges from bugs like infinite loops
 const MAX_NUMBER_OF_ACTIVE_REQUESTS = 50;
 let numberOfActiveRequests = 0;
@@ -37,15 +35,6 @@ export async function askQuestion(
     ...defaultProps,
     ...initialProps,
   };
-
-  if (IS_DEBUG) {
-    return new Promise((resolve: (response: string) => void) => {
-      setTimeout(() => {
-        resolve(`random: ${Math.random()}`);
-        --numberOfActiveRequests;
-      }, 2000);
-    });
-  }
 
   return new Promise((resolve: (response: string) => void, reject) => {
     openai
