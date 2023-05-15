@@ -1,10 +1,12 @@
-import { Badge, Card, Grow, IconButton, Tooltip } from '@mui/material';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { useMemo, useState } from 'react';
-import { SummaryDialogWrapper } from './summary-dialog/SummaryDialogWrapper';
-import { SummaryDialogType } from './summary-dialog/context/SummaryDialogContextProvider';
+
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { Badge, Card, Grow, IconButton, Tooltip } from '@mui/material';
+
+import { SummaryDialogType } from './summary-dialog/context/SummaryDialogContextProvider';
 import Summary from './summary-dialog/Summary';
+import { SummaryDialogWrapper } from './summary-dialog/SummaryDialogWrapper';
 
 export function ExerciseCartButton() {
   const [selectedExercises] = useSelectedExercises();
