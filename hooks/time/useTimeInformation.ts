@@ -3,7 +3,7 @@ import { useInterval } from 'usehooks-ts';
 
 import { TimeContextType, TimeSlot } from '@/components/main/workout/context/TimeContextProvider';
 import {
-  calculateRoundTimeInSeconds, calculateWorkoutTimeInSeconds, createTimeBuckets
+    calculateRoundTimeInSeconds, calculateWorkoutTimeInSeconds, createTimeBuckets
 } from '@/utils/time';
 
 import { release, updateScreenLock } from '../../utils/screenLock';
@@ -72,7 +72,6 @@ export default function useTimeInformation(): TimeContextType {
           bucket.endTimeInSeconds - elapsedTimeInSeconds;
 
         setCurrentBucket(bucket);
-      } else {
       }
     }
   }, [

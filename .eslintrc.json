@@ -19,6 +19,7 @@
     }],
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
     "indent": ["error", 2, {
-    }]
+    }],
+    "no-empty": ["error", { "allowEmptyCatch": true }]
   }
 }

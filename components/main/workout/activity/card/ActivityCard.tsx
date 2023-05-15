@@ -1,13 +1,14 @@
-import { Card, CardContent, LinearProgress, CardProps } from '@mui/material';
-import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
-import { ActiveExerciseTimer } from './ActiveExerciseTimer';
-import { ExerciseTitle } from './ExerciseTitle';
-import { ActivityCardCloseButton } from './ActivityCardCloseButton';
-
-import { VideoButtons } from './VideoButtons';
-import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 import { useEffect, useRef } from 'react';
+
+import { Card, CardContent, CardProps, LinearProgress } from '@mui/material';
+
+import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import { useTimeContext } from '../../context/TimeContextProvider';
+import { ActiveExerciseTimer } from './ActiveExerciseTimer';
+import { ActivityCardCloseButton } from './ActivityCardCloseButton';
+import { ExerciseTitle } from './ExerciseTitle';
+import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
+import { VideoButtons } from './VideoButtons';
 
 const progressColor = '#1976d2';
 
