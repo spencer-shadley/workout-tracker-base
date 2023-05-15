@@ -1,4 +1,5 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
+
 import { logError } from '@/utils/logger';
 
 const configuration = new Configuration({
@@ -9,7 +10,7 @@ const openai = new OpenAIApi(configuration);
 const IS_DEBUG = false;
 
 // each request costs money - safety to avoid massive charges from bugs like infinite loops
-const MAX_NUMBER_OF_ACTIVE_REQUESTS = 25;
+const MAX_NUMBER_OF_ACTIVE_REQUESTS = 50;
 let numberOfActiveRequests = 0;
 
 export async function askQuestion(
