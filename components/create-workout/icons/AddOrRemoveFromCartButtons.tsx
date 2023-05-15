@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
     useAddExerciseName, useRemoveExerciseName, useSelectedExercises
 } from '@/hooks/storage/useSessionStorage';
