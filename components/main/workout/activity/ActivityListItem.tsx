@@ -1,10 +1,12 @@
-import { CardProps, ListItem } from '@mui/material';
-import { ActivityCard } from './card/ActivityCard';
-import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
-import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
-import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import { useEffect, useState } from 'react';
+
+import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import { logError } from '@/utils/logger';
+import { CardProps, ListItem } from '@mui/material';
+
+import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
+import { ActivityType, useTimeContext } from '../context/TimeContextProvider';
+import { ActivityCard } from './card/ActivityCard';
 
 interface ActivityListItemProps extends CardProps {
   activityType: ActivityType;
@@ -28,21 +30,21 @@ export default function ActivityListItem({
 
   useEffect(() => {
     switch (activityType) {
-      case 'prep':
-        setIsExerciseActive(currentBucket.activityType === 'prep');
-        break;
-      case 'exercise':
-        setIsExerciseActive(currentBucket.containerExercise === exerciseName);
-        break;
-      case 'rest-exercise':
-        setIsExerciseActive(currentBucket.containerExercise === exerciseName);
-        break;
-      case 'rest-round':
-        setIsExerciseActive(currentBucket.activityType === 'rest-round');
-        break;
-      default:
-        setIsExerciseActive(false);
-        logError(`activityType not found ${activityType}`);
+    case 'prep':
+      setIsExerciseActive(currentBucket.activityType === 'prep');
+      break;
+    case 'exercise':
+      setIsExerciseActive(currentBucket.containerExercise === exerciseName);
+      break;
+    case 'rest-exercise':
+      setIsExerciseActive(currentBucket.containerExercise === exerciseName);
+      break;
+    case 'rest-round':
+      setIsExerciseActive(currentBucket.activityType === 'rest-round');
+      break;
+    default:
+      setIsExerciseActive(false);
+      logError(`activityType not found ${activityType}`);
     }
   }, [
     activityType,
