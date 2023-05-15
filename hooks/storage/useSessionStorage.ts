@@ -31,7 +31,7 @@ export function useRemoveExerciseName(exerciseName: string) {
 
   return () => {
     const filteredExercises = selectedExercises.filter(
-      (name) => name !== exerciseName
+      (name) => !isMatch(name, exerciseName)
     );
     setSelectedExercises(filteredExercises);
   };
@@ -57,10 +57,23 @@ function makeName(name: string, index: number) {
 function useUniqueName(exerciseName: string) {
   const [selectedExercises] = useSelectedExercises();
   let index = 0;
-  while (isNameTaken(makeName(exerciseName, index), selectedExercises)) {
+  while (isSelectedExercise(exerciseName, index, selectedExercises)) {
     ++index;
   }
 
   return makeName(exerciseName, index);
 }
 
+function isSelectedExercise(exerciseName: string, index: number, selectedExercises: string[]) {
+  return isNameTaken(makeName(exerciseName, index), selectedExercises);
+}
+
+export function isMatch(itemInCartName: string, newItem: string) {
+  if (itemInCartName === newItem) {
+    return true;
+  }
+
+  const duplicateAdditionRegex = new RegExp(`${newItem} \\(\\d+\\)`);
+  return duplicateAdditionRegex.test(itemInCartName);
+
+}

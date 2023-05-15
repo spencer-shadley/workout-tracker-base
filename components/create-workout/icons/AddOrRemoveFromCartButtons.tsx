@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import {
-    useAddExerciseName, useRemoveExerciseName, useSelectedExercises
+    isMatch, useAddExerciseName, useRemoveExerciseName, useSelectedExercises
 } from '@/hooks/storage/useSessionStorage';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -55,12 +55,3 @@ export function AddOrRemoveFromCartButtons({
   );
 }
 
-function isMatch(itemInCartName: string, newItem: string) {
-  if (itemInCartName === newItem) {
-    return true;
-  }
-
-  const duplicateAdditionRegex = new RegExp(`${newItem} \\(\\d+\\)`);
-  return duplicateAdditionRegex.test(itemInCartName);
-
-}
