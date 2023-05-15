@@ -12,7 +12,7 @@ export function MuscleGroupsChips({ exerciseName }: { exerciseName: string }) {
   const { muscleGroups, isFetching: isLoading, refetch } = useMuscleGroups({prompt: exerciseName, queryOptionOverrides: {enabled: false}});
 
   requestIdleCallback(() => {
-    if(!muscleGroups) {
+    if (!muscleGroups) {
       refetch();
     }
   })
