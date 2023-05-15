@@ -28,23 +28,23 @@ export function BackgroundOptions() {
         onChange={(e) => {
           const value = e.target.value;
           switch (value) {
-            case particles:
-              setBackgroundOption(particles);
-              break;
-            case colors:
-              setBackgroundOption(colors);
-              break;
-            case bounce:
-              setBackgroundOption(bounce);
-              break;
-            case seaAnemone:
-              setBackgroundOption(seaAnemone);
-              break;
-            case light:
-              setBackgroundOption(light);
-              break;
-            default:
-              logError(`Invalid background option ${value}`);
+          case particles:
+            setBackgroundOption(particles);
+            break;
+          case colors:
+            setBackgroundOption(colors);
+            break;
+          case bounce:
+            setBackgroundOption(bounce);
+            break;
+          case seaAnemone:
+            setBackgroundOption(seaAnemone);
+            break;
+          case light:
+            setBackgroundOption(light);
+            break;
+          default:
+            logError(`Invalid background option ${value}`);
           }
         }}
       >

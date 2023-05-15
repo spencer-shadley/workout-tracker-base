@@ -6,18 +6,18 @@ export default function useActivityName(
   exerciseName?: string
 ): string {
   switch (activityType) {
-    case 'prep':
-      return 'Get Ready!';
-    case 'exercise':
-      if (!exerciseName) {
-        break;
-      }
+  case 'prep':
+    return 'Get Ready!';
+  case 'exercise':
+    if (!exerciseName) {
+      break;
+    }
 
-      return exerciseName;
-    case 'rest-exercise':
-      return 'Rest';
-    case 'rest-round':
-      return 'Round Rest';
+    return exerciseName;
+  case 'rest-exercise':
+    return 'Rest';
+  case 'rest-round':
+    return 'Round Rest';
   }
 
   logError('No activity type found');

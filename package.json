@@ -7,7 +7,8 @@
     "build": "npx next build",
     "start": "npx next start",
     "check-types": "tsc --noemit",
-    "lint": "npm run check-types && next lint"
+    "lint": "npm run check-types && next lint",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
     "@emotion/react": "^11.11",
