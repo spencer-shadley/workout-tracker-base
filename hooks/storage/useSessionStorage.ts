@@ -7,6 +7,7 @@
  */
 
 import { useSessionStorage } from 'usehooks-ts';
+
 import { tryParse } from './useLocalStorage';
 
 const selectedExercisesKey = 'selected-exercises';
@@ -17,6 +18,8 @@ export function useSelectedExercises() {
 
 export function useAddExerciseName(exerciseName: string) {
   const [selectedExercises, setSelectedExercises] = useSelectedExercises();
+
+  exerciseName = useUniqueName(exerciseName);
 
   return () => {
     setSelectedExercises([...selectedExercises, exerciseName]);
@@ -42,3 +45,22 @@ export function getExerciseNames(): string[] {
   const rawExerciseNames = sessionStorage.getItem(selectedExercisesKey) ?? '';
   return tryParse<string[]>(rawExerciseNames, []);
 }
+
+function isNameTaken(name: string, names: string[]) {
+  return names.includes(name);
+}
+
+function makeName(name: string, index: number) {
+  return index === 0 ? name : `${name} (${index})`;
+}
+
+function useUniqueName(exerciseName: string) {
+  const [selectedExercises] = useSelectedExercises();
+  let index = 0;
+  while (isNameTaken(makeName(exerciseName, index), selectedExercises)) {
+    ++index;
+  }
+
+  return makeName(exerciseName, index);
+}
+

@@ -1,11 +1,10 @@
-import { ButtonGroup } from '@mui/material';
+import {
+    useAddExerciseName, useRemoveExerciseName, useSelectedExercises
+} from '@/hooks/storage/useSessionStorage';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {
-  useAddExerciseName,
-  useRemoveExerciseName,
-  useSelectedExercises,
-} from '@/hooks/storage/useSessionStorage';
+import { ButtonGroup } from '@mui/material';
+
 import { CircleListItemButton } from './CircleListItemButton';
 
 interface AddOrRemoveFromCartButtonsProps {
@@ -20,7 +19,7 @@ export function AddOrRemoveFromCartButtons({
   const [exerciseNames] = useSelectedExercises();
 
   const numberInCart = exerciseNames.filter(
-    (name) => name === exerciseName
+    (name) => isMatch(name, exerciseName)
   ).length;
 
   const isExerciseAdded = numberInCart > 0;
@@ -53,4 +52,14 @@ export function AddOrRemoveFromCartButtons({
       )}
     </ButtonGroup>
   );
+}
+
+function isMatch(itemInCartName: string, newItem: string) {
+  if (itemInCartName === newItem) {
+    return true;
+  }
+
+  const duplicateAdditionRegex = new RegExp(`${newItem} \\(\\d+\\)`);
+  return duplicateAdditionRegex.test(itemInCartName);
+
 }
