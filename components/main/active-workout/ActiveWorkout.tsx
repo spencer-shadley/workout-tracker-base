@@ -1,12 +1,13 @@
-import ActivitiesList from '../workout/activity/ActivitiesList';
-import { Typography } from '@mui/material';
-import { TimeProvider } from '../workout/context/TimeContextProvider';
-import RoundsStepper from './RoundsStepper';
-import useTimeInformation from '@/hooks/time/useTimeInformation';
-import { secondsToHumanReadable } from '@/utils/time';
-import TimerControls from './TimerControls';
 import Background from '@/components/shared/backgrounds/Background';
 import { Fireworks } from '@/components/shared/backgrounds/particles/Fireworks';
+import useTimeInformation from '@/hooks/time/useTimeInformation';
+import { secondsToHumanReadable } from '@/utils/time/time';
+import { Typography } from '@mui/material';
+
+import ActivitiesList from '../workout/activity/ActivitiesList';
+import { TimeProvider } from '../workout/context/TimeContextProvider';
+import RoundsStepper from './RoundsStepper';
+import TimerControls from './TimerControls';
 
 export default function ActiveWorkout() {
   const timeContext = useTimeInformation();

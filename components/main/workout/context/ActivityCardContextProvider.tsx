@@ -1,26 +1,16 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
-import { ActivityType, TimeSlot } from './TimeContextProvider';
+import { createContext, PropsWithChildren, useContext } from 'react';
+
+import { ActivityType } from './TimeContextProvider';
 
 export interface ActivityCardContextType {
-  exerciseName?: string;
+  exerciseName: string | null;
   isDismissible: boolean;
-  timeBucket: TimeSlot | undefined;
-  isActive: boolean;
   activityType: ActivityType;
 }
 
 export const ActivityCardContext = createContext<ActivityCardContextType>({
+  exerciseName: null,
   isDismissible: false,
-  isActive: false,
-  timeBucket: {
-    remainingTimeInSeconds: 0,
-    startTimeInSeconds: 0,
-    endTimeInSeconds: 0,
-    progressPercent: 0,
-    isActive: false,
-    containerRound: 0,
-    activityType: 'exercise',
-  },
   activityType: 'exercise',
 });
 

@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 export type ActivityType = 'exercise' | 'rest-round' | 'rest-exercise' | 'prep';
 
@@ -14,7 +14,7 @@ export interface TimeSlot {
 }
 
 export interface TimeContextType {
-  currentRound: number | null;
+  currentRound: number;
   remainingRoundTimeInSeconds: number;
   remainingWorkoutTimeInSeconds: number;
   buckets: TimeSlot[];

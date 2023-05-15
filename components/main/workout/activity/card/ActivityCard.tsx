@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import { Card, CardContent, CardProps, LinearProgress } from '@mui/material';
 
 import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
@@ -14,10 +15,13 @@ const progressColor = '#1976d2';
 
 export function ActivityCard(cardProps: CardProps) {
   const { isRunning } = useTimeContext();
-  const { exerciseName, activityType, isActive, timeBucket } =
+  const { exerciseName, activityType } =
     useActivityCardContext();
-
-  const progressPercent = timeBucket?.progressPercent;
+  const { activityBucket } = useActivityBucket(
+    exerciseName,
+    activityType
+  );
+  const {progressPercent, isActive} = activityBucket;
 
   const cardRef = useRef<HTMLDivElement>(null);
 

@@ -1,32 +1,22 @@
+/* eslint-disable indent */
 import {
-  ActivityType,
-  useTimeContext,
+    ActivityType, useTimeContext
 } from '@/components/main/workout/context/TimeContextProvider';
-import { logError } from '@/utils/logger';
+
+import { BucketFactory } from '../../utils/time/BucketFactory';
 
 export function useActivityBucket(
-  exerciseName: string | undefined,
+  exerciseName: string | null,
   activityType: ActivityType
 ) {
   const { buckets, elapsedTimeInSeconds, currentRound } = useTimeContext();
 
-  const activityBucket =
-    buckets.find(
-      (bucket) =>
-        bucket.containerExercise === exerciseName &&
-        bucket.activityType === activityType
-    ) ??
-    buckets.find(
-      (bucket) =>
-        bucket.activityType === 'rest-round' &&
-        bucket.containerRound === currentRound
-    );
-
-  if (!activityBucket) {
-    logError(
-      `Could not find activity bucket for exercise ${exerciseName} and activity type ${activityType}`
-    );
-  }
+  const activityBucket = BucketFactory.getMatchingBucket({
+    buckets,
+    exerciseName,
+    activityType,
+    currentRound,
+  });
 
   const activityEndTime: number = activityBucket
     ? activityBucket.endTimeInSeconds
@@ -35,3 +25,4 @@ export function useActivityBucket(
 
   return { activityBucket, isComplete };
 }
+
