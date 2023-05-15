@@ -1,8 +1,8 @@
-export function logError(error: unknown) {
-  console.error(error);
+export function logError(...args: unknown[]) {
+  console.error(args);
   console.trace();
 }
 
-export function logDebug(info: unknown) {
-  console.debug(info);
+export function logDebug(...args: unknown[]) {
+  console.debug(args);
 }

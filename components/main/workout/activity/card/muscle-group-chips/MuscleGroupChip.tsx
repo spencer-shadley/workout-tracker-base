@@ -1,5 +1,7 @@
-import { Chip } from '@mui/material';
 import { useState } from 'react';
+
+import { Chip } from '@mui/material';
+
 import { MuscleGroupDialog } from './MuscleGroupDialog';
 
 export function MuscleGroupChip({ muscleGroup }: { muscleGroup: string }) {

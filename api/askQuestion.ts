@@ -1,6 +1,6 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 
-import { logError } from '@/utils/logger';
+import { logDebug, logError } from '@/utils/logger';
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY ?? process.env.NEXT_PUBLIC_OPEN_AI_KEY,
@@ -16,7 +16,7 @@ let numberOfActiveRequests = 0;
 export async function askQuestion(
   initialProps: Partial<CreateCompletionRequest>
 ) {
-  console.log('askQuestion', initialProps);
+  logDebug('askQuestion', initialProps);
 
   initialProps.prompt = ((initialProps.prompt as string) ?? '').trim();
 
