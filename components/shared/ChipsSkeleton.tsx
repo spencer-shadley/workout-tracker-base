@@ -13,5 +13,5 @@ export function ChipsSkeleton() {
     );
   }
 
-  return <div className="flex gap-1">{skeletons}</div>;
+  return <div className="flex gap-1 flex-wrap">{skeletons}</div>;
 }
