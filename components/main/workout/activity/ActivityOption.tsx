@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
-import { ActivityCard } from './card/ActivityCard';
+
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
+import { ActivityCard } from './card/ActivityCard';
 
 interface ActivityOptionProps {
   exerciseName: string;
@@ -16,9 +17,7 @@ export default function ActivityOption({
       activityCardContext={{
         exerciseName,
         isDismissible: false,
-        timeBucket: undefined,
         activityType: 'exercise',
-        isActive: false,
       }}
     >
       <ActivityCard
