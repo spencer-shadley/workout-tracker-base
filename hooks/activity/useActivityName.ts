@@ -3,7 +3,7 @@ import { logError } from '@/utils/logger';
 
 export default function useActivityName(
   activityType: ActivityType,
-  exerciseName?: string
+  exerciseName: string | null
 ): string {
   switch (activityType) {
   case 'prep':

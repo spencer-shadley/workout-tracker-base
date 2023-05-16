@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import {
+    MuscleGroupsChips
+} from '@/components/main/workout/activity/card/muscle-group-chips/MuscleGroupsChips';
 import { useAddStyle } from '@/hooks/openai/useAddStyle';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
@@ -24,10 +27,12 @@ export default function Result({ exerciseName }: ResultProps) {
   );
 
   return (
-    <ListItem className="w-full hover:bg-slate-200 content-between">
-      <AddOrRemoveFromCartButtons exerciseName={exerciseName} />
-      <ResultListItemText exerciseName={exerciseName} shouldShowDetails={shouldShowDetails} />
-      <div className="flex flex-col space-y-2">
+    <ListItem className="w-full hover:bg-slate-200 flex flex-col items-start">
+      <div className='flex items-start'>
+        <div className='align-middle h-full'>
+          <AddOrRemoveFromCartButtons exerciseName={exerciseName} />
+        </div>
+        <ResultListItemText exerciseName={exerciseName} shouldShowDetails={shouldShowDetails} />
         <ResultIcon
           tooltip={`Learn more about ${exerciseName}`}
           prompt={aboutPrompt}
@@ -41,6 +46,7 @@ export default function Result({ exerciseName }: ResultProps) {
           prompt={howToPrompt}
         />
       </div>
+      <MuscleGroupsChips exerciseName={exerciseName} />
     </ListItem>
   );
 }

@@ -1,17 +1,24 @@
-import { Typography, IconButton, Tooltip, Zoom } from '@mui/material';
-import { useTimeContext } from '../../context/TimeContextProvider';
-import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 import useActivityName from '@/hooks/activity/useActivityName';
+import { useActivityBucket } from '@/hooks/time/useActivityBucket';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { IconButton, Tooltip, Typography, Zoom } from '@mui/material';
+
+import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
+import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ExerciseTitle() {
   const { jumpToBucket } = useTimeContext();
   const {
     exerciseName,
-    timeBucket,
     activityType,
-    isActive: isExerciseActive,
   } = useActivityCardContext();
+  
+  const { activityBucket } = useActivityBucket(
+    exerciseName,
+    activityType
+  );
+  const {isActive} = activityBucket;
+
   const activityName = useActivityName(activityType, exerciseName);
 
   return (
@@ -22,11 +29,11 @@ export function ExerciseTitle() {
         flexGrow: 1,
         justifySelf: 'center',
         alignSelf: 'stretch',
-        fontSize: isExerciseActive ? '4rem' : undefined,
+        fontSize: isActive ? '4rem' : undefined,
       }}
     >
       {activityName}
-      {timeBucket && (
+      {activityBucket && (
         <Tooltip
           title={`jump to ${activityName}`}
           arrow
@@ -34,7 +41,7 @@ export function ExerciseTitle() {
         >
           <IconButton
             onClick={() => {
-              jumpToBucket(timeBucket);
+              jumpToBucket(activityBucket);
             }}
           >
             <SkipNextIcon />
