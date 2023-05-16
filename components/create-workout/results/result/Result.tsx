@@ -1,11 +1,12 @@
-import { ListItem } from '@mui/material';
 import { useState } from 'react';
+
+import { useAddStyle } from '@/hooks/openai/useAddStyle';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
-import { ResultIcon } from './ResultIcon';
+import { ListItem } from '@mui/material';
+
 import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
-import { ListItemWithDetails } from '../ListItemWithDetails';
-import { useAddStyle } from '@/hooks/openai/useAddStyle';
+import { ResultIcon } from './ResultIcon';
 import { ResultListItemText } from './ResultListItemText';
 
 interface ResultProps {
@@ -25,11 +26,7 @@ export default function Result({ exerciseName }: ResultProps) {
   return (
     <ListItem className="w-full hover:bg-slate-200 content-between">
       <AddOrRemoveFromCartButtons exerciseName={exerciseName} />
-      {shouldShowDetails ? (
-        <ListItemWithDetails exerciseName={exerciseName} />
-      ) : (
-        <ResultListItemText exerciseName={exerciseName} />
-      )}
+      <ResultListItemText exerciseName={exerciseName} shouldShowDetails={shouldShowDetails} />
       <div className="flex flex-col space-y-2">
         <ResultIcon
           tooltip={`Learn more about ${exerciseName}`}
