@@ -1,5 +1,7 @@
-import { Card, FormControl, InputAdornment, TextField } from '@mui/material';
 import { ChangeEvent } from 'react';
+
+import { FormControl, InputAdornment, Paper, TextField } from '@mui/material';
+
 import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
 import { ExerciseCartButton } from './ExerciseCartButton';
 import { GenerateWithAiButton } from './GenerateWithAiButton';
@@ -8,8 +10,8 @@ export function ExerciseSearch() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText, setSearchText, currentHint } = searchInput;
   return (
-    <Card className="p-4 my-4" elevation={5} sx={{}}>
-      <FormControl variant="outlined" fullWidth>
+    <Paper elevation={6} className="mb-3">
+      <FormControl fullWidth>
         <TextField
           InputProps={{
             endAdornment: (
@@ -20,6 +22,7 @@ export function ExerciseSearch() {
             ),
           }}
           maxRows={3}
+          fullWidth
           multiline
           id="outlined-adornment-search"
           variant="outlined"
@@ -28,13 +31,12 @@ export function ExerciseSearch() {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setSearchText(event.target.value);
           }}
-          fullWidth
           aria-describedby="create-workout-hint-text"
           inputProps={{
             'aria-label': 'hint',
           }}
         />
       </FormControl>
-    </Card>
+    </Paper>
   );
 }
