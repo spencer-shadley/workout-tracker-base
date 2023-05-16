@@ -1,16 +1,14 @@
-import {
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  ListProps,
-} from '@mui/material';
-import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
-import { randomHints } from './InitialSearchHint';
-import { AutoFixHigh, Search } from '@mui/icons-material';
-import { AiDialog } from '../summary-dialog/AiDialog';
+/* eslint-disable indent */
 import { useState } from 'react';
+
+import { AutoFixHigh, Search } from '@mui/icons-material';
+import {
+    Button, ButtonGroup, Divider, List, ListItem, ListItemText, ListProps
+} from '@mui/material';
+
+import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+import { AiDialog } from '../summary-dialog/AiDialog';
+import { randomHints } from './InitialSearchHint';
 
 export function ExampleSearches(props: ListProps) {
   const { searchInput } = useCreateWorkoutContext();
@@ -23,24 +21,24 @@ export function ExampleSearches(props: ListProps) {
         <div key={hint}>
           <ListItem sx={{ display: 'flex' }} key={hint}>
             <ListItemText sx={{ flexGrow: 1 }}>{hint}</ListItemText>
-            <Button
-              color="info"
-              onClick={() => {
-                setShowDialog(true);
-              }}
-              endIcon={<AutoFixHigh />}
-            >
+            <ButtonGroup size='small' color='info' orientation='vertical' variant='outlined' className='ml-1'>
+              <Button
+                onClick={() => {
+                  setShowDialog(true);
+                }}
+                endIcon={<AutoFixHigh />}
+              >
               generate
-            </Button>
-            <Button
-              color="info"
-              onClick={() => {
-                setSearchText(hint);
-              }}
-              endIcon={<Search />}
-            >
+              </Button>
+              <Button
+                onClick={() => {
+                  setSearchText(hint);
+                }}
+                endIcon={<Search />}
+              >
               Search
-            </Button>
+              </Button>
+            </ButtonGroup>
           </ListItem>
           {index < randomHints.length - 1 && <Divider />}
         </div>
