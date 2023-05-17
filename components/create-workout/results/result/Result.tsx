@@ -40,7 +40,7 @@ export default function Result({ exerciseName }: ResultProps) {
             onClick={() => setShouldShowAbout(true)}
           />
           <ResultIcon
-            onClick={() => setShouldShowAbout(true)}
+            onClick={() => setShouldShowSteps(true)}
             icon={<SchoolIcon />}
             tooltip={`Learn how to do ${exerciseName}`}
           />
