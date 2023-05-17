@@ -21,7 +21,7 @@ export function ActivityCard(cardProps: CardProps) {
     exerciseName,
     activityType
   );
-  const {progressPercent, isActive} = activityBucket;
+  const { progressPercent, isActive } = activityBucket;
 
   const cardRef = useRef<HTMLDivElement>(null);
 
