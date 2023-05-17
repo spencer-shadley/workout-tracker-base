@@ -6,15 +6,11 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ButtonGroup } from '@mui/material';
 
+import { useResultContext } from '../results/result/context/ResultProvider';
 import { CircleListItemButton } from './CircleListItemButton';
 
-interface AddOrRemoveFromCartButtonsProps {
-  exerciseName: string;
-}
-
-export function AddOrRemoveFromCartButtons({
-  exerciseName,
-}: AddOrRemoveFromCartButtonsProps) {
+export function AddOrRemoveFromCartButtons() {
+  const { exerciseName } = useResultContext();
   const removeExercise = useRemoveExerciseName(exerciseName);
   const addExerciseName = useAddExerciseName(exerciseName);
   const [exerciseNames] = useSelectedExercises();

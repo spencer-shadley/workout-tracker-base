@@ -1,20 +1,18 @@
-import { Tooltip, ListItemButton, ListItemIcon } from '@mui/material';
+import { ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
 
 interface ResultIconProps {
   icon: React.ReactNode;
   tooltip: string;
   prompt: string;
-  setShouldShow: (shouldShow: boolean) => void;
+  onClick: () => void;
 }
 
-export function ResultIcon({ icon, tooltip, setShouldShow }: ResultIconProps) {
+export function ResultIcon({ icon, tooltip, onClick }: ResultIconProps) {
   return (
     <Tooltip title={tooltip} key={tooltip}>
       <ListItemButton
         sx={{ padding: '5px 5px', borderRadius: '100px' }}
-        onClick={() => {
-          setShouldShow(true);
-        }}
+        onClick={onClick}
       >
         <ListItemIcon sx={{ minWidth: '0px' }}>{icon}</ListItemIcon>
       </ListItemButton>
