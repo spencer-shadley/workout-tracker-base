@@ -3,7 +3,6 @@ import { ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
 interface ResultIconProps {
   icon: React.ReactNode;
   tooltip: string;
-  prompt: string;
   onClick: () => void;
 }
 

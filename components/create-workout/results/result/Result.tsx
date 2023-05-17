@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
     MuscleGroupsChips
 } from '@/components/main/workout/activity/card/muscle-group-chips/MuscleGroupsChips';
-import { useAddStyle } from '@/hooks/openai/useAddStyle';
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
 import { ListItem } from '@mui/material';
@@ -12,21 +11,15 @@ import { ListItem } from '@mui/material';
 import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
 import { ResultProvider } from './context/ResultProvider';
 import { ResultIcon } from './ResultIcon';
-import { InfoDialog, ResultListItemText } from './ResultListItemText';
+import { InfoDialog, ResultListItemText, StepsDialog } from './ResultListItemText';
 
 interface ResultProps {
   exerciseName: string;
 }
 
 export default function Result({ exerciseName }: ResultProps) {
-  const [shouldShowDetails, setShouldShowDetails] = useState<boolean>(false);
-
-  const aboutPrompt = useAddStyle(
-    `Tell me about ${exerciseName} in a few sentences`
-  );
-  const howToPrompt = useAddStyle(
-    `Provide an enumerated list of steps for how to do the exercise ${exerciseName}`
-  );
+  const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(false);
+  const [shouldShowSteps, setShouldShowSteps] = useState<boolean>(false);
 
   return (
     <ResultProvider exerciseName={exerciseName} >
@@ -41,21 +34,20 @@ export default function Result({ exerciseName }: ResultProps) {
           <div className='flex'>
           <ResultIcon
             tooltip={`Learn more about ${exerciseName}`}
-            prompt={aboutPrompt}
             icon={<InfoIcon />}
-            onClick={() => setShouldShowDetails(true)}
+            onClick={() => setShouldShowAbout(true)}
           />
           <ResultIcon
-            onClick={() => setShouldShowDetails(true)}
+            onClick={() => setShouldShowAbout(true)}
             icon={<SchoolIcon />}
             tooltip={`Learn how to do ${exerciseName}`}
-            prompt={howToPrompt}
           />
           </div>
         </div>
         <MuscleGroupsChips exerciseName={exerciseName} />
       </ListItem>
-      <InfoDialog isOpen={shouldShowDetails} close={() => setShouldShowDetails(false)}/>
+      <InfoDialog isOpen={shouldShowAbout} close={() => setShouldShowAbout(false)}/>
+      <StepsDialog isOpen={shouldShowSteps} close={() => setShouldShowSteps(false)}/>
     </ResultProvider>
   );
 }

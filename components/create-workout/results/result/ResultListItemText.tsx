@@ -1,7 +1,7 @@
 
-/* eslint-disable indent */
+import { useAddStyle } from '@/hooks/openai/useAddStyle';
 import { useOpenAi } from '@/hooks/openai/useOpenAi';
-import { useAiStyle } from '@/hooks/storage/useLocalStorage';
+/* eslint-disable indent */
 import {
     Button, Dialog, DialogActions, DialogContent, DialogTitle, ListItemText, Typography
 } from '@mui/material';
@@ -29,27 +29,40 @@ export function ResultListItemText() {
   );
 }
 
-interface InfoDialogProps {
+interface GenericDialogProps {
   isOpen: boolean;
   close: () => void;
 }
 
-export function InfoDialog({isOpen, close}: InfoDialogProps) {
+export function InfoDialog(props: GenericDialogProps) {
   const { exerciseName } = useResultContext();
+  return <PromptDialog {...props} prompt={`Tell me about ${exerciseName} in a few sentences.`} title={`About ${exerciseName}`}/>;
+}
 
-  const [aiStyle] = useAiStyle();
+export function StepsDialog(props: GenericDialogProps) {
+  const { exerciseName } = useResultContext();
+  return <PromptDialog {...props} prompt={`Provide an enumerated list of steps for how to do the exercise ${exerciseName}`} title={`How to do ${exerciseName}`}/>;
+}
 
-  const prompt = `Tell me about ${exerciseName} in a few sentences. Answer in the style of ${aiStyle}`;
+interface PromptDialogProps extends GenericDialogProps {
+  prompt: string;
+  title: string;
+}
 
-  const { data: exerciseDetailsText } = useOpenAi({
-    prompt,
+export function PromptDialog({isOpen, close, prompt, title}: PromptDialogProps) {
+  const styledPrompt = useAddStyle(
+   prompt
+  );
+
+  const { data } = useOpenAi({
+    prompt: styledPrompt,
   });
-
+  
   return (
     <Dialog open={isOpen} onClose={close}>
-      <DialogTitle>About {exerciseName}</DialogTitle>
-      <DialogContent>{exerciseDetailsText}</DialogContent>
-      <DialogActions><Button>hi</Button></DialogActions>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>{data}</DialogContent>
+      <DialogActions><Button onClick={close}>close</Button></DialogActions>
     </Dialog>
   )
 }
