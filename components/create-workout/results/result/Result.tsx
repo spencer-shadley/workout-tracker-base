@@ -28,12 +28,15 @@ export default function Result({ exerciseName }: ResultProps) {
   );
 
   return (
-    <ListItem className="w-full hover:bg-slate-200 flex flex-col items-start">
-      <div className='flex items-start'>
-        <div className='align-middle h-full'>
+    <ListItem className="hover:bg-slate-200 flex flex-col items-start">
+      <div className='flex w-full'>
+        <div className='align-middle'>
           <AddOrRemoveFromCartButtons exerciseName={exerciseName} />
         </div>
+        <div className='grow'>
         <ResultListItemText exerciseName={exerciseName} shouldShowDetails={shouldShowDetails} />
+        </div>
+        <div className='flex'>
         <ResultIcon
           tooltip={`Learn more about ${exerciseName}`}
           prompt={aboutPrompt}
@@ -46,6 +49,7 @@ export default function Result({ exerciseName }: ResultProps) {
           tooltip={`Learn how to do ${exerciseName}`}
           prompt={howToPrompt}
         />
+        </div>
       </div>
       <MuscleGroupsChips exerciseName={exerciseName} />
     </ListItem>
