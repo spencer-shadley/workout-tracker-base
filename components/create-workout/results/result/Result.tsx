@@ -10,8 +10,10 @@ import { ListItem } from '@mui/material';
 
 import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
 import { ResultProvider } from './context/ResultProvider';
+import { InfoDialog } from './InfoDialog';
 import { ResultIcon } from './ResultIcon';
-import { InfoDialog, ResultListItemText, StepsDialog } from './ResultListItemText';
+import { ResultListItemText } from './ResultListItemText';
+import { StepsDialog } from './StepsDialog';
 
 interface ResultProps {
   exerciseName: string;
