@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import { Card, CardContent, CardProps, LinearProgress } from '@mui/material';
 
-import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import { useTimeContext } from '../../context/TimeContextProvider';
 import { ActiveExerciseTimer } from './ActiveExerciseTimer';
 import { ActivityCardCloseButton } from './ActivityCardCloseButton';
@@ -15,12 +15,9 @@ const progressColor = '#1976d2';
 
 export function ActivityCard(cardProps: CardProps) {
   const { isRunning } = useTimeContext();
-  const { exerciseName, activityType } =
-    useActivityCardContext();
-  const { activityBucket } = useActivityBucket(
-    exerciseName,
-    activityType
-  );
+  const { activityType } =
+    useExerciseContext();
+  const { activityBucket } = useActivityBucket();
   const { progressPercent, isActive } = activityBucket;
 
   const cardRef = useRef<HTMLDivElement>(null);
@@ -47,7 +44,7 @@ export function ActivityCard(cardProps: CardProps) {
           <ExerciseTitle />
           <ActivityCardCloseButton />
           {activityType === 'exercise' && (
-            <MuscleGroupsChips exerciseName={exerciseName ?? ''} />
+            <MuscleGroupsChips />
           )}
         </CardContent>
         {isActive && <ActiveExerciseTimer />}

@@ -1,16 +1,19 @@
-import { IconButton, Tooltip, Typography } from '@mui/material';
 import { useCallback } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
-import { DescriptionText } from './DescriptionText';
-import { MuscleGroupsChips } from '@/components/main/workout/activity/card/muscle-group-chips/MuscleGroupsChips';
 
-interface SummaryDialogContentListItemContentProps {
-  exerciseName: string;
-}
-export function SummaryDialogContentListItemContent({
-  exerciseName,
-}: SummaryDialogContentListItemContentProps) {
+/*eslint-disable indent*/
+import {
+    MuscleGroupsChips
+} from '@/components/main/workout/activity/card/muscle-group-chips/MuscleGroupsChips';
+/* eslint-enable indent */
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
+import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton, Tooltip, Typography } from '@mui/material';
+
+import { DescriptionText } from './description/DescriptionText';
+
+export function SummaryDialogContentListItemContent() {
+  const { exerciseName } = useExerciseContext();
   const [exercises, setExercises] = useSelectedExercises();
 
   const removeExercise = useCallback(() => {
@@ -25,7 +28,7 @@ export function SummaryDialogContentListItemContent({
           <Typography variant="overline" fontSize={20}>
             {exerciseName}
           </Typography>
-          <MuscleGroupsChips exerciseName={exerciseName} />
+          <MuscleGroupsChips />
         </div>
         <Tooltip title={`Remove ${exerciseName}`} arrow>
           <IconButton
@@ -37,7 +40,7 @@ export function SummaryDialogContentListItemContent({
           </IconButton>
         </Tooltip>
       </span>
-      <DescriptionText exerciseName={exerciseName} />
+      <DescriptionText />
     </article>
   );
 }

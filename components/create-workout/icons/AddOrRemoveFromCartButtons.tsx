@@ -2,21 +2,27 @@
 import {
     isMatch, useAddExerciseName, useRemoveExerciseName, useSelectedExercises
 } from '@/hooks/storage/useSessionStorage';
+import { logError } from '@/utils/logger';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ButtonGroup } from '@mui/material';
 
-import { useResultContext } from '../results/result/context/ResultProvider';
+import { useExerciseContext } from '../../shared/ExerciseProvider';
 import { CircleListItemButton } from './CircleListItemButton';
 
 export function AddOrRemoveFromCartButtons() {
-  const { exerciseName } = useResultContext();
+  let { exerciseName } = useExerciseContext();
+  if (exerciseName === null) {
+    logError('exerciseName is null in AddOrRemoveFromCartButtons')
+    exerciseName = '';
+  }
+
   const removeExercise = useRemoveExerciseName(exerciseName);
   const addExerciseName = useAddExerciseName(exerciseName);
   const [exerciseNames] = useSelectedExercises();
 
   const numberInCart = exerciseNames.filter(
-    (name) => isMatch(name, exerciseName)
+    (name) => isMatch(name, exerciseName ?? '')
   ).length;
 
   const isExerciseAdded = numberInCart > 0;

@@ -1,6 +1,7 @@
 import { DialogTitle } from '@mui/material';
+
+import { SummaryContent } from './content/SummaryDialogContent';
 import { SummaryDialogActions } from './SummaryDialogActions';
-import { SummaryContent } from './SummaryDialogContent';
 
 export default function Summary() {
   return (

@@ -1,17 +1,11 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 
-import { ActivityType } from './TimeContextProvider';
-
 export interface ActivityCardContextType {
-  exerciseName: string | null;
   isDismissible: boolean;
-  activityType: ActivityType;
 }
 
 export const ActivityCardContext = createContext<ActivityCardContextType>({
-  exerciseName: null,
   isDismissible: false,
-  activityType: 'exercise',
 });
 
 export const useActivityCardContext = () => useContext(ActivityCardContext);

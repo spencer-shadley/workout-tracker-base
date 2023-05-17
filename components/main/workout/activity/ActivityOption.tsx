@@ -1,3 +1,4 @@
+import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { Typography } from '@mui/material';
 
 import { ActivityCardProvider } from '../context/ActivityCardContextProvider';
@@ -13,18 +14,18 @@ export default function ActivityOption({
   handleClick,
 }: ActivityOptionProps) {
   return exerciseName ? (
-    <ActivityCardProvider
-      activityCardContext={{
-        exerciseName,
-        isDismissible: false,
-        activityType: 'exercise',
-      }}
-    >
-      <ActivityCard
-        sx={{ margin: '10px' }}
-        onClick={() => handleClick(exerciseName)}
-      />
-    </ActivityCardProvider>
+    <ExerciseProvider exerciseName={exerciseName} activityType='exercise'>
+      <ActivityCardProvider
+        activityCardContext={{
+          isDismissible: false,
+        }}
+      >
+        <ActivityCard
+          sx={{ margin: '10px' }}
+          onClick={() => handleClick(exerciseName)}
+        />
+      </ActivityCardProvider>
+    </ExerciseProvider>
   ) : (
     <Typography>could not be found</Typography>
   );

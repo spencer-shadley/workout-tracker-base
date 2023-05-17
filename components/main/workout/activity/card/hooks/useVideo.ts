@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import youtubeSearch from 'youtube-search';
-import { useActivityCardContext } from '../../../context/ActivityCardContextProvider';
+
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import { logError } from '@/utils/logger';
 
 export default function useVideo() {
-  const { exerciseName } = useActivityCardContext();
+  const { exerciseName } = useExerciseContext();
 
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [shouldShowVideo, setShouldShowVideo] = useState<boolean>(false);

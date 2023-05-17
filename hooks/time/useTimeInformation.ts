@@ -14,7 +14,7 @@ import { useSelectedExercises } from '../storage/useSessionStorage';
 export default function useTimeInformation(): TimeContextType {
 
   // CONTEXT
-  
+
   const [exercises] = useSelectedExercises();
   const [workoutOptions] = useOptions();
 
@@ -50,7 +50,7 @@ export default function useTimeInformation(): TimeContextType {
     (elapsedTimeInSeconds - timeSpentInRoundRestInSeconds) % roundTimeInSeconds;
 
   // EFFECTS AND CALLBACKS
-  
+
   const getCurrentRound = useCallback(
     (hasTimeLeftInWorkout: boolean,
     currentBucket: TimeSlot | undefined
@@ -59,7 +59,7 @@ export default function useTimeInformation(): TimeContextType {
       return workoutOptions.numberOfRounds;
     }
 
-    return  currentBucket?.containerRound ?? 0;
+    return currentBucket?.containerRound ?? 0;
   }, [workoutOptions.numberOfRounds]);
 
   const createBuckets = useCallback(() => {
@@ -88,7 +88,7 @@ export default function useTimeInformation(): TimeContextType {
       bucket.progressPercent = isBucketActive
         ? (bucket.remainingTimeInSeconds / activityDuration) * 100
         : 100;
-        
+
       if (isBucketActive) {
         bucket.remainingTimeInSeconds =
         bucket.endTimeInSeconds - elapsedTimeInSeconds;

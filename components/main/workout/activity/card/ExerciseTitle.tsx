@@ -1,9 +1,9 @@
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import useActivityName from '@/hooks/activity/useActivityName';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { IconButton, Tooltip, Typography, Zoom } from '@mui/material';
 
-import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ExerciseTitle() {
@@ -11,13 +11,10 @@ export function ExerciseTitle() {
   const {
     exerciseName,
     activityType,
-  } = useActivityCardContext();
-  
-  const { activityBucket } = useActivityBucket(
-    exerciseName,
-    activityType
-  );
-  const {isActive} = activityBucket;
+  } = useExerciseContext();
+
+  const { activityBucket } = useActivityBucket();
+  const { isActive } = activityBucket;
 
   const activityName = useActivityName(activityType, exerciseName);
 

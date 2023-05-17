@@ -1,10 +1,9 @@
-import { ActivityType } from '@/components/main/workout/context/TimeContextProvider';
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import { logError } from '@/utils/logger';
 
-export default function useActivityName(
-  activityType: ActivityType,
-  exerciseName: string | null
-): string {
+export default function useActivityName(): string {
+  const { exerciseName, activityType } = useExerciseContext();
+
   switch (activityType) {
   case 'prep':
     return 'Get Ready!';

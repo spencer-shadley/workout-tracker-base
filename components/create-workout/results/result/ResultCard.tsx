@@ -1,10 +1,10 @@
-import { Card } from '@mui/material';
 import { PropsWithChildren } from 'react';
 
-interface ResultCardProps extends PropsWithChildren {
-  exerciseName: string;
-}
-export function ResultCard({ exerciseName, children }: ResultCardProps) {
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
+import { Card } from '@mui/material';
+
+export function ResultCard({ children }: PropsWithChildren) {
+  const { exerciseName } = useExerciseContext();
   return (
     <Card key={exerciseName} sx={{ marginBottom: '10px' }}>
       {children}

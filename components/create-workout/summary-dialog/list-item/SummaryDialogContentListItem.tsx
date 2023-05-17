@@ -1,4 +1,6 @@
+import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { Avatar, ListItem, ListItemAvatar } from '@mui/material';
+
 import { SummaryDialogContentListItemContent } from './SummaryDialogContentListItemContent';
 
 interface SummaryDialogContentListItemProps {
@@ -10,11 +12,13 @@ export function SummaryDialogContentListItem({
   exerciseName,
 }: SummaryDialogContentListItemProps) {
   return (
-    <ListItem>
-      <ListItemAvatar>
-        <Avatar>{exerciseNumber}</Avatar>
-      </ListItemAvatar>
-      <SummaryDialogContentListItemContent exerciseName={exerciseName} />
-    </ListItem>
+    <ExerciseProvider exerciseName={exerciseName} activityType='exercise'>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>{exerciseNumber}</Avatar>
+        </ListItemAvatar>
+        <SummaryDialogContentListItemContent />
+      </ListItem>
+    </ExerciseProvider>
   );
 }

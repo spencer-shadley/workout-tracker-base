@@ -1,4 +1,5 @@
 
+import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import { CardProps, ListItem } from '@mui/material';
 
@@ -16,25 +17,22 @@ export default function ActivityListItem({
   exerciseName,
   ...activityCardProps
 }: ActivityListItemProps) {
-  const { isComplete } = useActivityBucket(
-    exerciseName,
-    activityType
-  );
+  const { isComplete } = useActivityBucket();
 
   return (
-    <ActivityCardProvider
-      activityCardContext={{
-        exerciseName,
-        isDismissible: false,
-        activityType,
-      }}
-    >
-      <ListItem
-        key={`${exerciseName}-${activityType}`}
-        className={isComplete ? '' : 'opacity-25'}
+    <ExerciseProvider activityType={activityType} exerciseName={exerciseName}>
+      <ActivityCardProvider
+        activityCardContext={{
+          isDismissible: false,
+        }}
       >
-        <ActivityCard {...activityCardProps} />
-      </ListItem>
-    </ActivityCardProvider>
+        <ListItem
+          key={`${exerciseName}-${activityType}`}
+          className={isComplete ? '' : 'opacity-25'}
+        >
+          <ActivityCard {...activityCardProps} />
+        </ListItem>
+      </ActivityCardProvider>
+    </ExerciseProvider>
   );
 }

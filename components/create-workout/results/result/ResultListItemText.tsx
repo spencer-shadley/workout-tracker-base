@@ -1,12 +1,12 @@
 
 import { ListItemText, Typography } from '@mui/material';
 
+import { useExerciseContext } from '../../../shared/ExerciseProvider';
 import { TextSkeleton } from '../../../shared/TextSkeleton';
 import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
-import { useResultContext } from './context/ResultProvider';
 
 export function ResultListItemText() {
-  const { exerciseName } = useResultContext();
+  const { exerciseName } = useExerciseContext();
   const { searchInput } = useCreateWorkoutContext();
   const { isSearching } = searchInput;
 

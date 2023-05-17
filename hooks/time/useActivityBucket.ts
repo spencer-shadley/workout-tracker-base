@@ -1,15 +1,12 @@
-/* eslint-disable indent */
-import {
-    ActivityType, useTimeContext
-} from '@/components/main/workout/context/TimeContextProvider';
+import { useTimeContext } from '@/components/main/workout/context/TimeContextProvider';
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 
 import { BucketFactory } from '../../utils/time/BucketFactory';
 
 export function useActivityBucket(
-  exerciseName: string | null,
-  activityType: ActivityType
 ) {
   const { buckets, elapsedTimeInSeconds, currentRound } = useTimeContext();
+  const { exerciseName, activityType } = useExerciseContext();
 
   const activityBucket = BucketFactory.getMatchingBucket({
     buckets,
