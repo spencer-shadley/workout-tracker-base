@@ -12,17 +12,17 @@ export function SummaryContent() {
   return (
     <DialogContent>
       <List>
-        {isLoading ? (
+        {isLoading ?
           <SummaryContentSkeleton />
-        ) : (
-          exerciseNames.map((exerciseName, index) => (
+          :
+          exerciseNames.map((exerciseName, index) =>
             <SummaryDialogContentListItem
               key={exerciseName}
               exerciseName={exerciseName}
               exerciseNumber={index + 1}
             />
-          ))
-        )}
+          )
+        }
       </List>
     </DialogContent>
   );

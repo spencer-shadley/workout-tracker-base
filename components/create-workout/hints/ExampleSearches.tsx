@@ -17,7 +17,7 @@ export function ExampleSearches(props: ListProps) {
 
   return (
     <List {...props}>
-      {randomHints.map((hint, index) => (
+      {randomHints.map((hint, index) =>
         <div key={hint}>
           <ListItem sx={{ display: 'flex' }} key={hint}>
             <ListItemText sx={{ flexGrow: 1 }}>{hint}</ListItemText>
@@ -42,7 +42,7 @@ export function ExampleSearches(props: ListProps) {
           </ListItem>
           {index < randomHints.length - 1 && <Divider />}
         </div>
-      ))}
+      )}
       <AiDialog showDialog={showDialog} setShowDialog={setShowDialog} />
     </List>
   );

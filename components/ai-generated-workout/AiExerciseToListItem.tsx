@@ -1,4 +1,5 @@
-import { ListItem, ListItemAvatar, Avatar } from '@mui/material';
+import { Avatar, ListItem, ListItemAvatar } from '@mui/material';
+
 import AIExercise from '../../api/data/AIExercise';
 import ExerciseListItemContent from './ExerciseListItemContent';
 
@@ -11,12 +12,12 @@ export default function AiExerciseToListItem({
   aiExercise,
   stepNumber,
 }: AiExerciseToListItemProps) {
-  return aiExercise ? (
+  return aiExercise ?
     <ListItem key={Math.random()}>
       <ListItemAvatar>
         <Avatar>{stepNumber++}</Avatar>
       </ListItemAvatar>
       <ExerciseListItemContent {...aiExercise} />
     </ListItem>
-  ) : null;
+    : null;
 }

@@ -14,12 +14,12 @@ export function ExerciseSearch() {
       <FormControl fullWidth>
         <TextField
           InputProps={{
-            endAdornment: (
+            endAdornment:
               <InputAdornment position="end">
                 <GenerateWithAiButton />
                 <ExerciseCartButton />
               </InputAdornment>
-            ),
+            ,
           }}
           maxRows={3}
           fullWidth

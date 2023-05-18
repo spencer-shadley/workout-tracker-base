@@ -1,12 +1,9 @@
+/* eslint-disable indent */
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
+    Accordion, AccordionDetails, AccordionSummary, List, ListItem, ListItemText, Typography
 } from '@mui/material';
+
+/* eslint-enable indent */
 import { advancedHints } from './hints';
 
 export function AdvancedHintsExpand() {
@@ -22,11 +19,11 @@ export function AdvancedHintsExpand() {
       </AccordionSummary>
       <AccordionDetails>
         <List sx={{ overflow: 'auto', maxHeight: '100%' }}>
-          {advancedHints.map((hint) => (
+          {advancedHints.map((hint) =>
             <ListItem key={hint}>
               <ListItemText>{hint}</ListItemText>
             </ListItem>
-          ))}
+          )}
         </List>
       </AccordionDetails>
     </Accordion>

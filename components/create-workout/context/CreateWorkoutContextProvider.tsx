@@ -1,5 +1,6 @@
+import { createContext, PropsWithChildren, useContext } from 'react';
+
 import { logError } from '@/utils/logger';
-import { PropsWithChildren, createContext, useContext } from 'react';
 
 interface SearchInputType {
   searchText: string;
@@ -94,8 +95,8 @@ interface CreateWorkoutProviderProps extends PropsWithChildren {
 export const CreateWorkoutProvider = ({
   createWorkout,
   children,
-}: CreateWorkoutProviderProps) => (
+}: CreateWorkoutProviderProps) =>
   <CreateWorkout.Provider value={createWorkout}>
     {children}
   </CreateWorkout.Provider>
-);
+;

@@ -22,13 +22,13 @@ export function MuscleGroupsChips() {
 
   return (
     <div className="flex gap-1 max-w-xs flex-wrap">
-      {(isLoading || isSearching) ? (
+      {isLoading || isSearching ?
         <ChipsSkeleton />
-      ) : (
-        muscleGroups.map((muscleGroup) => (
+       :
+        muscleGroups.map((muscleGroup) =>
           <MuscleGroupChip key={muscleGroup} muscleGroup={muscleGroup} />
-        ))
-      )}
+        )
+      }
     </div>
   );
 }

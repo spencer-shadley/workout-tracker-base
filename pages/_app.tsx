@@ -1,22 +1,19 @@
 import '@/styles/globals.css';
 
-import type { AppProps } from 'next/app';
-
-import {
-  Hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-dayjs.extend(relativeTime);
+import { useEffect, useState } from 'react';
+
+import Background from '@/components/shared/backgrounds/Background';
+import { Box, CircularProgress } from '@mui/material';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import Settings from '../components/settings/Settings';
-import { useEffect, useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
-import Background from '@/components/shared/backgrounds/Background';
+
+import type { AppProps } from 'next/app';
+
+dayjs.extend(relativeTime);
 
 const queryClient = new QueryClient();
 
@@ -27,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
     setIsPageLoaded(true);
   }, []);
 
-  return isPageLoaded ? (
+  return isPageLoaded ?
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Background />
@@ -36,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Settings />
       </Hydrate>
     </QueryClientProvider>
-  ) : (
+    :
     <Box sx={{ display: 'flex' }}>
       <CircularProgress
         sx={{
@@ -46,5 +43,5 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
       />
     </Box>
-  );
+  ;
 }

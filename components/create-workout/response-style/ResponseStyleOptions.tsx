@@ -1,10 +1,9 @@
-import { FormControl, InputLabel, Select, Snackbar, Grow } from '@mui/material';
-import {
-  AnswerType,
-  answerTypes,
-} from '../context/CreateWorkoutContextProvider';
-import { useAiStyle } from '@/hooks/storage/useLocalStorage';
 import { useState } from 'react';
+
+import { useAiStyle } from '@/hooks/storage/useLocalStorage';
+import { FormControl, Grow, InputLabel, Select, Snackbar } from '@mui/material';
+
+import { AnswerType, answerTypes } from '../context/CreateWorkoutContextProvider';
 
 interface ResponseStyleOptionsProps {
   answerStyle: AnswerType;
@@ -42,12 +41,12 @@ export function ResponseStyleOption() {
             setIsSuccessAlertOpen(true);
           }}
         >
-          {answerTypes.map((answer) => (
+          {answerTypes.map((answer) =>
             <ResponseStyleMenuOption
               key={answer.styleModifier}
               answerStyle={answer}
             />
-          ))}
+          )}
         </Select>
       </FormControl>
       <Snackbar

@@ -21,7 +21,7 @@ export function ExerciseCartButton() {
     };
   }, [showDialog]);
 
-  return selectedExercises.length > 0 ? (
+  return selectedExercises.length > 0 ?
     <>
       <Tooltip
         title={
@@ -49,5 +49,5 @@ export function ExerciseCartButton() {
       </Tooltip>
       <SummaryDialogWrapper {...summaryDialogProps} />
     </>
-  ) : null;
+    : null;
 }

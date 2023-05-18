@@ -13,7 +13,7 @@ export default function ExerciseStatLabel({
   afterText,
   ...otherProps
 }: ExerciseStatLabelProps) {
-  return data ? (
+  return data ?
     <span
       style={{
         whiteSpace: 'nowrap',
@@ -22,11 +22,11 @@ export default function ExerciseStatLabel({
         alignItems: 'center',
       }}
     >
-      {beforeText && (
+      {beforeText &&
         <Typography color="text.secondary" {...otherProps}>
           {beforeText}
         </Typography>
-      )}
+      }
 
       <Chip
         label={data}
@@ -35,11 +35,11 @@ export default function ExerciseStatLabel({
         sx={{ padding: 0 }}
       />
 
-      {afterText && (
+      {afterText &&
         <Typography color="text.secondary" {...otherProps}>
           {afterText}
         </Typography>
-      )}
+      }
     </span>
-  ) : null;
+    : null;
 }

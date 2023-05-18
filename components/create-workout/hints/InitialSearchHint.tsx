@@ -1,12 +1,14 @@
-import { IconButton } from '@mui/material';
-import { searchHints } from './hints';
 import shuffle from 'lodash/shuffle';
-import { ExampleSearches } from './ExampleSearches';
-import { useEffect, useState } from 'react';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import React, { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
+
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { IconButton } from '@mui/material';
+
 import { AdvancedHints } from './AdvancedHints';
-import React from 'react';
+import { ExampleSearches } from './ExampleSearches';
+import { searchHints } from './hints';
+
 // import MenuIcon from '@mui/icons-material/Menu';
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 
@@ -120,18 +122,18 @@ export function InitialSearchHint() {
         </List>
       </Drawer> */}
       <div className="flex overflow-auto">
-        {shouldShowAdvancedHints && (
+        {shouldShowAdvancedHints &&
           <div className="flex flex-col flex-1">
             <AdvancedHints
               setShouldShowAdvancedHints={setShouldShowAdvancedHints}
             />
           </div>
-        )}
-        {!shouldShowAdvancedHints && (
+        }
+        {!shouldShowAdvancedHints &&
           <IconButton onClick={() => setShouldShowAdvancedHints(true)}>
             <ChevronRightIcon />
           </IconButton>
-        )}
+        }
         <div
           className="overflow-auto h-full w-full "
           style={{ flexGrow: shouldShowAdvancedHints ? 2 : undefined }}

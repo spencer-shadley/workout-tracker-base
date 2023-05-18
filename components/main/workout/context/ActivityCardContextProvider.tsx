@@ -17,8 +17,8 @@ interface ActivityCardContextProviderProps extends PropsWithChildren {
 export const ActivityCardProvider = ({
   activityCardContext,
   children,
-}: ActivityCardContextProviderProps) => (
+}: ActivityCardContextProviderProps) =>
   <ActivityCardContext.Provider value={activityCardContext}>
     {children}
   </ActivityCardContext.Provider>
-);
+;

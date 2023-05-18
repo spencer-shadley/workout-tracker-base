@@ -11,15 +11,15 @@ export function ResultListItemText() {
   const { isSearching } = searchInput;
 
   return (
-    isSearching ? (
+    isSearching ?
       <TextSkeleton />
-    ) : (
+      :
       <ListItemText
         sx={{
         }}
         className="flex-grow w-full"
         primary={<Typography variant='overline'>{isSearching ? '' : exerciseName}</Typography>}
       />
-    )
+
   );
 }
