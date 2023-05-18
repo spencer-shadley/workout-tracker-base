@@ -1,16 +1,13 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Divider,
-  Fab,
-} from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { ResponseStyleOption } from '@/components/create-workout/response-style/ResponseStyleOptions';
 import { PropsWithChildren, useState } from 'react';
-import { WorkoutOptionsContent } from './WorkoutOptionsContent';
+
+import {
+    ResponseStyleOption
+} from '@/components/create-workout/response-style/ResponseStyleOptions';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Dialog, DialogContent, DialogContentText, DialogTitle, Divider, Fab } from '@mui/material';
+
 import { BackgroundOptions } from '../shared/BackgroundOptions';
+import { WorkoutOptionsContent } from './workout-options/WorkoutOptionsContent';
 
 export default function Settings() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -32,14 +29,22 @@ export default function Settings() {
         <SettingsIcon color={'action'} />
       </Fab>
       <Dialog open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}>
-        <DialogTitle>Settings</DialogTitle>
+        <DialogTitle>
+          Settings
+        </DialogTitle>
         <DialogContent>
-          <SettingCategoryText>AI Preferences</SettingCategoryText>
+          <SettingCategoryText>
+            AI Preferences
+          </SettingCategoryText>
           <ResponseStyleOption />
           <Divider sx={{ marginY: '15px' }} />
-          <SettingCategoryText>Workout Preferences</SettingCategoryText>
+          <SettingCategoryText>
+            Workout Preferences
+          </SettingCategoryText>
           <WorkoutOptionsContent />
-          <SettingCategoryText>Background</SettingCategoryText>
+          <SettingCategoryText>
+            Background
+          </SettingCategoryText>
           <BackgroundOptions />
         </DialogContent>
       </Dialog>
@@ -48,5 +53,7 @@ export default function Settings() {
 }
 
 function SettingCategoryText({ children }: PropsWithChildren) {
-  return <DialogContentText variant="overline">{children}</DialogContentText>;
+  return <DialogContentText variant="overline">
+    {children}
+  </DialogContentText>;
 }

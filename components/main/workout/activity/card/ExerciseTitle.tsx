@@ -1,9 +1,14 @@
+import { useState } from 'react';
+
 import { useExerciseContext } from '@/components/shared/ExerciseProvider';
+import { GenericDialogProps } from '@/components/shared/PromptDialog';
 import useActivityName from '@/hooks/activity/useActivityName';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import EditIcon from '@mui/icons-material/Edit';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { IconButton, Tooltip, Typography, Zoom } from '@mui/material';
+import {
+    Dialog, DialogContent, DialogTitle, IconButton, Tooltip, Typography, Zoom
+} from '@mui/material';
 
 import { useTimeContext } from '../../context/TimeContextProvider';
 
@@ -55,9 +60,28 @@ function JumpToExerciseIconButton() {
 function EditExerciseIconButton() {
   const { exerciseName } = useExerciseContext();
 
-  return <Tooltip title={`Edit ${exerciseName}`}>
-    <IconButton>
-      <EditIcon/>
-    </IconButton>
-  </Tooltip>
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  return <>
+    <Tooltip title={`Edit ${exerciseName}`}>
+      <IconButton onClick={() => {
+        setIsDialogOpen(true);
+      }}>
+        <EditIcon/>
+      </IconButton>
+    </Tooltip>
+    <EditExerciseDialog isOpen={isDialogOpen} close={() => {setIsDialogOpen(false)}}/>
+  </>
+}
+
+function EditExerciseDialog({ close, isOpen }: GenericDialogProps) {
+  const { exerciseName } = useExerciseContext();
+  return <Dialog open={isOpen} onClose={close}>
+    <DialogTitle>
+      {`Edit ${exerciseName}`}
+    </DialogTitle>
+    <DialogContent>
+
+    </DialogContent>
+  </Dialog>
 }
