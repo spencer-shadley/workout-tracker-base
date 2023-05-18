@@ -19,6 +19,9 @@ export function PromptDialog({ isOpen, close, prompt, title }: PromptDialogProps
 
   const { data } = useOpenAi({
     prompt: styledPrompt,
+    queryOptionOverrides: {
+      enabled: isOpen,
+    }
   });
 
   return (

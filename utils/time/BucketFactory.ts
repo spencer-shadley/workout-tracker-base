@@ -27,6 +27,6 @@ export class BucketFactory {
       }
     }
 
-    throw new Error(`Could not find any bucket for ${strategyProps.activityType} ${strategyProps.currentRound} ${strategyProps.exerciseName}`);
+    throw new Error(`Could not find any bucket for activity ${strategyProps.activityType} round ${strategyProps.currentRound} exercise ${strategyProps.exerciseName}`);
   }
 }

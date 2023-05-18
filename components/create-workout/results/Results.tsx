@@ -1,24 +1,18 @@
+import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { Card, List } from '@mui/material';
-import { useCreateWorkoutContext as useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+
+/* eslint-disable indent */
+import {
+    useCreateWorkoutContext as useCreateWorkoutContext
+} from '../context/CreateWorkoutContextProvider';
+/* eslint-enable indent */
+import { NewExerciseButton } from './NewExerciseButton';
 import Result from './result/Result';
 import { ResultCard } from './result/ResultCard';
-import { NewExerciseButton } from './NewExerciseButton';
-import { useEffect, useState } from 'react';
-
-const skeletonNames = makeSkeletonNames();
 
 export function Results() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchedExerciseNameResults, isSearching } = searchInput;
-  const [names, setNames] = useState<string[]>(skeletonNames);
-
-  useEffect(() => {
-    if (isSearching) {
-      setNames(skeletonNames);
-    } else {
-      setNames(searchedExerciseNameResults);
-    }
-  }, [isSearching, searchedExerciseNameResults]);
 
   return (
     <Card
@@ -27,12 +21,14 @@ export function Results() {
       elevation={10}
     >
       <List className="w-full">
-        {names.map((exerciseName) => (
-          <ResultCard key={exerciseName} exerciseName={exerciseName}>
-            <Result exerciseName={exerciseName} />
-          </ResultCard>
-        ))}
-        <ResultCard exerciseName="new-exercise">
+        {isSearching ? <ResultsSkeleton/> : searchedExerciseNameResults.map((exerciseName) =>
+          <ExerciseProvider key={exerciseName} activityType='exercise' exerciseName={exerciseName}>
+            <ResultCard>
+              <Result />
+            </ResultCard>
+          </ExerciseProvider>
+        )}
+        <ResultCard>
           <NewExerciseButton />
         </ResultCard>
       </List>
@@ -40,11 +36,6 @@ export function Results() {
   );
 }
 
-function makeSkeletonNames() {
-  const names = [];
-  for (let i = 0; i < 10; i++) {
-    names.push(`${Math.random()}`);
-  }
-
-  return names;
+function ResultsSkeleton() {
+  return null;
 }

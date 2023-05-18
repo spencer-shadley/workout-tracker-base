@@ -1,9 +1,12 @@
-import { List } from '@mui/material';
 import { useState } from 'react';
-import ActivityListItem from './ActivityListItem';
-import { useTimeContext } from '../context/TimeContextProvider';
-import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
+
+import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
+import { List } from '@mui/material';
+
+import { useTimeContext } from '../context/TimeContextProvider';
+import ActivityListItem from './ActivityListItem';
+import DuplicateExerciseWarning from './exercise/DuplicateExerciseWarning';
 
 interface ActivitiesListProps {
   shouldIncludeRests?: boolean;
@@ -21,36 +24,32 @@ export default function ActivitiesList({
   return (
     <div className="h-full overflow-y-auto justify-middle">
       <List>
-        {shouldIncludeRests && (
-          <ActivityListItem
-            key={`prep-time-${currentRound}`}
+        {shouldIncludeRests &&
+          <ExerciseProvider
             activityType="prep"
-            exerciseName={`Prep for Round ${currentRound}`}
-          />
-        )}
-        {selectedExercises.map((exerciseName, index) => (
+            exerciseName={`Prep for Round ${currentRound}`}>
+            <ActivityListItem key={`prep-time-${currentRound}`} />
+          </ExerciseProvider>
+        }
+        {selectedExercises.map((exerciseName, index) =>
           <div key={exerciseName}>
-            <ActivityListItem
-              key={exerciseName}
-              activityType="exercise"
-              exerciseName={exerciseName}
-            />
-            {shouldIncludeRests && index !== selectedExercises.length - 1 && (
-              <ActivityListItem
-                key={`${exerciseName}-rest`}
-                activityType="rest-exercise"
-                exerciseName={exerciseName}
-              />
-            )}
+            <ExerciseProvider exerciseName={exerciseName} activityType='exercise'>
+              <ActivityListItem/>
+            </ExerciseProvider>
+            {shouldIncludeRests && index !== selectedExercises.length - 1 &&
+              <ExerciseProvider exerciseName={exerciseName} activityType='rest-exercise'>
+                <ActivityListItem/>
+              </ExerciseProvider>
+            }
           </div>
-        ))}
-        {shouldIncludeRests && (
-          <ActivityListItem
-            key={`round-rest-${currentRound}`}
-            activityType="rest-round"
-            exerciseName={`Round ${currentRound} Rest`}
-          />
         )}
+        {shouldIncludeRests &&
+          <ExerciseProvider
+            key={`round-rest-${currentRound}`}
+            exerciseName={`Round ${currentRound} Rest`} activityType='rest-round'>
+            <ActivityListItem/>
+          </ExerciseProvider>
+        }
       </List>
       <DuplicateExerciseWarning
         showDuplicateExerciseWarning={showDuplicateExerciseWarning}

@@ -24,6 +24,7 @@
     "no-trailing-spaces": ["error", { "ignoreComments": true }],
     "object-curly-spacing": ["error", "always"],
     "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
-    "eol-last": ["error", "always"]
+    "eol-last": ["error", "always"],
+    "no-extra-parens": ["error", "all", { "nestedBinaryExpressions": false }]
   }
 }

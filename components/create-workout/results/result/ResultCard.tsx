@@ -5,6 +5,7 @@ import { Card } from '@mui/material';
 
 export function ResultCard({ children }: PropsWithChildren) {
   const { exerciseName } = useExerciseContext();
+
   return (
     <Card key={exerciseName} sx={{ marginBottom: '10px' }}>
       {children}

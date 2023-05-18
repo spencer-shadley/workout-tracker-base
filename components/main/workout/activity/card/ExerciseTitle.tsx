@@ -1,4 +1,3 @@
-import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import useActivityName from '@/hooks/activity/useActivityName';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -8,15 +7,11 @@ import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ExerciseTitle() {
   const { jumpToBucket } = useTimeContext();
-  const {
-    exerciseName,
-    activityType,
-  } = useExerciseContext();
 
   const { activityBucket } = useActivityBucket();
   const { isActive } = activityBucket;
 
-  const activityName = useActivityName(activityType, exerciseName);
+  const activityName = useActivityName();
 
   return (
     <Typography
@@ -30,7 +25,7 @@ export function ExerciseTitle() {
       }}
     >
       {activityName}
-      {activityBucket && (
+      {activityBucket &&
         <Tooltip
           title={`jump to ${activityName}`}
           arrow
@@ -44,7 +39,7 @@ export function ExerciseTitle() {
             <SkipNextIcon />
           </IconButton>
         </Tooltip>
-      )}
+      }
     </Typography>
   );
 }

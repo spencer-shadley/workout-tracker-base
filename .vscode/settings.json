@@ -16,6 +16,7 @@
     "localstorage",
     "noemit",
     "openai",
+    "parens",
     "pulldowns",
     "pullups",
     "roboto",

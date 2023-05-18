@@ -13,7 +13,7 @@ export default function ActivityOption({
   exerciseName,
   handleClick,
 }: ActivityOptionProps) {
-  return exerciseName ? (
+  return exerciseName ?
     <ExerciseProvider exerciseName={exerciseName} activityType='exercise'>
       <ActivityCardProvider
         activityCardContext={{
@@ -26,7 +26,7 @@ export default function ActivityOption({
         />
       </ActivityCardProvider>
     </ExerciseProvider>
-  ) : (
+    :
     <Typography>could not be found</Typography>
-  );
+  ;
 }

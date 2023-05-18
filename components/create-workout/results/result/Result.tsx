@@ -9,23 +9,21 @@ import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
 import { ListItem } from '@mui/material';
 
-import { ExerciseProvider } from '../../../shared/ExerciseProvider';
+import { useExerciseContext } from '../../../shared/ExerciseProvider';
 import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
 import { InfoDialog } from './InfoDialog';
 import { ResultIcon } from './ResultIcon';
 import { ResultListItemText } from './ResultListItemText';
 import { StepsDialog } from './StepsDialog';
 
-interface ResultProps {
-  exerciseName: string;
-}
+export default function Result() {
+  const { exerciseName } = useExerciseContext();
 
-export default function Result({ exerciseName }: ResultProps) {
   const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(false);
   const [shouldShowSteps, setShouldShowSteps] = useState<boolean>(false);
 
   return (
-    <ExerciseProvider exerciseName={exerciseName} activityType='exercise' >
+    <>
       <ListItem className="hover:bg-slate-200 flex flex-col items-start">
         <div className='flex w-full'>
           <div className='align-middle'>
@@ -47,10 +45,10 @@ export default function Result({ exerciseName }: ResultProps) {
             />
           </div>
         </div>
-        <MuscleGroupsChips exerciseName={exerciseName} />
+        <MuscleGroupsChips />
       </ListItem>
       <InfoDialog isOpen={shouldShowAbout} close={() => setShouldShowAbout(false)}/>
       <StepsDialog isOpen={shouldShowSteps} close={() => setShouldShowSteps(false)}/>
-    </ExerciseProvider>
+    </>
   );
 }

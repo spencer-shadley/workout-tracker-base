@@ -43,16 +43,16 @@ export function ActivityCard(cardProps: CardProps) {
         <CardContent sx={{ flexGrow: 1 }}>
           <ExerciseTitle />
           <ActivityCardCloseButton />
-          {activityType === 'exercise' && (
+          {activityType === 'exercise' &&
             <MuscleGroupsChips />
-          )}
+          }
         </CardContent>
         {isActive && <ActiveExerciseTimer />}
       </span>
       <VideoButtons />
-      {progressPercent !== null && (
+      {progressPercent !== null &&
         <LinearProgress variant="determinate" value={progressPercent} />
-      )}
+      }
     </Card>
   );
 }
