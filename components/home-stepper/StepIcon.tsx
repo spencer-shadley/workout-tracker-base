@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { StepIconProps, IconButton } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import InfoIcon from '@mui/icons-material/Info';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import { IconButton, StepIconProps } from '@mui/material';
 
 const StepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
@@ -18,13 +18,13 @@ const StepIconRoot = styled('div')<{
   borderRadius: '50%',
   justifyContent: 'center',
   alignItems: 'center',
-  ...(ownerState.active && {
+  ...ownerState.active && {
     opacity: 0.75,
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-  }),
-  ...(ownerState.completed && {
+  },
+  ...ownerState.completed && {
     backgroundColor: 'gray',
-  }),
+  },
 }));
 
 export default function StepIcon({

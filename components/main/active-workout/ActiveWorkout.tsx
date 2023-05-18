@@ -17,11 +17,11 @@ export default function ActiveWorkout() {
 
   return (
     <>
-      {exerciseType === 'exercise' || !isRunning ? (
+      {exerciseType === 'exercise' || !isRunning ?
         <Background />
-      ) : (
+        :
         <Fireworks />
-      )}
+      }
       <TimeProvider timeContext={timeContext}>
         <div className="flex flex-col h-[100dvh] overflow-hidden">
           <Typography className="text-gray-100">

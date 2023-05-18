@@ -1,12 +1,9 @@
+/* eslint-disable indent */
 import {
-  Typography,
-  LinearProgress,
-  List,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Button,
+    Accordion, AccordionDetails, AccordionSummary, Button, LinearProgress, List, Typography
 } from '@mui/material';
+
+/* eslint-enable indent */
 import AiFormat from '../../api/data/AiFormat';
 import AiExerciseToListItem from './AiExerciseToListItem';
 
@@ -37,13 +34,13 @@ export default function AiWorkoutList({
           {aiPrompt.slice(0, aiPrompt.indexOf('.'))}
         </Typography>
         <List>
-          {exercises.map((exercise, index) => (
+          {exercises.map((exercise, index) =>
             <AiExerciseToListItem
               aiExercise={exercise}
               key={Math.random()}
               stepNumber={index + 1}
             />
-          ))}
+          )}
         </List>
         <Accordion>
           <AccordionSummary>

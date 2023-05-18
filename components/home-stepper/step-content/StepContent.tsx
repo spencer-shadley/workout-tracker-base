@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { StepInfo } from '../stepInfo';
-import { Quote } from '../Quote';
+
 import RectangleBouncer from '../../shared/RectangleBouncer';
-import { TitleButton } from './TitleButton';
+import { Quote } from '../Quote';
+import { StepInfo } from '../stepInfo';
 import { InfoDialog } from './InfoDialog';
+import { TitleButton } from './TitleButton';
 
 interface StepContentProps {
   activeStep: number;
@@ -36,18 +37,18 @@ export default function StepContent({ step }: StepContentProps) {
         }}
       >
         <RectangleBouncer>
-          {url && (
+          {url &&
             <Link href={url}>
               <TitleButton buttonText={title} />
             </Link>
-          )}
-          {dialogContent && (
+          }
+          {dialogContent &&
             <InfoDialog
               content={dialogContent}
               buttonText={title}
               tutorial={tutorial}
             />
-          )}
+          }
         </RectangleBouncer>
         <Quote prompt={aiPrompt} />
       </div>

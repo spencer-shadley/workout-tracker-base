@@ -1,15 +1,12 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogProps,
-  DialogTitle,
-  Skeleton,
-  Typography,
-} from '@mui/material';
-import { useOpenAi } from '@/hooks/openai/useOpenAi';
 import { useState } from 'react';
+
+import { useOpenAi } from '@/hooks/openai/useOpenAi';
+/* eslint-disable indent */
+import {
+    Button, Dialog, DialogActions, DialogContent, DialogProps, DialogTitle, Skeleton, Typography
+} from '@mui/material';
+
+/* eslint-enable indent */
 
 interface MuscleGroupDialogProps {
   muscleGroup: string;
@@ -30,11 +27,11 @@ export function MuscleGroupDialog({
     <Dialog {...dialogProps}>
       <DialogTitle>About {muscleGroup}</DialogTitle>
       <DialogContent>
-        {isLoading ? (
+        {isLoading ?
           <Skeleton sx={{ fontSize: 40, width: '100%' }} />
-        ) : (
+          :
           <Typography>{aboutExercise}</Typography>
-        )}
+        }
       </DialogContent>
       <DialogActions>
         <Button

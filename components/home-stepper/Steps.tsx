@@ -23,14 +23,14 @@ export default function Steps() {
         style={{ flexGrow: 1 }}
         containerStyle={{ height: '100%' }}
       >
-        {stepInfos.map((step, index) => (
+        {stepInfos.map((step, index) =>
           <StepContent
             activeStep={activeStep}
             step={step}
             index={index}
             key={step.title}
           />
-        ))}
+        )}
       </SwipeableViews>
       <WorkoutStepper activeStep={activeStep} setActiveStep={setActiveStep} />
     </Box>

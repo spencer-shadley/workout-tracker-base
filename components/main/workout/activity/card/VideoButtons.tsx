@@ -1,12 +1,14 @@
-import { Button, Link, Skeleton, Typography } from '@mui/material';
-import { useActivityCardContext } from '../../context/ActivityCardContextProvider';
 import ReactPlayer from 'react-player/lazy';
-import useVideo from './hooks/useVideo';
+
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
+import { Button, Link, Skeleton, Typography } from '@mui/material';
+
 import { useTimeContext } from '../../context/TimeContextProvider';
+import useVideo from './hooks/useVideo';
 
 export function VideoButtons() {
   const { pause } = useTimeContext();
-  const { activityType } = useActivityCardContext();
+  const { activityType } = useExerciseContext();
 
   const {
     videoUrl,
@@ -16,11 +18,11 @@ export function VideoButtons() {
     shouldShowVideo,
   } = useVideo();
 
-  return activityType === 'exercise' ? (
+  return activityType === 'exercise' ?
     <>
-      {hasYoutubeQuotaExceeded ? (
+      {hasYoutubeQuotaExceeded ?
         <Typography>YouTube Quota Exceeded</Typography>
-      ) : (
+        :
         <Button
           onClick={() => {
             pause();
@@ -29,19 +31,19 @@ export function VideoButtons() {
         >
           {shouldShowVideo ? 'hide video' : 'show video'}
         </Button>
-      )}
+      }
 
       <Link href={youtubeSearchUrl} target="_blank">
         <Button onClick={() => pause()}>Search on YouTube</Button>
       </Link>
 
-      {videoUrl && shouldShowVideo && (
+      {videoUrl && shouldShowVideo &&
         <ReactPlayer
           width="100%"
           fallback={<Skeleton variant="rectangular" />}
           url={videoUrl}
         />
-      )}
+      }
     </>
-  ) : null;
+    : null;
 }

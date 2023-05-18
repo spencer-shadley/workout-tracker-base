@@ -1,10 +1,12 @@
-import { Fab, SxProps, Theme, Tooltip } from '@mui/material';
-import { useTimeContext } from '../workout/context/TimeContextProvider';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { cloneElement, isValidElement, PropsWithChildren } from 'react';
+
 import PauseIcon from '@mui/icons-material/Pause';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { PropsWithChildren, cloneElement, isValidElement } from 'react';
+import { Fab, SxProps, Theme, Tooltip } from '@mui/material';
+
+import { useTimeContext } from '../workout/context/TimeContextProvider';
 
 export default function TimerControls() {
   const {

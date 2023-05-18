@@ -1,11 +1,12 @@
 import { Fade, Grow, Typography } from '@mui/material';
+
 import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ActiveExerciseTimer() {
   const { currentBucket, isRunning } = useTimeContext();
   const { remainingTimeInSeconds } = currentBucket;
 
-  return isRunning ? (
+  return isRunning ?
     <Grow
       in={isRunning}
       style={{
@@ -26,7 +27,7 @@ export function ActiveExerciseTimer() {
         {remainingTimeInSeconds}
       </Typography>
     </Grow>
-  ) : (
+    :
     <Fade in={!isRunning}>
       <Typography
         variant="h1"
@@ -37,5 +38,5 @@ export function ActiveExerciseTimer() {
         {remainingTimeInSeconds}
       </Typography>
     </Fade>
-  );
+  ;
 }

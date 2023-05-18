@@ -1,14 +1,12 @@
 import styled from '@emotion/styled';
+/* eslint-disable indent */
 import {
-  StepConnector,
-  stepConnectorClasses,
-  Stepper,
-  Tooltip,
-  Step,
-  StepLabel,
+    Step, StepConnector, stepConnectorClasses, StepLabel, Stepper, Tooltip
 } from '@mui/material';
-import { stepInfos } from './stepInfo';
+
+/* eslint-enable indent */
 import StepIcon from './StepIcon';
+import { stepInfos } from './stepInfo';
 
 const ColorlibConnector = styled(StepConnector)(() => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -40,7 +38,7 @@ export default function WorkoutStepper({
       sx={{ marginBottom: 2 }}
       connector={<ColorlibConnector />}
     >
-      {stepInfos.map((stepInfo, stepIndex) => (
+      {stepInfos.map((stepInfo, stepIndex) =>
         <Tooltip key={stepInfo.title} title={stepInfo.title}>
           <Step
             key={stepInfo.title}
@@ -51,7 +49,7 @@ export default function WorkoutStepper({
             <StepLabel StepIconComponent={StepIcon} />
           </Step>
         </Tooltip>
-      ))}
+      )}
     </Stepper>
   );
 }
