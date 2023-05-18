@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 export interface SummaryDialogType {
   isOpen: boolean;
@@ -23,8 +23,8 @@ interface SummaryDialogProviderProps extends PropsWithChildren {
 export const SummaryDialogProvider = ({
   summaryDialogContext,
   children,
-}: SummaryDialogProviderProps) => (
+}: SummaryDialogProviderProps) =>
   <SummaryDialogContext.Provider value={summaryDialogContext}>
     {children}
   </SummaryDialogContext.Provider>
-);
+;

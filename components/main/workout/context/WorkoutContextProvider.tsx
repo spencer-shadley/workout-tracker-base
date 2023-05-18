@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 export interface WorkoutContextType {
   removeExercise: (exerciseName: string) => void;
@@ -21,8 +21,8 @@ interface WorkoutContextProviderProps extends PropsWithChildren {
 export const WorkoutProvider = ({
   workoutContext,
   children,
-}: WorkoutContextProviderProps) => (
+}: WorkoutContextProviderProps) =>
   <WorkoutContext.Provider value={workoutContext}>
     {children}
   </WorkoutContext.Provider>
-);
+;
