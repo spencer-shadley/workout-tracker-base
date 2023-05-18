@@ -1,6 +1,7 @@
-import { Step, StepButton, Stepper, Typography } from '@mui/material';
-import { useTimeContext } from '../workout/context/TimeContextProvider';
 import { useOptions } from '@/hooks/storage/useLocalStorage';
+import { Step, StepButton, Stepper } from '@mui/material';
+
+import { useTimeContext } from '../workout/context/TimeContextProvider';
 
 export default function RoundsStepper() {
   const [workoutOptions] = useOptions();
@@ -14,15 +15,11 @@ export default function RoundsStepper() {
   }
 
   return (
-    <Stepper activeStep={currentRound ?? 0} nonLinear className="mb-2">
+    <Stepper activeStep={currentRound ?? 0} nonLinear className="mb-2" alternativeLabel>
       {rounds.map((round) => {
         return (
           <Step key={round}>
-            <StepButton onClick={() => setCurrentRound(round)}>
-              <Typography className="text-gray-100">
-                Round {round + 1}
-              </Typography>
-            </StepButton>
+            <StepButton onClick={() => setCurrentRound(round)}/>
           </Step>
         );
       })}
