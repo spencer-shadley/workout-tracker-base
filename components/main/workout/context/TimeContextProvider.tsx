@@ -80,6 +80,6 @@ interface TimeContextProviderProps extends PropsWithChildren {
 export const TimeProvider = ({
   timeContext,
   children,
-}: TimeContextProviderProps) => (
+}: TimeContextProviderProps) =>
   <TimeContext.Provider value={timeContext}>{children}</TimeContext.Provider>
-);
+;

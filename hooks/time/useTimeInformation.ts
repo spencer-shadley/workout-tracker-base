@@ -88,6 +88,7 @@ export default function useTimeInformation(): TimeContextType {
       bucket.progressPercent = isBucketActive
         ? (bucket.remainingTimeInSeconds / activityDuration) * 100
         : 100;
+      bucket.isActive = isBucketActive;
 
       if (isBucketActive) {
         bucket.remainingTimeInSeconds =

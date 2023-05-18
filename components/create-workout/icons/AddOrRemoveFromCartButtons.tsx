@@ -46,13 +46,13 @@ export function AddOrRemoveFromCartButtons() {
         icon={<AddIcon />}
         onClick={addExerciseName}
       />
-      {isExerciseAdded && (
+      {isExerciseAdded &&
         <CircleListItemButton
           tooltipTitle={removeExerciseTooltip}
           icon={<DeleteIcon />}
           onClick={removeExercise}
         />
-      )}
+      }
     </ButtonGroup>
   );
 }
