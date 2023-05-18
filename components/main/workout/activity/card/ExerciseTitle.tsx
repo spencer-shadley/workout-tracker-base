@@ -1,13 +1,14 @@
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import useActivityName from '@/hooks/activity/useActivityName';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
+import EditIcon from '@mui/icons-material/Edit';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { IconButton, Tooltip, Typography, Zoom } from '@mui/material';
 
 import { useTimeContext } from '../../context/TimeContextProvider';
 
 export function ExerciseTitle() {
-  const { jumpToBucket } = useTimeContext();
-
+  const { activityType } = useExerciseContext();
   const { activityBucket } = useActivityBucket();
   const { isActive } = activityBucket;
 
@@ -25,21 +26,38 @@ export function ExerciseTitle() {
       }}
     >
       {activityName}
-      {activityBucket &&
-        <Tooltip
-          title={`jump to ${activityName}`}
-          arrow
-          TransitionComponent={Zoom}
-        >
-          <IconButton
-            onClick={() => {
-              jumpToBucket(activityBucket);
-            }}
-          >
-            <SkipNextIcon />
-          </IconButton>
-        </Tooltip>
-      }
+      {activityBucket && <JumpToExerciseIconButton/>}
+      {activityType === 'exercise' && <EditExerciseIconButton/>}
     </Typography>
   );
+}
+
+function JumpToExerciseIconButton() {
+  const { jumpToBucket } = useTimeContext();
+  const { activityBucket } = useActivityBucket();
+  const activityName = useActivityName();
+
+  return <Tooltip
+    title={`jump to ${activityName}`}
+    arrow
+    TransitionComponent={Zoom}
+  >
+    <IconButton
+      onClick={() => {
+        jumpToBucket(activityBucket);
+      }}
+    >
+      <SkipNextIcon />
+    </IconButton>
+  </Tooltip>
+}
+
+function EditExerciseIconButton() {
+  const { exerciseName } = useExerciseContext();
+
+  return <Tooltip title={`Edit ${exerciseName}`}>
+    <IconButton>
+      <EditIcon/>
+    </IconButton>
+  </Tooltip>
 }

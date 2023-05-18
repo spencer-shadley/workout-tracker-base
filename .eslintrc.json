@@ -1,8 +1,9 @@
 {
-  "plugins": ["@typescript-eslint", "autofix"],
+  "plugins": ["@typescript-eslint", "autofix", "react"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/jsx-runtime",
     "prettier"
   ],
   "rules": {
@@ -25,6 +26,9 @@
     "object-curly-spacing": ["error", "always"],
     "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
     "eol-last": ["error", "always"],
-    "no-extra-parens": ["error", "all", { "nestedBinaryExpressions": false }]
+    "no-extra-parens": ["error", "all", { "nestedBinaryExpressions": false }],
+    "react/jsx-newline": ["error", { "prevent": true }],
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-one-expression-per-line": ["error", {  }]
   }
 }
