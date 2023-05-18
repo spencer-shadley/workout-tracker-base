@@ -21,7 +21,7 @@ export function MuscleGroupsChips() {
   })
 
   return (
-    <div className="flex gap-1 max-w-xs flex-wrap">
+    <div className="flex gap-1 max-w-s flex-wrap">
       {isLoading || isSearching ?
         <ChipsSkeleton />
        :

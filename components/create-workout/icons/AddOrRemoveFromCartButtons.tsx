@@ -2,7 +2,6 @@
 import {
     isMatch, useAddExerciseName, useRemoveExerciseName, useSelectedExercises
 } from '@/hooks/storage/useSessionStorage';
-import { logError } from '@/utils/logger';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ButtonGroup } from '@mui/material';
@@ -11,14 +10,11 @@ import { useExerciseContext } from '../../shared/ExerciseProvider';
 import { CircleListItemButton } from './CircleListItemButton';
 
 export function AddOrRemoveFromCartButtons() {
-  let { exerciseName } = useExerciseContext();
-  if (exerciseName === null) {
-    logError('exerciseName is null in AddOrRemoveFromCartButtons')
-    exerciseName = '';
-  }
+  const { exerciseName } = useExerciseContext();
+  const exerciseNameOrSkeletonName = exerciseName ?? 'loading...';
 
-  const removeExercise = useRemoveExerciseName(exerciseName);
-  const addExerciseName = useAddExerciseName(exerciseName);
+  const removeExercise = useRemoveExerciseName(exerciseNameOrSkeletonName);
+  const addExerciseName = useAddExerciseName(exerciseNameOrSkeletonName);
   const [exerciseNames] = useSelectedExercises();
 
   const numberInCart = exerciseNames.filter(
@@ -29,7 +25,7 @@ export function AddOrRemoveFromCartButtons() {
 
   const removeTooltip = `Remove ${exerciseName} from workout`;
   const removeAllTooltip = `Remove all ${exerciseName}${
-    exerciseName.endsWith('s') ? '' : 's'
+    exerciseNameOrSkeletonName.endsWith('s') ? '' : 's'
   } from workout`;
   const removeExerciseTooltip =
     numberInCart > 1 ? removeAllTooltip : removeTooltip;
