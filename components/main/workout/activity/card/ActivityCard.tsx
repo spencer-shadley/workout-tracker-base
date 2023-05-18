@@ -7,8 +7,8 @@ import { Card, CardContent, CardProps, LinearProgress } from '@mui/material';
 import { useTimeContext } from '../../context/TimeContextProvider';
 import { ActiveExerciseTimer } from './ActiveExerciseTimer';
 import { ActivityCardCloseButton } from './ActivityCardCloseButton';
-import { ExerciseTitle } from './ExerciseTitle';
 import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
+import { ExerciseTitle } from './title/ExerciseTitle';
 import { VideoButtons } from './VideoButtons';
 
 const progressColor = '#1976d2';

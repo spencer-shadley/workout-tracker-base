@@ -1,14 +1,20 @@
+import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import { useOptions } from '@/hooks/storage/useLocalStorage';
+import { logError } from '@/utils/logger';
 import { Slider, Typography } from '@mui/material';
 
 import { makeMinuteMarks } from './WorkoutOptionsContent';
 
 export function RestBetweenExercisesOption() {
   const [options, setOptions] = useOptions();
+  const { exerciseName } = useExerciseContext();
+  if (exerciseName){
+    logError('TODO: add edit support')
+  }
 
   return <>
     <Typography>
-      Rest between exercises
+      {exerciseName ? `Rest after ${exerciseName}` : "Rest between exercises"}
     </Typography>
     <Slider
       step={5}
