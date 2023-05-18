@@ -8,7 +8,6 @@ import {
     useCreateWorkoutContext as useCreateWorkoutContext
 } from '../context/CreateWorkoutContextProvider';
 /* eslint-enable indent */
-import Result from './result/Result';
 import { ResultCard } from './result/ResultCard';
 
 export function Results() {
@@ -23,15 +22,11 @@ export function Results() {
     >
       <List className="w-full">
         <ExerciseProvider activityType='exercise' exerciseName={`"${searchText}"`}>
-          <ResultCard>
-            <Result />
-          </ResultCard>
+          <ResultCard/>
         </ExerciseProvider>
         {isSearching ? <ResultsSkeleton/> : searchedExerciseNameResults.map((exerciseName) =>
           <ExerciseProvider key={exerciseName} activityType='exercise' exerciseName={exerciseName}>
-            <ResultCard>
-              <Result />
-            </ResultCard>
+            <ResultCard/>
           </ExerciseProvider>
         )}
       </List>
@@ -43,9 +38,7 @@ function ResultsSkeleton() {
   return <>
     {Array<React.ReactElement>(10).fill(
       <ExerciseProvider activityType='exercise' exerciseName={null}>
-        <ResultCard>
-          <Result/>
-        </ResultCard>
+        <ResultCard/>
       </ExerciseProvider>)}
   </>;
 }
