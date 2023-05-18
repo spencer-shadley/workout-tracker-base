@@ -6,9 +6,9 @@ export interface WorkoutContextType {
 }
 
 export const WorkoutContext = createContext<WorkoutContextType>({
-  removeExercise: () => console.log('removeExercise not implemented'),
+  removeExercise: () => console.log(`removeExercise not implemented`),
   addExercise(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
 });
 

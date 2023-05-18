@@ -9,7 +9,7 @@ export interface SummaryDialogType {
 export const SummaryDialogContext = createContext<SummaryDialogType>({
   isOpen: false,
   close: () => {
-    console.error('close not set');
+    console.error(`close not set`);
   },
   isLoading: false,
 });
