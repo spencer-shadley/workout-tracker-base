@@ -16,7 +16,7 @@ export function Results() {
 
   return (
     <Card
-      sx={{ padding: '5px 10px', overflow: 'auto', height: '100%' }}
+      sx={{ padding: `5px 10px`, overflow: `auto`, height: `100%` }}
       className="bg-slate-500"
       elevation={10}
     >

@@ -11,7 +11,7 @@ import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 import { ExerciseTitle } from './title/ExerciseTitle';
 import { VideoButtons } from './VideoButtons';
 
-const progressColor = '#1976d2';
+const progressColor = `#1976d2`;
 
 export function ActivityCard(cardProps: CardProps) {
   const { isRunning } = useTimeContext();
@@ -24,7 +24,7 @@ export function ActivityCard(cardProps: CardProps) {
 
   useEffect(() => {
     if (isRunning) {
-      cardRef.current?.scrollIntoView({ behavior: 'smooth' });
+      cardRef.current?.scrollIntoView({ behavior: `smooth` });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
@@ -33,17 +33,17 @@ export function ActivityCard(cardProps: CardProps) {
     <Card
       ref={cardRef}
       sx={{
-        width: '100%',
+        width: `100%`,
         border: isActive ? `5px solid ${progressColor}` : undefined,
         borderBottom: 0,
       }}
       {...cardProps}
     >
-      <span style={{ display: 'flex' }}>
+      <span style={{ display: `flex` }}>
         <CardContent sx={{ flexGrow: 1 }}>
           <ExerciseTitle />
           <ActivityCardCloseButton />
-          {activityType === 'exercise' &&
+          {activityType === `exercise` &&
             <MuscleGroupsChips />
           }
         </CardContent>

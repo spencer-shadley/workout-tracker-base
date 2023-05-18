@@ -9,12 +9,12 @@ export function RestBetweenExercisesOption() {
   const [options, setOptions] = useOptions();
   const { exerciseName } = useExerciseContext();
   if (exerciseName){
-    logError('TODO: add edit support')
+    logError(`TODO: add edit support`)
   }
 
   return <>
     <Typography>
-      {exerciseName ? `Rest after ${exerciseName}` : "Rest between exercises"}
+      {exerciseName ? `Rest after ${exerciseName}` : `Rest between exercises`}
     </Typography>
     <Slider
       step={5}

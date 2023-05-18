@@ -19,14 +19,14 @@ export function ExerciseTitle() {
       component="div"
       sx={{
         flexGrow: 1,
-        justifySelf: 'center',
-        alignSelf: 'stretch',
-        fontSize: isActive ? '4rem' : undefined,
+        justifySelf: `center`,
+        alignSelf: `stretch`,
+        fontSize: isActive ? `4rem` : undefined,
       }}
     >
       {activityName}
       {activityBucket && <JumpToExerciseIconButton/>}
-      {activityType === 'exercise' && <EditExerciseIconButton/>}
+      {activityType === `exercise` && <EditExerciseIconButton/>}
     </Typography>
   );
 }
