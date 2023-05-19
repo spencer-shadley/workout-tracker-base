@@ -1,7 +1,8 @@
-import { WorkoutOptions } from '@/components/settings/WorkoutOptions';
+import { useLocalStorage } from 'usehooks-ts';
+
+import { WorkoutOptions } from '@/components/settings/workout-options/WorkoutOptions';
 import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
 import { logError } from '@/utils/logger';
-import { useLocalStorage } from 'usehooks-ts';
 
 const aiStyleKey = `ai-style`;
 const optionsKey = `options`;
