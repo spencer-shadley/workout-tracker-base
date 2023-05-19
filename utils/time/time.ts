@@ -1,5 +1,5 @@
 import { TimeSlot } from '@/components/main/workout/context/TimeContextProvider';
-import { WorkoutOptions } from '@/components/settings/WorkoutOptions';
+import { WorkoutOptions } from '@/components/settings/workout-options/WorkoutOptions';
 import { getOptions } from '@/hooks/storage/useLocalStorage';
 import { getExerciseNames } from '@/hooks/storage/useSessionStorage';
 
