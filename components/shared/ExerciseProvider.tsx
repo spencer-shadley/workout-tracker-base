@@ -9,7 +9,7 @@ export interface ExerciseContextType {
 
 export const ExerciseContext = createContext<ExerciseContextType>({
   exerciseName: null,
-  activityType: 'exercise',
+  activityType: `exercise`,
 });
 
 export const useExerciseContext = () => useContext(ExerciseContext);

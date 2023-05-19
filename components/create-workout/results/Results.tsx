@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { Card, List } from '@mui/material';
 
@@ -9,6 +7,7 @@ import {
 } from '../context/CreateWorkoutContextProvider';
 /* eslint-enable indent */
 import { ResultCard } from './result/ResultCard';
+import { ResultsSkeleton } from './ResultsSkeleton';
 
 export function Results() {
   const { searchInput } = useCreateWorkoutContext();
@@ -34,11 +33,3 @@ export function Results() {
   );
 }
 
-function ResultsSkeleton() {
-  return <>
-    {Array<React.ReactElement>(10).fill(
-      <ExerciseProvider activityType='exercise' exerciseName={null}>
-        <ResultCard/>
-      </ExerciseProvider>)}
-  </>;
-}

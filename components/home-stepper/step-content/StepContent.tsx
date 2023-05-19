@@ -19,21 +19,21 @@ export default function StepContent({ step }: StepContentProps) {
     <div
       key={title}
       style={{
-        height: '100%',
-        alignItems: 'center',
-        maxWidth: '100%',
-        overflow: 'hidden',
+        height: `100%`,
+        alignItems: `center`,
+        maxWidth: `100%`,
+        overflow: `hidden`,
       }}
     >
       <div
         style={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
+          height: `100%`,
+          display: `flex`,
+          flexDirection: `column`,
+          alignItems: `center`,
+          justifyContent: `space-evenly`,
           flexGrow: 1,
-          padding: '50px',
+          padding: `50px`,
         }}
       >
         <RectangleBouncer>

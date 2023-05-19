@@ -1,8 +1,10 @@
 import { PropsWithChildren, useState } from 'react';
 
+/* eslint-disable indent */
 import {
     ResponseStyleOption
 } from '@/components/create-workout/response-style/ResponseStyleOptions';
+/* eslint-enable indent */
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Dialog, DialogContent, DialogContentText, DialogTitle, Divider, Fab } from '@mui/material';
 
@@ -20,13 +22,13 @@ export default function Settings() {
         color="secondary"
         aria-label="settings"
         sx={{
-          position: 'absolute',
-          bottom: '50px',
-          right: '50px',
+          position: `absolute`,
+          bottom: `50px`,
+          right: `50px`,
         }}
         onClick={() => setIsSettingsOpen(true)}
       >
-        <SettingsIcon color={'action'} />
+        <SettingsIcon color={`action`} />
       </Fab>
       <Dialog open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}>
         <DialogTitle>
@@ -37,7 +39,7 @@ export default function Settings() {
             AI Preferences
           </SettingCategoryText>
           <ResponseStyleOption />
-          <Divider sx={{ marginY: '15px' }} />
+          <Divider sx={{ marginY: `15px` }} />
           <SettingCategoryText>
             Workout Preferences
           </SettingCategoryText>

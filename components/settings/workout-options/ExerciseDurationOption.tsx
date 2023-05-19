@@ -9,7 +9,7 @@ export function ExerciseDurationOption() {
   const [options, setOptions] = useOptions();
   const { exerciseName } = useExerciseContext();
   if (exerciseName){
-    logError('TODO: add edit support')
+    logError(`TODO: add edit support`)
   }
 
   return <>
