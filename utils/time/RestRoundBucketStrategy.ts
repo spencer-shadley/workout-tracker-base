@@ -4,7 +4,7 @@ import { BucketStrategy, StrategyProps } from './StrategyProps';
 
 export class RestRoundBucketStrategy implements BucketStrategy {
   getBucket({ buckets, currentRound, activityType }: StrategyProps): TimeSlot | null {
-    if (activityType !== 'rest-round') {
+    if (activityType !== `rest-round`) {
       return null;
     }
 

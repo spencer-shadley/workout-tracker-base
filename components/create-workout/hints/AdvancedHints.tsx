@@ -12,17 +12,17 @@ export function AdvancedHints({
     <Card
       elevation={10}
       sx={{
-        padding: '10px',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
+        padding: `10px`,
+        height: `100%`,
+        display: `flex`,
+        flexDirection: `column`,
       }}
     >
       <HowToSearchText />
       <AdvancedHintsExpand />
       <IconButton
         onClick={() => setShouldShowAdvancedHints(false)}
-        sx={{ alignSelf: 'flex-end' }}
+        sx={{ alignSelf: `flex-end` }}
       >
         <ChevronLeftIcon />
       </IconButton>

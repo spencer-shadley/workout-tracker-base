@@ -29,7 +29,7 @@ export default function TimerControls() {
         <RestartAltIcon />
       </TimerControl>
       <TimerControl
-        tooltip={isRunning ? 'Pause the timer' : 'Start the timer'}
+        tooltip={isRunning ? `Pause the timer` : `Start the timer`}
         onClick={() => {
           toggleIsRunning();
         }}
@@ -62,7 +62,7 @@ function TimerControl({ children, onClick, sx, tooltip }: TimerControlProps) {
 
   if (isValidElement(childrenWithColor)) {
     childrenWithColor = cloneElement(childrenWithColor, {
-      color: 'action',
+      color: `action`,
     } as unknown as HTMLDivElement);
   }
 

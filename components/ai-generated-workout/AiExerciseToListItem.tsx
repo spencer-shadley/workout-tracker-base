@@ -15,7 +15,9 @@ export default function AiExerciseToListItem({
   return aiExercise ?
     <ListItem key={Math.random()}>
       <ListItemAvatar>
-        <Avatar>{stepNumber++}</Avatar>
+        <Avatar>
+          {stepNumber++}
+        </Avatar>
       </ListItemAvatar>
       <ExerciseListItemContent {...aiExercise} />
     </ListItem>

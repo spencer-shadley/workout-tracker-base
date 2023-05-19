@@ -12,7 +12,7 @@ import {
 import { getRandomHint } from './hints/hints';
 
 export default function CreateWorkout() {
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>(``);
   const [currentHint, setCurrentHint] = useState<string>(getRandomHint());
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function CreateWorkout() {
     useSearchExercises(debouncedSearch);
 
   const searchedExerciseNameResults = useMemo(() => {
-    return responseToArray(rawSearchedExerciseNameResults ?? '') ?? [];
+    return responseToArray(rawSearchedExerciseNameResults ?? ``) ?? [];
   }, [rawSearchedExerciseNameResults]);
 
   const createWorkoutContext: CreateWorkoutType = useMemo(() => {

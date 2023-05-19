@@ -23,8 +23,8 @@ export default function useVideo() {
 
     const opts: youtubeSearch.YouTubeSearchOptions = {
       maxResults: 1,
-      key: 'AIzaSyBKLpjDurJWREpz9oQu_FWh-nwrNoKDkzA',
-      type: 'video',
+      key: `AIzaSyBKLpjDurJWREpz9oQu_FWh-nwrNoKDkzA`,
+      type: `video`,
     };
 
     youtubeSearch(`how to do ${exerciseName}`, opts, (err, results) => {

@@ -19,18 +19,18 @@ export function ConfettiParticles() {
         },
         particles: {
           color: {
-            value: ['#1E00FF', '#FF0061', '#E1FF00', '#00FF9E'],
+            value: [`#1E00FF`, `#FF0061`, `#E1FF00`, `#00FF9E`],
           },
           move: {
             decay: 0.05,
-            direction: 'top',
+            direction: `top`,
             enable: true,
             gravity: {
               enable: true,
             },
             outModes: {
-              top: 'none',
-              default: 'destroy',
+              top: `none`,
+              default: `destroy`,
             },
             speed: {
               min: 50,
@@ -48,14 +48,14 @@ export function ConfettiParticles() {
               min: 0,
               max: 360,
             },
-            direction: 'random',
+            direction: `random`,
             animation: {
               enable: true,
               speed: 30,
             },
           },
           tilt: {
-            direction: 'random',
+            direction: `random`,
             enable: true,
             value: {
               min: 0,
@@ -70,7 +70,7 @@ export function ConfettiParticles() {
             value: 3,
             animation: {
               enable: true,
-              startValue: 'min',
+              startValue: `min`,
               count: 1,
               speed: 16,
               sync: true,
@@ -100,7 +100,7 @@ export function ConfettiParticles() {
             },
           },
           shape: {
-            type: ['circle', 'square'],
+            type: [`circle`, `square`],
             options: {},
           },
         },

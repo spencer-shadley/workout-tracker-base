@@ -25,12 +25,17 @@ export function MuscleGroupDialog({
 
   return (
     <Dialog {...dialogProps}>
-      <DialogTitle>About {muscleGroup}</DialogTitle>
+      <DialogTitle>
+        About
+        {muscleGroup}
+      </DialogTitle>
       <DialogContent>
         {isLoading ?
-          <Skeleton sx={{ fontSize: 40, width: '100%' }} />
+          <Skeleton sx={{ fontSize: 40, width: `100%` }} />
           :
-          <Typography>{aboutExercise}</Typography>
+          <Typography>
+            {aboutExercise}
+          </Typography>
         }
       </DialogContent>
       <DialogActions>

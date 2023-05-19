@@ -11,17 +11,21 @@ export function AdvancedHintsExpand() {
     <Accordion className="align-bottom">
       <AccordionSummary
         sx={{
-          padding: '0px 0px',
+          padding: `0px 0px`,
           margin: 0,
         }}
       >
-        <Typography>Advanced Hints</Typography>
+        <Typography>
+          Advanced Hints
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <List sx={{ overflow: 'auto', maxHeight: '100%' }}>
+        <List sx={{ overflow: `auto`, maxHeight: `100%` }}>
           {advancedHints.map((hint) =>
             <ListItem key={hint}>
-              <ListItemText>{hint}</ListItemText>
+              <ListItemText>
+                {hint}
+              </ListItemText>
             </ListItem>
           )}
         </List>

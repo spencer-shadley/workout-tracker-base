@@ -20,8 +20,10 @@ export default function AiWorkoutList({
 }: AiWorkoutListProps) {
   if (!rawAiResponse)
     return (
-      <div style={{ margin: '5' }}>
-        <Typography>Creating a workout just for you...</Typography>
+      <div style={{ margin: `5` }}>
+        <Typography>
+          Creating a workout just for you...
+        </Typography>
         <LinearProgress />
       </div>
     );
@@ -31,7 +33,7 @@ export default function AiWorkoutList({
     return (
       <>
         <Typography variant="h2">
-          {aiPrompt.slice(0, aiPrompt.indexOf('.'))}
+          {aiPrompt.slice(0, aiPrompt.indexOf(`.`))}
         </Typography>
         <List>
           {exercises.map((exercise, index) =>
@@ -44,20 +46,26 @@ export default function AiWorkoutList({
         </List>
         <Accordion>
           <AccordionSummary>
-            <Typography>See full details</Typography>
+            <Typography>
+              See full details
+            </Typography>
           </AccordionSummary>
-          <AccordionDetails>{JSON.stringify(rawAiResponse)}</AccordionDetails>
+          <AccordionDetails>
+            {JSON.stringify(rawAiResponse)}
+          </AccordionDetails>
         </Accordion>
       </>
     );
   } catch (e) {
-    console.error('failed to parse ai response', e);
+    console.error(`failed to parse ai response`, e);
     return (
       <>
         <Typography>
           Failed to make a workout, please try a different prompt or try again.
         </Typography>
-        <Button onClick={() => retry()}>Retry</Button>
+        <Button onClick={() => retry()}>
+          Retry
+        </Button>
       </>
     );
   }

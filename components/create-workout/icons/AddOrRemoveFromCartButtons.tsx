@@ -11,26 +11,26 @@ import { CircleListItemButton } from './CircleListItemButton';
 
 export function AddOrRemoveFromCartButtons() {
   const { exerciseName } = useExerciseContext();
-  const exerciseNameOrSkeletonName = exerciseName ?? 'loading...';
+  const exerciseNameOrSkeletonName = exerciseName ?? `loading...`;
 
   const removeExercise = useRemoveExerciseName(exerciseNameOrSkeletonName);
   const addExerciseName = useAddExerciseName(exerciseNameOrSkeletonName);
   const [exerciseNames] = useSelectedExercises();
 
   const numberInCart = exerciseNames.filter(
-    (name) => isMatch(name, exerciseName ?? '')
+    (name) => isMatch(name, exerciseName ?? ``)
   ).length;
 
   const isExerciseAdded = numberInCart > 0;
 
   const removeTooltip = `Remove ${exerciseName} from workout`;
   const removeAllTooltip = `Remove all ${exerciseName}${
-    exerciseNameOrSkeletonName.endsWith('s') ? '' : 's'
+    exerciseNameOrSkeletonName.endsWith(`s`) ? `` : `s`
   } from workout`;
   const removeExerciseTooltip =
     numberInCart > 1 ? removeAllTooltip : removeTooltip;
   const addTooltip = `Add ${
-    isExerciseAdded ? 'another' : ''
+    isExerciseAdded ? `another` : ``
   } ${exerciseName} to workout`;
 
   return (
@@ -38,7 +38,7 @@ export function AddOrRemoveFromCartButtons() {
       <CircleListItemButton
         tooltipTitle={addTooltip}
         badgeContent={numberInCart}
-        badgeSx={{ marginRight: '10px' }}
+        badgeSx={{ marginRight: `10px` }}
         icon={<AddIcon />}
         onClick={addExerciseName}
       />

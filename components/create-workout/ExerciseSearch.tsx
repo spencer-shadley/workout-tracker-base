@@ -15,10 +15,10 @@ export function ExerciseSearch() {
         <TextField
           InputProps={{
             endAdornment:
-              <InputAdornment position="end">
-                <GenerateWithAiButton />
-                <ExerciseCartButton />
-              </InputAdornment>
+  <InputAdornment position="end">
+    <GenerateWithAiButton />
+    <ExerciseCartButton />
+  </InputAdornment>
             ,
           }}
           maxRows={3}
@@ -33,7 +33,7 @@ export function ExerciseSearch() {
           }}
           aria-describedby="create-workout-hint-text"
           inputProps={{
-            'aria-label': 'hint',
+            'aria-label': `hint`,
           }}
         />
       </FormControl>

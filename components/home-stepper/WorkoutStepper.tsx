@@ -16,8 +16,8 @@ const ColorlibConnector = styled(StepConnector)(() => ({
     height: 2,
     border: 0,
     opacity: 0.1,
-    margin: '0 25px',
-    backgroundColor: 'white',
+    margin: `0 25px`,
+    backgroundColor: `white`,
     borderRadius: 1,
   },
 }));

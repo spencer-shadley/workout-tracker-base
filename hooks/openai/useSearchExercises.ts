@@ -1,7 +1,7 @@
 import { useOpenAi } from './useOpenAi';
 
 export function responseToArray(response: string): string[] {
-  return response.split(',').map((s) => s.trim());
+  return response.split(`,`).map((s) => s.trim());
 }
 
 export function useSearchExercises(search: string) {

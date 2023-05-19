@@ -17,7 +17,7 @@ export default function ActiveWorkout() {
 
   return (
     <>
-      {exerciseType === 'exercise' || !isRunning ?
+      {exerciseType === `exercise` || !isRunning ?
         <Background />
         :
         <Fireworks />
@@ -25,7 +25,8 @@ export default function ActiveWorkout() {
       <TimeProvider timeContext={timeContext}>
         <div className="flex flex-col h-[100dvh] overflow-hidden">
           <Typography className="text-gray-100">
-            Time left in workout{' '}
+            Time left in workout
+            {` `}
             {secondsToHumanReadable(remainingWorkoutTimeInSeconds)}
           </Typography>
           <RoundsStepper />

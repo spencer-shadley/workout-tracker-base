@@ -6,7 +6,9 @@ interface TitleButtonProps extends ButtonProps {
 export function TitleButton({ buttonText, ...buttonProps }: TitleButtonProps) {
   return (
     <Button variant="outlined" {...buttonProps}>
-      <Typography variant="h2">{buttonText}</Typography>
+      <Typography variant="h2">
+        {buttonText}
+      </Typography>
     </Button>
   );
 }

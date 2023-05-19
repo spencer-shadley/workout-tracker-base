@@ -15,7 +15,9 @@ export function SummaryDialogContentListItem({
     <ExerciseProvider exerciseName={exerciseName} activityType='exercise'>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>{exerciseNumber}</Avatar>
+          <Avatar>
+            {exerciseNumber}
+          </Avatar>
         </ListItemAvatar>
         <SummaryDialogContentListItemContent />
       </ListItem>

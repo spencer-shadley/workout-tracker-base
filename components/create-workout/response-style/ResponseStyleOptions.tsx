@@ -26,10 +26,12 @@ export function ResponseStyleOption() {
       <FormControl
         fullWidth
         sx={{
-          marginTop: '10px',
+          marginTop: `10px`,
         }}
       >
-        <InputLabel id="response-style-select">Answer Style</InputLabel>
+        <InputLabel id="response-style-select">
+          Answer Style
+        </InputLabel>
         <Select
           native
           labelId="response-style-select-label"
@@ -52,7 +54,7 @@ export function ResponseStyleOption() {
       <Snackbar
         open={isSuccessAlertOpen}
         onClose={() => setIsSuccessAlertOpen(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: `bottom`, horizontal: `center` }}
         message="Successfully updated your style preference"
         autoHideDuration={2000}
         TransitionComponent={Grow}

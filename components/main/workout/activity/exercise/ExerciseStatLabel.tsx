@@ -16,10 +16,10 @@ export default function ExerciseStatLabel({
   return data ?
     <span
       style={{
-        whiteSpace: 'nowrap',
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
+        whiteSpace: `nowrap`,
+        display: `flex`,
+        flexWrap: `wrap`,
+        alignItems: `center`,
       }}
     >
       {beforeText &&
@@ -27,14 +27,12 @@ export default function ExerciseStatLabel({
           {beforeText}
         </Typography>
       }
-
       <Chip
         label={data}
-        style={{ margin: '.5em' }}
+        style={{ margin: `.5em` }}
         size="small"
         sx={{ padding: 0 }}
       />
-
       {afterText &&
         <Typography color="text.secondary" {...otherProps}>
           {afterText}

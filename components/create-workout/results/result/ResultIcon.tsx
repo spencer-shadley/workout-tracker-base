@@ -10,10 +10,12 @@ export function ResultIcon({ icon, tooltip, onClick }: ResultIconProps) {
   return (
     <Tooltip title={tooltip} key={tooltip}>
       <ListItemButton
-        sx={{ padding: '5px 5px', borderRadius: '100px' }}
+        sx={{ padding: `5px 5px`, borderRadius: `100px` }}
         onClick={onClick}
       >
-        <ListItemIcon sx={{ minWidth: '0px' }}>{icon}</ListItemIcon>
+        <ListItemIcon sx={{ minWidth: `0px` }}>
+          {icon}
+        </ListItemIcon>
       </ListItemButton>
     </Tooltip>
   );

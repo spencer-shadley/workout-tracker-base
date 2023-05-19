@@ -7,7 +7,7 @@ export function ResultCard() {
   const { exerciseName } = useExerciseContext();
 
   return (
-    <Card key={exerciseName} sx={{ marginBottom: '10px' }}>
+    <Card key={exerciseName} sx={{ marginBottom: `10px` }}>
       <Result/>
     </Card>
   );

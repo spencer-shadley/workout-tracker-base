@@ -16,10 +16,12 @@ export function BackgroundOptions() {
     <FormControl
       fullWidth
       sx={{
-        marginTop: '10px',
+        marginTop: `10px`,
       }}
     >
-      <InputLabel id="background-select">Background style</InputLabel>
+      <InputLabel id="background-select">
+        Background style
+      </InputLabel>
       <Select
         labelId="background-select-label"
         id="background-select"
@@ -48,11 +50,21 @@ export function BackgroundOptions() {
           }
         }}
       >
-        <MenuItem value={particles}>{particles}</MenuItem>
-        <MenuItem value={colors}>{colors}</MenuItem>
-        <MenuItem value={bounce}>{bounce}</MenuItem>
-        <MenuItem value={seaAnemone}>{seaAnemone}</MenuItem>
-        <MenuItem value={light}>{light}</MenuItem>
+        <MenuItem value={particles}>
+          {particles}
+        </MenuItem>
+        <MenuItem value={colors}>
+          {colors}
+        </MenuItem>
+        <MenuItem value={bounce}>
+          {bounce}
+        </MenuItem>
+        <MenuItem value={seaAnemone}>
+          {seaAnemone}
+        </MenuItem>
+        <MenuItem value={light}>
+          {light}
+        </MenuItem>
       </Select>
     </FormControl>
   );

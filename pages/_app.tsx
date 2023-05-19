@@ -34,12 +34,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Hydrate>
     </QueryClientProvider>
     :
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: `flex` }}>
       <CircularProgress
         sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
+          position: `absolute`,
+          top: `50%`,
+          left: `50%`,
         }}
       />
     </Box>

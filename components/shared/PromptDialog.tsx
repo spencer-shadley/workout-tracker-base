@@ -26,9 +26,17 @@ export function PromptDialog({ isOpen, close, prompt, title }: PromptDialogProps
 
   return (
     <Dialog open={isOpen} onClose={close}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>{data}</DialogContent>
-      <DialogActions><Button onClick={close}>close</Button></DialogActions>
+      <DialogTitle>
+        {title}
+      </DialogTitle>
+      <DialogContent>
+        {data}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={close}>
+          close
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 }

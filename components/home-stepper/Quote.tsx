@@ -33,7 +33,7 @@ export function Quote({ prompt }: QuoteProps) {
             variant="circular"
             width={20}
             height={20}
-            sx={{ marginLeft: '5px' }}
+            sx={{ marginLeft: `5px` }}
           />
           :
           <IconButton
@@ -43,7 +43,7 @@ export function Quote({ prompt }: QuoteProps) {
             }}
           >
             <Tooltip title="Get a new answer">
-              <RefreshIcon sx={{ color: 'white' }} />
+              <RefreshIcon sx={{ color: `white` }} />
             </Tooltip>
           </IconButton>
         }

@@ -18,7 +18,7 @@ export default function ActivityListItem() {
     >
       <ListItem
         key={`${exerciseName}-${activityType}`}
-        className={isComplete ? '' : 'opacity-25'}
+        className={isComplete ? `` : `opacity-25`}
       >
         <ActivityCard />
       </ListItem>

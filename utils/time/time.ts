@@ -34,7 +34,7 @@ export function createTimeBuckets() {
   for (let round = 0; round < numberOfRounds; round++) {
     const prepTimeSlot: TimeSlot = {
       containerExercise: undefined,
-      activityType: 'prep',
+      activityType: `prep`,
       endTimeInSeconds: passedTimeInSeconds + prepTimeInSeconds,
       containerRound: round,
       startTimeInSeconds: passedTimeInSeconds,
@@ -48,7 +48,7 @@ export function createTimeBuckets() {
     for (const observedExercise of exercises) {
       const exerciseTimeSlot: TimeSlot = {
         containerExercise: observedExercise,
-        activityType: 'exercise',
+        activityType: `exercise`,
         endTimeInSeconds: passedTimeInSeconds + exerciseDurationInSeconds,
         startTimeInSeconds: passedTimeInSeconds,
         remainingTimeInSeconds: exerciseDurationInSeconds,
@@ -61,7 +61,7 @@ export function createTimeBuckets() {
 
       const exerciseRestTimeSlot: TimeSlot = {
         containerExercise: observedExercise,
-        activityType: 'rest-exercise',
+        activityType: `rest-exercise`,
         endTimeInSeconds: passedTimeInSeconds + restBetweenExercisesInSeconds,
         startTimeInSeconds: passedTimeInSeconds,
         remainingTimeInSeconds: restBetweenExercisesInSeconds,
@@ -75,7 +75,7 @@ export function createTimeBuckets() {
 
     const roundRestTimeSlot: TimeSlot = {
       containerExercise: undefined,
-      activityType: 'rest-round',
+      activityType: `rest-round`,
       endTimeInSeconds: passedTimeInSeconds + restBetweenRoundsInSeconds,
       startTimeInSeconds: passedTimeInSeconds,
       remainingTimeInSeconds: restBetweenRoundsInSeconds,

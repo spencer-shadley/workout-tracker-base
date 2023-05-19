@@ -9,32 +9,38 @@ export default function ExerciseListItemContent({
 }: AIExercise) {
   return (
     <article>
-      <span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+      <span style={{ display: `flex`, alignItems: `center`, width: `100%` }}>
         <Typography variant="h5" flexGrow={1}>
           {title}
         </Typography>
         <span
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
+            display: `flex`,
+            alignItems: `center`,
+            justifyContent: `flex-end`,
           }}
         >
           <Chip label={numberOfSets} />
-          <Typography>Sets</Typography>
+          <Typography>
+            Sets
+          </Typography>
         </span>
         <span
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
+            display: `flex`,
+            alignItems: `center`,
+            justifyContent: `flex-end`,
           }}
         >
           <Chip label={numberOfReps} />
-          <Typography>Reps</Typography>
+          <Typography>
+            Reps
+          </Typography>
         </span>
       </span>
-      <Typography>{description}</Typography>
+      <Typography>
+        {description}
+      </Typography>
     </article>
   );
 }

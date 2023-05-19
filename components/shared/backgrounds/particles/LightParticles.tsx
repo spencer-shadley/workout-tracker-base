@@ -7,19 +7,19 @@ export default function LightParticles() {
         autoPlay: true,
         background: {
           color: {
-            value: '#17163e',
+            value: `#17163e`,
           },
-          image: '',
-          position: '',
-          repeat: '',
-          size: '',
+          image: ``,
+          position: ``,
+          repeat: ``,
+          size: ``,
           opacity: 0,
         },
         backgroundMask: {
-          composite: 'destination-out',
+          composite: `destination-out`,
           cover: {
             color: {
-              value: '#fff',
+              value: `#fff`,
             },
             opacity: 1,
           },
@@ -35,7 +35,7 @@ export default function LightParticles() {
         duration: 0,
         fpsLimit: 120,
         interactivity: {
-          detectsOn: 'window',
+          detectsOn: `window`,
           events: {
             onClick: {
               enable: false,
@@ -45,11 +45,11 @@ export default function LightParticles() {
               selectors: [],
               enable: false,
               mode: [],
-              type: 'circle',
+              type: `circle`,
             },
             onHover: {
               enable: true,
-              mode: 'light',
+              mode: `light`,
               parallax: {
                 enable: false,
                 force: 2,
@@ -65,7 +65,7 @@ export default function LightParticles() {
             attract: {
               distance: 200,
               duration: 0.4,
-              easing: 'ease-out-quad',
+              easing: `ease-out-quad`,
               factor: 1,
               maxSpeed: 50,
               speed: 1,
@@ -113,14 +113,14 @@ export default function LightParticles() {
               factor: 100,
               speed: 1,
               maxSpeed: 50,
-              easing: 'ease-out-quad',
+              easing: `ease-out-quad`,
               divs: {
                 distance: 200,
                 duration: 0.4,
                 factor: 100,
                 speed: 1,
                 maxSpeed: 50,
-                easing: 'ease-out-quad',
+                easing: `ease-out-quad`,
                 selectors: [],
               },
             },
@@ -137,17 +137,17 @@ export default function LightParticles() {
               area: {
                 gradient: {
                   start: {
-                    value: '3b5e98',
+                    value: `3b5e98`,
                   },
                   stop: {
-                    value: '#17163e',
+                    value: `#17163e`,
                   },
                 },
                 radius: 1000,
               },
               shadow: {
                 color: {
-                  value: '#17163e',
+                  value: `#17163e`,
                 },
                 length: 2000,
               },
@@ -193,14 +193,14 @@ export default function LightParticles() {
               },
             },
             enable: false,
-            mode: 'bounce',
+            mode: `bounce`,
             overlap: {
               enable: true,
               retries: 0,
             },
           },
           color: {
-            value: '#ff0000',
+            value: `#ff0000`,
             animation: {
               h: {
                 count: 0,
@@ -282,7 +282,7 @@ export default function LightParticles() {
             },
             decay: 0,
             distance: {},
-            direction: 'none',
+            direction: `none`,
             drift: 0,
             enable: true,
             gravity: {
@@ -304,11 +304,11 @@ export default function LightParticles() {
               options: {},
             },
             outModes: {
-              default: 'out',
-              bottom: 'out',
-              left: 'out',
-              right: 'out',
-              top: 'out',
+              default: `out`,
+              bottom: `out`,
+              left: `out`,
+              right: `out`,
+              top: `out`,
             },
             random: false,
             size: false,
@@ -347,15 +347,15 @@ export default function LightParticles() {
               speed: 2,
               decay: 0,
               sync: false,
-              destroy: 'none',
-              startValue: 'random',
+              destroy: `none`,
+              startValue: `random`,
             },
           },
           reduceDuplicates: false,
           shadow: {
             blur: 0,
             color: {
-              value: '#000',
+              value: `#000`,
             },
             enable: false,
             offset: {
@@ -365,7 +365,7 @@ export default function LightParticles() {
           },
           shape: {
             options: {},
-            type: ['circle', 'square'],
+            type: [`circle`, `square`],
           },
           size: {
             random: {
@@ -382,8 +382,8 @@ export default function LightParticles() {
               speed: 5,
               decay: 0,
               sync: false,
-              destroy: 'none',
-              startValue: 'random',
+              destroy: `none`,
+              startValue: `random`,
             },
           },
           stroke: {
@@ -430,12 +430,12 @@ export default function LightParticles() {
               decay: 0,
               sync: false,
             },
-            direction: 'clockwise',
+            direction: `clockwise`,
             path: false,
           },
           destroy: {
             bounds: {},
-            mode: 'none',
+            mode: `none`,
             split: {
               count: 1,
               factor: {
@@ -469,7 +469,7 @@ export default function LightParticles() {
               enable: false,
               value: 0,
             },
-            mode: 'vertical',
+            mode: `vertical`,
             speed: 25,
           },
           tilt: {
@@ -484,7 +484,7 @@ export default function LightParticles() {
               decay: 0,
               sync: false,
             },
-            direction: 'clockwise',
+            direction: `clockwise`,
             enable: false,
           },
           twinkle: {
@@ -529,7 +529,7 @@ export default function LightParticles() {
           links: {
             blink: false,
             color: {
-              value: '#ffffff',
+              value: `#ffffff`,
             },
             consent: false,
             distance: 100,
@@ -539,7 +539,7 @@ export default function LightParticles() {
             shadow: {
               blur: 5,
               color: {
-                value: '#000',
+                value: `#000`,
               },
               enable: false,
             },

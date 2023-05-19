@@ -6,20 +6,20 @@ export function BounceParticles() {
       options={{
         fps_limit: 120,
         interactivity: {
-          detect_on: 'canvas',
+          detect_on: `canvas`,
           events: {
             onDiv: [
               {
                 enable: true,
-                selectors: '.bounce.rectangle',
-                mode: 'bounce',
-                type: 'rectangle',
+                selectors: `.bounce.rectangle`,
+                mode: `bounce`,
+                type: `rectangle`,
               },
               {
                 enable: true,
-                selectors: '.bounce.circle',
-                mode: 'bounce',
-                type: 'circle',
+                selectors: `.bounce.circle`,
+                mode: `bounce`,
+                type: `circle`,
               },
             ],
             resize: true,
@@ -30,7 +30,7 @@ export function BounceParticles() {
               duration: 2,
               opacity: 0.8,
               size: 6,
-              color: '#000000',
+              color: `#000000`,
             },
             grab: {
               distance: 400,
@@ -52,7 +52,7 @@ export function BounceParticles() {
         },
         particles: {
           color: {
-            value: '#ffffff',
+            value: `#ffffff`,
           },
           move: {
             attract: {
@@ -64,12 +64,12 @@ export function BounceParticles() {
               enable: true,
             },
             bounce: false,
-            direction: 'left',
+            direction: `left`,
             enable: true,
             outModes: {
-              default: 'bounce',
-              top: 'destroy',
-              bottom: 'destroy',
+              default: `bounce`,
+              top: `destroy`,
+              bottom: `destroy`,
             },
             random: false,
             speed: 2,
@@ -93,10 +93,10 @@ export function BounceParticles() {
             value: 0.75,
           },
           shape: {
-            type: 'image',
+            type: `image`,
             image: [
               {
-                src: 'https://freepngimg.com/save/138210-vector-dumbbells-fitness-free-hd-image/512x512',
+                src: `https://freepngimg.com/save/138210-vector-dumbbells-fitness-free-hd-image/512x512`,
                 width: 202,
                 height: 200,
               },
@@ -116,20 +116,20 @@ export function BounceParticles() {
         polygon: {
           draw: {
             enable: false,
-            lineColor: '#ffffff',
+            lineColor: `#ffffff`,
             lineWidth: 0.5,
           },
           move: {
             radius: 10,
           },
           scale: 1,
-          type: 'none',
-          url: '',
+          type: `none`,
+          url: ``,
         },
         retina_detect: true,
         emitters: [
           {
-            direction: 'left',
+            direction: `left`,
             position: {
               x: 50,
               y: 0,

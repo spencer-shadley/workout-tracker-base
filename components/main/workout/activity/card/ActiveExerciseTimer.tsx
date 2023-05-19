@@ -10,18 +10,18 @@ export function ActiveExerciseTimer() {
     <Grow
       in={isRunning}
       style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        position: `fixed`,
+        top: `50%`,
+        left: `50%`,
+        transform: `translate(-50%, -50%)`,
         zIndex: 1,
       }}
     >
       <Typography
         variant="h1"
-        fontSize={remainingTimeInSeconds > 99 ? '50dvw' : '90dvw'}
+        fontSize={remainingTimeInSeconds > 99 ? `50dvw` : `90dvw`}
         sx={{
-          textShadow: '0px 0px 10px rgba(255,255,255,255.5)',
+          textShadow: `0px 0px 10px rgba(255,255,255,255.5)`,
         }}
       >
         {remainingTimeInSeconds}

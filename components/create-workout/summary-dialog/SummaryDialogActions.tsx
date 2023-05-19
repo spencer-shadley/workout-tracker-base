@@ -7,9 +7,13 @@ export function SummaryDialogActions() {
 
   return (
     <DialogActions>
-      <Button onClick={close}>Close</Button>
+      <Button onClick={close}>
+        Close
+      </Button>
       <Link href="/ActiveWorkoutPage">
-        <Button>Start Workout</Button>
+        <Button>
+          Start Workout
+        </Button>
       </Link>
     </DialogActions>
   );

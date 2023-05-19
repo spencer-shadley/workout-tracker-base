@@ -24,7 +24,7 @@ export default function DuplicateExerciseWarning({
           setShowDuplicateExerciseWarning(false);
         }}
         severity="warning"
-        sx={{ width: '100%' }}
+        sx={{ width: `100%` }}
       >
         Exercise already exists
       </Alert>

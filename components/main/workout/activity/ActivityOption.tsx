@@ -21,12 +21,14 @@ export default function ActivityOption({
         }}
       >
         <ActivityCard
-          sx={{ margin: '10px' }}
+          sx={{ margin: `10px` }}
           onClick={() => handleClick(exerciseName)}
         />
       </ActivityCardProvider>
     </ExerciseProvider>
     :
-    <Typography>could not be found</Typography>
+    <Typography>
+      could not be found
+    </Typography>
   ;
 }

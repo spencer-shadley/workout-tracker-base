@@ -1,1 +1,1 @@
-export type ExerciseColumnTypes = 'Exercises' | 'Workout';
+export type ExerciseColumnTypes = `Exercises` | `Workout`;

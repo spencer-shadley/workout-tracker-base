@@ -19,7 +19,7 @@ export default function useMuscleGroups(props: useOpenAiProps) {
   useEffect(() => {
     if (muscleGroupsRaw) {
       const muscleGroups = muscleGroupsRaw
-        .split(',')
+        .split(`,`)
         .map((muscleGroup) => muscleGroup.trim());
       setMuscleGroups(muscleGroups);
     }

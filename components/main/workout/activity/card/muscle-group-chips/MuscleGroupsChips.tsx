@@ -12,7 +12,7 @@ export function MuscleGroupsChips() {
   const { exerciseName } = useExerciseContext();
   const { searchInput } = useCreateWorkoutContext();
   const { isSearching } = searchInput;
-  const { muscleGroups, isFetching: isLoading, refetch } = useMuscleGroups({ prompt: exerciseName ?? '', queryOptionOverrides: { enabled: false } });
+  const { muscleGroups, isFetching: isLoading, refetch } = useMuscleGroups({ prompt: exerciseName ?? ``, queryOptionOverrides: { enabled: false } });
 
   requestIdleCallback(() => {
     if (!muscleGroups) {

@@ -19,8 +19,12 @@ export function InfoDialog({ content, buttonText }: InfoDialogProps) {
         }}
       />
       <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-        <DialogTitle>TODO: Info Dialog</DialogTitle>
-        <DialogContent>{content}</DialogContent>
+        <DialogTitle>
+          TODO: Info Dialog
+        </DialogTitle>
+        <DialogContent>
+          {content}
+        </DialogContent>
       </Dialog>
     </>
   );

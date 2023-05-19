@@ -19,8 +19,10 @@ export function ExampleSearches(props: ListProps) {
     <List {...props}>
       {randomHints.map((hint, index) =>
         <div key={hint}>
-          <ListItem sx={{ display: 'flex' }} key={hint}>
-            <ListItemText sx={{ flexGrow: 1 }}>{hint}</ListItemText>
+          <ListItem sx={{ display: `flex` }} key={hint}>
+            <ListItemText sx={{ flexGrow: 1 }}>
+              {hint}
+            </ListItemText>
             <ButtonGroup size='small' color='info' orientation='vertical' variant='outlined' className='ml-1'>
               <Button
                 onClick={() => {
@@ -28,7 +30,7 @@ export function ExampleSearches(props: ListProps) {
                 }}
                 endIcon={<AutoFixHigh />}
               >
-              generate
+                generate
               </Button>
               <Button
                 onClick={() => {
@@ -36,7 +38,7 @@ export function ExampleSearches(props: ListProps) {
                 }}
                 endIcon={<Search />}
               >
-              Search
+                Search
               </Button>
             </ButtonGroup>
           </ListItem>

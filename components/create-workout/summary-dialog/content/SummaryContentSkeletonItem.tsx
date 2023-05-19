@@ -8,9 +8,9 @@ export function SummaryContentSkeletonItem() {
         width={30}
         height={30}
         sx={{
-          alignSelf: 'center',
+          alignSelf: `center`,
         }} />
-      <Skeleton variant="text" sx={{ fontSize: '5rem' }} className="grow" />
+      <Skeleton variant="text" sx={{ fontSize: `5rem` }} className="grow" />
     </Stack>
   );
 }

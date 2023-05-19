@@ -10,7 +10,7 @@ import { useSessionStorage } from 'usehooks-ts';
 
 import { tryParse } from './useLocalStorage';
 
-const selectedExercisesKey = 'selected-exercises';
+const selectedExercisesKey = `selected-exercises`;
 
 export function useSelectedExercises() {
   return useSessionStorage<string[]>(selectedExercisesKey, []);
@@ -38,11 +38,11 @@ export function useRemoveExerciseName(exerciseName: string) {
 }
 
 export function getExerciseNames(): string[] {
-  if (typeof window === 'undefined') {
+  if (typeof window === `undefined`) {
     return [];
   }
 
-  const rawExerciseNames = sessionStorage.getItem(selectedExercisesKey) ?? '';
+  const rawExerciseNames = sessionStorage.getItem(selectedExercisesKey) ?? ``;
   return tryParse<string[]>(rawExerciseNames, []);
 }
 

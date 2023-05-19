@@ -18,10 +18,12 @@ export function VideoButtons() {
     shouldShowVideo,
   } = useVideo();
 
-  return activityType === 'exercise' ?
+  return activityType === `exercise` ?
     <>
       {hasYoutubeQuotaExceeded ?
-        <Typography>YouTube Quota Exceeded</Typography>
+        <Typography>
+          YouTube Quota Exceeded
+        </Typography>
         :
         <Button
           onClick={() => {
@@ -29,14 +31,14 @@ export function VideoButtons() {
             setShouldShowVideo(!shouldShowVideo);
           }}
         >
-          {shouldShowVideo ? 'hide video' : 'show video'}
+          {shouldShowVideo ? `hide video` : `show video`}
         </Button>
       }
-
       <Link href={youtubeSearchUrl} target="_blank">
-        <Button onClick={() => pause()}>Search on YouTube</Button>
+        <Button onClick={() => pause()}>
+          Search on YouTube
+        </Button>
       </Link>
-
       {videoUrl && shouldShowVideo &&
         <ReactPlayer
           width="100%"

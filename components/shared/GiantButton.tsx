@@ -13,12 +13,12 @@ export default function GiantButton({
       variant="outlined"
       color="secondary"
       sx={{
-        borderRadius: '500px',
-        height: '150px',
-        borderColor: 'white',
-        color: 'white',
-        width: '100%',
-        maxWidth: '500px',
+        borderRadius: `500px`,
+        height: `150px`,
+        borderColor: `white`,
+        color: `white`,
+        width: `100%`,
+        maxWidth: `500px`,
       }}
     >
       {children}

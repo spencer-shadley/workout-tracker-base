@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 
-export type ActivityType = 'exercise' | 'rest-round' | 'rest-exercise' | 'prep';
+export type ActivityType = `exercise` | `rest-round` | `rest-exercise` | `prep`;
 
 export interface TimeSlot {
   remainingTimeInSeconds: number;
@@ -45,29 +45,29 @@ export const TimeContext = createContext<TimeContextType>({
     progressPercent: 0,
     isActive: false,
     containerRound: 0,
-    activityType: 'exercise',
+    activityType: `exercise`,
   },
   setCurrentBucket(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
   setCurrentRound(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
   reset(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
   toggleIsRunning(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
   skipCurrentActivity(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
   jumpToBucket(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
   workoutCompletionTime: null,
   pause(): void {
-    throw new Error('Function not implemented.');
+    throw new Error(`Function not implemented.`);
   },
 });
 
@@ -81,5 +81,7 @@ export const TimeProvider = ({
   timeContext,
   children,
 }: TimeContextProviderProps) =>
-  <TimeContext.Provider value={timeContext}>{children}</TimeContext.Provider>
+  <TimeContext.Provider value={timeContext}>
+    {children}
+  </TimeContext.Provider>
 ;

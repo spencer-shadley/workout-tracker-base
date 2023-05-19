@@ -6,7 +6,9 @@ import { SummaryDialogActions } from './SummaryDialogActions';
 export default function Summary() {
   return (
     <>
-      <DialogTitle>Workout Summary</DialogTitle>
+      <DialogTitle>
+        Workout Summary
+      </DialogTitle>
       <SummaryContent />
       <SummaryDialogActions />
     </>

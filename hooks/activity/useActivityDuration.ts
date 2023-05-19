@@ -11,14 +11,14 @@ export default function useActivityDurationInSeconds(
     restBetweenRoundsInSeconds,
   } = workoutOptions;
   switch (activityType) {
-  case 'exercise':
+  case `exercise`:
     return exerciseDurationInSeconds;
-  case 'rest-exercise':
+  case `rest-exercise`:
     return restBetweenExercisesInSeconds;
-  case 'rest-round':
+  case `rest-round`:
     return restBetweenRoundsInSeconds;
   default:
-    console.error('Invalid activity type');
+    console.error(`Invalid activity type`);
     return 0;
   }
 }

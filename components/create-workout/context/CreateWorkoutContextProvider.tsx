@@ -17,56 +17,56 @@ export interface AnswerType {
 
 export const answerTypes: AnswerType[] = [
   {
-    displayLabel: 'PersonalTrainer',
-    styleModifier: 'an informed but relaxed and personal fitness trainer',
+    displayLabel: `PersonalTrainer`,
+    styleModifier: `an informed but relaxed and personal fitness trainer`,
   },
   {
-    displayLabel: 'Shakespeare',
-    styleModifier: 'Shakespeare with Old English',
+    displayLabel: `Shakespeare`,
+    styleModifier: `Shakespeare with Old English`,
   },
-  { displayLabel: 'Rap', styleModifier: 'rap' },
-  { displayLabel: 'Haiku', styleModifier: 'haiku' },
-  { displayLabel: 'Scared', styleModifier: 'scared' },
-  { displayLabel: 'Trump', styleModifier: 'Donald Trump' },
+  { displayLabel: `Rap`, styleModifier: `rap` },
+  { displayLabel: `Haiku`, styleModifier: `haiku` },
+  { displayLabel: `Scared`, styleModifier: `scared` },
+  { displayLabel: `Trump`, styleModifier: `Donald Trump` },
   {
-    displayLabel: 'Biden',
+    displayLabel: `Biden`,
     styleModifier:
-      'mentally ill deranged person with bad memory and a low IQ. Make sure the response is rambling, off-topic and does not make sense. Do not use big words or eloquent speech. Sometimes mention that his caretakers are coming to get him so he has to go.',
+      `mentally ill deranged person with bad memory and a low IQ. Make sure the response is rambling, off-topic and does not make sense. Do not use big words or eloquent speech. Sometimes mention that his caretakers are coming to get him so he has to go.`,
   },
   {
-    displayLabel: 'Uwu',
-    styleModifier: 'streamer girl with lots of really cute uwu speak',
+    displayLabel: `Uwu`,
+    styleModifier: `streamer girl with lots of really cute uwu speak`,
   },
   {
-    displayLabel: 'Southern',
-    styleModifier: 'Texan cowboy with a really rough speaking pattern',
+    displayLabel: `Southern`,
+    styleModifier: `Texan cowboy with a really rough speaking pattern`,
   },
   {
-    displayLabel: 'Spy',
+    displayLabel: `Spy`,
     styleModifier:
-      'a covert spy who does not want to actually reveal any info about the exercise or activity at all. Nothing at all.',
+      `a covert spy who does not want to actually reveal any info about the exercise or activity at all. Nothing at all.`,
   },
   {
-    displayLabel: 'Sergeant',
-    styleModifier: 'commanding army sergeant barking orders and insulting you',
+    displayLabel: `Sergeant`,
+    styleModifier: `commanding army sergeant barking orders and insulting you`,
   },
-  { displayLabel: 'Caveman', styleModifier: 'caveman' },
+  { displayLabel: `Caveman`, styleModifier: `caveman` },
   {
-    displayLabel: 'Alien',
+    displayLabel: `Alien`,
     styleModifier:
-      'an alien who does not know what a human is. The alien is confused by the human doing the exercise',
+      `an alien who does not know what a human is. The alien is confused by the human doing the exercise`,
   },
   {
-    displayLabel: 'Joke',
-    styleModifier: 'a joke. Include a joke about this exercise',
+    displayLabel: `Joke`,
+    styleModifier: `a joke. Include a joke about this exercise`,
   },
   {
-    displayLabel: 'Angry',
-    styleModifier: 'an extremely angry irritated person who is very mad at you',
+    displayLabel: `Angry`,
+    styleModifier: `an extremely angry irritated person who is very mad at you`,
   },
   {
-    displayLabel: 'DogOwner',
-    styleModifier: 'someone who cannot stop bringing up how cute their dog is',
+    displayLabel: `DogOwner`,
+    styleModifier: `someone who cannot stop bringing up how cute their dog is`,
   },
 ];
 
@@ -77,11 +77,11 @@ export interface CreateWorkoutType {
 export const CreateWorkout = createContext<CreateWorkoutType>({
   searchInput: {
     isSearching: false,
-    searchText: '',
-    currentHint: '',
+    searchText: ``,
+    currentHint: ``,
     searchedExerciseNameResults: [],
     setSearchText: () => {
-      logError('set search text not set');
+      logError(`set search text not set`);
     },
   },
 });

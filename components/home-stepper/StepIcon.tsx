@@ -4,26 +4,26 @@ import InfoIcon from '@mui/icons-material/Info';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { IconButton, StepIconProps } from '@mui/material';
 
-const StepIconRoot = styled('div')<{
+const StepIconRoot = styled(`div`)<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ ownerState }) => ({
-  backgroundColor: '#fff',
+  backgroundColor: `#fff`,
   opacity: 0.25,
-  transition: 'opacity .5s ease-in-out',
+  transition: `opacity .5s ease-in-out`,
   zIndex: 1,
-  color: '#fff',
+  color: `#fff`,
   width: 50,
   height: 50,
-  display: 'flex',
-  borderRadius: '50%',
-  justifyContent: 'center',
-  alignItems: 'center',
+  display: `flex`,
+  borderRadius: `50%`,
+  justifyContent: `center`,
+  alignItems: `center`,
   ...ownerState.active && {
     opacity: 0.75,
-    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+    boxShadow: `0 4px 10px 0 rgba(0,0,0,.25)`,
   },
   ...ownerState.completed && {
-    backgroundColor: 'gray',
+    backgroundColor: `gray`,
   },
 }));
 
@@ -41,7 +41,9 @@ export default function StepIcon({
 
   return (
     <StepIconRoot ownerState={{ completed, active }} className={className}>
-      <IconButton>{icons[String(icon)]}</IconButton>
+      <IconButton>
+        {icons[String(icon)]}
+      </IconButton>
     </StepIconRoot>
   );
 }

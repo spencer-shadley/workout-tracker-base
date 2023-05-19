@@ -16,7 +16,7 @@ export function ActivityCardCloseButton() {
         removeExercise(exerciseName);
       }}
     >
-      <CloseIcon style={{ alignSelf: 'center', justifySelf: 'flex-end' }} />
+      <CloseIcon style={{ alignSelf: `center`, justifySelf: `flex-end` }} />
     </IconButton>
     : null;
 }

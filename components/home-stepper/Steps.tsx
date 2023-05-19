@@ -15,13 +15,13 @@ export default function Steps() {
   };
 
   return (
-    <Box sx={{ height: '100dvh', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ height: `100dvh`, display: `flex`, flexDirection: `column` }}>
       <SwipeableViews
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
         style={{ flexGrow: 1 }}
-        containerStyle={{ height: '100%' }}
+        containerStyle={{ height: `100%` }}
       >
         {stepInfos.map((step, index) =>
           <StepContent

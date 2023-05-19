@@ -18,7 +18,9 @@ export function ResultListItemText() {
         sx={{
         }}
         className="flex-grow w-full"
-        primary={<Typography variant='overline'>{isSearching ? '' : exerciseName}</Typography>}
+        primary={<Typography variant='overline'>
+          {isSearching ? `` : exerciseName}
+        </Typography>}
       />
 
   );

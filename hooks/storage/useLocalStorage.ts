@@ -3,17 +3,17 @@ import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
 import { logError } from '@/utils/logger';
 import { useLocalStorage } from 'usehooks-ts';
 
-const aiStyleKey = 'ai-style';
-const optionsKey = 'options';
-const backgroundKey = 'background';
-const tutorialKey = 'tutorial';
+const aiStyleKey = `ai-style`;
+const optionsKey = `options`;
+const backgroundKey = `background`;
+const tutorialKey = `tutorial`;
 
 export function useAiStyle() {
-  return useLocalStorage(aiStyleKey, 'Personal Trainer');
+  return useLocalStorage(aiStyleKey, `Personal Trainer`);
 }
 
 export function getAiStyle(): string {
-  return getItem<string>(aiStyleKey, 'Personal Trainer');
+  return getItem<string>(aiStyleKey, `Personal Trainer`);
 }
 
 export function useBackgroundPreference() {
@@ -45,11 +45,11 @@ export function tryParse<T>(jsonString: string, defaultValue: T): T {
 }
 
 function getItem<T>(key: string, defaultValue: T): T {
-  if (typeof window === 'undefined') {
+  if (typeof window === `undefined`) {
     return defaultValue;
   }
 
-  const rawData = localStorage.getItem(key) ?? '';
+  const rawData = localStorage.getItem(key) ?? ``;
   return tryParse<T>(rawData, defaultValue);
 }
 

@@ -4,10 +4,10 @@ export default function SeaAnemoneParticles() {
   return (
     <ParticlesWrapper
       options={{
-        name: 'Sea Anemone',
+        name: `Sea Anemone`,
         particles: {
           color: {
-            value: '#FF0000',
+            value: `#FF0000`,
           },
           move: {
             attract: {
@@ -17,10 +17,10 @@ export default function SeaAnemoneParticles() {
                 y: 2000,
               },
             },
-            direction: 'none',
+            direction: `none`,
             enable: true,
             outModes: {
-              default: 'destroy',
+              default: `destroy`,
             },
             path: {
               clamp: false,
@@ -28,13 +28,13 @@ export default function SeaAnemoneParticles() {
               delay: {
                 value: 0,
               },
-              generator: 'curvesPathGenerator',
+              generator: `curvesPathGenerator`,
             },
             random: false,
             speed: 1,
             straight: false,
             trail: {
-              fillColor: '#000',
+              fillColor: `#000`,
               length: 30,
               enable: true,
             },
@@ -49,13 +49,13 @@ export default function SeaAnemoneParticles() {
             value: 1,
           },
           shape: {
-            type: 'circle',
+            type: `circle`,
           },
           size: {
             value: 10,
             animation: {
               count: 1,
-              startValue: 'min',
+              startValue: `min`,
               enable: true,
               minimumValue: 1,
               speed: 10,
@@ -64,11 +64,11 @@ export default function SeaAnemoneParticles() {
           },
         },
         background: {
-          color: '#000',
+          color: `#000`,
           opacity: 0,
         },
         emitters: {
-          direction: 'none',
+          direction: `none`,
           rate: {
             quantity: 5,
             delay: 0.3,
@@ -78,7 +78,7 @@ export default function SeaAnemoneParticles() {
             height: 0,
           },
           spawnColor: {
-            value: '#ff0000',
+            value: `#ff0000`,
             animation: {
               enable: true,
               speed: 10,

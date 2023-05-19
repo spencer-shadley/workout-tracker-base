@@ -4,7 +4,7 @@ import { BucketStrategy, StrategyProps } from './StrategyProps';
 
 export class ExerciseBucketStrategy implements BucketStrategy {
   getBucket({ buckets, exerciseName, activityType }: StrategyProps): TimeSlot | null {
-    if (activityType !== 'exercise') {
+    if (activityType !== `exercise`) {
       return null;
     }
 

@@ -17,8 +17,12 @@ export function DescriptionDetails() {
 
   if (error) {
     logError(error);
-    return <DialogContentText>Error fetching description</DialogContentText>;
+    return <DialogContentText>
+      Error fetching description
+    </DialogContentText>;
   }
 
-  return <AccordionDetails sx={{ padding: 0 }}>{description}</AccordionDetails>;
+  return <AccordionDetails sx={{ padding: 0 }}>
+    {description}
+  </AccordionDetails>;
 }

@@ -1,5 +1,5 @@
 import shuffle from 'lodash/shuffle';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';

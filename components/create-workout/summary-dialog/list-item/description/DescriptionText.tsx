@@ -18,11 +18,13 @@ export function DescriptionText() {
       TransitionProps={{ unmountOnExit: true }}
       expanded={shouldShowDescription}
       onChange={() => setShouldShowDescription(!shouldShowDescription)}
-      sx={{ width: '100%', padding: 0 }}
+      sx={{ width: `100%`, padding: 0 }}
     >
       <AccordionSummary sx={{ padding: 0 }} expandIcon={<ExpandMoreIcon />}>
         <DialogContentText variant="subtitle2">
-          {shouldShowDescription ? 'Hide' : 'Show'} description
+          {shouldShowDescription ? `Hide` : `Show`}
+          {` `}
+          description
         </DialogContentText>
       </AccordionSummary>
       <DescriptionDetails/>

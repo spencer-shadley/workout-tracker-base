@@ -9,11 +9,11 @@ export function SimpleParticles() {
           events: {
             onClick: {
               enable: true,
-              mode: 'push',
+              mode: `push`,
             },
             onHover: {
               enable: true,
-              mode: 'repulse',
+              mode: `repulse`,
             },
             resize: true,
           },
@@ -29,10 +29,10 @@ export function SimpleParticles() {
         },
         particles: {
           color: {
-            value: '#ffffff',
+            value: `#ffffff`,
           },
           links: {
-            color: '#ffffff',
+            color: `#ffffff`,
             distance: 150,
             enable: true,
             opacity: 0.5,
@@ -42,10 +42,10 @@ export function SimpleParticles() {
             enable: true,
           },
           move: {
-            direction: 'none',
+            direction: `none`,
             enable: true,
             outModes: {
-              default: 'bounce',
+              default: `bounce`,
             },
             random: false,
             speed: 0.4,
@@ -62,7 +62,7 @@ export function SimpleParticles() {
             value: 0.5,
           },
           shape: {
-            type: 'circle',
+            type: `circle`,
           },
           size: {
             value: { min: 1, max: 8 },

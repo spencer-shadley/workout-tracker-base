@@ -4,9 +4,9 @@ export function Fireworks() {
   return (
     <ParticlesWrapper
       options={{
-        name: 'Fireworks',
+        name: `Fireworks`,
         emitters: {
-          direction: 'top',
+          direction: `top`,
           life: {
             count: 0,
             duration: 0.1,
@@ -33,7 +33,7 @@ export function Fireworks() {
             bounds: {
               top: 30,
             },
-            mode: 'split',
+            mode: `split`,
             split: {
               count: 1,
               factor: {
@@ -48,11 +48,11 @@ export function Fireworks() {
                 },
                 color: {
                   value: [
-                    '#ff595e',
-                    '#ffca3a',
-                    '#8ac926',
-                    '#1982c4',
-                    '#6a4c93',
+                    `#ff595e`,
+                    `#ffca3a`,
+                    `#8ac926`,
+                    `#1982c4`,
+                    `#6a4c93`,
                   ],
                 },
                 number: {
@@ -75,12 +75,12 @@ export function Fireworks() {
                     enable: true,
                     speed: 0.7,
                     sync: false,
-                    startValue: 'max',
-                    destroy: 'min',
+                    startValue: `max`,
+                    destroy: `min`,
                   },
                 },
                 shape: {
-                  type: 'circle',
+                  type: `circle`,
                 },
                 size: {
                   value: 2,
@@ -109,10 +109,10 @@ export function Fireworks() {
                     min: 10,
                     max: 25,
                   },
-                  direction: 'outside',
+                  direction: `outside`,
                   random: true,
                   straight: false,
-                  outModes: 'destroy',
+                  outModes: `destroy`,
                 },
               },
             },
@@ -121,7 +121,7 @@ export function Fireworks() {
             count: 1,
           },
           shape: {
-            type: 'line',
+            type: `line`,
           },
           size: {
             value: {
@@ -132,13 +132,13 @@ export function Fireworks() {
               enable: true,
               sync: true,
               speed: 90,
-              startValue: 'max',
-              destroy: 'min',
+              startValue: `max`,
+              destroy: `min`,
             },
           },
           stroke: {
             color: {
-              value: '#ffffff',
+              value: `#ffffff`,
             },
             width: 1,
           },
@@ -158,11 +158,11 @@ export function Fireworks() {
               max: 20,
             },
             outModes: {
-              default: 'destroy',
-              top: 'none',
+              default: `destroy`,
+              top: `none`,
             },
             trail: {
-              fillColor: '#000',
+              fillColor: `#000`,
               enable: true,
               length: 10,
             },
@@ -172,12 +172,12 @@ export function Fireworks() {
           enable: true,
           events: [
             {
-              event: 'particleRemoved',
-              filter: 'explodeSoundCheck',
+              event: `particleRemoved`,
+              filter: `explodeSoundCheck`,
               audio: [
-                'https://particles.js.org/audio/explosion0.mp3',
-                'https://particles.js.org/audio/explosion1.mp3',
-                'https://particles.js.org/audio/explosion2.mp3',
+                `https://particles.js.org/audio/explosion0.mp3`,
+                `https://particles.js.org/audio/explosion1.mp3`,
+                `https://particles.js.org/audio/explosion2.mp3`,
               ],
             },
           ],
