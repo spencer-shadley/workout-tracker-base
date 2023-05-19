@@ -23,6 +23,7 @@
     "eol-last": ["error", "always"],
     "no-extra-parens": ["error", "all", { "nestedBinaryExpressions": false }],
     "quotes": ["error", "backtick"],
+    "space-infix-ops": ["error", { "int32Hint": false }],
     "react/jsx-newline": ["error", { "prevent": true }],
     "react/jsx-indent": ["error", 2],
     "react/jsx-one-expression-per-line": ["error", {  }]

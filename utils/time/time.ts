@@ -16,7 +16,6 @@ export function secondsToHumanReadable(seconds: number): string {
   return `${hoursRemaining} hours, ${minutesRemaining} minutes, ${secondsRemaining} seconds`;
 }
 
-// TODO: move to options?
 const prepTimeInSeconds = 5;
 export function createTimeBuckets() {
   const options = getOptions();
