@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
+import { Routes, useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { Button } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 
 import RectangleBouncer from '../../shared/RectangleBouncer';
 import { Quote } from '../Quote';
@@ -18,16 +18,7 @@ interface StepContentProps {
 export default function StepContent({ step }: StepContentProps) {
   const { title, aiPrompt, url, dialogContent, tutorial } = step;
 
-  const path = `/openai/quote/why-is-fitness-important`;
-  const { data, refetch } = useQuery({
-    queryKey:[ path],
-    queryFn: async () =>
-    {
-      const result = await fetch(path);
-      return result;
-    },
-    enabled: false,
-  })
+  const { data, refetch } = useOpenAi(Routes.fitnessImportant);
 
   return (
     <div
