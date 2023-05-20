@@ -1,5 +1,8 @@
 import Link from 'next/link';
 
+import { Button } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+
 import RectangleBouncer from '../../shared/RectangleBouncer';
 import { Quote } from '../Quote';
 import { StepInfo } from '../stepInfo';
@@ -14,6 +17,17 @@ interface StepContentProps {
 
 export default function StepContent({ step }: StepContentProps) {
   const { title, aiPrompt, url, dialogContent, tutorial } = step;
+
+  const path = `/openai/quote/why-is-fitness-important`;
+  const { data, refetch } = useQuery({
+    queryKey:[ path],
+    queryFn: async () =>
+    {
+      const result = await fetch(path);
+      return result;
+    },
+    enabled: false,
+  })
 
   return (
     <div
@@ -38,9 +52,17 @@ export default function StepContent({ step }: StepContentProps) {
       >
         <RectangleBouncer>
           {url &&
-            <Link href={url}>
-              <TitleButton buttonText={title} />
-            </Link>
+            <>
+              <Link href={url}>
+                <TitleButton buttonText={title} />
+              </Link>
+              <Button onClick={() => {
+                refetch();
+                console.log(data);
+              } }>
+                test
+              </Button>
+            </>
           }
           {dialogContent &&
             <InfoDialog
