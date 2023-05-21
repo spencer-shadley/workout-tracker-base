@@ -11,8 +11,6 @@ import { MuscleGroupsChips } from './muscle-group-chips/MuscleGroupsChips';
 import { ExerciseTitle } from './title/ExerciseTitle';
 import { VideoButtons } from './VideoButtons';
 
-const progressColor = `#1976d2`;
-
 export function ActivityCard(cardProps: CardProps) {
   const theme = useTheme();
   const { isRunning } = useTimeContext();
@@ -35,7 +33,7 @@ export function ActivityCard(cardProps: CardProps) {
       ref={cardRef}
       sx={{
         width: `100%`,
-        border: isActive ? `5px solid ${progressColor}` : undefined,
+        border: isActive ? `5px solid ${theme.palette.background.default}` : undefined,
         borderBottom: 0,
         backgroundColor: theme.palette.background.default,
       }}
