@@ -1,8 +1,9 @@
 import { Paper } from '@mui/material';
-import { Results } from '../Results';
-import { ExerciseSearch } from '../../ExerciseSearch';
-import { InitialSearchHint } from '../../hints/InitialSearchHint';
+
 import { useCreateWorkoutContext } from '../../context/CreateWorkoutContextProvider';
+import { InitialSearchHint } from '../../hints/InitialSearchHint';
+import { ExerciseSearch } from '../../search/ExerciseSearch';
+import { Results } from '../Results';
 
 export default function CreateWorkoutContent() {
   const { searchInput } = useCreateWorkoutContext();

@@ -3,8 +3,8 @@ import { useState } from 'react';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import { IconButton, Tooltip } from '@mui/material';
 
-import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
-import { AiDialog } from './summary-dialog/AiDialog';
+import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+import { AiDialog } from '../summary-dialog/AiDialog';
 
 export function GenerateWithAiButton() {
   const [showDialog, setShowDialog] = useState<boolean>(false);

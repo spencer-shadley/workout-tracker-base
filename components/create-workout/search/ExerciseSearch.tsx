@@ -1,10 +1,9 @@
 import { ChangeEvent } from 'react';
 
-import { FormControl, InputAdornment, Paper, TextField } from '@mui/material';
+import { FormControl, Paper, TextField } from '@mui/material';
 
-import { useCreateWorkoutContext } from './context/CreateWorkoutContextProvider';
-import { ExerciseCartButton } from './ExerciseCartButton';
-import { GenerateWithAiButton } from './GenerateWithAiButton';
+import { useCreateWorkoutContext } from '../context/CreateWorkoutContextProvider';
+import { ExerciseSearchEndAdornment } from './ExerciseSearchEndAdornment';
 
 export function ExerciseSearch() {
   const { searchInput } = useCreateWorkoutContext();
@@ -13,14 +12,7 @@ export function ExerciseSearch() {
     <Paper elevation={6} className="mb-3">
       <FormControl fullWidth>
         <TextField
-          InputProps={{
-            endAdornment:
-  <InputAdornment position="end">
-    <GenerateWithAiButton />
-    <ExerciseCartButton />
-  </InputAdornment>
-            ,
-          }}
+          InputProps={{ endAdornment: <ExerciseSearchEndAdornment /> }}
           maxRows={3}
           fullWidth
           multiline
@@ -40,3 +32,4 @@ export function ExerciseSearch() {
     </Paper>
   );
 }
+
