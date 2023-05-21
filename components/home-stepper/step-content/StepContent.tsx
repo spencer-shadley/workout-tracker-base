@@ -1,8 +1,5 @@
 import Link from 'next/link';
 
-import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
-import { Button } from '@mui/material';
-
 import RectangleBouncer from '../../shared/RectangleBouncer';
 import { Quote } from '../Quote';
 import { StepInfo } from '../stepInfo';
@@ -17,8 +14,6 @@ interface StepContentProps {
 
 export default function StepContent({ step }: StepContentProps) {
   const { title, aiPrompt, url, dialogContent, tutorial } = step;
-
-  const { data, refetch } = useOpenAi({ prompt: `why is fitness important for biceps?`, temperature: 1.5 });
 
   return (
     <div
@@ -43,17 +38,9 @@ export default function StepContent({ step }: StepContentProps) {
       >
         <RectangleBouncer>
           {url &&
-            <>
-              <Link href={url}>
-                <TitleButton buttonText={title} />
-              </Link>
-              <Button onClick={() => {
-                refetch();
-                console.log(data);
-              } }>
-                test
-              </Button>
-            </>
+          <Link href={url}>
+            <TitleButton buttonText={title} />
+          </Link>
           }
           {dialogContent &&
             <InfoDialog
