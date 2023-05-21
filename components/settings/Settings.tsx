@@ -17,7 +17,7 @@ export default function Settings() {
   return (
     <>
       <Fab
-        className="bounce circle bg-gray-300"
+        className="bounce circle"
         size="medium"
         color="secondary"
         aria-label="settings"
