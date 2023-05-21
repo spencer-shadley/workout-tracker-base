@@ -9,13 +9,13 @@ export function MuscleGroupChip({ muscleGroup }: { muscleGroup: string }) {
   return (
     <>
       <Chip label={muscleGroup} onClick={() => setShouldShowDialog(true)} color='secondary'/>
-      <MuscleGroupDialog
+      {shouldShowDialog && <MuscleGroupDialog
         muscleGroup={muscleGroup}
         dialogProps={{
           open: shouldShowDialog,
           onClose: () => setShouldShowDialog(false),
         }}
-      />
+      />}
     </>
   );
 }

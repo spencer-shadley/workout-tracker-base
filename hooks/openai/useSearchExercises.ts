@@ -1,4 +1,4 @@
-import { useOpenAi } from './useOpenAi';
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 
 export function responseToArray(response: string): string[] {
   return response.split(`,`).map((s) => s.trim());

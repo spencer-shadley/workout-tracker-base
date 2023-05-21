@@ -20,14 +20,13 @@ export function MuscleGroupDialog({
     `Tell me about the muscle group ${muscleGroup}.`
   );
   const { data: aboutExercise, isFetching: isLoading } = useOpenAi({
-    prompt,
+    prompt
   });
 
   return (
     <Dialog {...dialogProps}>
       <DialogTitle>
-        About
-        {muscleGroup}
+        {`About ${muscleGroup}`}
       </DialogTitle>
       <DialogContent>
         {isLoading ?
