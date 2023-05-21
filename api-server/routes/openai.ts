@@ -24,6 +24,8 @@ openAiRouter.use((req, res, next) => {
     if (isNaN(temperature)) {
       res.status(400).send({ error: `temperature must be a number` } );
     }
+
+    next();
   }
   else {
     next()

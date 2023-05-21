@@ -7,14 +7,7 @@ interface QuoteProps {
 }
 
 export function Quote({ prompt }: QuoteProps) {
-  const {
-    data: aiAnswer,
-    isFetching: isLoading,
-    refetch: updateQuestion,
-  } = useOpenAi(
-    prompt,
-    1.5,
-  );
+  const { data, refetch, isLoading } = useOpenAi(prompt, 1.5);
 
   return (
     <Fade in>
@@ -23,7 +16,7 @@ export function Quote({ prompt }: QuoteProps) {
           <Skeleton width="50vw" />
           :
           <Typography color="white" variant="caption">
-            {aiAnswer}
+            {data}
           </Typography>
         }
         {isLoading ?
@@ -37,7 +30,7 @@ export function Quote({ prompt }: QuoteProps) {
           <IconButton
             disabled={isLoading}
             onClick={() => {
-              updateQuestion();
+              refetch();
             }}
           >
             <Tooltip title="Get a new answer">

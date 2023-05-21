@@ -16,7 +16,7 @@ export function useOpenAi(prompt: string, temperature?: number, queryOptionOverr
           prompt,
           temperature
         }
-      });
+      }).then(res => res.data);
     },
     cacheTime: ONE_DAY_IN_MS,
     staleTime: ONE_DAY_IN_MS,

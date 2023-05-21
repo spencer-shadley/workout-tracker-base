@@ -18,7 +18,7 @@ interface StepContentProps {
 export default function StepContent({ step }: StepContentProps) {
   const { title, aiPrompt, url, dialogContent, tutorial } = step;
 
-  const { data, refetch } = useOpenAi(`why is fitness important?`);
+  const { data, refetch } = useOpenAi(`why is fitness important for biceps?`, 1.5);
 
   return (
     <div
