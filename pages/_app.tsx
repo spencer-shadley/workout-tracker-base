@@ -20,17 +20,17 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: `#FF8F1F`,
+      main: `#FF8F1F`, // orange
     },
     secondary: {
-      main: `#FFF469`,
+      main: `#FFF469`, // pale yellow
     },
     info: {
-      main: `#9EE854`,
+      main: `#9EE854`, // green
     },
     background: {
-      default: `#3A523C`,
-    }
+      default: `#3A523C`, // very dark green
+    },
   }
 })
 

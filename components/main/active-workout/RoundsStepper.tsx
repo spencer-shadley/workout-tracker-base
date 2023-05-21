@@ -1,9 +1,10 @@
 import { useOptions } from '@/hooks/storage/useLocalStorage';
-import { Step, StepButton, Stepper } from '@mui/material';
+import { IconButton, Step, StepLabel, Stepper, useTheme } from '@mui/material';
 
 import { useTimeContext } from '../workout/context/TimeContextProvider';
 
 export default function RoundsStepper() {
+  const theme = useTheme();
   const [workoutOptions] = useOptions();
   const { numberOfRounds } = workoutOptions;
 
@@ -19,7 +20,11 @@ export default function RoundsStepper() {
       {rounds.map((round) => {
         return (
           <Step key={round}>
-            <StepButton onClick={() => setCurrentRound(round)}/>
+            <StepLabel onClick={() => setCurrentRound(round)} StepIconProps={{
+              icon: <IconButton sx={{ backgroundColor: theme.palette.secondary.main }} >
+                {round}
+              </IconButton>
+            }}/>
           </Step>
         );
       })}
