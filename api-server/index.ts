@@ -15,6 +15,7 @@ dotenv.config({ path: pathname });
 (async () => {
   try {
     await app.prepare();
+
     const server = express();
 
     server.use(`/openai`, openAiRouter);
