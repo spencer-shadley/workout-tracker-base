@@ -16,6 +16,7 @@ export function JumpToExerciseIconButton() {
     TransitionComponent={Zoom}
   >
     <IconButton
+      color='secondary'
       onClick={() => {
         jumpToBucket(activityBucket);
       }}

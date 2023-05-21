@@ -13,9 +13,11 @@ export function EditExerciseIconButton() {
 
   return <>
     <Tooltip title={`Edit ${exerciseName}`}>
-      <IconButton onClick={() => {
-        setIsDialogOpen(true);
-      }}>
+      <IconButton
+        color='secondary'
+        onClick={() => {
+          setIsDialogOpen(true);
+        }}>
         <EditIcon />
       </IconButton>
     </Tooltip>
