@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Routes, useOpenAi } from '@/api/hooks/openai/useOpenAi';
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { Button } from '@mui/material';
 
 import RectangleBouncer from '../../shared/RectangleBouncer';
@@ -18,7 +18,7 @@ interface StepContentProps {
 export default function StepContent({ step }: StepContentProps) {
   const { title, aiPrompt, url, dialogContent, tutorial } = step;
 
-  const { data, refetch } = useOpenAi(Routes.fitnessImportant);
+  const { data, refetch } = useOpenAi(`why is fitness important?`);
 
   return (
     <div

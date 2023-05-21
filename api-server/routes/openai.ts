@@ -8,9 +8,10 @@ openAiRouter.use(express.json());
 
 openAiRouter.use((req, res, next) => {
   console.log(`--- OpenAi request ---`, Date.now())
-  console.log(`req.body`, req.body)
-  const body = req.body as OpenAiRequest;
-  const prompt = body?.prompt;
+
+  const prompt = req.query?.prompt as string;
+
+  console.log(`prompt`, prompt)
   if (!prompt) {
     res.status(400).send({ error: `prompt is required` });
   }
@@ -33,7 +34,7 @@ openAiRouter.get(`/quote/why-is-fitness-important`, async (req, res) => {
 })
 
 openAiRouter.get(`/`, async (req, res) => {
-  const prompt = req.body.prompt as string;
+  const prompt = req.query.prompt as string;
 
   try {
     const quote = await askQuestion(prompt);
@@ -44,6 +45,3 @@ openAiRouter.get(`/`, async (req, res) => {
   }
 })
 
-interface OpenAiRequest {
-    prompt: string;
-}
