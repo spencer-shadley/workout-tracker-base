@@ -7,7 +7,7 @@ import {
 /* eslint-enable indent */
 import InfoIcon from '@mui/icons-material/Info';
 import SchoolIcon from '@mui/icons-material/School';
-import { ListItem } from '@mui/material';
+import { ListItem, useTheme } from '@mui/material';
 
 import { useExerciseContext } from '../../../shared/ExerciseProvider';
 import { AddOrRemoveFromCartButtons } from '../../icons/AddOrRemoveFromCartButtons';
@@ -17,6 +17,7 @@ import { ResultListItemText } from './ResultListItemText';
 import { StepsDialog } from './StepsDialog';
 
 export default function Result() {
+  const theme = useTheme();
   const { exerciseName } = useExerciseContext();
 
   const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(false);
@@ -24,7 +25,9 @@ export default function Result() {
 
   return (
     <>
-      <ListItem className="hover:bg-slate-200 flex flex-col items-start">
+      <ListItem className="hover:bg-slate-200 flex flex-col items-start" sx={{
+        backgroundColor: theme.palette.background.default,
+      }}>
         <div className='flex w-full'>
           <div className='align-middle'>
             <AddOrRemoveFromCartButtons />
@@ -35,12 +38,12 @@ export default function Result() {
           <div className='flex'>
             <ResultIcon
               tooltip={`Learn more about ${exerciseName}`}
-              icon={<InfoIcon />}
+              icon={<InfoIcon color='secondary' />}
               onClick={() => setShouldShowAbout(true)}
             />
             <ResultIcon
               onClick={() => setShouldShowSteps(true)}
-              icon={<SchoolIcon />}
+              icon={<SchoolIcon color='secondary' />}
               tooltip={`Learn how to do ${exerciseName}`}
             />
           </div>

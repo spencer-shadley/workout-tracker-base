@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 import { useActivityBucket } from '@/hooks/time/useActivityBucket';
-import { Card, CardContent, CardProps, LinearProgress } from '@mui/material';
+import { Card, CardContent, CardProps, LinearProgress, useTheme } from '@mui/material';
 
 import { useTimeContext } from '../../context/TimeContextProvider';
 import { ActiveExerciseTimer } from './ActiveExerciseTimer';
@@ -14,6 +14,7 @@ import { VideoButtons } from './VideoButtons';
 const progressColor = `#1976d2`;
 
 export function ActivityCard(cardProps: CardProps) {
+  const theme = useTheme();
   const { isRunning } = useTimeContext();
   const { activityType } =
     useExerciseContext();
@@ -36,6 +37,7 @@ export function ActivityCard(cardProps: CardProps) {
         width: `100%`,
         border: isActive ? `5px solid ${progressColor}` : undefined,
         borderBottom: 0,
+        backgroundColor: theme.palette.background.default,
       }}
       {...cardProps}
     >

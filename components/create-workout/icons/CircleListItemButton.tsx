@@ -1,11 +1,4 @@
-import {
-  Badge,
-  ListItemButton,
-  ListItemIcon,
-  SxProps,
-  Theme,
-  Tooltip,
-} from '@mui/material';
+import { Badge, ListItemButton, ListItemIcon, SxProps, Theme, Tooltip } from '@mui/material';
 
 interface CircleListItemButtonProps {
   tooltipTitle: string;

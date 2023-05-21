@@ -7,7 +7,7 @@ import { Typography } from '@mui/material';
 import ActivitiesList from '../workout/activity/ActivitiesList';
 import { TimeProvider } from '../workout/context/TimeContextProvider';
 import RoundsStepper from './RoundsStepper';
-import TimerControls from './TimerControls';
+import TimerControls from './timer-controls/TimerControls';
 
 export default function ActiveWorkout() {
   const timeContext = useTimeInformation();

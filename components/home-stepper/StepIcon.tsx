@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import InfoIcon from '@mui/icons-material/Info';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import { IconButton, StepIconProps } from '@mui/material';
+import { IconButton, StepIconProps, useTheme } from '@mui/material';
 
 const StepIconRoot = styled(`div`)<{
-  ownerState: { completed?: boolean; active?: boolean };
+  ownerState: { completed?: boolean; active?: boolean, secondaryColor: string };
 }>(({ ownerState }) => ({
-  backgroundColor: `#fff`,
+  backgroundColor: ownerState.secondaryColor,
   opacity: 0.25,
   transition: `opacity .5s ease-in-out`,
   zIndex: 1,
@@ -23,7 +23,7 @@ const StepIconRoot = styled(`div`)<{
     boxShadow: `0 4px 10px 0 rgba(0,0,0,.25)`,
   },
   ...ownerState.completed && {
-    backgroundColor: `gray`,
+    backgroundColor: ownerState.secondaryColor,
   },
 }));
 
@@ -33,6 +33,9 @@ export default function StepIcon({
   completed,
   className,
 }: StepIconProps) {
+  const theme = useTheme();
+  const secondaryColor = theme.palette.secondary.main;
+
   const icons: { [index: string]: React.ReactElement } = {
     1: <FitnessCenterIcon />,
     2: <LightbulbIcon />,
@@ -40,7 +43,7 @@ export default function StepIcon({
   };
 
   return (
-    <StepIconRoot ownerState={{ completed, active }} className={className}>
+    <StepIconRoot ownerState={{ completed, active, secondaryColor }} className={className}>
       <IconButton>
         {icons[String(icon)]}
       </IconButton>

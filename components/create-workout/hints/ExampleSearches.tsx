@@ -23,7 +23,7 @@ export function ExampleSearches(props: ListProps) {
             <ListItemText sx={{ flexGrow: 1 }}>
               {hint}
             </ListItemText>
-            <ButtonGroup size='small' color='info' orientation='vertical' variant='outlined' className='ml-1'>
+            <ButtonGroup size='small' color='primary' orientation='vertical' variant='outlined' className='ml-1'>
               <Button
                 onClick={() => {
                   setShowDialog(true);

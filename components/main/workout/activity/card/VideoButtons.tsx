@@ -26,6 +26,7 @@ export function VideoButtons() {
         </Typography>
         :
         <Button
+          color='secondary'
           onClick={() => {
             pause();
             setShouldShowVideo(!shouldShowVideo);
@@ -35,7 +36,7 @@ export function VideoButtons() {
         </Button>
       }
       <Link href={youtubeSearchUrl} target="_blank">
-        <Button onClick={() => pause()}>
+        <Button color='secondary' onClick={() => pause()}>
           Search on YouTube
         </Button>
       </Link>

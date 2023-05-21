@@ -39,13 +39,13 @@ export function AddOrRemoveFromCartButtons() {
         tooltipTitle={addTooltip}
         badgeContent={numberInCart}
         badgeSx={{ marginRight: `10px` }}
-        icon={<AddIcon />}
+        icon={<AddIcon color='primary' />}
         onClick={addExerciseName}
       />
       {isExerciseAdded &&
         <CircleListItemButton
           tooltipTitle={removeExerciseTooltip}
-          icon={<DeleteIcon />}
+          icon={<DeleteIcon color='primary' />}
           onClick={removeExercise}
         />
       }
