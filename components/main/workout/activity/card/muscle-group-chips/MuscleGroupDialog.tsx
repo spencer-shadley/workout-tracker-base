@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useOpenAi } from '@/hooks/openai/useOpenAi';
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 /* eslint-disable indent */
 import {
     Button, Dialog, DialogActions, DialogContent, DialogProps, DialogTitle, Skeleton, Typography

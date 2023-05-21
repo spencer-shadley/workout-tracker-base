@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useOpenAi } from '@/hooks/openai/useOpenAi';
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { tryParse } from '@/hooks/storage/useLocalStorage';
 import { useSelectedExercises } from '@/hooks/storage/useSessionStorage';
 

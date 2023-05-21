@@ -1,5 +1,5 @@
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { useExerciseContext } from '@/components/shared/ExerciseProvider';
-import { useOpenAi } from '@/hooks/openai/useOpenAi';
 import { logError } from '@/utils/logger';
 import { AccordionDetails, DialogContentText, Skeleton } from '@mui/material';
 

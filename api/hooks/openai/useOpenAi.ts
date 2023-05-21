@@ -7,7 +7,13 @@ const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
 const openaiRoute = `/openai`;
 
-export function useOpenAi(prompt: string, temperature?: number, queryOptionOverrides?: UseQueryOptions<string>) {
+export interface useOpenAiOptions {
+prompt: string;
+temperature?: number;
+queryOptionOverrides?: UseQueryOptions<string>;
+}
+
+export function useOpenAi({ prompt, temperature, queryOptionOverrides }: useOpenAiOptions) {
   let queryOptions: UseQueryOptions<string> = {
     queryKey: [`openai`, prompt],
     queryFn: async () => {

@@ -1,5 +1,5 @@
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { useAddStyle } from '@/hooks/openai/useAddStyle';
-import { useOpenAi } from '@/hooks/openai/useOpenAi';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 export interface GenericDialogProps {
