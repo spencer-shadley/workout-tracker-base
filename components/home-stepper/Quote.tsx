@@ -1,4 +1,4 @@
-import { useOpenAi } from '@/hooks/openai/useOpenAi';
+import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { Fade, IconButton, Skeleton, Tooltip, Typography } from '@mui/material';
 
@@ -11,12 +11,10 @@ export function Quote({ prompt }: QuoteProps) {
     data: aiAnswer,
     isFetching: isLoading,
     refetch: updateQuestion,
-  } = useOpenAi({
+  } = useOpenAi(
     prompt,
-    initialProps: {
-      temperature: 1.5,
-    },
-  });
+    1.5,
+  );
 
   return (
     <Fade in>

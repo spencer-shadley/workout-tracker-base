@@ -17,28 +17,27 @@ openAiRouter.use((req, res, next) => {
   }
   else if (typeof prompt !== `string`) {
     res.status(400).send({ error: `prompt must be a string` });
-  } else {
-    next()
   }
-})
-
-openAiRouter.get(`/quote/why-is-fitness-important`, async (req, res) => {
-  const prompt = `Tell me why working out is important. Keep it somewhat short.`;
-  try {
-    const quote = await askQuestion(prompt);
-    res.json(quote)
-  } catch (e) {
-    console.error(e);
-    res.status(500).send({ error: e })
+  else if (req.query?.temperature) {
+    const temperature = Number(req.query?.temperature);
+    console.log(`temperature`, temperature);
+    if (isNaN(temperature)) {
+      res.status(400).send({ error: `temperature must be a number` } );
+    }
+  }
+  else {
+    next()
   }
 })
 
 openAiRouter.get(`/`, async (req, res) => {
   const prompt = req.query.prompt as string;
+  const temperature = Number(req.query.temperature) ?? undefined;
 
   try {
-    const quote = await askQuestion(prompt);
-    res.json(quote)
+    const answer = await askQuestion(prompt, { temperature });
+    console.log(`--- answer to ${prompt}`, answer);
+    res.send(answer)
   } catch (e) {
     console.error(e);
     res.status(500).send({ error: e })
