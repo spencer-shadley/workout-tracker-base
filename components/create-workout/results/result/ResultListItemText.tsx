@@ -12,7 +12,7 @@ export function ResultListItemText() {
       <ListItemText
         className="flex-grow w-full"
         primary={
-          <Typography color='' variant='overline'>
+          <Typography color='primary' variant='overline'>
             {exerciseName}
           </Typography>}
       />

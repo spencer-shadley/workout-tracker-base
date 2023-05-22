@@ -18,7 +18,7 @@ export function CircleListItemButton({
     <Tooltip title={tooltipTitle}>
       <Badge badgeContent={badgeContent} sx={badgeSx} color="info">
         <ListItemButton
-          sx={{ padding: `5px`, borderRadius: 100 }}
+          sx={{ padding: `5px`, borderRadius: `50%` }}
           onClick={onClick}
         >
           <ListItemIcon sx={{ minWidth: 0 }}>
