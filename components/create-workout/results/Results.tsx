@@ -6,7 +6,7 @@ import {
     useCreateWorkoutContext as useCreateWorkoutContext
 } from '../context/CreateWorkoutContextProvider';
 /* eslint-enable indent */
-import { ResultCard } from './result/ResultCard';
+import { ResultListItem } from './result/ResultListItem';
 import { ResultsSkeleton } from './ResultsSkeleton';
 
 export function Results() {
@@ -18,13 +18,13 @@ export function Results() {
       sx={{ padding: `5px 10px`, overflow: `auto`, height: `100%` }}
       elevation={10}
     >
-      <List className="w-full">
+      <List >
         <ExerciseProvider activityType='exercise' exerciseName={`"${searchText}"`}>
-          <ResultCard/>
+          <ResultListItem/>
         </ExerciseProvider>
         {isSearching ? <ResultsSkeleton/> : searchedExerciseNameResults.map((exerciseName) =>
           <ExerciseProvider key={exerciseName} activityType='exercise' exerciseName={exerciseName}>
-            <ResultCard/>
+            <ResultListItem/>
           </ExerciseProvider>
         )}
       </List>

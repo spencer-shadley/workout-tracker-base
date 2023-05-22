@@ -1,12 +1,12 @@
 import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 
-import { ResultCard } from './result/ResultCard';
+import { ResultListItem } from './result/ResultListItem';
 
 export function ResultsSkeleton() {
   return <>
     {Array<React.ReactElement>(10).fill(
       <ExerciseProvider activityType='exercise' exerciseName={null} key={Math.random()}>
-        <ResultCard />
+        <ResultListItem />
       </ExerciseProvider>)}
   </>;
 }
