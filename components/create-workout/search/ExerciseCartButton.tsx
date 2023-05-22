@@ -39,6 +39,7 @@ export function ExerciseCartButton() {
           color="info"
         >
           <IconButton
+            color='primary'
             onClick={() => {
               setShowDialog(true);
             }}

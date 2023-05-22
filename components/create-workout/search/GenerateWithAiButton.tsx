@@ -15,7 +15,7 @@ export function GenerateWithAiButton() {
       {searchText &&
         <>
           <Tooltip title="Auto generate full workout" arrow>
-            <IconButton onClick={() => setShowDialog(true)}>
+            <IconButton color='primary' onClick={() => setShowDialog(true)}>
               <AutoFixHighIcon />
             </IconButton>
           </Tooltip>
