@@ -24,9 +24,7 @@ export default function Result() {
   return (
     <>
       <div className='flex w-full'>
-        <div className='align-middle'>
-          <AddOrRemoveFromCartButtons />
-        </div>
+        <AddOrRemoveFromCartButtons />
         <div className='grow'>
           <ResultListItemText />
         </div>

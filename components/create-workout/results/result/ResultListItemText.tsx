@@ -11,9 +11,10 @@ export function ResultListItemText() {
     exerciseName ?
       <ListItemText
         className="flex-grow w-full"
-        primary={<Typography variant='overline'>
-          {exerciseName}
-        </Typography>}
+        primary={
+          <Typography color='' variant='overline'>
+            {exerciseName}
+          </Typography>}
       />
       :
       <TextSkeleton />
