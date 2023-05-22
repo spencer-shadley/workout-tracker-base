@@ -8,11 +8,9 @@ export function ResultListItem() {
   const { exerciseName } = useExerciseContext();
 
   return (
-    <ListItem className="flex flex-col items-start" sx={{
-    }}>
+    <ListItem className="flex flex-col items-start">
       <Card className='w-full px-2 py-4' key={exerciseName}
-        sx={{
-          backgroundColor: theme.palette.background.default, }}>
+        sx={{ backgroundColor: theme.palette.background.default, }}>
         <Result/>
       </Card>
     </ListItem>

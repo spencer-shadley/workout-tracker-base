@@ -15,6 +15,7 @@ export function Results() {
 
   return (
     <Card
+      className='bg-slate-800'
       sx={{ padding: `5px 10px`, overflow: `auto`, height: `100%` }}
       elevation={10}
     >

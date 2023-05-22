@@ -3,10 +3,17 @@ import { ExerciseProvider } from '@/components/shared/ExerciseProvider';
 import { ResultListItem } from './result/ResultListItem';
 
 export function ResultsSkeleton() {
-  return <>
-    {Array<React.ReactElement>(10).fill(
-      <ExerciseProvider activityType='exercise' exerciseName={null} key={Math.random()}>
+  const skeleton = [];
+
+  for (let i = 0; i < 10; i++) {
+    skeleton.push(
+      <ExerciseProvider activityType='exercise' exerciseName={null} key={i}>
         <ResultListItem />
-      </ExerciseProvider>)}
+      </ExerciseProvider>
+    );
+  }
+
+  return <>
+    {skeleton}
   </>;
 }
