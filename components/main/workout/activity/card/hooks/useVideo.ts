@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import youtubeSearch from 'youtube-search';
 
 import { useExerciseContext } from '@/components/shared/ExerciseProvider';
-import { logError } from '@/utils/logger';
+
+import { useYoutube } from './useYoutube';
 
 export default function useVideo() {
   const { exerciseName } = useExerciseContext();
@@ -16,31 +16,15 @@ export default function useVideo() {
     `https://www.youtube.com/results?search_query=how+to+do+${exerciseName}`
   );
 
+  const { data: youtubeUrl, isError } = useYoutube(shouldShowVideo && !hasYoutubeQuotaExceeded);
+
   useEffect(() => {
-    if (!shouldShowVideo || hasYoutubeQuotaExceeded) {
-      return;
-    }
+    setVideoUrl(youtubeUrl ?? ``);
+  }, [youtubeUrl]);
 
-    const opts: youtubeSearch.YouTubeSearchOptions = {
-      maxResults: 1,
-      key: `AIzaSyBKLpjDurJWREpz9oQu_FWh-nwrNoKDkzA`,
-      type: `video`,
-    };
-
-    youtubeSearch(`how to do ${exerciseName}`, opts, (err, results) => {
-      if (err) {
-        setHasYoutubeQuotaExceeded(true);
-        return console.log(err);
-      }
-
-      console.dir(results);
-      if (results?.length) {
-        setVideoUrl(results[0].link);
-      } else {
-        logError(`No video found for exercise ${exerciseName}`);
-      }
-    });
-  }, [exerciseName, hasYoutubeQuotaExceeded, shouldShowVideo]);
+  useEffect(() => {
+    setHasYoutubeQuotaExceeded(isError);
+  }, [isError]);
 
   return {
     videoUrl,

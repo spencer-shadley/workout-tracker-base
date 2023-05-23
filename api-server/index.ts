@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import next from 'next';
 
 import { openAiRouter } from './routes/openai';
+import { youtubeRouter } from './routes/youtube';
 
 const dev = process.env.NODE_ENV !== `production`;
 const app = next({ dev });
@@ -19,6 +20,7 @@ dotenv.config({ path: pathname });
     const server = express();
 
     server.use(`/openai`, openAiRouter);
+    server.use(`/api/youtube`, youtubeRouter);
 
     server.all(`*`, (req: Request, res: Response) => {
       return handle(req, res);

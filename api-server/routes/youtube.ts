@@ -1,37 +1,53 @@
 import express from 'express';
-
-import { askQuestion } from './askQuestion';
+import { matchedData, query, validationResult } from 'express-validator';
+import youtubeSearch from 'youtube-search';
 
 export const youtubeRouter = express.Router()
 
 youtubeRouter.use(express.json());
 
-youtubeRouter.use((req, res, next) => {
+youtubeRouter.get(`/`, query(`exercise`).notEmpty().isString(), (req, res) => {
   console.log(`--- YouTube request ---`, Date.now())
 
-  const exerciseName = req.query?.exercise as string;
-  console.log(`exercise`, exerciseName)
+  const errors = validationResult(req);
 
-  if (!exerciseName) {
-    res.status(400).send({ error: `exercise is required` });
+  if (!errors.isEmpty()) {
+    res.status(400).send({ error: errors.array() })
+    return;
   }
-  else if (typeof exerciseName !== `string`) {
-    res.status(400).send({ error: `exercise must be a string` });
-  }
-  else if (req.query?.temperature) {
-    const temperature = Number(req.query?.temperature);
-    console.log(`temperature`, temperature);
-    if (isNaN(temperature)) {
-      res.status(400).send({ error: `temperature must be a number` } );
-    }
 
-    next();
-  }
-  else {
-    next()
-  }
-})
+  const { exercise } = matchedData(req);
+  console.log(`--- video search for exercise`, exercise);
 
-youtubeRouter.get(`/`, async (req, res) => {
-})
+  try {
+    const opts: youtubeSearch.YouTubeSearchOptions = {
+      maxResults: 1,
+      key: `AIzaSyBKLpjDurJWREpz9oQu_FWh-nwrNoKDkzA`,
+      type: `video`,
+    };
+
+    youtubeSearch(`how to do ${exercise}`, opts, (err, results) => {
+      if (err) {
+        res.status(500).send({ error: err });
+        return;
+      }
+
+      console.dir(`video results`, results);
+      if (results?.length) {
+        res.send(results[0].link);
+        return;
+      }
+
+      const errorMessage = `No video found for exercise ${exercise}`;
+      console.error(errorMessage);
+      res.status(400).send({ error: errorMessage });
+      return;
+    });
+  }
+  catch (e) {
+    console.error(e);
+    res.status(500).send({ error: e });
+    return;
+  }
+});
 
