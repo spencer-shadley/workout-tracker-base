@@ -17,6 +17,7 @@ export default function useVideo() {
   );
 
   const { data: youtubeUrl, isError } = useYoutube(shouldShowVideo && !hasYoutubeQuotaExceeded);
+  console.log(youtubeUrl);
 
   useEffect(() => {
     setVideoUrl(youtubeUrl ?? ``);

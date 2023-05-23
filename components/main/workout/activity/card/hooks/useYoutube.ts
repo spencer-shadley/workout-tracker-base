@@ -8,8 +8,13 @@ export function useYoutube(shouldEnable: boolean) {
   const { exerciseName } = useExerciseContext();
   const queryOptions: UseQueryOptions<string> = {
     queryKey: [`youtube`, exerciseName],
-    queryFn: () => {
-      return axios.get(`/api/youtube`, {}).then(res => res.data)
+    queryFn: async () => {
+      const res = await axios.get(`/api/youtube`, {
+        params: {
+          exercise: exerciseName
+        }
+      });
+      return res.data;
     },
     cacheTime: ONE_DAY_IN_MS,
     staleTime: ONE_DAY_IN_MS,
