@@ -18,6 +18,8 @@ export async function askQuestion(
   if (redisCacheValue) {
     console.log(`found prompt in cache`, prompt);
     return Promise.resolve(redisCacheValue);
+  } else {
+    console.log(`prompt not found in cache`, prompt);
   }
 
   const configuration = new Configuration({
