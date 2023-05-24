@@ -1,5 +1,7 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 
+import { redisClient } from '../';
+
 // each request costs money - safety to avoid massive charges from bugs like infinite loops
 const MAX_NUMBER_OF_ACTIVE_REQUESTS = 50;
 let numberOfActiveRequests = 0;
@@ -7,8 +9,16 @@ let numberOfActiveRequests = 0;
 export async function askQuestion(
   prompt: string,
   initialProps: Partial<CreateCompletionRequest> = {}
-) {
+): Promise<string> {
   console.log(`askQuestion`, prompt);
+
+  const redisCacheKey = `prompt/${prompt}`;
+  const redisCacheValue = await redisClient?.get(redisCacheKey);
+
+  if (redisCacheValue) {
+    console.log(`found prompt in cache`, prompt);
+    return Promise.resolve(redisCacheValue);
+  }
 
   const configuration = new Configuration({
     apiKey: process.env.OPEN_AI_KEY,
@@ -40,6 +50,7 @@ export async function askQuestion(
       .then((response) => {
         let data: string = response.data.choices[0].text ?? ``;
         data = data.trim();
+        redisClient?.set(redisCacheKey, data);
         resolve(data);
       })
       .catch((error) => {

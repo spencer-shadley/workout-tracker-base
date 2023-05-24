@@ -22,7 +22,7 @@ youtubeRouter.get(`/`, query(`exercise`).notEmpty().isString(), (req, res) => {
   try {
     const opts: youtubeSearch.YouTubeSearchOptions = {
       maxResults: 1,
-      key: `AIzaSyBKLpjDurJWREpz9oQu_FWh-nwrNoKDkzA`,
+      key: process.env.YOUTUBE_KEY,
       type: `video`,
     };
 

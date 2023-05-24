@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import next from 'next';
+import { createClient, RedisClientType } from 'redis';
 
 import { openAiRouter } from './routes/openai';
 import { youtubeRouter } from './routes/youtube';
@@ -33,5 +34,28 @@ dotenv.config({ path: pathname });
   } catch (e) {
     console.error(e);
     process.exit(1);
+  }
+})();
+
+export let redisClient: RedisClientType | undefined;
+
+(async () => {
+  const redisPassword = process.env.REDIS_PASSWORD;
+  const redisHost = process.env.REDIS_HOST;
+  const redisPort = Number(process.env.REDIS_PORT);
+
+  if (redisPassword && redisHost && redisPort) {
+    redisClient = createClient({
+      password: redisPassword,
+      socket: {
+        host: redisHost,
+        port: redisPort
+      }
+    });
+    await redisClient.connect();
+    redisClient.on(`connect`, () => console.log(`Redis connected`));
+    redisClient.on(`error`, (error) => console.error(`Redis error`, error));
+  } else {
+    console.error(`Missing redis config. Please update the .env file`);
   }
 })();
