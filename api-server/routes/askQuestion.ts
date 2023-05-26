@@ -1,10 +1,11 @@
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 
-import { redisClient } from '../';
+import { redisClient } from '../redisClient';
 
 // each request costs money - safety to avoid massive charges from bugs like infinite loops
 const MAX_NUMBER_OF_ACTIVE_REQUESTS = 50;
 let numberOfActiveRequests = 0;
+const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 
 export async function askQuestion(
   prompt: string,
@@ -52,7 +53,9 @@ export async function askQuestion(
       .then((response) => {
         let data: string = response.data.choices[0].text ?? ``;
         data = data.trim();
-        redisClient?.set(redisCacheKey, data);
+        redisClient?.set(redisCacheKey, data, {
+          EX: ONE_WEEK_IN_SECONDS,
+        });
         resolve(data);
       })
       .catch((error) => {
