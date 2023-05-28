@@ -5,19 +5,21 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 export const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
-const openaiRoute = `/openai`;
+const textRoute = `/openai/text`;
+const generateImageRoute = `/openai/generateImage`;
 
 export interface useOpenAiOptions {
 prompt: string;
 temperature?: number;
 queryOptionOverrides?: UseQueryOptions<string>;
+isPicture?: boolean;
 }
 
-export function useOpenAi({ prompt, temperature, queryOptionOverrides }: useOpenAiOptions) {
+export function useOpenAi({ prompt, temperature, queryOptionOverrides, isPicture }: useOpenAiOptions) {
   let queryOptions: UseQueryOptions<string> = {
     queryKey: [`openai`, prompt],
     queryFn: async () => {
-      return axios.get(openaiRoute, {
+      return axios.get(isPicture ? generateImageRoute : textRoute, {
         params: {
           prompt,
           temperature

@@ -1,5 +1,8 @@
 import Link from 'next/link';
 
+import { setIsFirstTime } from '@/hooks/storage/useLocalStorage';
+import { Button } from '@mui/material';
+
 import RectangleBouncer from '../../shared/RectangleBouncer';
 import { Quote } from '../Quote';
 import { StepInfo } from '../stepInfo';
@@ -42,6 +45,11 @@ export default function StepContent({ step }: StepContentProps) {
             <TitleButton buttonText={title} />
           </Link>
           }
+          <Button onClick={() => {
+            setIsFirstTime(true);
+          }}>
+            Show welcome
+          </Button>
           {dialogContent &&
             <InfoDialog
               content={dialogContent}

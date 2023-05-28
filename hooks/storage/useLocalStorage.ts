@@ -8,6 +8,7 @@ const aiStyleKey = `ai-style`;
 const optionsKey = `options`;
 const backgroundKey = `background`;
 const tutorialKey = `tutorial`;
+const firstTimeWelcomeKey = `first-time-welcome`;
 
 export function useAiStyle() {
   return useLocalStorage(aiStyleKey, `Personal Trainer`);
@@ -52,6 +53,14 @@ function getItem<T>(key: string, defaultValue: T): T {
 
   const rawData = localStorage.getItem(key) ?? ``;
   return tryParse<T>(rawData, defaultValue);
+}
+
+export function isFirstTime(): boolean {
+  return getItem<boolean>(firstTimeWelcomeKey, true);
+}
+
+export function setIsFirstTime(isFirstTime: boolean) {
+  localStorage.setItem(firstTimeWelcomeKey, isFirstTime.toString());
 }
 
 // TODO: add tutorial throughout
