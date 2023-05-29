@@ -10,6 +10,8 @@ const backgroundKey = `background`;
 const tutorialKey = `tutorial`;
 const firstTimeWelcomeKey = `first-time-welcome`;
 
+export type UsageState = `initial` | `about` | `settings` | `complete`
+
 export function useAiStyle() {
   return useLocalStorage(aiStyleKey, `Personal Trainer`);
 }
@@ -55,12 +57,16 @@ function getItem<T>(key: string, defaultValue: T): T {
   return tryParse<T>(rawData, defaultValue);
 }
 
-export function isFirstTime(): boolean {
-  return getItem<boolean>(firstTimeWelcomeKey, true);
+export function useTutorialStage() {
+  return useLocalStorage<UsageState>(firstTimeWelcomeKey, `initial`);
 }
 
-export function setIsFirstTime(isFirstTime: boolean) {
-  localStorage.setItem(firstTimeWelcomeKey, isFirstTime.toString());
+export function getTutorialStage(): UsageState {
+  return getItem<UsageState>(firstTimeWelcomeKey, `initial`);
+}
+
+export function setTutorialStage(stage: UsageState) {
+  localStorage.setItem(firstTimeWelcomeKey, stage);
 }
 
 // TODO: add tutorial throughout

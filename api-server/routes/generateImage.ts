@@ -43,19 +43,21 @@ export async function generateImage(
   };
 
   return new Promise((resolve: (response: string) => void, reject) => {
-    openai.createImage(imageRequestOptions).then((response) => {
-      let data: string = response.data.data[0].url ?? ``;
-      data = data.trim();
-      redisClient?.set(redisCacheKey, data, {
-        EX: ONE_WEEK_IN_SECONDS,
+    openai.createImage(imageRequestOptions)
+      .then((response) => {
+        let data: string = response.data.data[0].url ?? ``;
+        data = data.trim();
+        console.log(`updated cache for image`, prompt);
+        redisClient?.set(redisCacheKey, data, {
+          EX: ONE_WEEK_IN_SECONDS,
+        });
+        resolve(data);
+      }).catch((error) => {
+        reject(error);
+        console.error(error);
+      }).finally(() => {
+        --numberOfActiveRequests;
       });
-      resolve(data);
-    }).catch((error) => {
-      reject(error);
-      console.error(error);
-    }).finally(() => {
-      --numberOfActiveRequests;
-    });
 
   });
 }
