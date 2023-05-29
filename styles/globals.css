@@ -8,8 +8,11 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-body {
+html, #__next, body {
   height: 100dvh;
+}
+
+body {
   margin: auto;
   overflow: auto;
   background: linear-gradient(
