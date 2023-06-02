@@ -1,4 +1,7 @@
+import { useFeature } from 'flagged';
+
 import { UsageState, useTutorialStage } from '@/hooks/storage/useLocalStorage';
+import { welcomeTutorialFlag } from '@/utils/flags';
 import { logError } from '@/utils/logger';
 import { Typography } from '@mui/material';
 
@@ -8,12 +11,17 @@ import Welcome from '../welcome/Welcome';
 import { TutorialProvider } from './context/TutorialContext';
 
 export default function Main() {
+  const isWelcomeFlagEnabled = useFeature(welcomeTutorialFlag);
   const [currentStage, setStage] = useTutorialStage();
   const component = getComponent(currentStage, () => setStage(`initial`));
 
-  return <TutorialProvider tutorialContext={{ currentStage, setStage }}>
-    {component}
-  </TutorialProvider>
+  if (isWelcomeFlagEnabled) {
+    return <TutorialProvider tutorialContext={{ currentStage, setStage }}>
+      {component}
+    </TutorialProvider>
+  }
+
+  return <Steps />;
 }
 
 export function getComponent(tutorialStage: UsageState, resetStage: () => void) {

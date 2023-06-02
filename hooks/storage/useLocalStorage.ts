@@ -2,7 +2,6 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import { WorkoutOptions } from '@/components/settings/workout-options/WorkoutOptions';
 import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
-import { AboutPersonPrompt } from '@/components/welcome/CustomizeToIndividual';
 import { logError } from '@/utils/logger';
 
 const aiStyleKey = `ai-style`;

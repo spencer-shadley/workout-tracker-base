@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { FlagsProvider } from 'flagged';
 import { useEffect, useState } from 'react';
 
 import Background from '@/components/shared/backgrounds/Background';
@@ -12,7 +13,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Settings from '../components/settings/Settings';
 
 import type { AppProps } from 'next/app';
-
 dayjs.extend(relativeTime);
 
 const queryClient = new QueryClient();
@@ -45,26 +45,29 @@ export default function App({ Component, pageProps }: AppProps) {
     setIsPageLoaded(true);
   }, []);
 
-  return <ThemeProvider theme={theme}>
-    {isPageLoaded ?
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Background />
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
-          <Settings />
-        </Hydrate>
-      </QueryClientProvider>
-      :
-      <Box sx={{ display: `flex` }}>
-        <CircularProgress
-          sx={{
-            position: `absolute`,
-            top: `50%`,
-            left: `50%`,
-          }}
-        />
-      </Box>}
-  </ThemeProvider>
-  ;
+  return (
+    <FlagsProvider features={{ welcomeTutorial: false }}>
+      <ThemeProvider theme={theme}>
+        {isPageLoaded ?
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <Background />
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
+              <Settings />
+            </Hydrate>
+          </QueryClientProvider>
+          :
+          <Box sx={{ display: `flex` }}>
+            <CircularProgress
+              sx={{
+                position: `absolute`,
+                top: `50%`,
+                left: `50%`,
+              }}
+            />
+          </Box>}
+      </ThemeProvider>
+    </FlagsProvider>
+  ) ;
 }
