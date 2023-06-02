@@ -11,7 +11,7 @@ export function Quote({ prompt }: QuoteProps) {
 
   return (
     <Fade in>
-      <span className="flex items-center">
+      <span className="flex items-center max-h-fit overflow-auto">
         {isLoading ?
           <Skeleton width="50vw" />
           :

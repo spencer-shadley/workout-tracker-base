@@ -1,5 +1,5 @@
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import { useState } from 'react';
+import { Typography } from '@mui/material';
+
 import { TitleButton } from './TitleButton';
 
 interface InfoDialogProps {
@@ -8,24 +8,16 @@ interface InfoDialogProps {
   tutorial?: string;
 }
 export function InfoDialog({ content, buttonText }: InfoDialogProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
       <TitleButton
+        disabled
         buttonText={buttonText}
-        onClick={() => {
-          setIsOpen(true);
-        }}
       />
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-        <DialogTitle>
-          TODO: Info Dialog
-        </DialogTitle>
-        <DialogContent>
-          {content}
-        </DialogContent>
-      </Dialog>
+      <Typography>
+        {content}
+      </Typography>
     </>
   );
 }
