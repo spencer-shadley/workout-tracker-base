@@ -2,12 +2,12 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import { WorkoutOptions } from '@/components/settings/workout-options/WorkoutOptions';
 import { particles } from '@/components/shared/backgrounds/backgroundsTypes';
+import { AboutPersonPrompt } from '@/components/welcome/CustomizeToIndividual';
 import { logError } from '@/utils/logger';
 
 const aiStyleKey = `ai-style`;
 const optionsKey = `options`;
 const backgroundKey = `background`;
-const tutorialKey = `tutorial`;
 const firstTimeWelcomeKey = `first-time-welcome`;
 
 export type UsageState = `initial` | `about` | `settings` | `complete`
@@ -69,11 +69,20 @@ export function setTutorialStage(stage: UsageState) {
   localStorage.setItem(firstTimeWelcomeKey, stage);
 }
 
-// TODO: add tutorial throughout
-export function useTutorial(key: string) {
-  const [isFirstTime, setIsFirstTime] = useLocalStorage<boolean>(
-    `${tutorialKey}-${key}`,
-    true
-  );
-  return { isFirstTime, setIsFirstTime };
+export type AboutPersonKey = `age` | `weight` | `height` | `goals` | `conditions` | `equipment` | `experience` | `misc`;
+
+export const aboutPersonPromptMap = new Map<AboutPersonKey, string>([
+  [`age`, `How old are you?`],
+  [`weight`, `How much do you weigh? Make sure to include the units (e.g. 150 lbs or 68kg).`],
+  [`height`, `How tall are you? Make sure to include the units (e.g. 5'10" or 178cm).`],
+  [`goals`, `What are your fitness goals?`],
+  [`conditions`, `Do you have any medical conditions that may affect your ability to exercise?`],
+  [`equipment`, `What equipment do you have access to?`],
+  [`experience`, `How much experience do you have with exercising?`],
+  [`misc`, `Anything else that would be good to know?`],
+]);
+
+export function useAboutPersonStorage(key: AboutPersonKey) {
+  const aboutPersonKey = `about-person-${key}`;
+  return useLocalStorage<string | undefined>(aboutPersonKey, undefined);
 }
