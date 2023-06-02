@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocalStorage } from 'usehooks-ts';
 
+/* eslint-disable indent */
 import {
     AboutPersonKey, aboutPersonPromptMap, useAboutPersonStorage
 } from '@/hooks/storage/useLocalStorage';
+/* eslint-enable indent */
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Button, Card, MobileStepper, TextField, Typography, useTheme } from '@mui/material';
@@ -93,7 +94,7 @@ export default function CustomizeToIndividual() {
       backgroundColor: theme.palette.background.default,
     }}>
       {/* <AboutPerson step={activeStep} /> */}
-      <SimpleSetting {...{ prompt, localStorageKey: promptKey }} />
+      <SimpleSetting {...{ prompt, localStorageKey: promptKey as AboutPersonKey }} />
       <MobileStepper
         variant="dots"
         steps={aboutPersonPromptMap.size}
