@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <FlagsProvider features={{ welcomeTutorial: false }}>
+    <FlagsProvider features={{ welcomeTutorial: true }}>
       <ThemeProvider theme={theme}>
         {isPageLoaded ?
           <QueryClientProvider client={queryClient}>
