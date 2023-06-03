@@ -2,8 +2,9 @@ import shuffle from 'lodash/shuffle';
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
+import { getAllAboutPersonStorage } from '@/hooks/storage/useLocalStorage';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { IconButton } from '@mui/material';
+import { Alert, IconButton } from '@mui/material';
 
 import { AdvancedHints } from './AdvancedHints';
 import { ExampleSearches } from './ExampleSearches';
@@ -138,6 +139,11 @@ export function InitialSearchHint() {
           className="overflow-auto h-full w-full "
           style={{ flexGrow: shouldShowAdvancedHints ? 2 : undefined }}
         >
+          <Alert className='w-full' severity="info">
+            Your search will automatically account for these preferences:
+            <br />
+            {getAllAboutPersonStorage()}
+          </Alert>
           <ExampleSearches />
         </div>
       </div>

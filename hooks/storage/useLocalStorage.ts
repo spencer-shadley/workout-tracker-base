@@ -68,7 +68,7 @@ export function setTutorialStage(stage: UsageState) {
   localStorage.setItem(firstTimeWelcomeKey, stage);
 }
 
-export type AboutPersonKey = `age` | `weight` | `height` | `goals` | `conditions` | `equipment` | `experience` | `misc`;
+export type AboutPersonKey = `age` | `weight` | `height` | `goals` | `conditions` | `equipment` | `workout-experience-level` | `misc`;
 
 export const aboutPersonPromptMap = new Map<AboutPersonKey, string>([
   [`age`, `How old are you?`],
@@ -77,11 +77,22 @@ export const aboutPersonPromptMap = new Map<AboutPersonKey, string>([
   [`goals`, `What are your fitness goals?`],
   [`conditions`, `Do you have any medical conditions that may affect your ability to exercise?`],
   [`equipment`, `What equipment do you have access to?`],
-  [`experience`, `How much experience do you have with exercising?`],
+  [`workout-experience-level`, `How much experience do you have with exercising?`],
   [`misc`, `Anything else that would be good to know?`],
 ]);
 
 export function useAboutPersonStorage(key: AboutPersonKey) {
   const aboutPersonKey = `about-person-${key}`;
   return useLocalStorage<string | undefined>(aboutPersonKey, undefined);
+}
+
+export function getAllAboutPersonStorage() {
+  let settingsText = ``;
+  aboutPersonPromptMap.forEach((value, key) => {
+    const answer = localStorage.getItem(key);
+    if (answer && answer !== `undefined`) {
+      settingsText += `${key}: ${answer}, `;
+    }
+  });
+  return settingsText.substring(0, settingsText.length - 2);
 }
