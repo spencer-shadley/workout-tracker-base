@@ -1,7 +1,8 @@
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Card, IconButton } from '@mui/material';
+
 import { AdvancedHintsExpand } from './AdvancedHintsExpand';
 import { HowToSearchText } from './HowToSearchText';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 export function AdvancedHints({
   setShouldShowAdvancedHints,
@@ -10,6 +11,7 @@ export function AdvancedHints({
 }) {
   return (
     <Card
+      className='overflow-y-auto'
       elevation={10}
       sx={{
         padding: `10px`,

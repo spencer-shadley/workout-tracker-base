@@ -1,8 +1,9 @@
-import { Divider, Typography } from '@mui/material';
+import { Divider, Typography, useTheme } from '@mui/material';
 
 export function HowToSearchText() {
+  const theme = useTheme();
   return (
-    <article className="flex-1 flex-col h-full">
+    <article className="flex-1 flex-col h-full" style={{ color: theme.palette.text.secondary }}>
       <Typography variant="overline">
         Example searches
       </Typography>
