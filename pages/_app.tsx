@@ -32,7 +32,7 @@ const theme = createTheme({
       default: `#3A523C`, // very dark green
     },
     text: {
-      primary: `#fff`, // white
+      primary: `#333`, // black
       secondary: `#aaa`, // gray
     }
   }
