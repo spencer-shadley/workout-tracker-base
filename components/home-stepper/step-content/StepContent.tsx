@@ -26,6 +26,7 @@ export default function StepContent({ step }: StepContentProps) {
       }}
     >
       <div
+        className='max-h-fit overflow-y-auto overflow-x-hidden'
         style={{
           height: `100%`,
           display: `flex`,

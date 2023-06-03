@@ -15,9 +15,11 @@ export function InfoDialog({ content, buttonText }: InfoDialogProps) {
         disabled
         buttonText={buttonText}
       />
-      <Typography>
-        {content}
-      </Typography>
+      <span className='max-h-fit overflow-auto'>
+        <Typography className='max-h-40 overflow-y-auto'>
+          {content}
+        </Typography>
+      </span>
     </>
   );
 }
