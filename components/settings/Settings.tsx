@@ -69,7 +69,8 @@ export default function Settings() {
         <DialogContent>
           {settings.map((setting) => {
             return (
-              <Accordion key={setting.title}>
+              <Accordion
+                key={setting.title}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   key={setting.title}>

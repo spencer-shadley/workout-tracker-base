@@ -2,11 +2,14 @@ import shuffle from 'lodash/shuffle';
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
+import { GenericDialogProps } from '@/components/shared/PromptDialog';
+import CustomizeToIndividual from '@/components/welcome/CustomizeToIndividual';
 import { getAllAboutPersonStorage } from '@/hooks/storage/useLocalStorage';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import InfoIcon from '@mui/icons-material/Info';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import { Alert, IconButton } from '@mui/material';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import {
+    Alert, Button, Dialog, DialogContent, DialogTitle, IconButton, Tooltip
+} from '@mui/material';
 
 import { AdvancedHints } from './AdvancedHints';
 import { ExampleSearches } from './ExampleSearches';
@@ -124,7 +127,7 @@ export function InitialSearchHint() {
           ))}
         </List>
       </Drawer> */}
-      <div className="flex overflow-auto">
+      <div>
         {shouldShowAdvancedHints &&
           <div className="flex flex-col flex-1">
             <AdvancedHints
@@ -138,18 +141,51 @@ export function InitialSearchHint() {
           </IconButton>
         }
         <div
-          className="overflow-auto h-full w-full "
           style={{ flexGrow: shouldShowAdvancedHints ? 2 : undefined }}
         >
-          <Alert className='w-full' severity="info">
-            Your search will automatically account for your unique profile
-            (more info)
-            <br />
-            {getAllAboutPersonStorage()}
-          </Alert>
+          <SearchProfileAlert />
           <ExampleSearches />
         </div>
       </div>
     </>
   );
+}
+
+function SearchProfileAlert() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <ProfileDialog isOpen={isOpen} close={() => setIsOpen(false)} />
+      <Tooltip title={getAllAboutPersonStorage()} arrow>
+        <Alert
+          className='w-full'
+          severity="info"
+          action={
+            <IconButton onClick={() => setIsOpen(true)}
+              color='inherit' size='small'>
+              <ManageAccountsIcon />
+            </IconButton>}
+        >
+          Your search will automatically account for your unique profile.
+        </Alert>
+      </Tooltip>
+    </>
+  )
+}
+
+function ProfileDialog({ close, isOpen }: GenericDialogProps) {
+  return (
+    <Dialog
+      open={isOpen}
+      onClose={close}
+      scroll='paper'>
+      <DialogTitle>
+        Profile
+      </DialogTitle>
+      <DialogContent>
+        <CustomizeToIndividual shouldShowNext={false} />
+      </DialogContent>
+    </Dialog>
+  )
 }
