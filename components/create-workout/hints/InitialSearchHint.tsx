@@ -2,15 +2,10 @@ import shuffle from 'lodash/shuffle';
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
-import { GenericDialogProps } from '@/components/shared/PromptDialog';
-import CustomizeToIndividual from '@/components/welcome/CustomizeToIndividual';
-import { getAllAboutPersonStorage } from '@/hooks/storage/useLocalStorage';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import {
-    Alert, Button, Dialog, DialogContent, DialogTitle, IconButton, Tooltip
-} from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 
+import { SearchProfileAlert } from '../../profile/SearchProfileAlert';
 import { AdvancedHints } from './AdvancedHints';
 import { ExampleSearches } from './ExampleSearches';
 import { searchHints } from './hints';
@@ -127,7 +122,16 @@ export function InitialSearchHint() {
           ))}
         </List>
       </Drawer> */}
-      <div>
+      <div className='flex flex-col h-full overflow-y-auto place-content-between'>
+        <div>
+          <SearchProfileAlert />
+          <div
+            className='mt-4'
+            style={{ flexGrow: shouldShowAdvancedHints ? 2 : undefined }}
+          >
+            <ExampleSearches />
+          </div>
+        </div>
         {shouldShowAdvancedHints &&
           <div className="flex flex-col flex-1">
             <AdvancedHints
@@ -136,56 +140,14 @@ export function InitialSearchHint() {
           </div>
         }
         {!shouldShowAdvancedHints &&
-          <IconButton onClick={() => setShouldShowAdvancedHints(true)}>
-            <ChevronRightIcon />
-          </IconButton>
+          <span className='flex'>
+            <IconButton onClick={() => setShouldShowAdvancedHints(true)}>
+              <ChevronRightIcon />
+            </IconButton>
+          </span>
         }
-        <div
-          style={{ flexGrow: shouldShowAdvancedHints ? 2 : undefined }}
-        >
-          <SearchProfileAlert />
-          <ExampleSearches />
-        </div>
       </div>
     </>
   );
 }
 
-function SearchProfileAlert() {
-  const [isOpen, setIsOpen] = useState(false)
-
-  return (
-    <>
-      <ProfileDialog isOpen={isOpen} close={() => setIsOpen(false)} />
-      <Tooltip title={getAllAboutPersonStorage()} arrow>
-        <Alert
-          className='w-full'
-          severity="info"
-          action={
-            <IconButton onClick={() => setIsOpen(true)}
-              color='inherit' size='small'>
-              <ManageAccountsIcon />
-            </IconButton>}
-        >
-          Your search will automatically account for your unique profile.
-        </Alert>
-      </Tooltip>
-    </>
-  )
-}
-
-function ProfileDialog({ close, isOpen }: GenericDialogProps) {
-  return (
-    <Dialog
-      open={isOpen}
-      onClose={close}
-      scroll='paper'>
-      <DialogTitle>
-        Profile
-      </DialogTitle>
-      <DialogContent>
-        <CustomizeToIndividual shouldShowNext={false} />
-      </DialogContent>
-    </Dialog>
-  )
-}
