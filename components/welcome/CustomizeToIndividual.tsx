@@ -27,12 +27,16 @@ function SimpleSetting({ prompt, localStorageKey }: AboutPersonPrompt) {
   )
 }
 
-export default function CustomizeToIndividual() {
+interface CustomizeToIndividualProps {
+    shouldShowNext: boolean;
+}
+
+export default function CustomizeToIndividual({ shouldShowNext }: CustomizeToIndividualProps) {
   const theme = useTheme();
   const { setStage } = useTutorialContext();
 
   return <div className='flex flex-col justify-between h-full'>
-    <Card sx={{
+    <Card className='mb-4' sx={{
       backgroundColor: theme.palette.background.default,
     }}>
       <Typography
@@ -46,11 +50,11 @@ export default function CustomizeToIndividual() {
         backgroundColor: theme.palette.background.default,
       }}>
       <SimpleSettings/>
-      <Button
+      {shouldShowNext && <Button
         className='w-full'
         onClick={() => setStage(`complete`)}>
         Next
-      </Button>
+      </Button>}
     </Card>
   </div>;
 }

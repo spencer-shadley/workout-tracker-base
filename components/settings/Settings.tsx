@@ -1,15 +1,44 @@
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 
 /* eslint-disable indent */
 import {
     ResponseStyleOption
 } from '@/components/create-workout/response-style/ResponseStyleOptions';
-/* eslint-enable indent */
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Dialog, DialogContent, DialogContentText, DialogTitle, Divider, Fab } from '@mui/material';
+import {
+    Accordion, AccordionDetails, AccordionSummary, Dialog, DialogContent, DialogTitle, Fab,
+    Typography
+} from '@mui/material';
 
+/* eslint-enable indent */
 import { BackgroundOptions } from '../shared/BackgroundOptions';
+import CustomizeToIndividual from '../welcome/CustomizeToIndividual';
 import { WorkoutOptionsContent } from './workout-options/WorkoutOptionsContent';
+
+interface SettingProps {
+  title: string;
+  component: JSX.Element;
+}
+
+const settings: SettingProps[] = [
+  {
+    title: `🤖 AI Preferences`,
+    component: <ResponseStyleOption />
+  },
+  {
+    title: `🕛 Workout Preferences`,
+    component: <WorkoutOptionsContent />
+  },
+  {
+    title: `🎨 Background`,
+    component: <BackgroundOptions />
+  },
+  {
+    title: `📝 Profile`,
+    component: <CustomizeToIndividual shouldShowNext={false} />
+  }
+];
 
 export default function Settings() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -30,32 +59,32 @@ export default function Settings() {
       >
         <SettingsIcon color={`action`} />
       </Fab>
-      <Dialog open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}>
+      <Dialog
+        open={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        fullWidth>
         <DialogTitle>
           Settings
         </DialogTitle>
         <DialogContent>
-          <SettingCategoryText>
-            AI Preferences
-          </SettingCategoryText>
-          <ResponseStyleOption />
-          <Divider sx={{ marginY: `15px` }} />
-          <SettingCategoryText>
-            Workout Preferences
-          </SettingCategoryText>
-          <WorkoutOptionsContent />
-          <SettingCategoryText>
-            Background
-          </SettingCategoryText>
-          <BackgroundOptions />
+          {settings.map((setting) => {
+            return (
+              <Accordion key={setting.title}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  key={setting.title}>
+                  <Typography>
+                    {setting.title}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {setting.component}
+                </AccordionDetails>
+              </Accordion>
+            );
+          })}
         </DialogContent>
       </Dialog>
     </>
   );
-}
-
-function SettingCategoryText({ children }: PropsWithChildren) {
-  return <DialogContentText variant="overline">
-    {children}
-  </DialogContentText>;
 }

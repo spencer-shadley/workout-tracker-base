@@ -4,6 +4,8 @@ import { useWindowSize } from 'usehooks-ts';
 
 import { getAllAboutPersonStorage } from '@/hooks/storage/useLocalStorage';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import InfoIcon from '@mui/icons-material/Info';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { Alert, IconButton } from '@mui/material';
 
 import { AdvancedHints } from './AdvancedHints';
@@ -140,7 +142,8 @@ export function InitialSearchHint() {
           style={{ flexGrow: shouldShowAdvancedHints ? 2 : undefined }}
         >
           <Alert className='w-full' severity="info">
-            Your search will automatically account for these preferences:
+            Your search will automatically account for your unique profile
+            (more info)
             <br />
             {getAllAboutPersonStorage()}
           </Alert>

@@ -29,7 +29,7 @@ export function getComponent(tutorialStage: UsageState, resetStage: () => void) 
   case `initial`:
     return <Welcome />;
   case `settings`:
-    return <CustomizeToIndividual/>
+    return <CustomizeToIndividual shouldShowNext/>
   case `complete`:
     return <Steps />;
   default:
