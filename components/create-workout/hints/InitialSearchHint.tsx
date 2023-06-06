@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 import { SearchProfileAlert } from '../../profile/SearchProfileAlert';
 import { AdvancedHints } from './AdvancedHints';
