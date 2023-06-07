@@ -1,15 +1,18 @@
-import { useAboutPersonStorage } from '@/hooks/storage/useLocalStorage';
+import { useProfileLocalStorage } from '@/hooks/storage/useLocalStorage';
 import { TextField } from '@mui/material';
 
 import { ProfilePrompt } from './ProfilePrompt';
 
 export function ProfileSetting({ prompt, localStorageKey }: ProfilePrompt) {
-  const [about, setAbout] = useAboutPersonStorage(localStorageKey);
+  const [about, setAbout] = useProfileLocalStorage(localStorageKey);
 
   return (
     <TextField
       className='py-2'
-      label={prompt}
+      margin='normal'
+      multiline
+      helperText={prompt}
+      label={localStorageKey}
       fullWidth value={about ?? ``}
       onChange={(e) => {
         setAbout(e.target.value ?? ``);

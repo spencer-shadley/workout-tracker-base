@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { getAllAboutPersonStorage } from '@/hooks/storage/useLocalStorage';
+import { getProfileList } from '@/hooks/storage/useLocalStorage';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { Alert, IconButton, Tooltip } from '@mui/material';
 
@@ -12,7 +12,7 @@ export function SearchProfileAlert() {
   return (
     <>
       <ProfileDialog isOpen={isOpen} close={() => setIsOpen(false)} />
-      <Tooltip title={getAllAboutPersonStorage()} arrow>
+      <Tooltip title={getProfileList()} arrow>
         <Alert
           className='w-full'
           severity="info"

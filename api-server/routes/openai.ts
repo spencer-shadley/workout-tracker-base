@@ -24,7 +24,7 @@ openAiRouter.get(
       console.log(`temperature`, temperature);
       try {
         const answer = await askQuestion(prompt, { temperature: temperature });
-        console.log(`--- answer to ${prompt}`, answer);
+        console.log(`--- answer to ${prompt} --- \n`, answer);
         res.send(answer)
       } catch (e) {
         console.error(e);
