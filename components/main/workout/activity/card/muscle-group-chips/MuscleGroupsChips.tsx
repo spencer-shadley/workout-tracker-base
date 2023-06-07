@@ -5,24 +5,19 @@ import {
 import { useExerciseContext } from '@/components/shared/ExerciseProvider';
 
 import { ChipsSkeleton } from '../../../../../shared/ChipsSkeleton';
-import useMuscleGroups from './hooks/useMuscleGroups';
 import { MuscleGroupChip } from './MuscleGroupChip';
 
 export function MuscleGroupsChips() {
   const { exerciseName } = useExerciseContext();
   const { searchInput } = useCreateWorkoutContext();
-  const { isSearching } = searchInput;
-  const { muscleGroups, isFetching: isLoading, refetch } = useMuscleGroups({ prompt: exerciseName ?? ``, queryOptionOverrides: { enabled: false } });
+  const { isSearching, searchedExerciseResults } = searchInput;
+  // const { muscleGroups, isFetching: isLoading, refetch } = useMuscleGroups({ prompt: exerciseName ?? ``, queryOptionOverrides: { enabled: false } });
 
-  requestIdleCallback(() => {
-    if (!muscleGroups) {
-      refetch();
-    }
-  })
+  const muscleGroups = searchedExerciseResults.find(exercise => exercise.exerciseName === exerciseName)?.muscleGroups ?? [];
 
   return (
     <div className="flex gap-1 max-w-s flex-wrap">
-      {isLoading || isSearching ?
+      {isSearching ?
         <ChipsSkeleton />
        :
         muscleGroups.map((muscleGroup) =>

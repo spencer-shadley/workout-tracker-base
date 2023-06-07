@@ -1,15 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  CreateWorkoutProvider,
-  CreateWorkoutType,
-} from './context/CreateWorkoutContextProvider';
+
+import { parseResponse, useSearchExercises } from '@/hooks/openai/useSearchExercises';
 import useDebounce from '@/hooks/utils/useDebounce';
-import CreateWorkoutContent from './results/create-workout-content/CreateWorkoutContent';
-import {
-  useSearchExercises,
-  responseToArray,
-} from '@/hooks/openai/useSearchExercises';
+
+import { CreateWorkoutProvider, CreateWorkoutType } from './context/CreateWorkoutContextProvider';
 import { getRandomHint } from './hints/hints';
+import CreateWorkoutContent from './results/create-workout-content/CreateWorkoutContent';
 
 export default function CreateWorkout() {
   const [searchText, setSearchText] = useState<string>(``);
@@ -29,7 +25,7 @@ export default function CreateWorkout() {
     useSearchExercises(debouncedSearch);
 
   const searchedExerciseNameResults = useMemo(() => {
-    return responseToArray(rawSearchedExerciseNameResults ?? ``) ?? [];
+    return parseResponse(rawSearchedExerciseNameResults ?? []) ?? [];
   }, [rawSearchedExerciseNameResults]);
 
   const createWorkoutContext: CreateWorkoutType = useMemo(() => {
@@ -39,7 +35,7 @@ export default function CreateWorkout() {
         isSearching: isLoading,
         setSearchText,
         currentHint,
-        searchedExerciseNameResults,
+        searchedExerciseResults: searchedExerciseNameResults,
       },
     };
     return context;

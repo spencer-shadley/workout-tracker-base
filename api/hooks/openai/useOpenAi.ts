@@ -8,15 +8,15 @@ export const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 const textRoute = `/openai/text`;
 const generateImageRoute = `/openai/generateImage`;
 
-export interface useOpenAiOptions {
+export interface useOpenAiOptions<T> {
 prompt: string;
 temperature?: number;
-queryOptionOverrides?: UseQueryOptions<string>;
+queryOptionOverrides?: UseQueryOptions<T>;
 isPicture?: boolean;
 }
 
-export function useOpenAi({ prompt, temperature, queryOptionOverrides, isPicture }: useOpenAiOptions) {
-  let queryOptions: UseQueryOptions<string> = {
+export function useOpenAi<T>({ prompt, temperature, queryOptionOverrides, isPicture }: useOpenAiOptions<T>) {
+  let queryOptions: UseQueryOptions<T> = {
     queryKey: [`openai`, prompt],
     queryFn: async () => {
       return axios.get(isPicture ? generateImageRoute : textRoute, {
@@ -34,6 +34,6 @@ export function useOpenAi({ prompt, temperature, queryOptionOverrides, isPicture
 
   useDebugValue(queryOptions);
 
-  return useQuery<string>(queryOptions);
+  return useQuery<T>(queryOptions);
 }
 

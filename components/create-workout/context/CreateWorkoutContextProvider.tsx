@@ -1,11 +1,12 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 
+import { ExerciseResponseInfo } from '@/hooks/openai/useSearchExercises';
 import { logError } from '@/utils/logger';
 
 interface SearchInputType {
   searchText: string;
   setSearchText: (searchText: string) => void;
-  searchedExerciseNameResults: string[];
+  searchedExerciseResults: ExerciseResponseInfo[];
   currentHint: string;
   isSearching: boolean;
 }
@@ -79,7 +80,7 @@ export const CreateWorkout = createContext<CreateWorkoutType>({
     isSearching: false,
     searchText: ``,
     currentHint: ``,
-    searchedExerciseNameResults: [],
+    searchedExerciseResults: [],
     setSearchText: () => {
       logError(`set search text not set`);
     },

@@ -1,9 +1,13 @@
-import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
+/* eslint-disable indent */
+import {
+    Configuration, CreateChatCompletionRequest, CreateCompletionRequest, OpenAIApi
+} from 'openai';
 
+/* eslint-enable indent */
 import { redisClient } from '../redisClient';
 
 // each request costs money - safety to avoid massive charges from bugs like infinite loops
-const MAX_NUMBER_OF_ACTIVE_REQUESTS = 50;
+const MAX_NUMBER_OF_ACTIVE_REQUESTS = 150;
 let numberOfActiveRequests = 0;
 const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 
@@ -36,22 +40,18 @@ export async function askQuestion(
     return Promise.reject(`too many requests`);
   }
 
-  const defaultProps: Partial<CreateCompletionRequest> = {
-    model: `text-davinci-003`,
+  const defaultProps: CreateChatCompletionRequest = {
+    model: `gpt-3.5-turbo`,
+    messages: [{ content: prompt, role: `user` }],
     temperature: 0.2,
     max_tokens: 1500,
   };
 
-  const props: CreateCompletionRequest = {
-    ...defaultProps,
-    ...initialProps,
-  } as CreateCompletionRequest;
-
   return new Promise((resolve: (response: string) => void, reject) => {
     openai
-      .createCompletion(props)
+      .createChatCompletion(defaultProps)
       .then((response) => {
-        let data: string = response.data.choices[0].text ?? ``;
+        let data: string = response.data.choices[0].message?.content ?? ``;
         data = data.trim();
         redisClient?.set(redisCacheKey, data, {
           EX: ONE_WEEK_IN_SECONDS,

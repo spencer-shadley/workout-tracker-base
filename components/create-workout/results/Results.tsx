@@ -11,7 +11,7 @@ import { ResultsSkeleton } from './ResultsSkeleton';
 
 export function Results() {
   const { searchInput } = useCreateWorkoutContext();
-  const { searchedExerciseNameResults, isSearching, searchText } = searchInput;
+  const { searchedExerciseResults: searchedExerciseNameResults, isSearching, searchText } = searchInput;
 
   return (
     <Card
@@ -23,8 +23,8 @@ export function Results() {
         <ExerciseProvider activityType='exercise' exerciseName={`"${searchText}"`}>
           <ResultListItem/>
         </ExerciseProvider>
-        {isSearching ? <ResultsSkeleton/> : searchedExerciseNameResults.map((exerciseName) =>
-          <ExerciseProvider key={exerciseName} activityType='exercise' exerciseName={exerciseName}>
+        {isSearching ? <ResultsSkeleton/> : searchedExerciseNameResults.map((exercise) =>
+          <ExerciseProvider key={exercise.exerciseName} activityType='exercise' exerciseName={exercise.exerciseName}>
             <ResultListItem/>
           </ExerciseProvider>
         )}

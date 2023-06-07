@@ -17,21 +17,22 @@ openAiRouter.get(
 
     const errors = validationResult(req);
 
-    if (errors.isEmpty()) {
-      const { prompt, temperature: rawTemperature } = matchedData(req);
-      const temperature = Number(rawTemperature) ?? undefined;
-      console.log(`prompt`, prompt);
-      console.log(`temperature`, temperature);
-      try {
-        const answer = await askQuestion(prompt, { temperature: temperature });
-        console.log(`--- answer to ${prompt} --- \n`, answer);
-        res.send(answer)
-      } catch (e) {
-        console.error(e);
-        res.status(500).send({ error: e })
-      }
-    } else {
+    if (!errors.isEmpty()) {
       res.status(400).send({ error: errors.array() })
+      return;
+    }
+
+    const { prompt, temperature: rawTemperature } = matchedData(req);
+    const temperature = Number(rawTemperature) ?? undefined;
+    console.log(`prompt`, prompt);
+    console.log(`temperature`, temperature);
+    try {
+      const answer = await askQuestion(prompt, { temperature: temperature });
+      console.log(`--- answer to ${prompt} --- \n`, answer);
+      res.send(answer)
+    } catch (e) {
+      console.error(e);
+      res.status(500).send({ error: e })
     }
   })
 
@@ -43,18 +44,18 @@ openAiRouter.get(
 
     const errors = validationResult(req);
 
-    if (errors.isEmpty()) {
-      const { prompt } = matchedData(req);
-      console.log(`prompt`, prompt);
-      try {
-        const imageUrl = await generateImage(prompt);
-        console.log(`--- image to ${prompt}`, imageUrl);
-        res.send(imageUrl)
-      } catch (e) {
-        console.error(e);
-        res.status(500).send({ error: e })
-      }
-    } else {
+    if (!errors.isEmpty()) {
       res.status(400).send({ error: errors.array() })
+    }
+
+    const { prompt } = matchedData(req);
+    console.log(`prompt`, prompt);
+    try {
+      const imageUrl = await generateImage(prompt);
+      console.log(`--- image to ${prompt}`, imageUrl);
+      res.send(imageUrl)
+    } catch (e) {
+      console.error(e);
+      res.status(500).send({ error: e })
     }
   })
