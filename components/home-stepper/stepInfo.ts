@@ -27,7 +27,7 @@ export const stepInfos: StepInfo[] = [
   {
     title: `Learn more`,
     aiPrompt: `Tell me why working out is important. Keep it somewhat short.`,
-    dialogContent: `TODO: Learn more about fitness in this app!`,
+    dialogContent: `This will be a learning page for education around fitness`,
   },
 
 ];

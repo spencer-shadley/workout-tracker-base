@@ -1,5 +1,5 @@
 import { GenericDialogProps } from '@/components/shared/PromptDialog';
-import CustomizeToIndividual from '@/components/welcome/CustomizeToIndividual';
+import ProfileInput from '@/components/welcome/ProfileInput';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 
 export function ProfileDialog({ close, isOpen }: GenericDialogProps) {
@@ -12,7 +12,7 @@ export function ProfileDialog({ close, isOpen }: GenericDialogProps) {
         Profile
       </DialogTitle>
       <DialogContent>
-        <CustomizeToIndividual shouldShowNext={false} />
+        <ProfileInput shouldShowNext={false} />
       </DialogContent>
     </Dialog>
   );

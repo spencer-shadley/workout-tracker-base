@@ -13,7 +13,7 @@ import {
 
 /* eslint-enable indent */
 import { BackgroundOptions } from '../shared/BackgroundOptions';
-import CustomizeToIndividual from '../welcome/CustomizeToIndividual';
+import ProfileInput from '../welcome/ProfileInput';
 import { WorkoutOptionsContent } from './workout-options/WorkoutOptionsContent';
 
 interface SettingProps {
@@ -36,7 +36,7 @@ const settings: SettingProps[] = [
   },
   {
     title: `📝 Profile`,
-    component: <CustomizeToIndividual shouldShowNext={false} />
+    component: <ProfileInput shouldShowNext={false} />
   }
 ];
 

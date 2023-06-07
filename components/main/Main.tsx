@@ -6,7 +6,7 @@ import { logError } from '@/utils/logger';
 import { Typography } from '@mui/material';
 
 import Steps from '../home-stepper/Steps';
-import CustomizeToIndividual from '../welcome/CustomizeToIndividual';
+import ProfileInput from '../welcome/ProfileInput';
 import Welcome from '../welcome/Welcome';
 import { TutorialProvider } from './context/TutorialContext';
 
@@ -29,7 +29,7 @@ export function getComponent(tutorialStage: UsageState, resetStage: () => void) 
   case `initial`:
     return <Welcome />;
   case `settings`:
-    return <CustomizeToIndividual shouldShowNext/>
+    return <ProfileInput shouldShowNext/>
   case `complete`:
     return <Steps />;
   default:
