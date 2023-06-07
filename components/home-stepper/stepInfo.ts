@@ -22,7 +22,7 @@ export const stepInfos: StepInfo[] = [
     aiPrompt:
       `Provide a description of an app that uses OpenAI to enable custom AI powered workouts unique to each person. Restrict this description to just a few sentences. Prefix the response with "Auto-generated app description from OpenAI".`,
     dialogContent:
-      `I created this app to experiment more - to learn more about its feature-set and limitations. I am hoping this can also help solve a missing need in the market - personalized workouts. Every person is different and a successful workout will look very different. I have seen many people become discouraged due to physical limitations (illness, lack of experience, innate conditions, etc.) which prevent them from getting the fitness that would improve their health.`,
+      `I created this app to experiment with AI - to learn more about its feature-set and limitations. I am hoping this can also help solve a missing need in the market - personalized workouts. Every person is different and a successful workout will look very different. I have seen many people become discouraged due to physical limitations (illness, lack of experience, innate conditions, etc.) which prevent them from getting the fitness that would improve their health.`,
   },
   {
     title: `Learn more`,
