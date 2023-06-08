@@ -7,7 +7,7 @@ export function DescriptionDetails() {
   const { exerciseName } = useExerciseContext();
   const {
     isFetching: isLoading, error, data: description,
-  } = useOpenAi({
+  } = useOpenAi<string>({
     prompt: `Give me a brief description for the exercise ${exerciseName}`,
   });
 
