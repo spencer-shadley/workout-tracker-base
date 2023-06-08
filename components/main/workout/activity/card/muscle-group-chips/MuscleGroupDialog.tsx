@@ -19,7 +19,7 @@ export function MuscleGroupDialog({
   const [prompt, setPrompt] = useState<string>(
     `Tell me about the muscle group ${muscleGroup}.`
   );
-  const { data: aboutExercise, isFetching: isLoading } = useOpenAi({
+  const { data: aboutExercise, isFetching: isLoading } = useOpenAi<string>({
     prompt
   });
 
