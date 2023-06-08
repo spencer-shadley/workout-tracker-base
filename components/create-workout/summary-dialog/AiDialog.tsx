@@ -21,7 +21,7 @@ export function AiDialog({ showDialog, setShowDialog }: AiDialogProps) {
     data: rawWorkoutString,
     isFetching,
     refetch,
-  } = useOpenAi({
+  } = useOpenAi<string>({
     prompt: `Generate a workout alternating between antagonist and protagonist exercises. Focus on ${searchText}. Return the response as an array of exercise names. Only use double quotes, no single quotes.`,
     queryOptionOverrides: {
       enabled: false,
