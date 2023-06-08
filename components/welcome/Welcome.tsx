@@ -11,7 +11,7 @@ export default function Welcome() {
 
   const { setStage } = useTutorialContext();
 
-  const { data: greetings, isFetching: isLoadingGreeting } = useOpenAi({
+  const { data: greetings, isFetching: isLoadingGreeting } = useOpenAi<string>({
     prompt: `Provide 10 simple messages like "Hello" and "Welcome" to greet a new user. Include a fun emoji at the end of each welcome message. Return the greetings as comma separated list.`
   });
 
