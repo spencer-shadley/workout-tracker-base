@@ -5,3 +5,4 @@ export function TextSkeleton() {
     <Skeleton width={`${Math.random() * 100}%`} sx={{ marginRight: `20px` }} />
   );
 }
+

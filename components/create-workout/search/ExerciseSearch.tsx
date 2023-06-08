@@ -8,6 +8,7 @@ import { ExerciseSearchEndAdornment } from './ExerciseSearchEndAdornment';
 export function ExerciseSearch() {
   const { searchInput } = useCreateWorkoutContext();
   const { searchText, setSearchText, currentHint } = searchInput;
+
   return (
     <Paper elevation={6} className="mb-3">
       <FormControl fullWidth>
@@ -19,7 +20,8 @@ export function ExerciseSearch() {
           id="outlined-adornment-search"
           variant="outlined"
           value={searchText}
-          label={currentHint}
+          label="Search for an exercise or activity`"
+          helperText={currentHint}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setSearchText(event.target.value);
           }}

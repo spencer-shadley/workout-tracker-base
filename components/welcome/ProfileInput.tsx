@@ -1,9 +1,9 @@
 import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { getProfileList } from '@/hooks/storage/useLocalStorage';
-import { Button, Card, Typography, useTheme } from '@mui/material';
+import { Button, Card, Typography } from '@mui/material';
 
 import { useTutorialContext } from '../main/context/TutorialContext';
-import { TextSkeleton } from '../shared/TextSkeleton';
+import { TextSkeletons } from '../shared/TextSkeletonsProps';
 import { ProfileSettings } from './ProfileSettings';
 
 interface ProfileInputProps {
@@ -11,11 +11,10 @@ interface ProfileInputProps {
 }
 
 export default function ProfileInput({ shouldShowNext }: ProfileInputProps) {
-  const theme = useTheme();
   const { setStage } = useTutorialContext();
 
   const { data: attributeConfirmation, isFetching: isLoadingAttributeConfirmation, refetch } =
-  useOpenAi({
+  useOpenAi<string>({
     prompt: `
       Repeat these attributes in a friendly paragraph if possible. 
       In the answer, try to phrase it in the second person. Like "You are X years old".
@@ -34,35 +33,37 @@ export default function ProfileInput({ shouldShowNext }: ProfileInputProps) {
 
   return (
     <div className='flex flex-col justify-between h-full'>
-      <Card className='mb-4' sx={{
-        backgroundColor: theme.palette.background.default,
-      }}>
+      <Card className='mb-4'>
         <Typography
           className='m-5'
           color='text.primary'>
-          {`Tell me about yourself! I'll keep this info in mind for your workouts. The more I know the better the workout! 🏋️‍♀️ FYI - you can phrase your answers in plain English, no need to have a nice structure!`}
+          {`Tell me about yourself! 
+          I'll keep this info in mind for your workouts. 
+          The more I know the better the workout! 
+          🏋️‍♀️ Phrase your answers in plain English, no need to worry about structure!`}
         </Typography>
       </Card>
-      <Card className='max-h-fit overflow-y-auto'
-        sx={{
-          backgroundColor: theme.palette.background.default,
-        }}>
+      <Card className='max-h-fit overflow-y-auto'>
         <ProfileSettings/>
-        <Button
-          color='secondary'
-          onClick={() => {
-            refetch();
-          }}>
-          check understanding
-        </Button>
-        {isLoadingAttributeConfirmation ? <TextSkeleton/> : <Typography>
-          {attributeConfirmation}
-        </Typography>}
-        {shouldShowNext && <Button
-          className='w-full'
-          onClick={() => setStage(`complete`)}>
-          Next
-        </Button>}
+        <div className='p-4'>
+          <Button
+            color='secondary'
+            onClick={() => {
+              refetch();
+            }}>
+            {attributeConfirmation ? `re-check understanding` : `check understanding`}
+          </Button>
+          {isLoadingAttributeConfirmation ?
+            <TextSkeletons numberOfLinesOfText={3}/> :
+            <Typography>
+              {attributeConfirmation}
+            </Typography>}
+          {shouldShowNext && <Button
+            className='w-full'
+            onClick={() => setStage(`complete`)}>
+            Next
+          </Button>}
+        </div>
       </Card>
     </div>
   );

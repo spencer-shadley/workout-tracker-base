@@ -1,6 +1,12 @@
 import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import { useAddStyle } from '@/hooks/openai/useAddStyle';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+/* eslint-disable indent */
+import {
+    Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography
+} from '@mui/material';
+
+/* eslint-enable indent */
+import { TextSkeletons } from './TextSkeletonsProps';
 
 export interface GenericDialogProps {
   isOpen: boolean;
@@ -17,7 +23,7 @@ export function PromptDialog({ isOpen, close, prompt, title }: PromptDialogProps
     prompt
   );
 
-  const { data } = useOpenAi({
+  const { data, isFetching: isLoading } = useOpenAi<string>({
     prompt: styledPrompt,
     queryOptionOverrides: {
       enabled: isOpen,
@@ -30,7 +36,9 @@ export function PromptDialog({ isOpen, close, prompt, title }: PromptDialogProps
         {title}
       </DialogTitle>
       <DialogContent>
-        {data}
+        {isLoading ? <TextSkeletons numberOfLinesOfText={5}/> : <Typography>
+          {data}
+        </Typography>}
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>
