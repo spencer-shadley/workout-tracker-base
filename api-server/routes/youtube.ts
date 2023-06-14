@@ -23,14 +23,14 @@ youtubeRouter.get(`/`, query(`exercise`).notEmpty().isString(), async (req, res)
   const { exercise } = matchedData(req);
   console.log(`--- video search for exercise`, exercise);
 
-  const redisCacheKey = `youtube/${prompt}`;
+  const redisCacheKey = `youtube/${exercise}`;
   const redisCacheValue = await redisClient?.get(redisCacheKey);
 
   if (redisCacheValue) {
-    console.log(`found video url in cache`, prompt);
+    console.log(`found video url in cache`, exercise);
     return Promise.resolve(redisCacheValue);
   } else {
-    console.log(`video url not found in cache`, prompt);
+    console.log(`video url not found in cache`, exercise);
   }
 
   try {

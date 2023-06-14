@@ -9,12 +9,11 @@ export function useYoutube(shouldEnable: boolean) {
   const queryOptions: UseQueryOptions<string> = {
     queryKey: [`youtube`, exerciseName],
     queryFn: async () => {
-      const res = await axios.get(`/api/youtube`, {
+      return axios.get(`/api/youtube`, {
         params: {
           exercise: exerciseName
         }
-      });
-      return res.data;
+      }).then(res => res.data);
     },
     cacheTime: ONE_DAY_IN_MS,
     staleTime: ONE_DAY_IN_MS,
