@@ -12,13 +12,6 @@ html, #__next, body {
   height: 100dvh;
 }
 
-#__next {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 body {
   margin: auto;
   overflow: auto;

@@ -33,7 +33,7 @@ export default function Welcome() {
         </Typography>
       </div>
       <WelcomeImage />
-      <Card className='shrink-0' sx={{
+      <Card className='shrink-0 text-center' sx={{
         backgroundColor: theme.palette.background.default,
         padding: `20px`,
         overflowY: `auto`

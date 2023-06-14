@@ -32,8 +32,8 @@ export default function ProfileInput({ shouldShowNext }: ProfileInputProps) {
   } )
 
   return (
-    <div className='flex flex-col justify-between h-full'>
-      <Card className='mb-4 opacity-80'>
+    <div className='flex flex-col justify-between h-full overflow-y-auto'>
+      <Card className='max-h-fit overflow-y-auto opacity-80'>
         <Typography
           className='m-5'
           color='text.primary'>
@@ -42,8 +42,6 @@ export default function ProfileInput({ shouldShowNext }: ProfileInputProps) {
           The more I know the better the workout! 
           🏋️‍♀️ Phrase your answers in plain English, no need to worry about structure!`}
         </Typography>
-      </Card>
-      <Card className='max-h-fit overflow-y-auto'>
         <ProfileSettings/>
         <div className='p-4'>
           <Button
