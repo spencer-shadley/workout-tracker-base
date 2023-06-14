@@ -33,7 +33,7 @@ export default function ProfileInput({ shouldShowNext }: ProfileInputProps) {
 
   return (
     <div className='flex flex-col justify-between h-full'>
-      <Card className='mb-4'>
+      <Card className='mb-4 opacity-80'>
         <Typography
           className='m-5'
           color='text.primary'>
