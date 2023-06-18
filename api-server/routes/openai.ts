@@ -12,6 +12,7 @@ openAiRouter.get(
   `/text`,
   query(`prompt`).notEmpty().isString(),
   query(`temperature`).optional().isNumeric(),
+  query(`skipCache`).optional().isBoolean(),
   async (req, res) => {
     console.log(`--- OpenAi request ---`, Date.now())
 
@@ -22,12 +23,11 @@ openAiRouter.get(
       return;
     }
 
-    const { prompt, temperature: rawTemperature } = matchedData(req);
+    const { prompt, temperature: rawTemperature, skipCache } = matchedData(req);
     const temperature = Number(rawTemperature) ?? undefined;
     console.log(`prompt`, prompt);
-    console.log(`temperature`, temperature);
     try {
-      const answer = await askQuestion(prompt, { temperature: temperature });
+      const answer = await askQuestion(prompt, skipCache, { temperature });
       console.log(`--- answer to ${prompt} --- \n`, answer);
       res.send(answer)
     } catch (e) {

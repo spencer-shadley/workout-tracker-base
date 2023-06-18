@@ -7,7 +7,7 @@ interface QuoteProps {
 }
 
 export function Quote({ prompt }: QuoteProps) {
-  const { data, refetch, isLoading } = useOpenAi<string>({ prompt, temperature: 1.5 });
+  const { data, refetch, isLoading } = useOpenAi<string>({ prompt, temperature: 1.5, skipCache: true });
 
   return (
     <Fade in>

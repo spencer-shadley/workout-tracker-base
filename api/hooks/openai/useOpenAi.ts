@@ -13,16 +13,18 @@ prompt: string;
 temperature?: number;
 queryOptionOverrides?: UseQueryOptions<T>;
 isPicture?: boolean;
+skipCache?: boolean;
 }
 
-export function useOpenAi<T>({ prompt, temperature, queryOptionOverrides, isPicture }: useOpenAiOptions<T>) {
+export function useOpenAi<T>({ prompt, temperature, queryOptionOverrides, isPicture, skipCache }: useOpenAiOptions<T>) {
   let queryOptions: UseQueryOptions<T> = {
     queryKey: [`openai`, prompt],
     queryFn: async () => {
       return axios.get(isPicture ? generateImageRoute : textRoute, {
         params: {
           prompt,
-          temperature
+          temperature,
+          skipCache
         }
       }).then(res => res.data);
     },

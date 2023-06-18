@@ -13,6 +13,7 @@ const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 
 export async function askQuestion(
   prompt: string,
+  skipCache = false,
   initialProps: Partial<CreateCompletionRequest> = {}
 ): Promise<string> {
   console.log(`askQuestion`, prompt);
@@ -20,7 +21,7 @@ export async function askQuestion(
   const redisCacheKey = `prompt/${prompt}`;
   const redisCacheValue = await redisClient?.get(redisCacheKey);
 
-  if (redisCacheValue) {
+  if (redisCacheValue && !skipCache) {
     console.log(`found prompt in cache`, prompt);
     return Promise.resolve(redisCacheValue);
   } else {
