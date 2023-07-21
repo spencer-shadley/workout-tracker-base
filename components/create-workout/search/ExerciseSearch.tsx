@@ -20,7 +20,7 @@ export function ExerciseSearch() {
           id="outlined-adornment-search"
           variant="outlined"
           value={searchText}
-          label="Search for an exercise or activity`"
+          label="Search for an exercise or activity"
           helperText={currentHint}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setSearchText(event.target.value);
