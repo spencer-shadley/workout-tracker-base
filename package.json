@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json api-server/index.ts",
+    "prepare": "tsc --project tsconfig.server.json",
     "build": "yarn run build:client && yarn run build:server",
     "start": "NODE_ENV=production node dist/index.js",
     "build:server": "tsc --project tsconfig.server.json",

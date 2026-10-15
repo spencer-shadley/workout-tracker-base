@@ -12,6 +12,8 @@
 
 # production
 /build
+# Server build output (code#7738). prepare and build:server emit dist/.
+/dist/
 
 # misc
 .DS_Store
