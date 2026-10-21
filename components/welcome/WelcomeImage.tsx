@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useOpenAi } from '@/api/hooks/openai/useOpenAi';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { CircularProgress, IconButton, Typography } from '@mui/material';
 
 export function WelcomeImage() {
-  const [previousPrompts, setPreviousPrompts] = useState<string[]>([]);
-  const [promptPrompt, setPromptPrompt] = useState<string | undefined>(undefined);
+  const [previousPrompts] = useState<string[]>([]);
+  const [, setPromptPrompt] = useState<string | undefined>(undefined);
 
-  const { data: prompt, refetch } = useOpenAi<string>({
+  const { data: prompt } = useOpenAi<string>({
     skipCache: true,
     prompt: `Generate a prompt to give to DALLE. 
     The prompt should generate a picture that would be relevant to fitness. 
